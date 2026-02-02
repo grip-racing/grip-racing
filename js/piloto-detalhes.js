@@ -63,6 +63,48 @@ function formatNumber(num) {
     return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
+// Format position with ordinal
+function formatPosition(pos) {
+    if (!pos || pos === '-' || pos === 'N/A') return pos;
+    const posStr = String(pos).trim();
+    if (posStr.toUpperCase().includes('DNF') || posStr.toUpperCase().includes('DQ') || posStr.toUpperCase().includes('ABANDON')) return posStr;
+    const num = parseInt(posStr.replace(/\D/g, ''));
+    if (isNaN(num)) return posStr;
+    return num + 'º';
+}
+
+// Get badge class for position
+function getBadgeClass(pos) {
+    if (!pos) return '';
+    const posStr = String(pos).trim();
+    const num = parseInt(posStr.replace(/\D/g, ''));
+    if (num === 1) return 'badge-1';
+    if (num === 2) return 'badge-2';
+    if (num === 3) return 'badge-3';
+    return '';
+}
+
+// Check if mobile
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+// Format championship badges for display
+function formatChampionshipBadges(qtdPiloto, qtdConstrutores) {
+    const mobile = isMobile();
+    let badges = '';
+    
+    if (qtdPiloto > 0) {
+        badges += mobile && qtdPiloto > 1 ? `${qtdPiloto}x 🏆` : '🏆'.repeat(qtdPiloto);
+    }
+    if (qtdConstrutores > 0) {
+        if (badges && mobile) badges += ' ';
+        badges += mobile && qtdConstrutores > 1 ? `${qtdConstrutores}x 👥` : '👥'.repeat(qtdConstrutores);
+    }
+    
+    return badges ? ' ' + badges : '';
+}
+
 // Get piloto name from URL
 function getPilotoName() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -272,19 +314,23 @@ function displayStatDetails(type, container) {
                 ${t.corridas.map(c => {
                     const pista = c['Pista'] || 'Desconhecida';
                     const final = c['Final'] || 'N/A';
-                    const pole = c['Pole'] === 'Sim' ? '🏁' : '';
-                    const bestLap = c['Best Lap'] === 'Sim' ? '⚡' : '';
+                    const pole = String(c['Pole'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Pole Position">🚩</span>' : '';
+                    const bestLap = String(c['Best Lap'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Volta R\u00e1pida">⚡</span>' : '';
+                    const campeonatoPiloto = String(c['Piloto Campeao'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Campe\u00e3o de Pilotos">🏆</span>' : '';
+                    const construtoresVal = String(c['Construtores'] || '').trim().toUpperCase();
+                    const campeonatoConstrutores = (construtoresVal === 'SIM' || construtoresVal === 'TIME') ? '<span title="Campe\u00e3o de Construtores">👥</span>' : '';
                     
                     let resultClass = '';
                     if (final === '1' || final.includes('1º')) resultClass = 'resultado-vitoria';
-                    else if (final === '2' || final === '3' || final.includes('2º') || final.includes('3º')) resultClass = 'resultado-podio';
+                    else if (final === '2' || final.includes('2º')) resultClass = 'resultado-segundo';
+                    else if (final === '3' || final.includes('3º')) resultClass = 'resultado-podio';
                     else if (final.toUpperCase().includes('DNF') || final.toUpperCase().includes('ABANDON')) resultClass = 'resultado-dnf';
                     
                     return `
                         <div class="titulo-corrida-item">
+                            <div class="titulo-corrida-resultado ${resultClass}">${formatPosition(final)}</div>
                             <div class="titulo-corrida-pista">${pista}</div>
-                            <div class="titulo-corrida-resultado ${resultClass}">${final}</div>
-                            <div class="titulo-corrida-badges">${pole}${bestLap}</div>
+                            <div class="titulo-corrida-badges">${pole}${bestLap}${campeonatoPiloto}${campeonatoConstrutores}</div>
                         </div>
                     `;
                 }).join('')}
@@ -361,6 +407,9 @@ function displayStatDetails(type, container) {
                     
                     return `
                         <div class="stat-detail-item">
+                            <div class="stat-detail-item-info">
+                                ${type === 'vitorias' || type === 'podios' ? `<span class="stat-detail-posicao ${getBadgeClass(final)}">${formatPosition(final)}</span>` : ''}
+                            </div>
                             <div class="stat-detail-item-main">
                                 <div class="stat-detail-pista">${pista}</div>
                                 <div class="stat-detail-meta">
@@ -368,9 +417,6 @@ function displayStatDetails(type, container) {
                                     ${categoria ? `<span class="stat-detail-categoria">${categoria}</span>` : ''}
                                     ${temporada ? `<span class="stat-detail-temporada">${temporada}</span>` : ''}
                                 </div>
-                            </div>
-                            <div class="stat-detail-item-info">
-                                ${type === 'vitorias' || type === 'podios' ? `<span class="stat-detail-posicao">${final}</span>` : ''}
                             </div>
                         </div>
                     `;
@@ -411,113 +457,174 @@ function displayTemporadas() {
         return;
     }
     
-    // Group by temporada
-    const temporadasMap = {};
+    // Group by ano
+    const anosMap = {};
     pilotoParticipacoes.forEach(p => {
-        const temporada = p['Temporada'] || p['temporada'] || 'Desconhecida';
-        if (!temporadasMap[temporada]) {
-            temporadasMap[temporada] = [];
+        const ano = p['Ano'] || 'Desconhecido';
+        if (!anosMap[ano]) {
+            anosMap[ano] = [];
         }
-        temporadasMap[temporada].push(p);
+        anosMap[ano].push(p);
     });
     
-    // Sort temporadas (most recent first)
-    const temporadas = Object.keys(temporadasMap).sort((a, b) => {
-        const yearA = parseInt(a.match(/\d{4}/)?.[0] || 0);
-        const yearB = parseInt(b.match(/\d{4}/)?.[0] || 0);
+    // Sort anos (most recent first)
+    const anos = Object.keys(anosMap).sort((a, b) => {
+        const yearA = parseInt(a) || 0;
+        const yearB = parseInt(b) || 0;
         return yearB - yearA;
     });
     
-    const html = temporadas.map(temporada => {
-        const corridas = temporadasMap[temporada];
+    const html = anos.map((ano, anoIndex) => {
+        const corridasDoAno = anosMap[ano];
         
-        // Vitórias: quando Final = 1 ou contém "1º"
-        const vitorias = corridas.filter(c => {
+        // Group by temporada within this year
+        const temporadasMap = {};
+        corridasDoAno.forEach(p => {
+            const temporada = p['Temporada'] || 'Desconhecida';
+            if (!temporadasMap[temporada]) {
+                temporadasMap[temporada] = [];
+            }
+            temporadasMap[temporada].push(p);
+        });
+        
+        const temporadas = Object.keys(temporadasMap);
+        const totalCorridas = corridasDoAno.length;
+        const totalVitorias = corridasDoAno.filter(c => {
             const final = String(c['Final'] || '').trim();
             return final === '1' || final.includes('1º');
         }).length;
-        
-        // Pódios: quando Final = 1, 2, 3 ou contém 1º, 2º, 3º
-        const podios = corridas.filter(c => {
+        const totalPodios = corridasDoAno.filter(c => {
             const final = String(c['Final'] || '').trim();
             return final === '1' || final === '2' || final === '3' ||
                    final.includes('1º') || final.includes('2º') || final.includes('3º');
         }).length;
-        
-        // Poles: quando Pole = "Sim"
-        const poles = corridas.filter(c => {
+        const totalPoles = corridasDoAno.filter(c => {
             const pole = String(c['Pole'] || '').trim().toLowerCase();
             return pole === 'sim';
         }).length;
-        
-        // DNFs: quando Final contém "DNF" ou "Abandonou"
-        const dnfs = corridas.filter(c => {
-            const final = String(c['Final'] || '').trim().toUpperCase();
-            return final.includes('DNF') || final.includes('ABANDONOU') || final.includes('ABANDON');
+        const totalFastLaps = corridasDoAno.filter(c => {
+            const bestLap = String(c['Best Lap'] || '').trim().toLowerCase();
+            return bestLap === 'sim';
         }).length;
         
-        const corridasHtml = corridas.map(c => {
-            const pista = c['Pista'] || 'Desconhecida';
-            const final = c['Final'] || 'N/A';
-            const liga = c['Liga'] || 'N/A';
-            const categoria = c['Categoria'] || '';
-            const ano = c['Ano'] || '';
-            const pole = c['Pole'] === 'Sim' ? '🏁' : '';
-            const bestLap = c['Best Lap'] === 'Sim' ? '⚡' : '';
-            
-            // Cor do resultado
-            let resultClass = '';
-            if (final === '1' || final.includes('1º')) resultClass = 'resultado-vitoria';
-            else if (final === '2' || final === '3' || final.includes('2º') || final.includes('3º')) resultClass = 'resultado-podio';
-            else if (final.toUpperCase().includes('DNF') || final.toUpperCase().includes('ABANDON')) resultClass = 'resultado-dnf';
-            
-            return `
-                <div class="corrida-item">
-                    <div class="corrida-principal">
-                        <div class="corrida-pista">${pista}</div>
-                        <div class="corrida-liga-categoria">
-                            <span class="corrida-liga">${liga}</span>
-                            ${categoria ? `<span class="corrida-categoria">${categoria}</span>` : ''}
-                            ${ano ? `<span class="corrida-ano">${ano}</span>` : ''}
-                        </div>
-                    </div>
-                    <div class="corrida-info">
-                        <span class="corrida-resultado ${resultClass}">${final}</span>
-                        <span class="corrida-badges">${pole}${bestLap}</span>
-                    </div>
-                </div>
-            `;
-        }).join('');
+        // Check for championships - count how many
+        const qtdCampeonatosPiloto = corridasDoAno.filter(c => {
+            const campeao = String(c['Piloto Campeao'] || '').trim().toUpperCase();
+            return campeao === 'SIM';
+        }).length;
+        const qtdCampeonatosConstrutores = corridasDoAno.filter(c => {
+            const construtores = String(c['Construtores'] || '').trim().toUpperCase();
+            return construtores === 'SIM' || construtores === 'TIME';
+        }).length;
         
         return `
-            <div class="temporada-item">
-                <div class="temporada-header" onclick="toggleTemporada(this)">
-                    <div class="temporada-header-left">
-                        <span class="temporada-nome">${temporada}</span>
-                        <span class="temporada-corridas">${corridas.length} corridas</span>
+            <div class="ano-item-wrapper">
+                <div class="ano-item" onclick="toggleAno(this)">
+                    <div class="ano-header-left">
+                        <span class="ano-nome">${ano} ${'🏆'.repeat(qtdCampeonatosPiloto)}${'👥'.repeat(qtdCampeonatosConstrutores)}</span>
+                        <span class="ano-info">${temporadas.length} ${temporadas.length === 1 ? 'temporada' : 'temporadas'} • ${totalCorridas} ${totalCorridas === 1 ? 'corrida' : 'corridas'}</span>
                     </div>
-                    <span class="temporada-toggle">▼</span>
+                    <div class="ano-stats-mini">
+                        ${totalVitorias > 0 ? `<span class="ano-stat-mini">🥇 ${totalVitorias}</span>` : ''}
+                        ${totalPodios > 0 ? `<span class="ano-stat-mini">🏅 ${totalPodios}</span>` : ''}
+                        ${totalPoles > 0 ? `<span class="ano-stat-mini">🚩 ${totalPoles}</span>` : ''}
+                        ${totalFastLaps > 0 ? `<span class="ano-stat-mini">⚡ ${totalFastLaps}</span>` : ''}
+                    </div>
+                    <div class="ano-expand">▼</div>
                 </div>
-                <div class="temporada-stats">
-                    <div class="temporada-stat">
-                        <span class="temporada-stat-value">${vitorias}</span>
-                        <span class="temporada-stat-label">Vitórias</span>
-                    </div>
-                    <div class="temporada-stat">
-                        <span class="temporada-stat-value">${podios}</span>
-                        <span class="temporada-stat-label">Pódios</span>
-                    </div>
-                    <div class="temporada-stat">
-                        <span class="temporada-stat-value">${poles}</span>
-                        <span class="temporada-stat-label">Poles</span>
-                    </div>
-                    <div class="temporada-stat">
-                        <span class="temporada-stat-value">${dnfs}</span>
-                        <span class="temporada-stat-label">DNFs</span>
-                    </div>
-                </div>
-                <div class="temporada-corridas-list">
-                    ${corridasHtml}
+                <div class="ano-temporadas" id="anoTemporadas-${anoIndex}">
+                    ${temporadas.map((temporada, tempIndex) => {
+                        const corridas = temporadasMap[temporada];
+                        
+                        const vitorias = corridas.filter(c => {
+                            const final = String(c['Final'] || '').trim();
+                            return final === '1' || final.includes('1º');
+                        }).length;
+                        
+                        const podios = corridas.filter(c => {
+                            const final = String(c['Final'] || '').trim();
+                            return final === '1' || final === '2' || final === '3' ||
+                                   final.includes('1º') || final.includes('2º') || final.includes('3º');
+                        }).length;
+                        
+                        const poles = corridas.filter(c => {
+                            const pole = String(c['Pole'] || '').trim().toLowerCase();
+                            return pole === 'sim';
+                        }).length;
+                        
+                        const fastLaps = corridas.filter(c => {
+                            const bestLap = String(c['Best Lap'] || '').trim().toLowerCase();
+                            return bestLap === 'sim';
+                        }).length;
+                                                // Check for championships in this season - count how many
+                        const qtdCampeonatosPiloto = corridas.filter(c => {
+                            const campeao = String(c['Piloto Campeao'] || '').trim().toUpperCase();
+                            return campeao === 'SIM';
+                        }).length;
+                        const qtdCampeonatosConstrutores = corridas.filter(c => {
+                            const construtores = String(c['Construtores'] || '').trim().toUpperCase();
+                            return construtores === 'SIM' || construtores === 'TIME';
+                        }).length;
+                                                const dnfs = corridas.filter(c => {
+                            const final = String(c['Final'] || '').trim().toUpperCase();
+                            return final.includes('DNF') || final.includes('ABANDONOU') || final.includes('ABANDON');
+                        }).length;
+                        
+                        const corridasHtml = corridas.map(c => {
+                            const pista = c['Pista'] || 'Desconhecida';
+                            const final = c['Final'] || 'N/A';
+                            const liga = c['Liga'] || 'N/A';
+                            const categoria = c['Categoria'] || '';
+                            const pole = String(c['Pole'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Pole Position">🚩</span>' : '';
+                            const bestLap = String(c['Best Lap'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Volta R\u00e1pida">⚡</span>' : '';
+                            const campeonatoPiloto = String(c['Piloto Campeao'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Campe\u00e3o de Pilotos">🏆</span>' : '';
+                            const construtoresVal = String(c['Construtores'] || '').trim().toUpperCase();
+                            const campeonatoConstrutores = (construtoresVal === 'SIM' || construtoresVal === 'TIME') ? '<span title="Campe\u00e3o de Construtores">👥</span>' : '';
+                            
+                            let resultClass = '';
+                            if (final === '1' || final.includes('1º')) resultClass = 'resultado-vitoria';
+                            else if (final === '2' || final.includes('2º')) resultClass = 'resultado-segundo';
+                            else if (final === '3' || final.includes('3º')) resultClass = 'resultado-podio';
+                            else if (final.toUpperCase().includes('DNF') || final.toUpperCase().includes('ABANDON')) resultClass = 'resultado-dnf';
+                            
+                            return `
+                                <div class="corrida-item">
+                                    <div class="corrida-info">
+                                        <span class="corrida-resultado ${resultClass}">${formatPosition(final)}</span>
+                                    </div>
+                                    <div class="corrida-principal">
+                                        <div class="corrida-pista">${pista}</div>
+                                        <div class="corrida-liga-categoria">
+                                            <span class="corrida-liga">${liga}</span>
+                                            ${categoria ? `<span class="corrida-categoria">${categoria}</span>` : ''}
+                                        </div>
+                                    </div>
+                                    <span class="corrida-badges">${pole}${bestLap}${campeonatoPiloto}${campeonatoConstrutores}</span>
+                                </div>
+                            `;
+                        }).join('');
+                        
+                        return `
+                            <div class="temporada-item-wrapper">
+                                <div class="temporada-item" onclick="toggleTemporada(this)">
+                                    <div class="temporada-header-left">
+                                        <span class="temporada-nome">${temporada} ${'🏆'.repeat(qtdCampeonatosPiloto)}${'👥'.repeat(qtdCampeonatosConstrutores)}</span>
+                                        <span class="temporada-corridas">${corridas.length} corridas</span>
+                                    </div>
+                                    <div class="temporada-stats-mini">
+                                        ${vitorias > 0 ? `<span>🥇 ${vitorias}</span>` : ''}
+                                        ${podios > 0 ? `<span>🏅 ${podios}</span>` : ''}
+                                        ${poles > 0 ? `<span>🚩 ${poles}</span>` : ''}
+                                        ${fastLaps > 0 ? `<span>⚡ ${fastLaps}</span>` : ''}
+                                    </div>
+                                    <div class="temporada-toggle">▼</div>
+                                </div>
+                                <div class="temporada-corridas-list">
+                                    ${corridasHtml}
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
                 </div>
             </div>
         `;
@@ -526,20 +633,59 @@ function displayTemporadas() {
     document.getElementById('temporadasContainer').innerHTML = html;
 }
 
+// Toggle ano expansion
+function toggleAno(element) {
+    const wrapper = element.closest('.ano-item-wrapper');
+    const temporadas = wrapper.querySelector('.ano-temporadas');
+    const expand = element.querySelector('.ano-expand');
+    
+    const isActive = wrapper.classList.toggle('active');
+    
+    if (isActive) {
+        expand.style.transform = 'rotate(180deg)';
+        temporadas.style.maxHeight = temporadas.scrollHeight + 'px';
+    } else {
+        expand.style.transform = 'rotate(0deg)';
+        temporadas.style.maxHeight = '0';
+    }
+}
+
 // Toggle temporada expansion
-function toggleTemporada(header) {
-    const item = header.parentElement;
-    const corridasList = item.querySelector('.temporada-corridas-list');
-    const toggle = header.querySelector('.temporada-toggle');
+function toggleTemporada(element) {
+    const wrapper = element.closest('.temporada-item-wrapper');
+    const corridasList = wrapper.querySelector('.temporada-corridas-list');
+    const toggle = element.querySelector('.temporada-toggle');
     
-    item.classList.toggle('expanded');
+    const isActive = wrapper.classList.toggle('active');
     
-    if (item.classList.contains('expanded')) {
+    if (isActive) {
         corridasList.style.maxHeight = corridasList.scrollHeight + 'px';
         toggle.style.transform = 'rotate(180deg)';
+        
+        // Update parent ano-temporadas height with buffer
+        const updateParentHeight = () => {
+            const parentTemporadas = wrapper.closest('.ano-temporadas');
+            if (parentTemporadas) {
+                parentTemporadas.style.maxHeight = (parentTemporadas.scrollHeight + 100) + 'px';
+            }
+        };
+        
+        // Update multiple times to ensure proper expansion
+        setTimeout(updateParentHeight, 50);
+        setTimeout(updateParentHeight, 100);
+        setTimeout(updateParentHeight, 200);
+        setTimeout(updateParentHeight, 450);
     } else {
         corridasList.style.maxHeight = '0';
         toggle.style.transform = 'rotate(0deg)';
+        
+        // Update parent ano-temporadas height after collapse
+        setTimeout(() => {
+            const parentTemporadas = wrapper.closest('.ano-temporadas');
+            if (parentTemporadas) {
+                parentTemporadas.style.maxHeight = parentTemporadas.scrollHeight + 'px';
+            }
+        }, 450);
     }
 }
 
@@ -595,26 +741,223 @@ function displayCampeonatos() {
         (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
     );
     
-    // Group by liga (campeonato)
+    // Group by liga and collect all championships
     const campeonatosMap = {};
     pilotoParticipacoes.forEach(p => {
-        const campeonato = p['Liga'] || 'Desconhecido';
-        campeonatosMap[campeonato] = (campeonatosMap[campeonato] || 0) + 1;
+        const liga = p['Liga'] || 'Desconhecido';
+        const temporada = p['Temporada'] || '';
+        const ano = p['Ano'] || '';
+        const categoria = p['Categoria'] || '';
+        const key = `${liga}|||${temporada}|||${categoria}`;
+        
+        if (!campeonatosMap[liga]) {
+            campeonatosMap[liga] = {
+                nome: liga,
+                campeonatos: [],
+                campeonatosSet: new Set()
+            };
+        }
+        
+        if (!campeonatosMap[liga].campeonatosSet.has(key)) {
+            campeonatosMap[liga].campeonatosSet.add(key);
+            campeonatosMap[liga].campeonatos.push({
+                temporada: temporada,
+                ano: ano,
+                categoria: categoria,
+                corridas: 0
+            });
+        }
+        
+        // Count races for this championship
+        const idx = campeonatosMap[liga].campeonatos.findIndex(c => 
+            c.temporada === temporada && c.categoria === categoria
+        );
+        if (idx !== -1) {
+            campeonatosMap[liga].campeonatos[idx].corridas++;
+        }
     });
     
-    // Sort by participacoes
-    const campeonatos = Object.entries(campeonatosMap)
-        .sort((a, b) => b[1] - a[1])
+    // Convert to array and sort by championships count
+    const campeonatos = Object.values(campeonatosMap)
+        .map(c => {
+            // Count championships for this league
+            const corridasDaLiga = pilotoParticipacoes.filter(p => 
+                String(p.Liga || '').trim() === c.nome
+            );
+            
+            const qtdCampeonatosPiloto = corridasDaLiga.filter(corrida => {
+                const campeao = String(corrida['Piloto Campeao'] || '').trim().toUpperCase();
+                return campeao === 'SIM';
+            }).length;
+            
+            const qtdCampeonatosConstrutores = corridasDaLiga.filter(corrida => {
+                const campeao = String(corrida['Construtores'] || '').trim().toUpperCase();
+                return campeao === 'SIM';
+            }).length;
+            
+            return {
+                nome: c.nome,
+                campeonatos: c.campeonatos.sort((a, b) => {
+                    const anoA = parseInt(a.ano) || 0;
+                    const anoB = parseInt(b.ano) || 0;
+                    return anoB - anoA;
+                }),
+                total: c.campeonatos.length,
+                qtdCampeonatosPiloto,
+                qtdCampeonatosConstrutores
+            };
+        })
+        .sort((a, b) => b.total - a.total)
         .slice(0, 20); // Top 20
     
-    const html = campeonatos.map(([nome, participacoes]) => `
-        <div class="campeonato-item">
-            <span class="campeonato-nome">${nome}</span>
-            <span class="campeonato-participacoes">${participacoes} corridas</span>
+    const html = campeonatos.map((c, index) => `
+        <div class="campeonato-item-wrapper">
+            <div class="campeonato-item" onclick="toggleCampeonato(this)">
+                <div class="campeonato-header-left">
+                    <span class="campeonato-nome">${c.nome} ${'🏆'.repeat(c.qtdCampeonatosPiloto)}${'👥'.repeat(c.qtdCampeonatosConstrutores)}</span>
+                    <span class="campeonato-participacoes">${c.total} ${c.total === 1 ? 'campeonato' : 'campeonatos'}</span>
+                </div>
+                <div class="campeonato-expand">▼</div>
+            </div>
+            <div class="campeonato-detail" id="campeonatoDetail-${index}">
+                ${c.campeonatos.map((camp, campIdx) => {
+                    // Detect championships for this season - count how many
+                    const corridasCamp = pilotoParticipacoes.filter(p => 
+                        String(p.Liga || '').trim() === c.nome &&
+                        String(p.Temporada || '').trim() === camp.temporada &&
+                        String(p.Categoria || '').trim() === (camp.categoria || '')
+                    );
+                    
+                    const qtdCampeonatosPiloto = corridasCamp.filter(corrida => {
+                        const campeao = String(corrida['Piloto Campeao'] || '').trim().toUpperCase();
+                        return campeao === 'SIM';
+                    }).length;
+                    
+                    const qtdCampeonatosConstrutores = corridasCamp.filter(corrida => {
+                        const campeao = String(corrida['Construtores'] || '').trim().toUpperCase();
+                        return campeao === 'SIM';
+                    }).length;
+                    
+                    return `
+                    <div class="campeonato-subitem-wrapper">
+                        <div class="campeonato-subitem" onclick="toggleCampeonatoCorridas(this, '${c.nome}', '${camp.temporada}', '${camp.categoria}')">
+                            <div class="campeonato-subitem-info">
+                                <span class="campeonato-temporada">${camp.temporada || 'N/A'} ${'🏆'.repeat(qtdCampeonatosPiloto)}${'👥'.repeat(qtdCampeonatosConstrutores)}</span>
+                                ${camp.categoria ? `<span class="campeonato-categoria">${camp.categoria}</span>` : ''}
+                                ${camp.ano ? `<span class="campeonato-ano">${camp.ano}</span>` : ''}
+                            </div>
+                            <div class="campeonato-subitem-right">
+                                <span class="campeonato-corridas">${camp.corridas} ${camp.corridas === 1 ? 'corrida' : 'corridas'}</span>
+                                <div class="campeonato-subexpand">▼</div>
+                            </div>
+                        </div>
+                        <div class="campeonato-corridas-list" id="campeonatoCorridas-${index}-${campIdx}"></div>
+                    </div>
+                    `;
+                }).join('')}
+            </div>
         </div>
     `).join('');
     
     document.getElementById('campeonatosContainer').innerHTML = html || '<p style="text-align: center; color: rgba(255,255,255,0.5);">Nenhum campeonato encontrado</p>';
+}
+
+// Toggle campeonato detail
+function toggleCampeonato(element) {
+    const wrapper = element.closest('.campeonato-item-wrapper');
+    const detail = wrapper.querySelector('.campeonato-detail');
+    const expand = element.querySelector('.campeonato-expand');
+    
+    const isActive = wrapper.classList.toggle('active');
+    
+    if (isActive) {
+        expand.style.transform = 'rotate(180deg)';
+        detail.style.maxHeight = detail.scrollHeight + 'px';
+    } else {
+        expand.style.transform = 'rotate(0deg)';
+        detail.style.maxHeight = '0';
+    }
+}
+
+// Toggle campeonato corridas detail
+function toggleCampeonatoCorridas(element, liga, temporada, categoria) {
+    const wrapper = element.closest('.campeonato-subitem-wrapper');
+    const corridasList = wrapper.querySelector('.campeonato-corridas-list');
+    const expand = element.querySelector('.campeonato-subexpand');
+    
+    const isActive = wrapper.classList.toggle('active');
+    
+    if (isActive) {
+        expand.style.transform = 'rotate(180deg)';
+        
+        // Load corridas if not loaded yet
+        if (!corridasList.hasAttribute('data-loaded')) {
+            const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
+            const corridas = participacoesData.filter(p => 
+                (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase() &&
+                (p['Liga'] || '') === liga &&
+                (p['Temporada'] || '') === temporada &&
+                (p['Categoria'] || '') === categoria
+            );
+            
+            const corridasHtml = corridas.map(c => {
+                const pista = c['Pista'] || 'Desconhecida';
+                const final = c['Final'] || 'N/A';
+                const pole = String(c['Pole'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Pole Position">🚩</span>' : '';
+                const bestLap = String(c['Best Lap'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Volta R\u00e1pida">⚡</span>' : '';
+                const campeonatoPiloto = String(c['Piloto Campeao'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Campe\u00e3o de Pilotos">🏆</span>' : '';
+                const construtoresVal = String(c['Construtores'] || '').trim().toUpperCase();
+                const campeonatoConstrutores = (construtoresVal === 'SIM' || construtoresVal === 'TIME') ? '<span title="Campe\u00e3o de Construtores">👥</span>' : '';
+                
+                let resultClass = '';
+                if (final === '1' || final.includes('1º')) resultClass = 'resultado-vitoria';
+                else if (final === '2' || final.includes('2º')) resultClass = 'resultado-segundo';
+                else if (final === '3' || final.includes('3º')) resultClass = 'resultado-podio';
+                else if (final.toUpperCase().includes('DNF') || final.toUpperCase().includes('ABANDON')) resultClass = 'resultado-dnf';
+                
+                return `
+                    <div class="campeonato-corrida-item">
+                        <span class="corrida-resultado ${resultClass}">${formatPosition(final)}</span>
+                        <span class="campeonato-corrida-pista">${pista}</span>
+                        <span class="campeonato-corrida-badges">${pole}${bestLap}${campeonatoPiloto}${campeonatoConstrutores}</span>
+                    </div>
+                `;
+            }).join('');
+            
+            corridasList.innerHTML = corridasHtml || '<p style="text-align: center; color: #999; padding: 10px;">Nenhuma corrida encontrada</p>';
+            corridasList.setAttribute('data-loaded', 'true');
+        }
+        
+        setTimeout(() => {
+            corridasList.style.maxHeight = corridasList.scrollHeight + 'px';
+            
+            // Update parent campeonato-detail maxHeight with buffer
+            const updateParentHeight = () => {
+                const parentDetail = wrapper.closest('.campeonato-detail');
+                if (parentDetail) {
+                    // Add buffer to accommodate all content
+                    parentDetail.style.maxHeight = (parentDetail.scrollHeight + 100) + 'px';
+                }
+            };
+            
+            // Update multiple times to ensure proper expansion
+            setTimeout(updateParentHeight, 50);
+            setTimeout(updateParentHeight, 100);
+            setTimeout(updateParentHeight, 200);
+            setTimeout(updateParentHeight, 450);
+        }, 10);
+    } else {
+        expand.style.transform = 'rotate(0deg)';
+        corridasList.style.maxHeight = '0';
+        
+        // Update parent campeonato-detail maxHeight after collapse
+        setTimeout(() => {
+            const parentDetail = wrapper.closest('.campeonato-detail');
+            if (parentDetail) {
+                parentDetail.style.maxHeight = parentDetail.scrollHeight + 'px';
+            }
+        }, 450);
+    }
 }
 
 // Display advanced stats

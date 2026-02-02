@@ -516,9 +516,29 @@
     font-size: 22px;
     font-weight: 700;
     color: #1a1a1a;
-    margin: 0 0 20px 0;
+    margin: 0 0 12px 0;
     padding-bottom: 12px;
     border-bottom: 2px solid rgba(255, 107, 0, 0.15);
+}
+
+.legenda-simbolos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 12px 16px;
+    background: rgba(255, 107, 0, 0.05);
+    border-left: 3px solid rgba(255, 107, 0, 0.3);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.legenda-item {
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
+    text-align: center;
 }
 
 /* Temporadas */
@@ -581,6 +601,10 @@
 }
 
 /* Campeonatos */
+.campeonato-item-wrapper {
+    margin-bottom: 12px;
+}
+
 .campeonato-item {
     display: flex;
     align-items: center;
@@ -589,14 +613,33 @@
     background: #f8f8f8;
     border-left: 3px solid rgba(255, 107, 0, 0.5);
     border-radius: 8px;
-    margin-bottom: 12px;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .campeonato-item:hover {
     background: rgba(255, 107, 0, 0.08);
     border-left-color: #ff6b00;
     transform: translateX(5px);
+}
+
+.campeonato-item-wrapper.active .campeonato-item {
+    background: rgba(255, 107, 0, 0.1);
+    border-left-color: #ff6b00;
+}
+
+.campeonato-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.campeonato-expand {
+    font-size: 12px;
+    color: #666;
+    transition: transform 0.3s ease;
+    margin-left: 10px;
 }
 
 .campeonato-nome {
@@ -606,9 +649,143 @@
 }
 
 .campeonato-participacoes {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     color: #ff6b00;
+}
+
+.campeonato-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 0 0 8px 8px;
+    margin-top: -8px;
+    padding: 0 20px;
+}
+
+.campeonato-item-wrapper.active .campeonato-detail {
+    padding: 15px 20px;
+}
+
+.campeonato-subitem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.campeonato-subitem:hover {
+    background: rgba(255, 107, 0, 0.05);
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: -10px;
+    margin-right: -10px;
+    border-radius: 6px;
+}
+
+.campeonato-subitem-wrapper.active .campeonato-subitem {
+    background: rgba(255, 107, 0, 0.08);
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: -10px;
+    margin-right: -10px;
+    border-radius: 6px 6px 0 0;
+}
+
+.campeonato-subitem-wrapper:last-child .campeonato-subitem {
+    border-bottom: none;
+}
+
+.campeonato-subitem-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.campeonato-subexpand {
+    font-size: 10px;
+    color: #666;
+    transition: transform 0.3s ease;
+}
+
+.campeonato-subitem-info {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.campeonato-temporada {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 14px;
+}
+
+.campeonato-categoria {
+    font-size: 12px;
+    padding: 2px 8px;
+    background: rgba(255, 107, 0, 0.1);
+    color: #ff6b00;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.campeonato-ano {
+    font-size: 12px;
+    color: #666;
+}
+
+.campeonato-corridas {
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
+}
+
+.campeonato-corridas-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 0 0 6px 6px;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.campeonato-subitem-wrapper.active .campeonato-corridas-list {
+    padding: 10px;
+}
+
+.campeonato-corrida-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+.campeonato-corrida-item:last-child {
+    margin-bottom: 0;
+}
+
+.campeonato-corrida-pista {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a1a1a;
+}
+
+.campeonato-corrida-badges {
+    font-size: 13px;
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
 }
 
 /* Sidebar */
@@ -673,9 +850,109 @@
     color: #1a1a1a;
 }
 
-/* Temporada expandível */
-.temporada-item {
+/* Ano expandível */
+.ano-item-wrapper {
+    margin-bottom: 15px;
+}
+
+.ano-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    background: linear-gradient(135deg, rgba(255, 107, 0, 0.08), rgba(255, 107, 0, 0.03));
+    border-left: 4px solid #ff6b00;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ano-item:hover {
+    background: linear-gradient(135deg, rgba(255, 107, 0, 0.12), rgba(255, 107, 0, 0.06));
+    transform: translateX(3px);
+    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.15);
+}
+
+.ano-item-wrapper.active .ano-item {
+    background: linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(255, 107, 0, 0.08));
+    border-left-width: 4px;
+}
+
+.ano-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.ano-nome {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.ano-info {
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
+}
+
+.ano-stats-mini {
+    display: flex;
+    gap: 15px;
+    margin-right: 15px;
+}
+
+.ano-stat-mini {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ff6b00;
+}
+
+.ano-expand {
+    font-size: 12px;
+    color: #666;
+    transition: transform 0.3s ease;
+}
+
+.ano-temporadas {
+    max-height: 0;
     overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 20px;
+    margin-top: 0;
+}
+
+.ano-item-wrapper.active .ano-temporadas {
+    margin-top: 15px;
+}
+
+/* Temporada expandível (dentro do ano) */
+.temporada-item-wrapper {
+    margin-bottom: 12px;
+}
+
+.temporada-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.02);
+    border-left: 3px solid rgba(255, 107, 0, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.temporada-item:hover {
+    background: rgba(255, 107, 0, 0.06);
+    border-left-color: #ff6b00;
+    transform: translateX(3px);
+}
+
+.temporada-item-wrapper.active .temporada-item {
+    background: rgba(255, 107, 0, 0.08);
+    border-left-color: #ff6b00;
 }
 
 .temporada-header {
@@ -692,12 +969,32 @@
 
 .temporada-header-left {
     display: flex;
-    align-items: center;
-    gap: 15px;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.temporada-nome {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.temporada-corridas {
+    font-size: 12px;
+    color: #666;
+}
+
+.temporada-stats-mini {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    color: #666;
+    margin-right: 10px;
 }
 
 .temporada-toggle {
-    font-size: 12px;
+    font-size: 10px;
     color: rgba(0, 0, 0, 0.4);
     transition: transform 0.3s ease;
 }
@@ -705,12 +1002,16 @@
 .temporada-corridas-list {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.4s ease;
     margin-top: 0;
+    padding: 0;
 }
 
-.temporada-item.expanded .temporada-corridas-list {
-    margin-top: 15px;
+.temporada-item-wrapper.active .temporada-corridas-list {
+    margin-top: 12px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 6px;
 }
 
 .corrida-item {
@@ -722,6 +1023,7 @@
     border-radius: 8px;
     margin-bottom: 8px;
     transition: background-color 0.2s ease;
+    gap: 12px;
 }
 
 .corrida-item:hover {
@@ -783,12 +1085,30 @@
 }
 
 .resultado-vitoria {
-    color: #ffd700;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #1a1a1a;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+.resultado-segundo {
+    background: linear-gradient(135deg, #C0C0C0 0%, #E8E8E8 100%);
+    color: #1a1a1a;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(192, 192, 192, 0.3);
 }
 
 .resultado-podio {
-    color: #ff6b00;
+    background: linear-gradient(135deg, #CD7F32 0%, #E8A87C 100%);
+    color: #fff;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(205, 127, 50, 0.3);
 }
 
 .resultado-dnf {
@@ -804,6 +1124,9 @@
 .corrida-badges {
     font-size: 14px;
     min-width: 30px;
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
 }
 
 .loading-text {
@@ -912,6 +1235,7 @@
     background: rgba(0, 0, 0, 0.02);
     border-radius: 10px;
     transition: all 0.2s ease;
+    gap: 12px;
 }
 
 .stat-detail-item:hover {
@@ -967,11 +1291,35 @@
 }
 
 .stat-detail-posicao {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
-    color: #ff6b00;
-    min-width: 35px;
-    text-align: center;
+    min-width: 45px;
+    text-align: left;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.stat-detail-posicao.badge-1 {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #1a1a1a;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+.stat-detail-posicao.badge-2 {
+    background: linear-gradient(135deg, #C0C0C0 0%, #E8E8E8 100%);
+    color: #1a1a1a;
+    box-shadow: 0 2px 8px rgba(192, 192, 192, 0.3);
+}
+
+.stat-detail-posicao.badge-3 {
+    background: linear-gradient(135deg, #CD7F32 0%, #E8A87C 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(205, 127, 50, 0.3);
+}
+
+.stat-detail-posicao:not(.badge-1):not(.badge-2):not(.badge-3) {
+    color: #666;
 }
 
 .stat-detail-equipe {
@@ -1204,6 +1552,7 @@
     background: rgba(0, 0, 0, 0.02);
     border-radius: 8px;
     margin-bottom: 6px;
+    gap: 12px;
 }
 
 .titulo-corrida-item:last-child {
@@ -1244,6 +1593,10 @@
     font-size: 14px;
     min-width: 40px;
     text-align: right;
+    display: flex;
+    gap: 4px;
+    justify-content: flex-end;
+    margin-left: auto;
 }
 
 /* Footer */
@@ -1501,5 +1854,26 @@
     /* Mostrar quando expandido */
     .pilotos-table tr.expanded .expandable-data {
         display: flex;
+    }
+    
+    /* Ocultar informações extras no mobile para listagens principais */
+    .ano-stats-mini {
+        display: none;
+    }
+    
+    .temporada-stats-mini {
+        display: none;
+    }
+    
+    .ano-info {
+        font-size: 11px;
+    }
+    
+    .temporada-corridas {
+        font-size: 11px;
+    }
+    
+    .campeonato-participacoes {
+        font-size: 11px;
     }
 }
