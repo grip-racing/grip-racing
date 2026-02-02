@@ -138,9 +138,7 @@ async function updateStatistics() {
 async function updateStaff() {
     const pilotos = await fetchData(DATA_SOURCES.pilotos);
     if (!pilotos || pilotos.length === 0) return;
-    
-    console.log('Pilotos carregados:', pilotos.length);
-    
+        
     // Create a map of pilots by name (normalize names)
     const pilotosMap = {};
     pilotos.forEach(piloto => {
