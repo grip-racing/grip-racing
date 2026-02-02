@@ -140,6 +140,10 @@ body {
     width: 100%;
 }
 
+.navbar-logo {
+    display: none;
+}
+
 .mobile-menu-btn {
     display: none;
     flex-direction: column;
@@ -1870,6 +1874,27 @@ body {
 @media (max-width: 768px) {
     .container {
         padding: 0 20px;
+    }
+
+    .navbar .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .navbar-logo {
+        display: block;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 8px;
+        z-index: 10;
+    }
+
+    .navbar-logo img {
+        height: 50px;
+        width: auto;
     }
 
     .mobile-menu-btn {

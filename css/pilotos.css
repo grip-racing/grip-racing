@@ -56,6 +56,45 @@
     background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
 }
 
+/* Mobile Sort Controls - Hidden by default */
+.mobile-sort-controls {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #ffffff;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+.mobile-sort-controls label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6c757d;
+    white-space: nowrap;
+}
+
+.mobile-sort-select {
+    flex: 1;
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    color: #1a1a1a;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobile-sort-select:focus {
+    outline: none;
+    border-color: #ff6b00;
+    background: #ffffff;
+}
+
 .pilotos-controls {
     display: flex;
     gap: 20px;
@@ -188,6 +227,11 @@
 .pilotos-table {
     width: 100%;
     border-collapse: collapse;
+}
+
+/* Hide badges on desktop */
+.piloto-badges {
+    display: none;
 }
 
 .pilotos-table thead {
@@ -1215,11 +1259,21 @@
 
 @media (max-width: 768px) {
     .hero-title {
-        font-size: 36px;
+        font-size: 28px;
     }
     
     .piloto-name {
         font-size: 32px;
+    }
+    
+    /* Show Mobile Sort Controls */
+    .mobile-sort-controls {
+        display: flex;
+    }
+
+    /* Show badges on mobile */
+    .piloto-badges {
+        display: flex;
     }
     
     .pilotos-controls {
@@ -1256,11 +1310,178 @@
         font-size: 10px;
     }
     
+    /* Transformar tabela em cards no mobile */
     .table-container {
-        overflow-x: auto;
+        overflow: visible;
     }
     
     .pilotos-table {
-        min-width: 800px;
+        display: block;
+        border: none;
+    }
+    
+    .pilotos-table thead {
+        display: none;
+    }
+    
+    .pilotos-table tbody {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .pilotos-table tr {
+        display: block;
+        background: #ffffff;
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        padding: 20px;
+        transition: all 0.3s ease;
+        position: relative;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .pilotos-table tr.expanded {
+        border-color: #ff6b00;
+    }
+    
+    .pilotos-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border: none;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 15px;
+        font-weight: 600;
+        color: #1a1a1a;
+    }
+    
+    .pilotos-table td:last-child {
+        border-bottom: none;
+    }
+    
+    .pilotos-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #6c757d;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        flex-shrink: 0;
+        margin-right: 10px;
+    }
+    
+    /* Primeira célula (nome) destaque */
+    .pilotos-table td:first-child {
+        font-size: 18px;
+        font-weight: 700;
+        color: #ff6b00;
+        padding: 0 0 0 0;
+        margin-bottom: 0;
+        border-bottom: none;
+        justify-content: flex-start;
+        position: relative;
+    }
+    
+    .pilotos-table td:first-child::before {
+        display: none;
+    }
+    
+    .piloto-name-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        padding-right: 40px;
+    }
+    
+    .piloto-name-text {
+        font-size: 18px;
+        font-weight: 700;
+        color: #ff6b00;
+    }
+    
+    .piloto-badges {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #495057;
+    }
+    
+    .stat-badge-highlight {
+        background: #fff3e6;
+        border-color: #ff6b00;
+        color: #ff6b00;
+    }
+    
+    /* Esconder badges quando expandido */
+    .pilotos-table tr.expanded .piloto-badges {
+        display: none;
+    }
+    
+    /* Mostrar borda e espaçamento quando expandido */
+    .pilotos-table tr.expanded td:first-child {
+        padding-bottom: 12px;
+        margin-bottom: 8px;
+        border-bottom: 2px solid #ff6b00;
+    }
+    
+    /* Botão de expansão */
+    .expand-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 32px;
+        height: 32px;
+        background: #ff6b00;
+        border: none;
+        border-radius: 50%;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 10;
+        padding: 0;
+        line-height: 1;
+    }
+    
+    .expand-btn:hover {
+        background: #e05d00;
+        transform: scale(1.1);
+    }
+    
+    .expand-btn::before {
+        content: '+';
+    }
+    
+    .pilotos-table tr.expanded .expand-btn::before {
+        content: '−';
+    }
+    
+    /* Esconder dados expandidos por padrão */
+    .pilotos-table .expandable-data {
+        display: none;
+    }
+    
+    /* Mostrar quando expandido */
+    .pilotos-table tr.expanded .expandable-data {
+        display: flex;
     }
 }

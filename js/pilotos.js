@@ -131,18 +131,38 @@ function displayPilotos() {
     }
     
     tbody.innerHTML = filteredPilotos.map(p => `
-        <tr onclick="window.location.href='piloto-detalhes.html?nome=${encodeURIComponent(p.piloto)}'">
-            <td>${p.piloto}</td>
-            <td>${formatNumber(p.corridas)}</td>
-            <td>${formatNumber(p.titulos)}</td>
-            <td>${formatNumber(p.podios)}</td>
-            <td>${formatNumber(p.vitorias)}</td>
-            <td>${formatNumber(p.poles)}</td>
-            <td>${formatNumber(p.fastLaps)}</td>
-            <td>${p.estreia}</td>
-            <td>${p.ultima}</td>
+        <tr>
+            <td data-label="Piloto" class="piloto-name-cell">
+                <div class="piloto-name-wrapper">
+                    <span class="piloto-name-text">${p.piloto}</span>
+                    <div class="piloto-badges">
+                        <span class="stat-badge">🏁 ${formatNumber(p.corridas)}</span>
+                        <span class="stat-badge stat-badge-highlight">🏆 ${formatNumber(p.titulos)}</span>
+                        <span class="stat-badge">🏅 ${formatNumber(p.podios)}</span>
+                    </div>
+                </div>
+                <button class="expand-btn" onclick="event.stopPropagation(); this.closest('tr').classList.toggle('expanded')"></button>
+            </td>
+            <td data-label="Corridas" class="expandable-data">${formatNumber(p.corridas)}</td>
+            <td data-label="Títulos" class="expandable-data">${formatNumber(p.titulos)}</td>
+            <td data-label="Pódios" class="expandable-data">${formatNumber(p.podios)}</td>
+            <td data-label="Vitórias" class="expandable-data">${formatNumber(p.vitorias)}</td>
+            <td data-label="Poles" class="expandable-data">${formatNumber(p.poles)}</td>
+            <td data-label="Fast Laps" class="expandable-data">${formatNumber(p.fastLaps)}</td>
+            <td data-label="Estreia" class="expandable-data">${p.estreia}</td>
+            <td data-label="Última" class="expandable-data">${p.ultima}</td>
         </tr>
     `).join('');
+    
+    // Adicionar evento de clique para navegação (exceto no botão)
+    tbody.querySelectorAll('tr').forEach(tr => {
+        tr.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('expand-btn')) {
+                const pilotoNome = tr.querySelector('.piloto-name-text').textContent.trim();
+                window.location.href = `piloto-detalhes.html?nome=${encodeURIComponent(pilotoNome)}`;
+            }
+        });
+    });
 }
 
 // Setup sort listeners
@@ -190,10 +210,24 @@ function setupSearchListener() {
     });
 }
 
+// Setup mobile sort listener
+function setupMobileSortListener() {
+    const mobileSortSelect = document.getElementById('mobileSortSelect');
+    if (mobileSortSelect) {
+        mobileSortSelect.addEventListener('change', (e) => {
+            const [column, direction] = e.target.value.split('-');
+            currentSort.column = column;
+            currentSort.direction = direction;
+            displayPilotos();
+        });
+    }
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     loadPilotos();
     setupSortListeners();
     setupFilterListeners();
     setupSearchListener();
+    setupMobileSortListener();
 });
