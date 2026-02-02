@@ -1629,6 +1629,10 @@
 }
 
 @media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
     .hero-title {
         font-size: 28px;
     }
