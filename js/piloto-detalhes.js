@@ -141,6 +141,124 @@ async function loadPilotoData() {
     displayCampeonatos();
     displayAdvancedStats();
     displayRecordes();
+    createRadarChart();
+}
+
+// Create radar chart
+async function createRadarChart() {
+    const pilotos = await fetchData(DATA_SOURCES.pilotos);
+    
+    // Get max values for each stat
+    const maxStats = {
+        titulos: Math.max(...pilotos.map(p => parseInt(p['Tot. Títulos'] || p['Títulos'] || 0))),
+        corridas: Math.max(...pilotos.map(p => parseInt(p['Corridas'] || 0))),
+        vitorias: Math.max(...pilotos.map(p => parseInt(p['P1'] || p['Vitórias'] || 0))),
+        podios: Math.max(...pilotos.map(p => parseInt(p['Pódios'] || p['Podios'] || 0))),
+        poles: Math.max(...pilotos.map(p => parseInt(p['Poles'] || 0))),
+        fastLaps: Math.max(...pilotos.map(p => parseInt(p['Fast Laps'] || 0)))
+    };
+    
+    // Get current pilot stats
+    const currentStats = {
+        titulos: parseInt(pilotoData['Tot. Títulos'] || pilotoData['Títulos'] || 0),
+        corridas: parseInt(pilotoData['Corridas'] || 0),
+        vitorias: parseInt(pilotoData['P1'] || pilotoData['Vitórias'] || 0),
+        podios: parseInt(pilotoData['Pódios'] || pilotoData['Podios'] || 0),
+        poles: parseInt(pilotoData['Poles'] || 0),
+        fastLaps: parseInt(pilotoData['Fast Laps'] || 0)
+    };
+    
+    // Calculate percentages
+    const percentages = {
+        titulos: maxStats.titulos > 0 ? (currentStats.titulos / maxStats.titulos * 100) : 0,
+        corridas: maxStats.corridas > 0 ? (currentStats.corridas / maxStats.corridas * 100) : 0,
+        vitorias: maxStats.vitorias > 0 ? (currentStats.vitorias / maxStats.vitorias * 100) : 0,
+        podios: maxStats.podios > 0 ? (currentStats.podios / maxStats.podios * 100) : 0,
+        poles: maxStats.poles > 0 ? (currentStats.poles / maxStats.poles * 100) : 0,
+        fastLaps: maxStats.fastLaps > 0 ? (currentStats.fastLaps / maxStats.fastLaps * 100) : 0
+    };
+    
+    const ctx = document.getElementById('statsRadarChart');
+    
+    new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['Títulos', 'Corridas', 'Vitórias', 'Voltas Rápidas', 'Poles', 'Pódios'],
+            datasets: [{
+                label: pilotoData['Piloto'] || pilotoData['piloto'],
+                data: [
+                    percentages.titulos,
+                    percentages.corridas,
+                    percentages.vitorias,
+                    percentages.fastLaps,
+                    percentages.poles,
+                    percentages.podios
+                ],
+                backgroundColor: 'rgba(255, 107, 0, 0.2)',
+                borderColor: 'rgba(255, 107, 0, 1)',
+                borderWidth: 2,
+                pointBackgroundColor: 'rgba(255, 107, 0, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(255, 107, 0, 1)',
+                pointRadius: 4,
+                pointHoverRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            layout: {
+                padding: {
+                    top: 20,
+                    right: 20,
+                    bottom: 20,
+                    left: 20
+                }
+            },
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        stepSize: 20,
+                        callback: function(value) {
+                            return value + '%';
+                        },
+                        font: {
+                            size: 12
+                        }
+                    },
+                    pointLabels: {
+                        font: {
+                            size: 14,
+                            weight: '600'
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const label = context.label || '';
+                            const percentage = context.parsed.r.toFixed(1);
+                            const statKey = ['titulos', 'corridas', 'vitorias', 'fastLaps', 'poles', 'podios'][context.dataIndex];
+                            const currentValue = currentStats[statKey];
+                            const maxValue = maxStats[statKey];
+                            return `${label}: ${currentValue}/${maxValue} (${percentage}%)`;
+                        }
+                    }
+                }
+            }
+        }
+    });
 }
 
 // Display piloto info

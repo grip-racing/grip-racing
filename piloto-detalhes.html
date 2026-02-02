@@ -87,6 +87,7 @@
                 <div id="statDetailPodios" class="stat-detail-section"></div>
                 <div id="statDetailPoles" class="stat-detail-section"></div>
                 <div id="statDetailFastlaps" class="stat-detail-section"></div>
+
             </div>
         </section>
 
@@ -156,6 +157,12 @@
                                 <p class="loading-text">Calculando recordes...</p>
                             </div>
                         </div>
+                        
+                        <div class="content-card">
+                            <h3 class="sidebar-title">Comparação Percentual</h3>
+                            <p class="radar-chart-subtitle">Estatísticas em relação aos valores máximos</p>
+                            <canvas id="statsRadarChart"></canvas>
+                        </div>
                     </aside>
                 </div>
             </div>
@@ -164,8 +171,8 @@
 
     <!-- Footer -->
     <div id="footer-container"></div>
-
-    <script src="js/components-loader.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>    <script src="js/components-loader.js"></script>
     <script src="js/script.js"></script>
     <script src="js/piloto-detalhes.js"></script>
 </body>

@@ -1877,3 +1877,30 @@
         font-size: 11px;
     }
 }
+
+/* Radar Chart */
+.radar-chart-subtitle {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    margin: -10px 0 10px 0;
+    text-align: center;
+}
+
+#statsRadarChart {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 320px;
+    margin: 0 auto;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .radar-chart-subtitle {
+        font-size: 11px;
+        margin: -8px 0 15px 0;
+    }
+    
+    #statsRadarChart {
+        max-height: 300px;
+    }
+}
