@@ -1644,6 +1644,17 @@
     /* Show Mobile Sort Controls */
     .mobile-sort-controls {
         display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .mobile-sort-controls label {
+        width: 100%;
+    }
+    
+    .mobile-sort-select {
+        width: 100%;
     }
 
     /* Show badges on mobile */
