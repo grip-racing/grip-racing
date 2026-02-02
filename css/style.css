@@ -474,7 +474,7 @@ body {
    ======================================== */
 
 .stats {
-    padding: 100px 0;
+    padding: 60px 0;
     background: linear-gradient(180deg, #FFFFFF 0%, #F8F9FA 100%);
     border-top: 2px solid var(--orange);
     border-bottom: 2px solid var(--orange);
@@ -565,7 +565,7 @@ body {
    ======================================== */
 
 .about {
-    padding: 100px 0;
+    padding: 60px 0;
     background: #F8F9FA;
 }
 
@@ -620,23 +620,10 @@ body {
     font-size: 52px;
     font-weight: 900;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
     color: #1A1A1A;
     position: relative;
     letter-spacing: -0.5px;
-    text-shadow: 0 2px 30px rgba(255, 107, 0, 0.15);
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 4px;
-    background: linear-gradient(90deg, transparent, var(--orange), transparent);
-    border-radius: 2px;
 }
 
 .about-content {
@@ -821,7 +808,7 @@ body {
    ======================================== */
 
 .detailed-stats {
-    padding: 100px 0;
+    padding: 60px 0;
     background: #FFFFFF;
 }
 
@@ -991,7 +978,7 @@ body {
    ======================================== */
 
 .staff {
-    padding: 100px 0;
+    padding: 60px 0;
     background: #F8F9FA;
 }
 
@@ -1003,22 +990,6 @@ body {
     margin-bottom: 70px;
     font-weight: 400;
     letter-spacing: 0.5px;
-    position: relative;
-    display: inline-block;
-    width: 100%;
-}
-
-.section-subtitle::before {
-    content: '';
-    position: absolute;
-    bottom: 3px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 180px;
-    height: 12px;
-    background: rgba(255, 107, 0, 0.2);
-    z-index: -1;
-    border-radius: 3px;
 }
 
 .staff-grid {
@@ -1150,7 +1121,7 @@ body {
    ======================================== */
 
 .contact {
-    padding: 100px 0;
+    padding: 60px 0;
     background: #FFFFFF;
 }
 
@@ -1278,7 +1249,7 @@ body {
    ======================================== */
 
 .achievements {
-    padding: 100px 0;
+    padding: 60px 0;
     background: #FFFFFF;
     position: relative;
     overflow: hidden;
@@ -1587,7 +1558,7 @@ body {
    ======================================== */
 
 .partners {
-    padding: 100px 0;
+    padding: 60px 0;
     background: #2F2F2F;
     position: relative;
     overflow: hidden;
