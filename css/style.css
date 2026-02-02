@@ -564,6 +564,14 @@ body {
     font-weight: 600;
 }
 
+.stat-sublabel {
+    font-size: 13px;
+    color: var(--orange);
+    margin-top: 8px;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
 /* ========================================
    ABOUT SECTION
    ======================================== */

@@ -56,34 +56,36 @@
                     <div class="stat-label">Participações Totais</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stat-number">3065</div>
+                    <div class="stat-number" id="statEtapas">3065</div>
                     <div class="stat-label">Etapas Disputadas</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stat-number">556</div>
+                    <div class="stat-number" id="statCampeonatos">556</div>
                     <div class="stat-label">Campeonatos</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="stat-number" id="statTitulos">168</div>
                     <div class="stat-label">Títulos Conquistados</div>
+                    <div class="stat-sublabel"><span id="statTitulosIndividuais">99</span> Indiv. · <span id="statTitulosConstrutores">69</span> Const.</div>
                 </div>
             </div>
             <div class="stats-grid stats-secondary">
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="stat-number" id="statPodios">1718</div>
-                    <div class="stat-label">Pódios (576 Vitórias)</div>
+                    <div class="stat-label">Pódios</div>
+                    <div class="stat-sublabel"><span id="statVitorias">576</span> Vitórias</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="500">
-                    <div class="stat-number">491</div>
+                    <div class="stat-number" id="statPoles">491</div>
                     <div class="stat-label">Pole Positions</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="600">
-                    <div class="stat-number">505</div>
+                    <div class="stat-number" id="statFastLaps">505</div>
                     <div class="stat-label">Voltas Mais Rápidas</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="700">
-                    <div class="stat-number">53%</div>
-                    <div class="stat-label">Taxa Top 10</div>
+                    <div class="stat-number" id="statTaxaTop10">53</div>
+                    <div class="stat-label">% Taxa Top 10</div>
                 </div>
             </div>
         </div>
@@ -104,8 +106,8 @@
             <div class="about-content">
                 <div class="about-text" data-aos="fade-right">
                     <p class="lead">Desde 2008, a Grip Racing é sinônimo de excelência no automobilismo virtual brasileiro.</p>
-                    <p>Ao longo de 18 anos de história, construímos um legado impressionante com <strong><span id="totalPilotosAbout">218</span> pilotos diferentes</strong> que representaram a equipe, acumulando <strong><span id="totalParticipacoesAbout">9.074</span> participações</strong> em <strong>556 campeonatos</strong> e <strong>3.065 etapas</strong>. Conquistamos <strong><span id="totalTitulosAbout">168</span> títulos</strong> (99 de pilotos e 69 de construtores), com <strong><span id="totalPodiosAbout">1.718</span> pódios</strong>, sendo 576 vitórias.</p>
-                    <p>Nossa presença se estende por <strong>29 ligas distintas</strong>, com destaque para F1BC (6.962 participações e 108 títulos), Racing Bears (627 participações), RacersAv, iRacing e competições internacionais. A consistência é nossa marca: <strong>4.868 finalizações no Top 10</strong>, <strong>2.723 no Top 5</strong>, além de 491 pole positions e 505 voltas mais rápidas. Mais que números, somos uma família unida pela paixão, respeito e fair play.</p>
+                    <p>Ao longo de 18 anos de história, construímos um legado impressionante com <strong><span id="totalPilotosAbout">303</span> pilotos diferentes</strong> que representaram a equipe, acumulando <strong><span id="totalParticipacoesAbout">9.137</span> participações</strong> em <strong><span id="totalCampeonatosAbout">556</span> campeonatos</strong> e <strong><span id="totalEtapasAbout">3.065</span> etapas</strong>. Conquistamos <strong><span id="totalTitulosAbout">168</span> títulos</strong> (<span id="totalTitulosIndivAbout">99</span> de pilotos e <span id="totalTitulosConstAbout">69</span> de construtores), com <strong><span id="totalPodiosAbout">1.718</span> pódios</strong>, sendo <span id="totalVitoriasAbout">576</span> vitórias.</p>
+                    <p>Nossa presença se estende por <strong><span id="totalLigasAbout">29</span> ligas distintas</strong>, com destaque para F1BC (<span id="f1bcParticipacoesAbout">6.962</span> participações e <span id="f1bcTitulosAbout">108</span> títulos), Racing Bears (<span id="rbParticipacoesAbout">627</span> participações e <span id="rbTitulosAbout">0</span> títulos), RacersAv (<span id="racersavParticipacoesAbout">0</span> participações e <span id="racersavTitulosAbout">0</span> títulos), eventos oficiais do iRacing (<span id="iracingParticipacoesAbout">0</span> participações), entre outras. A consistência é nossa marca: <strong><span id="totalTop10About">4.868</span> finalizações no Top 10</strong>, <strong><span id="totalTop5About">2.723</span> no Top 5</strong>, além de <span id="totalPolesAbout">491</span> pole positions e <span id="totalFastLapsAbout">505</span> voltas mais rápidas. Mais que números, somos uma família unida pela paixão, respeito e fair play.</p>
                 </div>
                 <div class="about-features" data-aos="fade-left">
                     <div class="feature-card">
@@ -119,20 +121,20 @@
                     
                     <div class="feature-card">
                         <div class="feature-stats">
-                            <div class="feature-number">168</div>
+                            <div class="feature-number" id="featureTitulos">168</div>
                             <div class="feature-label">Títulos</div>
                         </div>
                         <h3>Títulos & Vitórias</h3>
-                        <p>99 Pilotos • 69 Construtores<br>576 Vitórias • 1.718 Pódios</p>
+                        <p><span id="featureTitulosIndiv">99</span> Pilotos • <span id="featureTitulosConst">69</span> Construtores<br><span id="featureVitorias">576</span> Vitórias • <span id="featurePodios">1.718</span> Pódios</p>
                     </div>
                     
                     <div class="feature-card">
                         <div class="feature-stats">
-                            <div class="feature-number">218</div>
+                            <div class="feature-number" id="featurePilotos">303</div>
                             <div class="feature-label">Pilotos</div>
                         </div>
                         <h3>Comunidade Forte</h3>
-                        <p>18 Anos de História • 29 Ligas<br>Fair Play • Respeito • Paixão</p>
+                        <p>18 Anos de História • <span id="featureLigas">29</span> Ligas<br>Fair Play • Respeito • Paixão</p>
                     </div>
                 </div>
             </div>
