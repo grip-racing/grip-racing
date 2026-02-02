@@ -178,16 +178,31 @@ function setupSortListeners() {
                 currentSort.direction = 'desc';
             }
             
-            // Update UI
-            document.querySelectorAll('.sortable').forEach(t => t.classList.remove('sorted'));
-            th.classList.add('sorted');
-            
-            const icon = th.querySelector('.sort-icon');
-            icon.textContent = currentSort.direction === 'asc' ? '↑' : '↓';
-            
+            updateSortUI();
             displayPilotos();
         });
     });
+    
+    // Set initial sort UI
+    updateSortUI();
+}
+
+// Update sort UI indicators
+function updateSortUI() {
+    document.querySelectorAll('.sortable').forEach(th => {
+        th.classList.remove('sorted');
+        const icon = th.querySelector('.sort-icon');
+        if (icon) icon.textContent = '';
+    });
+    
+    const activeHeader = document.querySelector(`[data-sort="${currentSort.column}"]`);
+    if (activeHeader) {
+        activeHeader.classList.add('sorted');
+        const icon = activeHeader.querySelector('.sort-icon');
+        if (icon) {
+            icon.textContent = currentSort.direction === 'asc' ? '↑' : '↓';
+        }
+    }
 }
 
 // Setup filter listeners
