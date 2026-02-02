@@ -974,12 +974,116 @@ body {
 }
 
 /* ========================================
-   STAFF SECTION
+   TEAM SECTION (Pilotos + Staff)
    ======================================== */
 
-.staff {
-    padding: 60px 0;
-    background: #F8F9FA;
+.team-section {
+    padding: 80px 0;
+    background: linear-gradient(180deg, #F8F9FA 0%, #FFFFFF 50%, #F8F9FA 100%);
+    position: relative;
+}
+
+/* Pilotos Overview */
+.pilotos-overview {
+    margin-bottom: 80px;
+    padding-bottom: 60px;
+    border-bottom: 2px solid #E9ECEF;
+}
+
+.subsection-title {
+    font-size: 36px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--orange);
+    letter-spacing: -0.5px;
+}
+
+.subsection-subtitle {
+    text-align: center;
+    color: #6C757D;
+    font-size: 16px;
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+.pilotos-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.pilotos-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    border: 2px solid #E9ECEF;
+    transition: var(--transition);
+}
+
+.pilotos-stat-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--orange);
+    box-shadow: 0 10px 30px rgba(255, 107, 0, 0.15);
+}
+
+.stat-icon {
+    font-size: 48px;
+    line-height: 1;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.pilotos-stat-card .stat-value {
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.pilotos-stat-card .stat-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6C757D;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pilotos-description {
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #495057;
+}
+
+.pilotos-description strong {
+    color: var(--orange);
+    font-weight: 700;
+}
+
+.pilotos-cta {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-large {
+    padding: 18px 50px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Staff Subsection */
+.staff-subsection {
+    margin-top: 60px;
 }
 
 .section-subtitle {
@@ -1956,6 +2060,43 @@ body {
 
     .footer-brand {
         font-size: 28px;
+    }
+
+    /* Team Section Responsive */
+    .subsection-title {
+        font-size: 28px;
+    }
+
+    .pilotos-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .pilotos-stat-card {
+        padding: 25px;
+    }
+
+    .stat-icon {
+        font-size: 40px;
+    }
+
+    .pilotos-stat-card .stat-value {
+        font-size: 32px;
+    }
+
+    .pilotos-description {
+        font-size: 16px;
+        padding: 0 20px;
+    }
+
+    .btn-large {
+        padding: 15px 40px;
+        font-size: 16px;
+    }
+
+    .pilotos-overview {
+        margin-bottom: 60px;
+        padding-bottom: 40px;
     }
 }
 

@@ -15,24 +15,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home">Início</a></li>
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#achievements">Conquistas</a></li>
-                <li><a href="#staff">Staff</a></li>
-                <li><a href="pilotos.html">Pilotos</a></li>
-                <li><a href="inscricoes.html">Inscrições</a></li>
-                <li><a href="#contact">Contato</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div id="header-container"></div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -69,7 +52,7 @@
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-card" data-aos="fade-up">
-                    <div class="stat-number">9137</div>
+                    <div class="stat-number" id="statParticipacoes">9137</div>
                     <div class="stat-label">Participações Totais</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
@@ -81,13 +64,13 @@
                     <div class="stat-label">Campeonatos</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="stat-number">168</div>
+                    <div class="stat-number" id="statTitulos">168</div>
                     <div class="stat-label">Títulos Conquistados</div>
                 </div>
             </div>
             <div class="stats-grid stats-secondary">
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="stat-number">1718</div>
+                    <div class="stat-number" id="statPodios">1718</div>
                     <div class="stat-label">Pódios (576 Vitórias)</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="500">
@@ -121,7 +104,7 @@
             <div class="about-content">
                 <div class="about-text" data-aos="fade-right">
                     <p class="lead">Desde 2008, a Grip Racing é sinônimo de excelência no automobilismo virtual brasileiro.</p>
-                    <p>Ao longo de 18 anos de história, construímos um legado impressionante com <strong>218 pilotos diferentes</strong> que representaram a equipe, acumulando <strong>9.137 participações</strong> em <strong>556 campeonatos</strong> e <strong>3.065 etapas</strong>. Conquistamos <strong>168 títulos</strong> (99 de pilotos e 69 de construtores), com <strong>1.718 pódios</strong>, sendo 576 vitórias.</p>
+                    <p>Ao longo de 18 anos de história, construímos um legado impressionante com <strong><span id="totalPilotosAbout">218</span> pilotos diferentes</strong> que representaram a equipe, acumulando <strong><span id="totalParticipacoesAbout">9.074</span> participações</strong> em <strong>556 campeonatos</strong> e <strong>3.065 etapas</strong>. Conquistamos <strong><span id="totalTitulosAbout">168</span> títulos</strong> (99 de pilotos e 69 de construtores), com <strong><span id="totalPodiosAbout">1.718</span> pódios</strong>, sendo 576 vitórias.</p>
                     <p>Nossa presença se estende por <strong>29 ligas distintas</strong>, com destaque para F1BC (6.962 participações e 108 títulos), Racing Bears (627 participações), RacersAv, iRacing e competições internacionais. A consistência é nossa marca: <strong>4.868 finalizações no Top 10</strong>, <strong>2.723 no Top 5</strong>, além de 491 pole positions e 505 voltas mais rápidas. Mais que números, somos uma família unida pela paixão, respeito e fair play.</p>
                 </div>
                 <div class="about-features" data-aos="fade-left">
@@ -206,13 +189,55 @@
         </div>
     </section>
 
-    <!-- Staff Section -->
-    <section id="staff" class="staff">
+    <!-- Team Section (Pilotos + Staff) -->
+    <section id="staff" class="team-section">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Nossa Equipe</h2>
-            <p class="section-subtitle" data-aos="fade-up">Conheça os profissionais que movem a Grip Racing</p>
+            <p class="section-subtitle" data-aos="fade-up">Os talentos que representam a Grip Racing</p>
             
-            <div class="staff-grid">
+            <!-- Pilotos Overview -->
+            <div class="pilotos-overview">
+                <h3 class="subsection-title" data-aos="fade-up">Nossos Pilotos</h3>
+                
+                <div class="pilotos-stats-grid" data-aos="fade-up" data-aos-delay="100">
+                    <div class="pilotos-stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="totalPilotosSection">303</div>
+                            <div class="stat-label">Pilotos Totais</div>
+                        </div>
+                    </div>
+                    <div class="pilotos-stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-content">
+                            <div class="stat-value">99</div>
+                            <div class="stat-label">Campeões de Pilotos</div>
+                        </div>
+                    </div>
+                    <div class="pilotos-stat-card">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-content">
+                            <div class="stat-value">576</div>
+                            <div class="stat-label">Vitórias</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pilotos-description" data-aos="fade-up" data-aos-delay="200">
+                    <p>Desde 2008, mais de <strong>300 pilotos</strong> vestiram as cores da Grip Racing. Cada um contribuiu para construir nosso legado de excelência no automobilismo virtual brasileiro. Da estreia às conquistas, todos fazem parte da nossa história.</p>
+                </div>
+
+                <div class="pilotos-cta" data-aos="fade-up" data-aos-delay="300">
+                    <a href="pilotos.html" class="btn-primary btn-large">Ver Todos os Pilotos</a>
+                </div>
+            </div>
+
+            <!-- Staff -->
+            <div class="staff-subsection">
+                <h3 class="subsection-title" data-aos="fade-up">Staff Atual</h3>
+                <p class="subsection-subtitle" data-aos="fade-up">Os pilotos que lideram a equipe atualmente</p>
+                
+                <div class="staff-grid">
                 <div class="staff-card" data-aos="zoom-in">
                     <a href="piloto-detalhes.html?nome=Charles%20Zimmermann" class="staff-link">
                         <h3 class="staff-name">Charles Zimmermann</h3>
@@ -331,39 +356,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo-section">
-                    <img src="assets/Grip Racing Logo Vector.svg" alt="Grip Racing" class="footer-logo">
-                    <p class="footer-tagline">Automobilismo Virtual • EST. 2008</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Navegação</h4>
-                        <ul>
-                            <li><a href="#home">Início</a></li>
-                            <li><a href="#about">Sobre</a></li>
-                            <li><a href="#staff">Staff</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Conecte-se</h4>
-                        <ul>
-                            <li><a href="https://www.instagram.com/grip.racing/" target="_blank">Instagram</a></li>
-                            <li><a href="https://twitter.com/GripRace" target="_blank">Twitter</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Grip Racing. Todos os direitos reservados. | Desde 2008</p>
-                <p class="footer-stats">9,137 Participações • 1,718 Pódios • 168 Títulos • 556 Campeonatos</p>
-                <p class="footer-dev">Desenvolvido por <strong>Rodrigo de Sousa</strong></p>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-container"></div>
 
+    <script src="js/components-loader.js"></script>
     <script src="js/data-loader.js"></script>
     <script src="js/script.js"></script>
 </body>

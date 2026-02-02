@@ -45,8 +45,6 @@ function formatNumber(num) {
 
 // Load and display pilotos
 async function loadPilotos() {
-    console.log('🏁 Carregando pilotos...');
-    
     const pilotos = await fetchData(DATA_SOURCES.pilotos);
     if (!pilotos || pilotos.length === 0) {
         document.getElementById('pilotosTableBody').innerHTML = '<tr><td colspan="9">Erro ao carregar dados</td></tr>';
@@ -67,8 +65,6 @@ async function loadPilotos() {
         abandonos: parseInt(p['Abandonos'] || p['abandonos'] || 0)
     }));
     
-    console.log(`✅ ${allPilotos.length} pilotos carregados`);
-    
     updateSummary();
     displayPilotos();
 }
@@ -77,8 +73,13 @@ async function loadPilotos() {
 function updateSummary() {
     const totalPilotos = allPilotos.length;
     const campeoes = allPilotos.filter(p => p.titulos > 0).length;
+    const totalCorridas = allPilotos.reduce((sum, p) => {
+        const corridas = parseInt(p.corridas) || 0;
+        return sum + corridas;
+    }, 0);
     
     document.getElementById('totalPilotos').textContent = formatNumber(totalPilotos);
+    document.getElementById('totalCorridas').textContent = formatNumber(totalCorridas);
     document.getElementById('totalCampeoes').textContent = formatNumber(campeoes);
     
     // Update hero subtitle
@@ -191,7 +192,6 @@ function setupSearchListener() {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🏁 Inicializando página de pilotos');
     loadPilotos();
     setupSortListeners();
     setupFilterListeners();

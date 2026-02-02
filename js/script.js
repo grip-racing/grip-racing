@@ -2,24 +2,6 @@
 // GRIP RACING - JAVASCRIPT
 // ========================================
 
-// Mobile Menu Toggle
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const navMenu = document.getElementById('navMenu');
-
-mobileMenuBtn.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    mobileMenuBtn.classList.toggle('active');
-});
-
-// Close mobile menu when clicking on a link
-const navLinks = document.querySelectorAll('.nav-menu a');
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        mobileMenuBtn.classList.remove('active');
-    });
-});
-
 // Navbar scroll effect
 const navbar = document.querySelector('.navbar');
 let lastScroll = 0;
@@ -146,6 +128,76 @@ window.addEventListener('scroll', () => {
         hero.style.opacity = 1 - (scrolled / window.innerHeight);
     }
 });
+
+// Load dynamic stats
+async function loadDynamicStats() {
+    try {
+        const response = await fetch('data/data-pilotos.csv');
+        const text = await response.text();
+        const lines = text.trim().split('\n');
+        
+        // Parse CSV
+        const pilotos = lines.slice(1).map(line => {
+            const values = line.split(',');
+            return {
+                corridas: parseInt(values[4]) || 0,
+                titulos: parseInt(values[3]) || 0,
+                podios: parseInt(values[5]) || 0
+            };
+        });
+        
+        // Calculate stats
+        const totalPilotos = pilotos.length;
+        const totalParticipacoes = pilotos.reduce((sum, p) => sum + p.corridas, 0);
+        const totalTitulos = pilotos.reduce((sum, p) => sum + p.titulos, 0);
+        const totalPodios = pilotos.reduce((sum, p) => sum + p.podios, 0);
+        
+        // Format numbers
+        const participacoesFormatted = totalParticipacoes.toLocaleString('pt-BR');
+        const titulosFormatted = totalTitulos.toLocaleString('pt-BR');
+        const podiosFormatted = totalPodios.toLocaleString('pt-BR');
+        
+        // Update stat cards
+        const statParticipacoes = document.getElementById('statParticipacoes');
+        const statTitulos = document.getElementById('statTitulos');
+        const statPodios = document.getElementById('statPodios');
+        
+        if (statParticipacoes) statParticipacoes.textContent = totalParticipacoes;
+        if (statTitulos) statTitulos.textContent = totalTitulos;
+        if (statPodios) statPodios.textContent = totalPodios;
+        
+        // Update about section
+        const pilotosEl = document.getElementById('totalPilotosAbout');
+        const participacoesEl = document.getElementById('totalParticipacoesAbout');
+        const titulosEl = document.getElementById('totalTitulosAbout');
+        const podiosEl = document.getElementById('totalPodiosAbout');
+        
+        if (pilotosEl) pilotosEl.textContent = totalPilotos;
+        if (participacoesEl) participacoesEl.textContent = participacoesFormatted;
+        if (titulosEl) titulosEl.textContent = totalTitulos;
+        if (podiosEl) podiosEl.textContent = podiosFormatted;
+        
+        // Update pilotos section
+        const pilotosSectionEl = document.getElementById('totalPilotosSection');
+        if (pilotosSectionEl) pilotosSectionEl.textContent = totalPilotos;
+        
+        // Update footer
+        const footerParticipacoes = document.getElementById('footerParticipacoes');
+        const footerTitulos = document.getElementById('footerTitulos');
+        const footerPodios = document.getElementById('footerPodios');
+        
+        if (footerParticipacoes) footerParticipacoes.textContent = participacoesFormatted;
+        if (footerTitulos) footerTitulos.textContent = titulosFormatted;
+        if (footerPodios) footerPodios.textContent = podiosFormatted;
+    } catch (error) {
+        console.error('❌ Erro ao carregar estatísticas:', error);
+    }
+}
+
+// Load stats on page load
+if (document.querySelector('.about-text')) {
+    loadDynamicStats();
+}
 
 // Console easter egg
 console.log('%c🏁 GRIP RACING 🏁', 'color: #FF6B00; font-size: 30px; font-weight: bold;');

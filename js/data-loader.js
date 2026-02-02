@@ -173,8 +173,6 @@ async function updateStaff() {
         }
         
         if (pilotoData) {
-            console.log(`Atualizando ${nomeCard}:`, pilotoData);
-            
             const titulos = pilotoData['Tot. Títulos'] || pilotoData['Títulos'] || '0';
             const poles = pilotoData['Poles'] || '0';
             const podios = pilotoData['Pódios'] || pilotoData['Podios'] || '0';
@@ -205,7 +203,7 @@ async function initializeData() {
     
     try {
         await Promise.all([
-            updateStatistics(),
+            // updateStatistics(), // Desabilitado - estatísticas agora são carregadas pelo script.js
             updateStaff()
         ]);
         
