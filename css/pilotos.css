@@ -9,7 +9,7 @@
 
 /* Hero Section */
 .pilotos-hero {
-    padding: 150px 20px 80px;
+    padding: 110px 20px 40px;
     background: linear-gradient(135deg, rgba(255, 107, 0, 0.05) 0%, rgba(255, 107, 0, 0) 100%);
     border-bottom: 1px solid rgba(255, 107, 0, 0.15);
     position: relative;
@@ -27,19 +27,27 @@
 }
 
 .hero-title {
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 900;
-    margin: 0 0 15px 0;
+    margin: 0 0 10px 0;
     color: #1a1a1a;
     letter-spacing: -1px;
     text-transform: uppercase;
 }
 
 .hero-subtitle {
-    font-size: 18px;
+    font-size: 16px;
     color: rgba(0, 0, 0, 0.6);
     margin: 0;
     font-weight: 400;
+}
+
+.hero-hint {
+    font-size: 14px;
+    color: #ff6b00;
+    margin: 12px 0 0 0;
+    font-weight: 500;
+    opacity: 0.9;
 }
 
 /* Controls */
@@ -223,6 +231,24 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
     cursor: pointer;
+    position: relative;
+}
+
+.pilotos-table tbody tr::after {
+    content: '›';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #ff6b00;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.pilotos-table tbody tr:hover::after {
+    opacity: 0.6;
+    right: 15px;
 }
 
 .pilotos-table tbody tr:hover {
@@ -293,17 +319,24 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: rgba(255, 255, 255, 0.6);
+    color: #ff6b00;
+    background: rgba(255, 107, 0, 0.1);
     text-decoration: none;
     font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 107, 0, 0.2);
     transition: all 0.3s ease;
 }
 
 .back-link:hover {
-    color: #ff6b00;
+    color: #ffffff;
+    background: #ff6b00;
+    border-color: #ff6b00;
     transform: translateX(-5px);
+    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
 }
 
 .piloto-name {

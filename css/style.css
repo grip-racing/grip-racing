@@ -1008,10 +1008,26 @@ body {
     transition: var(--transition);
     position: relative;
     overflow: hidden;
-    min-height: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    cursor: pointer;
+}
+
+.staff-link {
+    text-decoration: none !important;
+    color: inherit;
+    display: block;
+    width: 100%;
+}
+
+.staff-link:hover,
+.staff-link:focus,
+.staff-link:active,
+.staff-link:visited {
+    text-decoration: none !important;
+    color: inherit;
+}
+
+.staff-link * {
+    text-decoration: none !important;
 }
 
 .staff-card::before {
