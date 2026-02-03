@@ -48,4 +48,35 @@ if ($failed -gt 0) {
 }
 Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Cyan
 Write-Host ""
+
+# Incrementar versão do cache
+Write-Host "🔄 Incrementando versão do cache..." -NoNewline
+try {
+    $jsFile = "js\piloto-detalhes.js"
+    $content = Get-Content $jsFile -Raw
+    
+    # Encontrar a versão atual
+    if ($content -match "const DATA_VERSION = '(\d+)\.(\d+)\.(\d+)'") {
+        $major = [int]$matches[1]
+        $minor = [int]$matches[2]
+        $patch = [int]$matches[3]
+        
+        # Incrementar patch version
+        $patch++
+        $newVersion = "$major.$minor.$patch"
+        
+        # Substituir no arquivo
+        $content = $content -replace "const DATA_VERSION = '\d+\.\d+\.\d+'", "const DATA_VERSION = '$newVersion'"
+        Set-Content $jsFile -Value $content -NoNewline
+        
+        Write-Host " ✅ v$newVersion" -ForegroundColor Green
+    } else {
+        Write-Host " ⚠️ Versão não encontrada" -ForegroundColor Yellow
+    }
+} catch {
+    Write-Host " ❌ Erro: $_" -ForegroundColor Red
+}
+
+Write-Host ""
+Write-Host "🚀 Dados atualizados! Recarregue o site no navegador." -ForegroundColor Cyan
 Write-Host "🚀 Dados atualizados! Recarregue o site no navegador." -ForegroundColor Yellow

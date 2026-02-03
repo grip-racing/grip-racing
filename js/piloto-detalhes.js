@@ -1,20 +1,21 @@
 // Piloto detalhes page script
+const DATA_VERSION = '1.0.1'; // Incrementar quando atualizar os dados
 const DATA_SOURCES = {
-    pilotos: 'data/data-pilotos.csv',
-    participacoes: 'data/data-participacoes.csv'
+    pilotos: `data/data-pilotos.csv?v=${DATA_VERSION}`,
+    participacoes: `data/data-participacoes.csv?v=${DATA_VERSION}`
 };
 
 let pilotoData = null;
 let participacoesData = [];
 
 // Parse CSV
-function parseCSV(csv) {
+function parseCSV(csv, url = '') {
     const lines = csv.trim().split('\n');
     if (lines.length === 0) return [];
     
     const headers = lines[0].split(',').map(h => h.trim());
     
-    return lines.slice(1).map(line => {
+    const parsed = lines.slice(1).map(line => {
         const values = [];
         let current = '';
         let inQuotes = false;
@@ -43,12 +44,23 @@ function parseCSV(csv) {
     });
 }
 
+// Validar se é uma participação válida (não é separador de ano)
+function isValidParticipacao(p) {
+    // Ignorar linhas que são apenas separadores de ano (sem piloto, pista, etc)
+    const piloto = String(p['Piloto'] || '').trim();
+    const pista = String(p['Pista'] || '').trim();
+    const final = String(p['Final'] || '').trim();
+    
+    // Se não tem piloto E não tem pista E não tem resultado final, é separador
+    return piloto !== '' || pista !== '' || final !== '';
+}
+
 // Fetch data
 async function fetchData(url) {
     try {
         const response = await fetch(url);
         const text = await response.text();
-        return parseCSV(text);
+        return parseCSV(text, url);
     } catch (error) {
         console.error('Erro ao carregar dados:', error);
         return [];
@@ -149,6 +161,7 @@ async function loadPilotoData() {
 function displayCircuitos() {
     const pilotoNome = pilotoData['Piloto'] || '';
     const pilotoParticipacoes = participacoesData.filter(p => 
+        isValidParticipacao(p) &&
         (p['Piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
     );
 
@@ -538,6 +551,7 @@ function toggleStatDetail(type) {
 function displayStatDetails(type, container) {
     const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
     const pilotoParticipacoes = participacoesData.filter(p => 
+        isValidParticipacao(p) &&
         (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
     );
     
@@ -548,6 +562,7 @@ function displayStatDetails(type, container) {
         // Buscar TODAS as participações do piloto para contar corridas por campeonato
         const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
         const todasParticipacoes = participacoesData.filter(p => 
+            isValidParticipacao(p) &&
             (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
         );
         
@@ -562,9 +577,6 @@ function displayStatDetails(type, container) {
             return construtores === 'SIM' || construtores === 'TIME';
         });
         
-        console.log(`🏆 Títulos de Piloto: ${campeonatosPiloto.length} linhas`);
-        console.log(`🏗️ Títulos de Construtores: ${campeonatosConstrutores.length} linhas`);
-        
         // Agrupar títulos de pilotos com contagem real de corridas
         const titulosPilotoUnicos = {};
         campeonatosPiloto.forEach(c => {
@@ -577,6 +589,7 @@ function displayStatDetails(type, container) {
             if (!titulosPilotoUnicos[key]) {
                 // Contar TODAS as corridas desta liga/temporada/categoria
                 const corridasCampeonato = todasParticipacoes.filter(p => 
+                    isValidParticipacao(p) &&
                     String(p['Liga'] || '').trim() === liga && 
                     String(p['Temporada'] || '').trim() === temporada &&
                     String(p['Categoria'] || '').trim() === categoria
@@ -607,6 +620,7 @@ function displayStatDetails(type, container) {
             if (!titulosConstrutoresUnicos[key]) {
                 // Contar TODAS as corridas desta liga/temporada/categoria
                 const corridasCampeonato = todasParticipacoes.filter(p => 
+                    isValidParticipacao(p) &&
                     String(p['Liga'] || '').trim() === liga && 
                     String(p['Temporada'] || '').trim() === temporada &&
                     String(p['Categoria'] || '').trim() === categoria
@@ -641,7 +655,6 @@ function displayStatDetails(type, container) {
         });
         
         const totalTitulos = titulosPiloto.length + titulosConstrutores.length;
-        console.log(`🏆 Total de títulos únicos: ${totalTitulos}`);
         
         const renderTituloCard = (t, index) => `
             <div class="titulo-card-wrapper">
@@ -802,6 +815,7 @@ function displayPilotoStats() {
 function displayTemporadas() {
     const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
     const pilotoParticipacoes = participacoesData.filter(p => 
+        isValidParticipacao(p) &&
         (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
     );
     
@@ -1096,6 +1110,7 @@ function toggleTituloDetail(id) {
 function displayCampeonatos() {
     const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
     const pilotoParticipacoes = participacoesData.filter(p => 
+        isValidParticipacao(p) &&
         (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
     );
     
@@ -1335,6 +1350,7 @@ function toggleCampeonatoCorridas(element, liga, temporada, categoria) {
         if (!corridasList.hasAttribute('data-loaded')) {
             const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
             const corridas = participacoesData.filter(p => 
+                isValidParticipacao(p) &&
                 (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase() &&
                 (p['Liga'] || '') === liga &&
                 (p['Temporada'] || '') === temporada &&
@@ -1435,6 +1451,7 @@ function displayAdvancedStats() {
 function displayRecordes() {
     const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
     const pilotoParticipacoes = participacoesData.filter(p => 
+        isValidParticipacao(p) &&
         (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
     );
     
