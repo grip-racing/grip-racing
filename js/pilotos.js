@@ -77,9 +77,14 @@ function updateSummary() {
         const corridas = parseInt(p.corridas) || 0;
         return sum + corridas;
     }, 0);
+    const totalPodios = allPilotos.reduce((sum, p) => {
+        const podios = parseInt(p.podios) || 0;
+        return sum + podios;
+    }, 0);
     
     document.getElementById('totalPilotos').textContent = formatNumber(totalPilotos);
     document.getElementById('totalCorridas').textContent = formatNumber(totalCorridas);
+    document.getElementById('totalPodios').textContent = formatNumber(totalPodios);
     document.getElementById('totalCampeoes').textContent = formatNumber(campeoes);
     
     // Update hero subtitle

@@ -788,6 +788,128 @@
     margin-left: auto;
 }
 
+/* Circuitos */
+.circuitos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.circuito-item-wrapper {
+    margin-bottom: 12px;
+}
+
+.circuito-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: #f8f8f8;
+    border-left: 3px solid rgba(255, 107, 0, 0.5);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.circuito-item:hover {
+    background: rgba(255, 107, 0, 0.08);
+    border-left-color: #ff6b00;
+    transform: translateX(5px);
+}
+
+.circuito-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.circuito-expand {
+    font-size: 12px;
+    color: #666;
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+}
+
+.circuito-nome {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.circuito-participacoes {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff6b00;
+}
+
+.circuito-melhor {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.05);
+    color: #666;
+}
+
+.circuito-melhor.resultado-vitoria {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #000;
+}
+
+.circuito-melhor.resultado-segundo {
+    background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+    color: #000;
+}
+
+.circuito-melhor.resultado-podio {
+    background: linear-gradient(135deg, #cd7f32 0%, #e8a87c 100%);
+    color: #000;
+}
+
+.circuito-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 0 0 8px 8px;
+    margin-top: -8px;
+    padding: 0;
+}
+
+.circuito-corridas-list {
+    padding: 15px 20px;
+}
+
+.circuito-corrida-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+.circuito-corrida-item:last-child {
+    margin-bottom: 0;
+}
+
+.circuito-corrida-info {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: #666;
+}
+
+.circuito-corrida-badges {
+    font-size: 13px;
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+}
+
 /* Sidebar */
 .sidebar-title {
     font-size: 18px;
@@ -848,6 +970,21 @@
     font-size: 18px;
     font-weight: 700;
     color: #1a1a1a;
+}
+
+.recorde-especial {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 107, 0, 0.08));
+    border-left-color: #FFD700;
+}
+
+.recorde-especial .recorde-label {
+    color: #B8860B;
+    font-weight: 600;
+    cursor: help;
+}
+
+.recorde-especial .recorde-value {
+    color: #B8860B;
 }
 
 /* Ano expandível */
@@ -1986,6 +2123,89 @@
     max-height: 320px;
     margin: 0 auto;
     display: block;
+}
+
+.stats-comparison {
+    margin: 0 0 15px 0;
+    max-height: 500px;
+    overflow: hidden;
+    opacity: 1;
+    transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.4s ease;
+}
+
+.stats-comparison.hidden {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+}
+
+.toggle-comparison-btn {
+    width: 100%;
+    padding: 8px 12px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    background: rgba(255, 107, 0, 0.08);
+    border: 1px solid rgba(255, 107, 0, 0.2);
+    border-radius: 6px;
+    color: #ff6b00;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.toggle-comparison-btn:hover {
+    background: rgba(255, 107, 0, 0.12);
+    border-color: rgba(255, 107, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+.toggle-comparison-btn .toggle-icon {
+    font-size: 10px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.toggle-comparison-btn.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.comparison-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 8px;
+    align-items: center;
+    padding: 6px 10px;
+    background: rgba(255, 107, 0, 0.04);
+    border-left: 2px solid rgba(255, 107, 0, 0.3);
+    border-radius: 4px;
+    margin-bottom: 5px;
+    font-size: 11px;
+}
+
+.comparison-label {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 11px;
+}
+
+.comparison-leader {
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: right;
+}
+
+.comparison-you {
+    font-weight: 700;
+    color: #ff6b00;
+    text-align: right;
+    min-width: 65px;
+    font-size: 12px;
 }
 
 @media (max-width: 768px) {
