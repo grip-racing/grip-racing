@@ -46,6 +46,7 @@ function formatNumber(num) {
 // Load and display pilotos
 async function loadPilotos() {
     const pilotos = await fetchData(DATA_SOURCES.pilotos);
+    
     if (!pilotos || pilotos.length === 0) {
         document.getElementById('pilotosTableBody').innerHTML = '<tr><td colspan="9">Erro ao carregar dados</td></tr>';
         return;
@@ -59,6 +60,8 @@ async function loadPilotos() {
         vitorias: parseInt(p['P1'] || p['Vitórias'] || p['vitorias'] || 0),
         poles: parseInt(p['Poles'] || p['poles'] || 0),
         fastLaps: parseInt(p['Fast Laps'] || p['fast_laps'] || 0),
+        hatTricks: parseInt(p['Hat-Tricks'] || p['Hat-Trick'] || 0),
+        chelems: parseInt(p['Chelems'] || p['Chelem'] || 0),
         top10: parseInt(p['Top 10'] || p['top_10'] || 0),
         estreia: p['Estreia'] || p['estreia'] || '-',
         ultima: p['Ultima'] || p['Última'] || p['ultima'] || '-',
@@ -131,7 +134,7 @@ function displayPilotos() {
     // Render table
     const tbody = document.getElementById('pilotosTableBody');
     if (filteredPilotos.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 40px;">Nenhum piloto encontrado</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="11" style="text-align: center; padding: 40px;">Nenhum piloto encontrado</td></tr>';
         return;
     }
     
@@ -151,11 +154,13 @@ function displayPilotos() {
             <td data-label="Corridas" class="expandable-data">${formatNumber(p.corridas)}</td>
             <td data-label="Títulos" class="expandable-data">${formatNumber(p.titulos)}</td>
             <td data-label="Pódios" class="expandable-data">${formatNumber(p.podios)}</td>
-            <td data-label="Vitórias" class="expandable-data">${formatNumber(p.vitorias)}</td>
+            <td data-label="Vit." class="expandable-data">${formatNumber(p.vitorias)}</td>
             <td data-label="Poles" class="expandable-data">${formatNumber(p.poles)}</td>
-            <td data-label="Fast Laps" class="expandable-data">${formatNumber(p.fastLaps)}</td>
-            <td data-label="Estreia" class="expandable-data">${p.estreia}</td>
-            <td data-label="Última" class="expandable-data">${p.ultima}</td>
+            <td data-label="Fast Laps" class="expandable-data hide-mobile">${formatNumber(p.fastLaps)}</td>
+            <td data-label="HT" class="expandable-data">${formatNumber(p.hatTricks)}</td>
+            <td data-label="CH" class="expandable-data">${formatNumber(p.chelems)}</td>
+            <td data-label="Estreia" class="expandable-data hide-mobile">${p.estreia}</td>
+            <td data-label="Última" class="expandable-data hide-mobile">${p.ultima}</td>
         </tr>
     `).join('');
     

@@ -1,5 +1,5 @@
 // Piloto detalhes page script
-const DATA_VERSION = '1.0.1'; // Incrementar quando atualizar os dados
+const DATA_VERSION = '1.0.3'; // Incrementar quando atualizar os dados
 const DATA_SOURCES = {
     pilotos: `data/data-pilotos.csv?v=${DATA_VERSION}`,
     participacoes: `data/data-participacoes.csv?v=${DATA_VERSION}`
@@ -42,6 +42,8 @@ function parseCSV(csv, url = '') {
         // Filtrar linhas vazias ou inválidas
         return Object.values(obj).some(v => v && v.length > 0);
     });
+    
+    return parsed;
 }
 
 // Validar se é uma participação válida (não é separador de ano)
@@ -58,11 +60,15 @@ function isValidParticipacao(p) {
 // Fetch data
 async function fetchData(url) {
     try {
+        console.log(`📥 Fetching: ${url}`);
         const response = await fetch(url);
         const text = await response.text();
-        return parseCSV(text, url);
+        console.log(`✅ Loaded ${url}: ${text.length} bytes`);
+        const parsed = parseCSV(text, url);
+        console.log(`✅ Parsed ${url}: ${parsed.length} rows`);
+        return parsed;
     } catch (error) {
-        console.error('Erro ao carregar dados:', error);
+        console.error('❌ Erro ao carregar dados:', error);
         return [];
     }
 }

@@ -1799,6 +1799,11 @@
         line-height: 1.2;
     }
     
+    /* Hide specific columns on mobile to prevent horizontal scroll */
+    .hide-mobile {
+        display: none !important;
+    }
+    
     .piloto-periodo {
         font-size: 13px;
     }
