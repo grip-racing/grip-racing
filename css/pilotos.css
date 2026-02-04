@@ -4,7 +4,7 @@
 
 .pilotos-main {
     min-height: 100vh;
-    background: var(--bg-secondary, #ffffff);
+    background: var(--bg-primary);
     transition: background-color 0.3s ease;
 }
 
@@ -31,14 +31,14 @@
     font-size: 36px;
     font-weight: 900;
     margin: 0 0 10px 0;
-    color: #1a1a1a;
+    color: var(--text-primary);
     letter-spacing: -1px;
     text-transform: uppercase;
 }
 
 .hero-subtitle {
     font-size: 16px;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--text-muted);
     margin: 0;
     font-weight: 400;
 }
@@ -54,7 +54,7 @@
 /* Controls */
 .pilotos-content {
     padding: 60px 20px 100px;
-    background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
+    background: var(--bg-primary);
 }
 
 /* Mobile Sort Controls - Hidden by default */
@@ -64,25 +64,25 @@
     gap: 12px;
     margin-bottom: 20px;
     padding: 15px;
-    background: #ffffff;
-    border: 2px solid rgba(0, 0, 0, 0.1);
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
     border-radius: 12px;
 }
 
 .mobile-sort-controls label {
     font-size: 14px;
     font-weight: 600;
-    color: #6c757d;
+    color: var(--text-secondary);
     white-space: nowrap;
 }
 
 .mobile-sort-select {
     flex: 1;
     padding: 10px 15px;
-    background: #f8f9fa;
-    border: 2px solid rgba(0, 0, 0, 0.1);
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
     border-radius: 8px;
-    color: #1a1a1a;
+    color: var(--text-primary);
     font-size: 14px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
@@ -93,7 +93,7 @@
 .mobile-sort-select:focus {
     outline: none;
     border-color: #ff6b00;
-    background: #ffffff;
+    background: var(--card-bg);
 }
 
 .pilotos-controls {
@@ -113,10 +113,10 @@
 .search-box input {
     width: 100%;
     padding: 14px 45px 14px 20px;
-    background: #ffffff;
-    border: 2px solid rgba(0, 0, 0, 0.1);
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
     border-radius: 12px;
-    color: #1a1a1a;
+    color: var(--text-primary);
     font-size: 15px;
     font-family: 'Montserrat', sans-serif;
     transition: all 0.3s ease;
@@ -124,13 +124,13 @@
 
 .search-box input:focus {
     outline: none;
-    background: #ffffff;
+    background: var(--card-bg);
     border-color: #ff6b00;
     box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.1);
 }
 
 .search-box input::placeholder {
-    color: rgba(0, 0, 0, 0.4);
+    color: var(--text-secondary);
 }
 
 .search-icon {
@@ -138,7 +138,7 @@
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: rgba(0, 0, 0, 0.4);
+    color: var(--text-secondary);
     pointer-events: none;
 }
 
@@ -149,10 +149,10 @@
 
 .filter-btn {
     padding: 12px 24px;
-    background: #ffffff;
-    border: 2px solid rgba(0, 0, 0, 0.1);
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
     border-radius: 10px;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-primary);
     font-size: 14px;
     font-weight: 600;
     font-family: 'Montserrat', sans-serif;
@@ -163,7 +163,7 @@
 }
 
 .filter-btn:hover {
-    background: #f8f8f8;
+    background: var(--bg-tertiary);
     border-color: rgba(255, 107, 0, 0.3);
     color: #ff6b00;
     transform: translateY(-2px);
@@ -172,7 +172,7 @@
 .filter-btn.active {
     background: linear-gradient(135deg, #ff6b00 0%, #ff8c00 100%);
     border-color: #ff6b00;
-    color: #fff;
+    color: #FFFFFF;
     box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
 }
 
@@ -189,11 +189,11 @@
     flex-direction: column;
     align-items: center;
     padding: 20px 20px;
-    background: linear-gradient(135deg, rgba(255, 107, 0, 0.08) 0%, rgba(255, 107, 0, 0.03) 100%);
-    border: 2px solid rgba(255, 107, 0, 0.15);
+    background: var(--card-bg);
+    border: 2px solid rgba(255, 107, 0, 0.3);
     border-radius: 12px;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 20px rgba(255, 107, 0, 0.1);
+    box-shadow: 0 5px 20px var(--card-shadow);
 }
 
 .summary-card:hover {
@@ -211,18 +211,18 @@
 
 .summary-label {
     font-size: 12px;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 /* Table */
 .table-container {
-    background: #ffffff;
-    border: 2px solid rgba(0, 0, 0, 0.08);
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 40px var(--card-shadow);
 }
 
 .pilotos-table {
@@ -282,14 +282,14 @@
 }
 
 .pilotos-table tbody tr {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--border-color);
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
 }
 
 .pilotos-table tbody tr:nth-child(even) {
-    background: rgba(0, 0, 0, 0.04);
+    background: var(--bg-tertiary);
 }
 
 .pilotos-table tbody tr:hover {
@@ -321,20 +321,20 @@
 
 .pilotos-table td {
     padding: 12px 20px;
-    color: rgba(0, 0, 0, 0.8);
+    color: var(--text-secondary);
     font-size: 14px;
     vertical-align: middle;
 }
 
 .pilotos-table td:first-child {
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text-primary);
 }
 
 .loading-row td {
     text-align: center;
     padding: 60px 20px;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--text-secondary);
 }
 
 .loading-spinner {
@@ -357,7 +357,7 @@
 
 .piloto-detalhes-main {
     min-height: 100vh;
-    background: #ffffff;
+    background: var(--bg-secondary);
 }
 
 .piloto-hero {
@@ -395,7 +395,7 @@
 }
 
 .back-link:hover {
-    color: #ffffff;
+    color: #FFFFFF;
     background: #ff6b00;
     border-color: #ff6b00;
     transform: translateX(-5px);
@@ -406,21 +406,21 @@
     font-size: 42px;
     font-weight: 900;
     margin: 0 0 8px 0;
-    color: #1a1a1a;
+    color: var(--text-primary);
     letter-spacing: -1.5px;
     text-transform: uppercase;
 }
 
 .piloto-periodo {
     font-size: 16px;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
 /* Stats Overview */
 .piloto-stats-overview {
     padding: 15px 20px 0;
-    background: rgba(255, 107, 0, 0.02);
+    background: transparent;
 }
 
 .stats-grid-large {
@@ -436,18 +436,18 @@
     justify-content: center;
     gap: 6px;
     padding: 15px 10px;
-    background: #ffffff;
-    border: 2px solid rgba(0, 0, 0, 0.08);
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
     border-radius: 12px;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 10px var(--card-shadow);
 }
 
 .stat-card-large:hover {
     transform: translateY(-3px);
     border-color: rgba(255, 107, 0, 0.3);
     box-shadow: 0 8px 25px rgba(255, 107, 0, 0.15);
-    background: linear-gradient(135deg, rgba(255, 107, 0, 0.03) 0%, #ffffff 100%);
+    background: var(--card-bg);
 }
 
 .stat-icon {
@@ -465,14 +465,14 @@
 .stat-number-large {
     font-size: 24px;
     font-weight: 800;
-    color: #1a1a1a;
+    color: var(--text-primary);
     line-height: 1;
     margin-bottom: 3px;
 }
 
 .stat-label-large {
     font-size: 10px;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     line-height: 1.2;
@@ -481,7 +481,7 @@
 /* Detalhes Content */
 .piloto-detalhes-content {
     padding: 0 20px 60px;
-    background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
+    background: var(--bg-primary);
 }
 
 .content-card:first-child {
@@ -495,12 +495,12 @@
 }
 
 .content-card {
-    background: #ffffff;
-    border: 2px solid rgba(0, 0, 0, 0.08);
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
     border-radius: 16px;
     padding: 25px;
     margin-bottom: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 20px var(--card-shadow);
     transition: all 0.3s ease;
 }
 
@@ -516,7 +516,7 @@
 .section-title {
     font-size: 22px;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--text-primary);
     margin: 0 0 12px 0;
     padding-bottom: 12px;
     border-bottom: 2px solid rgba(255, 107, 0, 0.15);
@@ -527,7 +527,7 @@
     flex-wrap: wrap;
     gap: 15px;
     padding: 12px 16px;
-    background: rgba(255, 107, 0, 0.05);
+    background: var(--bg-tertiary);
     border-left: 3px solid rgba(255, 107, 0, 0.3);
     border-radius: 8px;
     margin-bottom: 20px;
@@ -537,7 +537,7 @@
 
 .legenda-item {
     font-size: 13px;
-    color: #666;
+    color: var(--text-secondary);
     font-weight: 500;
     text-align: center;
 }
@@ -545,8 +545,8 @@
 /* Temporadas */
 .temporada-item {
     padding: 20px;
-    background: #f8f8f8;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     margin-bottom: 15px;
     transition: all 0.3s ease;
@@ -572,7 +572,7 @@
 
 .temporada-corridas {
     font-size: 13px;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--text-secondary);
 }
 
 .temporada-stats {
@@ -589,13 +589,13 @@
     display: block;
     font-size: 20px;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--text-primary);
 }
 
 .temporada-stat-label {
     display: block;
     font-size: 11px;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-top: 5px;
@@ -611,7 +611,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px 20px;
-    background: #f8f8f8;
+    background: var(--bg-tertiary);
     border-left: 3px solid rgba(255, 107, 0, 0.5);
     border-radius: 8px;
     transition: all 0.3s ease;
@@ -638,7 +638,7 @@
 
 .campeonato-expand {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
     transition: transform 0.3s ease;
     margin-left: 10px;
 }
@@ -646,7 +646,7 @@
 .campeonato-nome, .campeonato-nome-wrapper {
     font-size: 15px;
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text-primary);
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -673,7 +673,7 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease;
-    background: rgba(0, 0, 0, 0.02);
+    background: var(--bg-primary);
     border-radius: 0 0 8px 8px;
     margin-top: -8px;
     padding: 0 20px;
@@ -723,7 +723,7 @@
 
 .campeonato-subexpand {
     font-size: 10px;
-    color: #666;
+    color: var(--text-secondary);
     transition: transform 0.3s ease;
 }
 
@@ -736,7 +736,7 @@
 
 .campeonato-temporada {
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text-primary);
     font-size: 14px;
 }
 
@@ -751,12 +751,12 @@
 
 .campeonato-ano {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .campeonato-corridas {
     font-size: 13px;
-    color: #666;
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
@@ -764,7 +764,7 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease;
-    background: rgba(0, 0, 0, 0.03);
+    background: var(--bg-primary);
     border-radius: 0 0 6px 6px;
     margin-left: -10px;
     margin-right: -10px;
@@ -780,7 +780,7 @@
     justify-content: space-between;
     gap: 12px;
     padding: 8px 10px;
-    background: rgba(255, 255, 255, 0.5);
+    background: var(--bg-tertiary);
     border-radius: 6px;
     margin-bottom: 6px;
 }
@@ -793,7 +793,7 @@
     flex: 1;
     font-size: 13px;
     font-weight: 500;
-    color: #1a1a1a;
+    color: var(--text-primary);
 }
 
 .campeonato-corrida-badges {
@@ -819,7 +819,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px 20px;
-    background: #f8f8f8;
+    background: var(--bg-tertiary);
     border-left: 3px solid rgba(255, 107, 0, 0.5);
     border-radius: 8px;
     transition: all 0.3s ease;
@@ -841,7 +841,7 @@
 
 .circuito-expand {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
     transition: transform 0.3s ease;
     margin-left: 10px;
 }
@@ -849,7 +849,7 @@
 .circuito-nome {
     font-size: 15px;
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text-primary);
 }
 
 .circuito-participacoes {
@@ -864,8 +864,8 @@
     border-radius: 4px;
     font-size: 12px;
     font-weight: 600;
-    background: rgba(0, 0, 0, 0.05);
-    color: #666;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
 }
 
 .circuito-melhor.resultado-vitoria {
@@ -887,7 +887,7 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease;
-    background: rgba(0, 0, 0, 0.02);
+    background: var(--bg-primary);
     border-radius: 0 0 8px 8px;
     margin-top: -8px;
     padding: 0;
@@ -902,7 +902,7 @@
     align-items: center;
     gap: 12px;
     padding: 8px 10px;
-    background: rgba(255, 255, 255, 0.5);
+    background: var(--bg-tertiary);
     border-radius: 6px;
     margin-bottom: 6px;
 }
@@ -915,7 +915,7 @@
     flex: 1;
     font-size: 13px;
     font-weight: 500;
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .circuito-corrida-badges {
@@ -929,10 +929,10 @@
 .sidebar-title {
     font-size: 18px;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--text-primary);
     margin: 0 0 20px 0;
     padding-bottom: 12px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .advanced-stats {
@@ -946,7 +946,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .advanced-stat:last-child {
@@ -955,7 +955,7 @@
 
 .advanced-label {
     font-size: 13px;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--text-secondary);
 }
 
 .advanced-value {
@@ -967,7 +967,7 @@
 /* Recordes */
 .recorde-item {
     padding: 15px;
-    background: rgba(255, 107, 0, 0.05);
+    background: var(--bg-tertiary);
     border-left: 3px solid #ff6b00;
     border-radius: 8px;
     margin-bottom: 12px;
@@ -976,7 +976,7 @@
 .recorde-label {
     display: block;
     font-size: 12px;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--text-secondary);
     margin-bottom: 5px;
 }
 
@@ -984,7 +984,7 @@
     display: block;
     font-size: 18px;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--text-primary);
 }
 
 .recorde-especial {
@@ -1040,12 +1040,12 @@
 .ano-nome {
     font-size: 20px;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--text-primary);
 }
 
 .ano-info {
     font-size: 13px;
-    color: #666;
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
@@ -1063,7 +1063,7 @@
 
 .ano-expand {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
     transition: transform 0.3s ease;
 }
 
@@ -1129,25 +1129,25 @@
 .temporada-nome {
     font-size: 15px;
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text-primary);
 }
 
 .temporada-corridas {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .temporada-stats-mini {
     display: flex;
     gap: 10px;
     font-size: 13px;
-    color: #666;
+    color: var(--text-secondary);
     margin-right: 10px;
 }
 
 .temporada-toggle {
     font-size: 10px;
-    color: rgba(0, 0, 0, 0.4);
+    color: var(--text-muted);
     transition: transform 0.3s ease;
 }
 
@@ -1162,7 +1162,7 @@
 .temporada-item-wrapper.active .temporada-corridas-list {
     margin-top: 12px;
     padding: 12px;
-    background: rgba(0, 0, 0, 0.02);
+    background: var(--bg-primary);
     border-radius: 6px;
 }
 
@@ -1171,7 +1171,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 15px;
-    background: rgba(0, 0, 0, 0.02);
+    background: var(--bg-tertiary);
     border-radius: 8px;
     margin-bottom: 8px;
     transition: background-color 0.2s ease;
@@ -1191,7 +1191,7 @@
 
 .corrida-pista {
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text-primary);
     font-size: 15px;
 }
 
@@ -1213,13 +1213,13 @@
 
 .corrida-categoria {
     font-size: 11px;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
 .corrida-ano {
     font-size: 11px;
-    color: rgba(0, 0, 0, 0.4);
+    color: var(--text-muted);
     font-weight: 500;
 }
 
@@ -1238,7 +1238,7 @@
 
 .resultado-vitoria {
     background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-    color: #1a1a1a;
+    color: #000000;
     font-weight: 700;
     padding: 4px 10px;
     border-radius: 6px;
@@ -1247,7 +1247,7 @@
 
 .resultado-segundo {
     background: linear-gradient(135deg, #C0C0C0 0%, #E8E8E8 100%);
-    color: #1a1a1a;
+    color: #000000;
     font-weight: 700;
     padding: 4px 10px;
     border-radius: 6px;
@@ -1256,7 +1256,7 @@
 
 .resultado-podio {
     background: linear-gradient(135deg, #CD7F32 0%, #E8A87C 100%);
-    color: #fff;
+    color: #000000;
     font-weight: 700;
     padding: 4px 10px;
     border-radius: 6px;
@@ -1269,7 +1269,7 @@
 
 .corrida-equipe {
     font-size: 13px;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--text-secondary);
     min-width: 120px;
 }
 
@@ -1283,7 +1283,7 @@
 
 .loading-text {
     text-align: center;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--text-secondary);
     font-size: 14px;
 }
 
@@ -1309,7 +1309,7 @@
     top: 10px;
     right: 10px;
     font-size: 10px;
-    color: rgba(0, 0, 0, 0.3);
+    color: var(--text-muted);
     transition: transform 0.3s ease;
 }
 
@@ -1334,16 +1334,16 @@
 }
 
 .stat-detail-content {
-    background: white;
+    background: var(--card-bg);
     border-radius: 16px;
     padding: 25px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 15px var(--card-shadow);
 }
 
 .stat-detail-title {
     font-size: 22px;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--text-primary);
     margin: 0 0 20px 0;
     display: flex;
     align-items: center;
@@ -1404,7 +1404,7 @@
 
 .stat-detail-pista {
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text-primary);
     font-size: 15px;
 }
 
@@ -1426,13 +1426,13 @@
 
 .stat-detail-categoria {
     font-size: 11px;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
 .stat-detail-temporada {
     font-size: 11px;
-    color: rgba(0, 0, 0, 0.4);
+    color: var(--text-muted);
     font-weight: 500;
 }
 
@@ -1454,29 +1454,29 @@
 
 .stat-detail-posicao.badge-1 {
     background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-    color: #1a1a1a;
+    color: #000000;
     box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
 }
 
 .stat-detail-posicao.badge-2 {
     background: linear-gradient(135deg, #C0C0C0 0%, #E8E8E8 100%);
-    color: #1a1a1a;
+    color: #000000;
     box-shadow: 0 2px 8px rgba(192, 192, 192, 0.3);
 }
 
 .stat-detail-posicao.badge-3 {
     background: linear-gradient(135deg, #CD7F32 0%, #E8A87C 100%);
-    color: #fff;
+    color: #000000;
     box-shadow: 0 2px 8px rgba(205, 127, 50, 0.3);
 }
 
 .stat-detail-posicao:not(.badge-1):not(.badge-2):not(.badge-3) {
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .stat-detail-equipe {
     font-size: 13px;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--text-secondary);
     min-width: 100px;
 }
 
@@ -1492,7 +1492,7 @@
 .titulos-group-title {
     font-size: 18px;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--text-primary);
     margin: 0 0 15px 0;
     padding-bottom: 10px;
     border-bottom: 2px solid rgba(255, 107, 0, 0.1);
@@ -1519,7 +1519,7 @@
 }
 
 .titulo-card {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 107, 0, 0.05));
+    background: var(--card-bg);
     border: 2px solid #ffd700;
     border-radius: 16px;
     padding: 20px;
@@ -1532,12 +1532,12 @@
 }
 
 .titulo-card-construtor {
-    background: linear-gradient(135deg, rgba(192, 192, 192, 0.15), rgba(128, 128, 128, 0.08));
+    background: var(--card-bg);
     border: 2px solid #c0c0c0;
 }
 
 .titulo-card-evento {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(37, 99, 235, 0.06));
+    background: var(--card-bg);
     border: 2px solid #3b82f6;
     cursor: default !important;
 }
@@ -1549,17 +1549,17 @@
     right: -50%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+    background: transparent;
     transform: rotate(45deg);
     transition: all 0.5s ease;
 }
 
 .titulo-card-construtor::before {
-    background: linear-gradient(45deg, transparent, rgba(192, 192, 192, 0.15), transparent);
+    background: transparent;
 }
 
 .titulo-card-evento::before {
-    background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.15), transparent);
+    background: transparent;
 }
 
 .titulo-card:hover {
@@ -1572,7 +1572,7 @@
     border-color: #ff6b00;
     border-width: 3px;
     box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 107, 0, 0.1));
+    background: var(--card-bg);
 }
 
 .titulo-card-construtor:hover {
@@ -1590,7 +1590,7 @@
     border-color: #666;
     border-width: 3px;
     box-shadow: 0 8px 25px rgba(102, 102, 102, 0.4);
-    background: linear-gradient(135deg, rgba(192, 192, 192, 0.25), rgba(128, 128, 128, 0.15));
+    background: var(--card-bg);
 }
 
 .titulo-card:hover::before {
@@ -1633,7 +1633,7 @@
 }
 
 .titulo-card-construtor .titulo-tipo {
-    color: #666;
+    color: #a0a0a0;
 }
 
 .titulo-liga, .titulo-liga-main {
@@ -1644,7 +1644,7 @@
 }
 
 .titulo-card-construtor .titulo-liga, .titulo-card-construtor .titulo-liga-main {
-    color: #555;
+    color: #a0a0a0;
 }
 
 .titulo-card-evento .titulo-liga, .titulo-card-evento .titulo-liga-main {
@@ -1654,20 +1654,20 @@
 .titulo-temporada {
     font-size: 15px;
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text-primary);
 }
 
 .titulo-categoria {
     font-size: 12px;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
 .titulo-equipe {
     font-size: 12px;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-primary);
     font-weight: 600;
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--bg-tertiary);
     padding: 3px 8px;
     border-radius: 4px;
     margin-top: 2px;
@@ -1675,7 +1675,7 @@
 
 .titulo-pilotos {
     font-size: 11px;
-    color: rgba(0, 0, 0, 0.65);
+    color: var(--text-secondary);
     font-weight: 500;
     font-style: italic;
     margin-top: 3px;
@@ -1698,22 +1698,22 @@
 
 .titulo-ano {
     font-size: 12px;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--text-secondary);
     font-weight: 600;
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--bg-tertiary);
     padding: 2px 8px;
     border-radius: 4px;
 }
 
 .titulo-corridas {
     font-size: 11px;
-    color: rgba(0, 0, 0, 0.4);
+    color: var(--text-muted);
     font-weight: 500;
 }
 
 .titulo-expand {
     font-size: 12px;
-    color: rgba(0, 0, 0, 0.4);
+    color: var(--text-muted);
     transition: transform 0.3s ease;
     position: absolute;
     top: 15px;
@@ -1725,7 +1725,7 @@
     overflow: hidden;
     transition: max-height 0.5s ease;
     margin-top: 0;
-    background: white;
+    background: var(--card-bg);
     border-radius: 12px;
     padding: 0;
 }
@@ -1741,7 +1741,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    background: rgba(0, 0, 0, 0.02);
+    background: var(--bg-tertiary);
     border-radius: 8px;
     margin-bottom: 6px;
     gap: 12px;
@@ -1753,7 +1753,7 @@
 
 .titulo-corrida-pista {
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text-primary);
     flex: 1;
 }
 
@@ -1768,7 +1768,7 @@
 
 .titulo-corrida-resultado.resultado-vitoria {
     background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-    color: #1a1a1a;
+    color: #000000;
 }
 
 .titulo-corrida-resultado.resultado-podio {
@@ -1793,7 +1793,7 @@
 
 .titulo-liga-small {
     font-size: 11px;
-    color: rgba(0, 0, 0, 0.4);
+    color: var(--text-muted);
     font-weight: 500;
 }
 
@@ -1830,12 +1830,12 @@
 
 /* Logo em listas de detalhes */
 .stat-detail-liga {
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--bg-tertiary);
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 12px;
     font-weight: 600;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     height: 22px;
 }
 
@@ -1847,7 +1847,7 @@
 /* Logo em corridas */
 .corrida-liga {
     font-size: 13px;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     font-weight: 600;
 }
 
@@ -2086,7 +2086,7 @@
     
     .pilotos-table tr {
         display: block;
-        background: #ffffff;
+        background: var(--card-bg);
         border: 2px solid #e9ecef;
         border-radius: 12px;
         padding: 20px;
@@ -2105,10 +2105,10 @@
         align-items: center;
         padding: 8px 0;
         border: none;
-        border-bottom: 1px solid #f0f0f0;
+        border-bottom: 1px solid var(--border-color);
         font-size: 15px;
         font-weight: 600;
-        color: #1a1a1a;
+        color: var(--text-primary);
     }
     
     .pilotos-table td:last-child {
@@ -2118,7 +2118,7 @@
     .pilotos-table td::before {
         content: attr(data-label);
         font-weight: 600;
-        color: #6c757d;
+        color: var(--text-secondary);
         font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -2167,16 +2167,16 @@
         align-items: center;
         gap: 4px;
         padding: 4px 10px;
-        background: #f8f9fa;
-        border: 1px solid #e9ecef;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
         border-radius: 20px;
         font-size: 13px;
         font-weight: 600;
-        color: #495057;
+        color: var(--text-secondary);
     }
     
     .stat-badge-highlight {
-        background: #fff3e6;
+        background: rgba(255, 107, 0, 0.1);
         border-color: #ff6b00;
         color: #ff6b00;
     }
@@ -2264,7 +2264,7 @@
 /* Radar Chart */
 .radar-chart-subtitle {
     font-size: 12px;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--text-secondary);
     margin: -10px 0 10px 0;
     text-align: center;
 }
@@ -2333,7 +2333,7 @@
     gap: 8px;
     align-items: center;
     padding: 6px 10px;
-    background: rgba(255, 107, 0, 0.04);
+    background: var(--bg-tertiary);
     border-left: 2px solid rgba(255, 107, 0, 0.3);
     border-radius: 4px;
     margin-bottom: 5px;
@@ -2342,13 +2342,13 @@
 
 .comparison-label {
     font-weight: 600;
-    color: rgba(0, 0, 0, 0.8);
+    color: var(--text-primary);
     font-size: 11px;
 }
 
 .comparison-leader {
     font-size: 10px;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--text-secondary);
     text-align: right;
 }
 
