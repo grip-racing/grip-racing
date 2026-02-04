@@ -4,7 +4,8 @@
 
 .pilotos-main {
     min-height: 100vh;
-    background: #ffffff;
+    background: var(--bg-secondary, #ffffff);
+    transition: background-color 0.3s ease;
 }
 
 /* Hero Section */
@@ -642,10 +643,24 @@
     margin-left: 10px;
 }
 
-.campeonato-nome {
+.campeonato-nome, .campeonato-nome-wrapper {
     font-size: 15px;
     font-weight: 600;
     color: #1a1a1a;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.campeonato-liga-logo {
+    display: inline-flex;
+    align-items: center;
+}
+
+.campeonato-liga-logo img {
+    max-height: 20px;
+    max-width: 100px;
+    object-fit: contain;
 }
 
 .campeonato-participacoes {
@@ -1521,6 +1536,12 @@
     border: 2px solid #c0c0c0;
 }
 
+.titulo-card-evento {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(37, 99, 235, 0.06));
+    border: 2px solid #3b82f6;
+    cursor: default !important;
+}
+
 .titulo-card::before {
     content: '';
     position: absolute;
@@ -1535,6 +1556,10 @@
 
 .titulo-card-construtor::before {
     background: linear-gradient(45deg, transparent, rgba(192, 192, 192, 0.15), transparent);
+}
+
+.titulo-card-evento::before {
+    background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.15), transparent);
 }
 
 .titulo-card:hover {
@@ -1553,6 +1578,12 @@
 .titulo-card-construtor:hover {
     box-shadow: 0 10px 30px rgba(192, 192, 192, 0.4);
     border-color: #909090;
+}
+
+.titulo-card-evento:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    border-color: #2563eb;
 }
 
 .titulo-card-construtor.active {
@@ -1575,6 +1606,10 @@
 
 .titulo-card-construtor .titulo-trophy {
     filter: drop-shadow(0 0 10px rgba(192, 192, 192, 0.5));
+}
+
+.titulo-card-evento .titulo-trophy {
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
 }
 
 @keyframes trophy-pulse {
@@ -1601,15 +1636,19 @@
     color: #666;
 }
 
-.titulo-liga {
+.titulo-liga, .titulo-liga-main {
     font-size: 18px;
     font-weight: 700;
     color: #ff6b00;
     line-height: 1.2;
 }
 
-.titulo-card-construtor .titulo-liga {
+.titulo-card-construtor .titulo-liga, .titulo-card-construtor .titulo-liga-main {
     color: #555;
+}
+
+.titulo-card-evento .titulo-liga, .titulo-card-evento .titulo-liga-main {
+    color: #2563eb;
 }
 
 .titulo-temporada {
@@ -1632,6 +1671,22 @@
     padding: 3px 8px;
     border-radius: 4px;
     margin-top: 2px;
+}
+
+.titulo-pilotos {
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.65);
+    font-weight: 500;
+    font-style: italic;
+    margin-top: 3px;
+    line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.titulo-pilotos .piloto-nome {
+    display: block;
 }
 
 .titulo-info {
@@ -1734,6 +1789,98 @@
     gap: 4px;
     justify-content: flex-end;
     margin-left: auto;
+}
+
+.titulo-liga-small {
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.4);
+    font-weight: 500;
+}
+
+/* Estilos genéricos para logos de liga */
+.liga-display, .liga-display-titulo, .liga-display-small, 
+.stat-detail-liga, .corrida-liga, .liga-inline {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.liga-display img, .liga-display-titulo img, .liga-display-small img,
+.stat-detail-liga img, .corrida-liga img, .liga-inline img {
+    height: auto;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Logo nos títulos grandes */
+.liga-display-titulo img {
+    max-height: 24px;
+    max-width: 120px;
+}
+
+/* Logo pequeno em eventos */
+.liga-display-small {
+    height: 16px;
+}
+
+.liga-display-small img {
+    max-height: 16px;
+    max-width: 70px;
+}
+
+/* Logo em listas de detalhes */
+.stat-detail-liga {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.7);
+    height: 22px;
+}
+
+.stat-detail-liga img {
+    max-height: 18px;
+    max-width: 80px;
+}
+
+/* Logo em corridas */
+.corrida-liga {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 600;
+}
+
+.corrida-liga img {
+    max-height: 16px;
+    max-width: 80px;
+}
+
+/* Logo inline em circuitos */
+.liga-inline {
+    font-size: inherit;
+    color: inherit;
+}
+
+.liga-inline img {
+    max-height: 14px;
+    max-width: 60px;
+    vertical-align: middle;
+}
+
+/* Texto fallback quando não há logo */
+.liga-text {
+    font-size: inherit;
+    color: inherit;
+    font-weight: inherit;
+}
+
+.evento-badges-inline {
+    font-size: 16px;
+    margin-top: 8px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
 }
 
 /* Footer */

@@ -1,5 +1,5 @@
 // Piloto detalhes page script
-const DATA_VERSION = '1.0.3'; // Incrementar quando atualizar os dados
+const DATA_VERSION = '1.0.4'; // Incrementar quando atualizar os dados
 const DATA_SOURCES = {
     pilotos: `data/data-pilotos.csv?v=${DATA_VERSION}`,
     participacoes: `data/data-participacoes.csv?v=${DATA_VERSION}`
@@ -105,6 +105,18 @@ function getBadgeClass(pos) {
 // Check if mobile
 function isMobile() {
     return window.innerWidth <= 768;
+}
+
+// Format liga with logo or text
+function formatLiga(ligaNome, cssClass = 'liga-display') {
+    if (!ligaNome) return '';
+    const ligaNormalizada = ligaNome.toLowerCase().replace(/\s+/g, '');
+    const logoPath = `assets/ligas/${ligaNormalizada}.png`;
+    
+    return `<span class="${cssClass}">
+        <img src="${logoPath}" alt="${ligaNome}" title="${ligaNome}" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+        <span class="liga-text" style="display:none;">${ligaNome}</span>
+    </span>`;
 }
 
 // Format championship badges for display
@@ -286,7 +298,7 @@ function displayCircuitos() {
                         return `
                             <div class="circuito-corrida-item">
                                 <span class="corrida-resultado ${resultClass}">${formatPosition(final)}</span>
-                                <span class="circuito-corrida-info">${ano} • ${liga}${categoria ? ' ' + categoria : ''} ${temporada}</span>
+                                <span class="circuito-corrida-info">${ano} • ${formatLiga(liga, 'liga-inline')}${categoria ? ' ' + categoria : ''} ${temporada}</span>
                                 <span class="circuito-corrida-badges">${vitoria}${podio}${pole}${bestLap}${hatTrick}${chelem}${campeonatoPiloto}${campeonatoConstrutores}</span>
                             </div>
                         `;
@@ -583,6 +595,12 @@ function displayStatDetails(type, container) {
             return construtores === 'SIM' || construtores === 'TIME';
         });
         
+        // Filtrar eventos vencidos
+        const eventosVencidos = todasParticipacoes.filter(c => {
+            const campeao = String(c['Piloto Campeao'] || '').trim().toUpperCase();
+            return campeao === 'EVENTO';
+        });
+        
         // Agrupar títulos de pilotos com contagem real de corridas
         const titulosPilotoUnicos = {};
         campeonatosPiloto.forEach(c => {
@@ -632,6 +650,21 @@ function displayStatDetails(type, container) {
                     String(p['Categoria'] || '').trim() === categoria
                 );
                 
+                // Buscar todos os pilotos que venceram este título de construtores (de TODAS as participações, não só do piloto atual)
+                const pilotosCampeoes = [...new Set(
+                    participacoesData
+                        .filter(p => 
+                            isValidParticipacao(p) &&
+                            String(p['Liga'] || '').trim() === liga && 
+                            String(p['Temporada'] || '').trim() === temporada &&
+                            String(p['Categoria'] || '').trim() === categoria &&
+                            (String(p['Construtores'] || '').trim().toUpperCase() === 'SIM' || 
+                             String(p['Construtores'] || '').trim().toUpperCase() === 'TIME')
+                        )
+                        .map(p => String(p['Piloto'] || '').trim())
+                        .filter(nome => nome !== '')
+                )];
+                
                 titulosConstrutoresUnicos[key] = {
                     tipo: 'construtor',
                     liga: liga,
@@ -639,6 +672,7 @@ function displayStatDetails(type, container) {
                     ano: ano,
                     categoria: categoria,
                     equipe: equipe,
+                    pilotos: pilotosCampeoes,
                     totalCorridas: corridasCampeonato.length,
                     corridas: corridasCampeonato
                 };
@@ -660,6 +694,36 @@ function displayStatDetails(type, container) {
             return b.temporada.localeCompare(a.temporada);
         });
         
+        // Processar eventos vencidos - agrupar por evento único
+        const eventosUnicos = {};
+        eventosVencidos.forEach(c => {
+            const categoria = String(c['Categoria'] || 'Evento').trim();
+            const pista = String(c['Pista'] || 'N/A').trim();
+            const liga = String(c['Liga'] || 'N/A').trim();
+            const temporada = String(c['Temporada'] || '').trim();
+            const ano = String(c['Ano'] || '').trim();
+            const key = `evento|||${categoria}|||${pista}|||${liga}|||${temporada}`;
+            
+            if (!eventosUnicos[key]) {
+                eventosUnicos[key] = {
+                    tipo: 'evento',
+                    categoria: categoria,
+                    pista: pista,
+                    liga: liga,
+                    temporada: temporada,
+                    ano: ano,
+                    corrida: c
+                };
+            }
+        });
+        
+        const eventos = Object.values(eventosUnicos).sort((a, b) => {
+            const anoA = parseInt(a.ano) || 0;
+            const anoB = parseInt(b.ano) || 0;
+            if (anoB !== anoA) return anoB - anoA;
+            return b.temporada.localeCompare(a.temporada);
+        });
+        
         const totalTitulos = titulosPiloto.length + titulosConstrutores.length;
         
         const renderTituloCard = (t, index) => `
@@ -667,9 +731,10 @@ function displayStatDetails(type, container) {
                 <div class="titulo-card ${t.tipo === 'construtor' ? 'titulo-card-construtor' : ''}" onclick="toggleTituloDetail('${t.tipo}-${index}')" style="cursor: pointer;">
                     <div class="titulo-trophy">${t.tipo === 'piloto' ? '🏆' : '👥'}</div>
                     <div class="titulo-content">
-                        <div class="titulo-liga">${t.liga}</div>
+                        <div class="titulo-liga-main">${formatLiga(t.liga, 'liga-display-titulo')}</div>
                         <div class="titulo-temporada">${t.temporada}</div>
                         ${t.categoria ? `<div class="titulo-categoria">${t.categoria}</div>` : ''}
+                        ${t.tipo === 'construtor' && t.pilotos && t.pilotos.length > 0 ? `<div class="titulo-pilotos">${t.pilotos.map(p => `<span class="piloto-nome">${p}</span>`).join('')}</div>` : ''}
                         <div class="titulo-info">
                             <span class="titulo-ano">${t.ano}</span>
                             <span class="titulo-corridas">${t.totalCorridas} corridas</span>
@@ -710,6 +775,44 @@ function displayStatDetails(type, container) {
             </div>
         `;
         
+        const renderEventoCard = (e, index) => {
+            const c = e.corrida;
+            const final = c['Final'] || 'N/A';
+            const finalNum = parseInt(String(final).replace(/[^\d]/g, '')) || 999;
+            const vitoria = finalNum === 1 ? '<span title="Vitória">🥇</span>' : '';
+            const podio = (finalNum === 2 || finalNum === 3) ? '<span title="Pódio">🏅</span>' : '';
+            const pole = String(c['Pole'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Pole Position">🚩</span>' : '';
+            const bestLap = String(c['Best Lap'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Volta Rápida">⚡</span>' : '';
+            const hatTrick = String(c['Hat-Trick'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Hat-trick: Pole + Vitória + Volta Rápida">🎩</span>' : '';
+            const chelem = String(c['Chelem'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Chelem: Pole + Vitória + Volta Rápida + Liderou todas as voltas">👑</span>' : '';
+            
+            let resultClass = '';
+            if (final === '1' || final.includes('1º')) resultClass = 'resultado-vitoria';
+            else if (final === '2' || final.includes('2º')) resultClass = 'resultado-segundo';
+            else if (final === '3' || final.includes('3º')) resultClass = 'resultado-podio';
+            
+            // Normalizar nome da liga para o nome do arquivo
+            const ligaNormalizada = e.liga.toLowerCase().replace(/\s+/g, '');
+            const logoPath = `assets/ligas/${ligaNormalizada}.png`;
+            
+            return `
+            <div class="titulo-card-wrapper">
+                <div class="titulo-card titulo-card-evento">
+                    <div class="titulo-trophy">⭐</div>
+                    <div class="titulo-content">
+                        <div class="titulo-liga">${e.categoria}</div>
+                        <div class="titulo-temporada">${e.pista}</div>
+                        <div class="titulo-info">
+                            <span class="titulo-ano">${e.temporada}</span>
+                            ${formatLiga(e.liga, 'liga-display-small')}
+                        </div>
+                        <div class="evento-badges-inline">${vitoria}${podio}${pole}${bestLap}${hatTrick}${chelem}</div>
+                    </div>
+                </div>
+            </div>
+            `;
+        };
+        
         const html = `
             <div class="stat-detail-content">
                 <h3 class="stat-detail-title">🏆 Campeonatos Vencidos <span class="stat-detail-count">(${totalTitulos})</span></h3>
@@ -728,6 +831,15 @@ function displayStatDetails(type, container) {
                         <h4 class="titulos-group-title">👥 Títulos de Construtores <span class="titulos-group-count">(${titulosConstrutores.length})</span></h4>
                         <div class="titulos-grid">
                             ${titulosConstrutores.map((t, i) => renderTituloCard(t, i)).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+                
+                ${eventos.length > 0 ? `
+                    <div class="titulos-group">
+                        <h4 class="titulos-group-title">⭐ Eventos Vencidos <span class="titulos-group-count">(${eventos.length})</span></h4>
+                        <div class="titulos-grid">
+                            ${eventos.map((e, i) => renderEventoCard(e, i)).join('')}
                         </div>
                     </div>
                 ` : ''}
@@ -785,7 +897,7 @@ function displayStatDetails(type, container) {
                             <div class="stat-detail-item-main">
                                 <div class="stat-detail-pista">${pista}</div>
                                 <div class="stat-detail-meta">
-                                    <span class="stat-detail-liga">${liga}</span>
+                                    ${formatLiga(liga, 'stat-detail-liga')}
                                     ${categoria ? `<span class="stat-detail-categoria">${categoria}</span>` : ''}
                                     ${temporada ? `<span class="stat-detail-temporada">${temporada}</span>` : ''}
                                 </div>
@@ -973,7 +1085,7 @@ function displayTemporadas() {
                                     <div class="corrida-principal">
                                         <div class="corrida-pista">${pista}</div>
                                         <div class="corrida-liga-categoria">
-                                            <span class="corrida-liga">${liga}</span>
+                                            ${formatLiga(liga, 'corrida-liga')}
                                             ${categoria ? `<span class="corrida-categoria">${categoria}</span>` : ''}
                                         </div>
                                     </div>
@@ -1237,7 +1349,7 @@ function displayCampeonatos() {
         <div class="campeonato-item-wrapper">
             <div class="campeonato-item" onclick="toggleCampeonato(this)">
                 <div class="campeonato-header-left">
-                    <span class="campeonato-nome">${c.nome} ${'🏆'.repeat(c.qtdCampeonatosPiloto)}${'👥'.repeat(c.qtdCampeonatosConstrutores)}</span>
+                    <span class="campeonato-nome-wrapper">${formatLiga(c.nome, 'campeonato-liga-logo')} ${'🏆'.repeat(c.qtdCampeonatosPiloto)}${'👥'.repeat(c.qtdCampeonatosConstrutores)}</span>
                     <span class="campeonato-participacoes">${c.total} ${c.total === 1 ? 'campeonato' : 'campeonatos'}${statsSummary.length > 0 ? ' • ' + statsSummary.join('  ') : ''}</span>
                 </div>
                 <div class="campeonato-expand">▼</div>
