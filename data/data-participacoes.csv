@@ -6254,7 +6254,7 @@ DNF,Supercopa Automobilista,Watkins Glen,Adelar de Vargas,Grip Racing,,,,,,,F1BC
 DNF,Supercopa Automobilista,Autopolis,Adelar de Vargas,Grip Racing,,,,,,,F1BC,2020/2,2020,Supercopa Automobilista/F1BC/2020/2,Supercopa Automobilista/F1BC/2020/2/Autopolis
 14,Indy 500,Indianapolis,Fernando Horta,Grip Racing,,,,,,,iRacing,2020/2,2020,Indy 500/iRacing/2020/2,Indy 500/iRacing/2020/2/Indianapolis
 DNF,Indy 500,Indianapolis,Fernando Horta,Grip Racing,,,,,,,iRacing,2020/2,2020,Indy 500/iRacing/2020/2,Indy 500/iRacing/2020/2/Indianapolis
-1,Charlotte 600,Charlotte,Juliano Flores,Grip Racing,-,-,-,-,SIM,-,iRacing,2020/2,2020,Charlotte 600/iRacing/2020/2,Charlotte 600/iRacing/2020/2/Charlotte
+1,Charlotte 600,Charlotte,Juliano Flores,Grip Racing,-,-,-,-,EVENTO,-,iRacing,2020/2,2020,Charlotte 600/iRacing/2020/2,Charlotte 600/iRacing/2020/2/Charlotte
 16,VRS GT Endurance,Suzuka,Fernando Horta,Grip Racing,,,,,,,iRacing,2020/2,2020,VRS GT Endurance/iRacing/2020/2,VRS GT Endurance/iRacing/2020/2/Suzuka
 16,VRS GT Endurance,Suzuka,Juliano Flores,Grip Racing,-,-,-,-,-,-,iRacing,2020/2,2020,VRS GT Endurance/iRacing/2020/2,VRS GT Endurance/iRacing/2020/2/Suzuka
 5,VRS GT Endurance,Mount Panorama,Fernando Horta,Grip Racing,,,,,,,iRacing,2020/2,2020,VRS GT Endurance/iRacing/2020/2,VRS GT Endurance/iRacing/2020/2/Mount Panorama
@@ -7956,9 +7956,9 @@ DNF,DTM,Hockenheim,Charles Zimmermann,,SIM,-,-,-,-,-,Campeonatos Classicos,2022/
 11,DTM,Red Bull,Charles Zimmermann,,SIM,SIM,-,-,-,-,Campeonatos Classicos,2022/1,2022,DTM/Campeonatos Classicos/2022/1,DTM/Campeonatos Classicos/2022/1/Red Bull
 1,Alpine,Nürburgring,Matheus Araujo,,SIM,SIM,SIM,SIM,SIM,-,Campeonatos Classicos,2022/1,2022,Alpine/Campeonatos Classicos/2022/1,Alpine/Campeonatos Classicos/2022/1/Nürburgring
 2,Alpine,Nürburgring,Rodrigo de Sousa,,-,-,-,-,-,-,Campeonatos Classicos,2022/1,2022,Alpine/Campeonatos Classicos/2022/1,Alpine/Campeonatos Classicos/2022/1/Nürburgring
-1,Bathurst 12h,Bathurst,Leandro Daminelli,,-,-,-,-,SIM,-,iRacing,2022/1,2022,Bathurst 12h/iRacing/2022/1,Bathurst 12h/iRacing/2022/1/Bathurst
-1,Bathurst 12h,Bathurst,Paulo Galvão,,-,-,-,-,SIM,-,iRacing,2022/1,2022,Bathurst 12h/iRacing/2022/1,Bathurst 12h/iRacing/2022/1/Bathurst
-1,Bathurst 12h,Bathurst,Fernando Horta,,-,-,-,-,SIM,-,iRacing,2022/1,2022,Bathurst 12h/iRacing/2022/1,Bathurst 12h/iRacing/2022/1/Bathurst
+1,Bathurst 12h,Bathurst,Leandro Daminelli,,-,-,-,-,EVENTO,-,iRacing,2022/1,2022,Bathurst 12h/iRacing/2022/1,Bathurst 12h/iRacing/2022/1/Bathurst
+1,Bathurst 12h,Bathurst,Paulo Galvão,,-,-,-,-,EVENTO,-,iRacing,2022/1,2022,Bathurst 12h/iRacing/2022/1,Bathurst 12h/iRacing/2022/1/Bathurst
+1,Bathurst 12h,Bathurst,Fernando Horta,,-,-,-,-,EVENTO,-,iRacing,2022/1,2022,Bathurst 12h/iRacing/2022/1,Bathurst 12h/iRacing/2022/1/Bathurst
 5,Sebring 12h,Sebring,Fernando Horta,,-,-,-,-,-,-,iRacing,2022/1,2022,Sebring 12h/iRacing/2022/1,
 5,Sebring 12h,Sebring,Flavio Felicio,,-,-,-,-,-,-,iRacing,2022/1,2022,Sebring 12h/iRacing/2022/1,
 5,Sebring 12h,Sebring,Victor Ribeiro,,-,-,-,-,-,-,iRacing,2022/1,2022,Sebring 12h/iRacing/2022/1,
@@ -9202,8 +9202,8 @@ DNF,GT3 Sport,Spa-Francorchamps 2,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1B
 9,GT3 Sport,Spielberg,Flavio Felicio,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Spielberg
 14,GT3 Sport,Spielberg,Fred Quintao,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Spielberg
 4,GT3 Sport,Algarve,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Algarve
-1,WES,Sebring,Carlos Junior,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,2025,WES/F1BC/2025-2,WES/F1BC/2025-2/Sebring
-1,WES,Sebring,Matheus Beraldo,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,2025,WES/F1BC/2025-2,WES/F1BC/2025-2/Sebring
+1,WES,Sebring,Carlos Junior,Grip Racing,-,-,-,-,EVENTO,-,F1BC,2025-2,2025,WES/F1BC/2025-2,WES/F1BC/2025-2/Sebring
+1,WES,Sebring,Matheus Beraldo,Grip Racing,-,-,-,-,EVENTO,-,F1BC,2025-2,2025,WES/F1BC/2025-2,WES/F1BC/2025-2/Sebring
 1,GT3 Sport,Road America,Demetrio Fontclara,Grip Racing,SIM,SIM,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Road America
 DNF,GT3 Sport,Road America,Fred Quintao,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Road America
 3,GT3 Sport,Road Atlanta,Demetrio Fontclara,Grip Racing,SIM,-,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Road Atlanta
@@ -9214,9 +9214,9 @@ DNF,GT3 Sport,Road Atlanta,Flavio Felicio,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,20
 2,WES,Le Mans,Andrey Fajardo,Grip Racing,-,-,-,-,-,-,F1BC,2025-3,2025,WES/F1BC/2025-3,WES/F1BC/2025-3/Le Mans
 2,WES,Le Mans,Carlos Junior,Grip Racing,-,-,-,-,-,-,F1BC,2025-3,2025,WES/F1BC/2025-3,WES/F1BC/2025-3/Le Mans
 2,WES,Le Mans,Matheus Beraldo,Grip Racing,-,-,-,-,-,-,F1BC,2025-3,2025,WES/F1BC/2025-3,WES/F1BC/2025-3/Le Mans
-1,WES,Interlagos,Matheus Beraldo,Grip Racing,-,-,-,-,-,-,F1BC,2025-3,2025,WES/F1BC/2025-3,WES/F1BC/2025-3/Interlagos
-1,WES,Interlagos,Andrey Fajardo,Grip Racing,-,-,-,-,-,-,F1BC,2025-3,2025,WES/F1BC/2025-3,WES/F1BC/2025-3/Interlagos
+1,WES,Interlagos,Matheus Beraldo,Grip Racing,-,-,-,-,EVENTO,-,F1BC,2025-3,2025,WES/F1BC/2025-3,WES/F1BC/2025-3/Interlagos
+1,WES,Interlagos,Andrey Fajardo,Grip Racing,-,-,-,-,EVENTO,-,F1BC,2025-3,2025,WES/F1BC/2025-3,WES/F1BC/2025-3/Interlagos
 2025/4,,,,,,,,,,,,,,,
-1,F1BC WES,Spa-Francorchamps,Matheus Beraldo,Grip Racing,-,-,-,-,-,-,F1BC,2025-4,2025,F1BC WES/F1BC/2025-4,F1BC WES/F1BC/2025-4/Spa-Francorchamps
-1,F1BC WES,Spa-Francorchamps,Carlos Junior,,-,-,-,-,-,-,F1BC,2025-4,2025,F1BC WES/F1BC/2025-4,F1BC WES/F1BC/2025-4/Spa-Francorchamps
-1,F1BC WES,Spa-Francorchamps,Andrey Fajardo,,-,-,-,-,-,-,F1BC,2025-4,2025,F1BC WES/F1BC/2025-4,F1BC WES/F1BC/2025-4/Spa-Francorchamps
+1,WES,Spa-Francorchamps,Matheus Beraldo,Grip Racing,-,-,-,-,EVENTO,-,F1BC,2025-4,2025,WES/F1BC/2025-4,WES/F1BC/2025-4/Spa-Francorchamps
+1,WES,Spa-Francorchamps,Carlos Junior,,-,-,-,-,EVENTO,-,F1BC,2025-4,2025,WES/F1BC/2025-4,WES/F1BC/2025-4/Spa-Francorchamps
+1,WES,Spa-Francorchamps,Andrey Fajardo,,-,-,-,-,EVENTO,-,F1BC,2025-4,2025,WES/F1BC/2025-4,WES/F1BC/2025-4/Spa-Francorchamps
