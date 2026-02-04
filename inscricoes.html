@@ -12,7 +12,7 @@
     <style>
         .inscricoes-main {
             min-height: 100vh;
-            background: #ffffff;
+            background: var(--bg-primary);
             padding-top: 80px;
         }
 
@@ -20,15 +20,15 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 60px 20px 100px;
-            background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
+            background: var(--bg-secondary);
         }
 
         .form-container {
-            background: #ffffff;
+            background: var(--card-bg);
             border-radius: 12px;
             padding: 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(255, 107, 0, 0.1);
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
         }
 
         .form-intro {
@@ -47,14 +47,14 @@
         .form-intro p {
             font-size: 16px;
             line-height: 1.6;
-            color: rgba(0, 0, 0, 0.7);
+            color: var(--text-secondary);
         }
 
         .iframe-wrapper {
             border-radius: 8px;
             overflow: hidden;
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            background: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .iframe-wrapper iframe {
