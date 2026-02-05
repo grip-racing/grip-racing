@@ -1,5 +1,5 @@
 // Piloto detalhes page script
-const DATA_VERSION = '1.0.4'; // Incrementar quando atualizar os dados
+const DATA_VERSION = '1.0.7'; // Incrementar quando atualizar os dados
 const DATA_SOURCES = {
     pilotos: `data/data-pilotos.csv?v=${DATA_VERSION}`,
     participacoes: `data/data-participacoes.csv?v=${DATA_VERSION}`
@@ -119,6 +119,26 @@ function formatLiga(ligaNome, cssClass = 'liga-display') {
     </span>`;
 }
 
+// Normalize circuit name (remove suffixes like " 2", " 3", etc)
+function normalizeCircuitName(circuitName) {
+    if (!circuitName) return circuitName;
+    // Remove sufixos como " 2", " 3", " II", " III", etc
+    return circuitName.replace(/\s+\d+$/, '').replace(/\s+[IVX]+$/, '').trim();
+}
+
+// Check if transmission link is valid
+function isValidTransmissionLink(link) {
+    if (!link || link.trim() === '' || link === '#N/A' || link === 'N/A' || link === '-') return false;
+    const trimmed = link.trim();
+    return trimmed.startsWith('http://') || trimmed.startsWith('https://');
+}
+
+// Render transmission link icon
+function renderTransmissionLink(link) {
+    if (!isValidTransmissionLink(link)) return '';
+    return `<a href="${link.trim()}" target="_blank" rel="noopener noreferrer" class="transmission-link" title="Ver transmissão">📺</a>`;
+}
+
 // Format championship badges for display
 function formatChampionshipBadges(qtdPiloto, qtdConstrutores) {
     const mobile = isMobile();
@@ -191,7 +211,8 @@ function displayCircuitos() {
     // Agrupar por pista
     const circuitosMap = {};
     pilotoParticipacoes.forEach(p => {
-        const pista = p['Pista'] || 'Desconhecido';
+        const pistaOriginal = p['Pista'] || 'Desconhecido';
+        const pista = normalizeCircuitName(pistaOriginal);
         if (!circuitosMap[pista]) {
             circuitosMap[pista] = {
                 nome: pista,
@@ -277,6 +298,7 @@ function displayCircuitos() {
                         const liga = String(c['Liga'] || '').trim();
                         const categoria = String(c['Categoria'] || '').trim();
                         const ano = String(c['Ano'] || '').trim();
+                        const transmissao = c['Link Transmissao'] || '';
 
                         const finalNum = final.match(/^\d+/) ? parseInt(final) : (final.includes('º') ? parseInt(final) : 999);
                         const vitoria = finalNum === 1 ? '<span title="Vitória">🥇</span>' : '';
@@ -288,7 +310,8 @@ function displayCircuitos() {
                         const campeonatoPiloto = String(c['Piloto Campeao'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Campeão de Pilotos">🏆</span>' : '';
                         const construtoresVal = String(c['Construtores'] || '').trim().toUpperCase();
                         const campeonatoConstrutores = (construtoresVal === 'SIM' || construtoresVal === 'TIME') ? '<span title="Campeão de Construtores">👥</span>' : '';
-
+                        const transmissaoLink = renderTransmissionLink(transmissao);
+                        
                         let resultClass = '';
                         if (final === '1' || final.includes('1º')) resultClass = 'resultado-vitoria';
                         else if (final === '2' || final.includes('2º')) resultClass = 'resultado-segundo';
@@ -298,7 +321,7 @@ function displayCircuitos() {
                         return `
                             <div class="circuito-corrida-item">
                                 <span class="corrida-resultado ${resultClass}">${formatPosition(final)}</span>
-                                <span class="circuito-corrida-info">${ano} • ${formatLiga(liga, 'liga-inline')}${categoria ? ' ' + categoria : ''} ${temporada}</span>
+                                <span class="circuito-corrida-info">${ano} • ${formatLiga(liga, 'liga-inline')}${categoria ? ' ' + categoria : ''} ${temporada}${transmissaoLink ? ' ' + transmissaoLink : ''}</span>
                                 <span class="circuito-corrida-badges">${vitoria}${podio}${pole}${bestLap}${hatTrick}${chelem}${campeonatoPiloto}${campeonatoConstrutores}</span>
                             </div>
                         `;
@@ -744,8 +767,11 @@ function displayStatDetails(type, container) {
                 </div>
                 <div class="titulo-corridas-list" id="tituloDetail-${t.tipo}-${index}">
                 ${t.corridas.map(c => {
-                    const pista = c['Pista'] || 'Desconhecida';
+                    const pistaOriginal = c['Pista'] || 'Desconhecida';
+                    const pista = normalizeCircuitName(pistaOriginal);
                     const final = c['Final'] || 'N/A';
+                    const transmissao = c['Link Transmissao'] || '';
+                    const transmissaoLink = renderTransmissionLink(transmissao);
                     const finalNum = parseInt(String(final).replace(/[^\d]/g, '')) || 999;
                     const vitoria = finalNum === 1 ? '<span title="Vitória">🥇</span>' : '';
                     const podio = (finalNum === 2 || finalNum === 3) ? '<span title="Pódio">🏅</span>' : '';
@@ -766,7 +792,7 @@ function displayStatDetails(type, container) {
                     return `
                         <div class="titulo-corrida-item">
                             <div class="titulo-corrida-resultado ${resultClass}">${formatPosition(final)}</div>
-                            <div class="titulo-corrida-pista">${pista}</div>
+                            <div class="titulo-corrida-pista">${pista}${transmissaoLink ? ' ' + transmissaoLink : ''}</div>
                             <div class="titulo-corrida-badges">${vitoria}${podio}${pole}${bestLap}${hatTrick}${chelem}${campeonatoPiloto}${campeonatoConstrutores}</div>
                         </div>
                     `;
@@ -882,20 +908,23 @@ function displayStatDetails(type, container) {
             <h3 class="stat-detail-title">${title} <span class="stat-detail-count">(${filteredData.length})</span></h3>
             <div class="stat-detail-list">
                 ${filteredData.map(c => {
-                    const pista = c['Pista'] || 'Desconhecida';
+                    const pistaOriginal = c['Pista'] || 'Desconhecida';
+                    const pista = normalizeCircuitName(pistaOriginal);
                     const liga = c['Liga'] || 'N/A';
                     const temporada = c['Temporada'] || '';
                     const ano = c['Ano'] || '';
                     const categoria = c['Categoria'] || '';
                     const final = c['Final'] || '-';
+                    const transmissao = c['Link Transmissao'] || '';
+                    const transmissaoLink = renderTransmissionLink(transmissao);
                     
                     return `
                         <div class="stat-detail-item">
                             <div class="stat-detail-item-info">
-                                ${type === 'vitorias' || type === 'podios' ? `<span class="stat-detail-posicao ${getBadgeClass(final)}">${formatPosition(final)}</span>` : ''}
+                                <span class="stat-detail-posicao ${getBadgeClass(final)}">${formatPosition(final)}</span>
                             </div>
                             <div class="stat-detail-item-main">
-                                <div class="stat-detail-pista">${pista}</div>
+                                <div class="stat-detail-pista">${pista}${transmissaoLink ? ' ' + transmissaoLink : ''}</div>
                                 <div class="stat-detail-meta">
                                     ${formatLiga(liga, 'stat-detail-liga')}
                                     ${categoria ? `<span class="stat-detail-categoria">${categoria}</span>` : ''}
@@ -1056,10 +1085,13 @@ function displayTemporadas() {
                         }).length;
                         
                         const corridasHtml = corridas.map(c => {
-                            const pista = c['Pista'] || 'Desconhecida';
+                            const pistaOriginal = c['Pista'] || 'Desconhecida';
+                            const pista = normalizeCircuitName(pistaOriginal);
                             const final = c['Final'] || 'N/A';
                             const liga = c['Liga'] || 'N/A';
                             const categoria = c['Categoria'] || '';
+                            const transmissao = c['Link Transmissao'] || '';
+                            const transmissaoLink = renderTransmissionLink(transmissao);
                             const finalNum = parseInt(String(final).replace(/[^\d]/g, '')) || 999;
                             const vitoria = finalNum === 1 ? '<span title="Vitória">🥇</span>' : '';
                             const podio = (finalNum === 2 || finalNum === 3) ? '<span title="Pódio">🏅</span>' : '';
@@ -1083,7 +1115,7 @@ function displayTemporadas() {
                                         <span class="corrida-resultado ${resultClass}">${formatPosition(final)}</span>
                                     </div>
                                     <div class="corrida-principal">
-                                        <div class="corrida-pista">${pista}</div>
+                                        <div class="corrida-pista">${pista}${transmissaoLink ? ' ' + transmissaoLink : ''}</div>
                                         <div class="corrida-liga-categoria">
                                             ${formatLiga(liga, 'corrida-liga')}
                                             ${categoria ? `<span class="corrida-categoria">${categoria}</span>` : ''}
@@ -1476,8 +1508,11 @@ function toggleCampeonatoCorridas(element, liga, temporada, categoria) {
             );
             
             const corridasHtml = corridas.map(c => {
-                const pista = c['Pista'] || 'Desconhecida';
+                const pistaOriginal = c['Pista'] || 'Desconhecida';
+                const pista = normalizeCircuitName(pistaOriginal);
                 const final = c['Final'] || 'N/A';
+                const transmissao = c['Link Transmissao'] || '';
+                const transmissaoLink = renderTransmissionLink(transmissao);
                 const finalNum = parseInt(String(final).replace(/[^\d]/g, '')) || 999;
                 const vitoria = finalNum === 1 ? '<span title="Vitória">🥇</span>' : '';
                 const podio = (finalNum === 2 || finalNum === 3) ? '<span title="Pódio">🏅</span>' : '';
@@ -1498,7 +1533,7 @@ function toggleCampeonatoCorridas(element, liga, temporada, categoria) {
                 return `
                     <div class="campeonato-corrida-item">
                         <span class="corrida-resultado ${resultClass}">${formatPosition(final)}</span>
-                        <span class="campeonato-corrida-pista">${pista}</span>
+                        <span class="campeonato-corrida-pista">${pista}${transmissaoLink ? ' ' + transmissaoLink : ''}</span>
                         <span class="campeonato-corrida-badges">${vitoria}${podio}${pole}${bestLap}${hatTrick}${chelem}${campeonatoPiloto}${campeonatoConstrutores}</span>
                     </div>
                 `;
@@ -1660,5 +1695,23 @@ function toggleStatsComparison() {
         btn.innerHTML = '<span class="toggle-icon">▼</span> Ver comparação com líderes';
     } else {
         btn.innerHTML = '<span class="toggle-icon">▼</span> Esconder comparação';
+    }
+}
+
+// Toggle section visibility
+function toggleSection(sectionId, button) {
+    const section = document.getElementById(sectionId);
+    const icon = button.querySelector('.toggle-icon');
+    
+    if (section.style.display === 'none') {
+        section.style.display = 'block';
+        section.classList.remove('section-collapsed');
+        icon.style.transform = 'rotate(180deg)';
+        button.innerHTML = '<span class="toggle-icon" style="transform: rotate(180deg);">▼</span> ESCONDER';
+    } else {
+        section.style.display = 'none';
+        section.classList.add('section-collapsed');
+        icon.style.transform = 'rotate(0deg)';
+        button.innerHTML = '<span class="toggle-icon">▼</span> MOSTRAR';
     }
 }
