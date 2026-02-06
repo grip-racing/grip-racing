@@ -1,5 +1,5 @@
 // Piloto detalhes page script
-const DATA_VERSION = '1.0.10'; // Incrementar quando atualizar os dados
+const DATA_VERSION = '1.0.13'; // Incrementar quando atualizar os dados
 const DATA_SOURCES = {
     pilotos: `data/data-pilotos.csv?v=${DATA_VERSION}`,
     participacoes: `data/data-participacoes.csv?v=${DATA_VERSION}`
@@ -955,12 +955,12 @@ function displayPilotoStats() {
         return construtores === 'SIM' || construtores === 'TIME';
     });
     
-    // Agrupar títulos únicos
+    // Agrupar títulos únicos - adicionar tipo na chave para separar piloto de construtor
     const titulosPilotoUnicos = new Set(campeonatosPiloto.map(c => 
-        `${c['Liga']}|||${c['Temporada']}|||${c['Categoria']}`
+        `PILOTO|||${c['Liga']}|||${c['Temporada']}|||${c['Categoria']}`
     ));
     const titulosConstrutoresUnicos = new Set(campeonatosConstrutores.map(c => 
-        `${c['Liga']}|||${c['Temporada']}|||${c['Categoria']}`
+        `CONSTRUTOR|||${c['Liga']}|||${c['Temporada']}|||${c['Categoria']}`
     ));
     
     const titulos = titulosPilotoUnicos.size + titulosConstrutoresUnicos.size;
