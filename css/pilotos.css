@@ -672,6 +672,7 @@
 .campeonato-detail {
     max-height: 0;
     overflow: hidden;
+    overflow-x: hidden;
     transition: max-height 0.4s ease;
     background: var(--bg-primary);
     border-radius: 0 0 8px 8px;
@@ -763,6 +764,7 @@
 .campeonato-corridas-list {
     max-height: 0;
     overflow: hidden;
+    overflow-x: hidden;
     transition: max-height 0.4s ease;
     background: var(--bg-primary);
     border-radius: 0 0 6px 6px;
@@ -896,6 +898,7 @@
 .circuito-detail {
     max-height: 0;
     overflow: hidden;
+    overflow-x: hidden;
     transition: max-height 0.4s ease;
     background: var(--bg-primary);
     border-radius: 0 0 8px 8px;
@@ -1148,6 +1151,7 @@
 .ano-temporadas {
     max-height: 0;
     overflow: hidden;
+    overflow-x: hidden;
     transition: max-height 0.4s ease;
     padding: 0 20px;
     margin-top: 0;
@@ -1232,6 +1236,7 @@
 .temporada-corridas-list {
     max-height: 0;
     overflow: hidden;
+    overflow-x: hidden;
     transition: max-height 0.4s ease;
     margin-top: 0;
     padding: 0;
