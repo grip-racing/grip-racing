@@ -863,6 +863,18 @@ function displayStatDetails(type, container) {
             return bestLap === 'sim';
         });
         title = '⏱️ Voltas Mais Rápidas';
+    } else if (type === 'hattricks') {
+        filteredData = pilotoParticipacoes.filter(c => {
+            const hatTrick = String(c['Hat-Trick'] || '').trim().toLowerCase();
+            return hatTrick === 'sim';
+        });
+        title = '🎩 Hat-tricks';
+    } else if (type === 'chelems') {
+        filteredData = pilotoParticipacoes.filter(c => {
+            const chelem = String(c['Chelem'] || '').trim().toLowerCase();
+            return chelem === 'sim';
+        });
+        title = '👑 Chelems';
     }
     
     const html = `
@@ -939,12 +951,23 @@ function displayPilotoStats() {
     const poles = parseInt(pilotoData['Poles'] || pilotoData['poles'] || 0);
     const fastLaps = parseInt(pilotoData['Fast Laps'] || pilotoData['fast_laps'] || 0);
     
+    // Count Hat-tricks and Chelems
+    const hatTricks = todasParticipacoes.filter(p => 
+        String(p['Hat-Trick'] || '').trim().toUpperCase() === 'SIM'
+    ).length;
+    
+    const chelems = todasParticipacoes.filter(p => 
+        String(p['Chelem'] || '').trim().toUpperCase() === 'SIM'
+    ).length;
+    
     document.getElementById('statTitulos').textContent = window.GripUtils.formatNumber(titulos);
     document.getElementById('statCorridas').textContent = window.GripUtils.formatNumber(corridas);
     document.getElementById('statVitorias').textContent = window.GripUtils.formatNumber(vitorias);
     document.getElementById('statPodios').textContent = window.GripUtils.formatNumber(podios);
     document.getElementById('statPoles').textContent = window.GripUtils.formatNumber(poles);
     document.getElementById('statFastLaps').textContent = window.GripUtils.formatNumber(fastLaps);
+    document.getElementById('statHatTricks').textContent = window.GripUtils.formatNumber(hatTricks);
+    document.getElementById('statChelems').textContent = window.GripUtils.formatNumber(chelems);
 }
 
 // Display temporadas
@@ -1716,16 +1739,6 @@ function displayRecordes() {
         <div class="recorde-item">
             <span class="recorde-label">🏁 Domínio</span>
             <span class="recorde-value">${dominioText}</span>
-        </div>` : ''}
-        ${hatTricks > 0 ? `
-        <div class="recorde-item">
-            <span class="recorde-label" title="Pole + Vitória + Volta Rápida">🎩 Hat-tricks</span>
-            <span class="recorde-value">${hatTricks}</span>
-        </div>` : ''}
-        ${chelems > 0 ? `
-        <div class="recorde-item">
-            <span class="recorde-label" title="Pole + Vitória + Volta Rápida + Liderou todas as voltas">👑 Chelems</span>
-            <span class="recorde-value">${chelems}</span>
         </div>` : ''}
     `;
     
