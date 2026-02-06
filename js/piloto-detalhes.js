@@ -13,6 +13,9 @@ const REGEX_CACHE = {
     leadingDigits: /^\d+/
 };
 
+// Cache de elementos DOM
+const DOM_CACHE = {};
+
 let pilotoData = null;
 let participacoesData = [];
 
@@ -51,6 +54,14 @@ function getBadgeClass(pos) {
 // Check if mobile
 function isMobile() {
     return window.innerWidth <= 768;
+}
+
+// Get cached DOM element
+function getCachedElement(id) {
+    if (!DOM_CACHE[id]) {
+        DOM_CACHE[id] = document.getElementById(id);
+    }
+    return DOM_CACHE[id];
 }
 
 // Format liga with logo or text
@@ -290,7 +301,7 @@ function displayCircuitos() {
         `;
     }).join('');
 
-    document.getElementById('circuitosContainer').innerHTML = circuitosHTML;
+    getCachedElement('circuitosContainer').innerHTML = circuitosHTML;
 }
 
 // Toggle para expandir/recolher circuito
@@ -968,14 +979,14 @@ function displayPilotoStats() {
         String(p['Chelem'] || '').trim().toUpperCase() === 'SIM'
     ).length;
     
-    document.getElementById('statTitulos').textContent = window.GripUtils.formatNumber(titulos);
-    document.getElementById('statCorridas').textContent = window.GripUtils.formatNumber(corridas);
-    document.getElementById('statVitorias').textContent = window.GripUtils.formatNumber(vitorias);
-    document.getElementById('statPodios').textContent = window.GripUtils.formatNumber(podios);
-    document.getElementById('statPoles').textContent = window.GripUtils.formatNumber(poles);
-    document.getElementById('statFastLaps').textContent = window.GripUtils.formatNumber(fastLaps);
-    document.getElementById('statHatTricks').textContent = window.GripUtils.formatNumber(hatTricks);
-    document.getElementById('statChelems').textContent = window.GripUtils.formatNumber(chelems);
+    getCachedElement('statTitulos').textContent = window.GripUtils.formatNumber(titulos);
+    getCachedElement('statCorridas').textContent = window.GripUtils.formatNumber(corridas);
+    getCachedElement('statVitorias').textContent = window.GripUtils.formatNumber(vitorias);
+    getCachedElement('statPodios').textContent = window.GripUtils.formatNumber(podios);
+    getCachedElement('statPoles').textContent = window.GripUtils.formatNumber(poles);
+    getCachedElement('statFastLaps').textContent = window.GripUtils.formatNumber(fastLaps);
+    getCachedElement('statHatTricks').textContent = window.GripUtils.formatNumber(hatTricks);
+    getCachedElement('statChelems').textContent = window.GripUtils.formatNumber(chelems);
 }
 
 // Display temporadas
