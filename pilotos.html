@@ -47,11 +47,12 @@
 
                 <div class="pilotos-controls">
                     <div class="search-box">
-                        <input type="text" id="searchInput" placeholder="Buscar piloto...">
+                        <input type="text" id="searchInput" placeholder="Buscar piloto..." autocomplete="off">
                         <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="11" cy="11" r="8"></circle>
                             <path d="m21 21-4.35-4.35"></path>
                         </svg>
+                        <div id="autocompleteResults" class="autocomplete-results"></div>
                     </div>
                     
                     <div class="filter-controls">

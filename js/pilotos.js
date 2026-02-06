@@ -195,10 +195,117 @@ function setupFilterListeners() {
 // Setup search listener com debounce
 function setupSearchListener() {
     const searchInput = document.getElementById('searchInput');
+    const autocompleteResults = document.getElementById('autocompleteResults');
+    let selectedIndex = -1;
+    
+    // Debounce para performance
     const debouncedSearch = window.GripUtils.debounce(() => {
         displayPilotos();
     }, 300);
-    searchInput.addEventListener('input', debouncedSearch);
+    
+    // Autocomplete
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase().trim();
+        selectedIndex = -1; // Reset selection
+        
+        // Atualizar tabela
+        debouncedSearch();
+        
+        // Mostrar autocomplete apenas se tiver 2+ caracteres
+        if (searchTerm.length >= 2) {
+            const matches = allPilotos
+                .filter(p => p.piloto.toLowerCase().includes(searchTerm))
+                .slice(0, 8) // Limitar a 8 sugestões
+                .sort((a, b) => {
+                    // Priorizar matches no início do nome
+                    const aStarts = a.piloto.toLowerCase().startsWith(searchTerm);
+                    const bStarts = b.piloto.toLowerCase().startsWith(searchTerm);
+                    if (aStarts && !bStarts) return -1;
+                    if (!aStarts && bStarts) return 1;
+                    // Depois por número de corridas
+                    return b.corridas - a.corridas;
+                });
+            
+            if (matches.length > 0) {
+                autocompleteResults.innerHTML = matches.map((p, index) => `
+                    <div class="autocomplete-item" data-piloto="${p.piloto}" data-index="${index}">
+                        <span class="autocomplete-name">${highlightMatch(p.piloto, searchTerm)}</span>
+                        <span class="autocomplete-stats">${p.corridas} corridas${p.titulos > 0 ? ` • ${p.titulos} 🏆` : ''}</span>
+                    </div>
+                `).join('');
+                autocompleteResults.classList.add('show');
+            } else {
+                autocompleteResults.classList.remove('show');
+            }
+        } else {
+            autocompleteResults.classList.remove('show');
+        }
+    });
+    
+    // Click em item do autocomplete
+    document.addEventListener('click', (e) => {
+        const item = e.target.closest('.autocomplete-item');
+        if (item) {
+            const piloto = item.dataset.piloto;
+            window.location.href = `piloto-detalhes.html?nome=${encodeURIComponent(piloto)}`;
+        } else if (!e.target.closest('.search-box')) {
+            // Fechar autocomplete se clicar fora
+            autocompleteResults.classList.remove('show');
+            selectedIndex = -1;
+        }
+    });
+    
+    // Navegação por teclado
+    searchInput.addEventListener('keydown', (e) => {
+        const items = autocompleteResults.querySelectorAll('.autocomplete-item');
+        
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (items.length > 0) {
+                selectedIndex = selectedIndex < items.length - 1 ? selectedIndex + 1 : 0;
+                updateSelectedItem(items, selectedIndex);
+            }
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (items.length > 0) {
+                selectedIndex = selectedIndex > 0 ? selectedIndex - 1 : items.length - 1;
+                updateSelectedItem(items, selectedIndex);
+            }
+        } else if (e.key === 'Enter') {
+            if (selectedIndex >= 0 && items[selectedIndex]) {
+                e.preventDefault();
+                const piloto = items[selectedIndex].dataset.piloto;
+                window.location.href = `piloto-detalhes.html?nome=${encodeURIComponent(piloto)}`;
+            }
+        } else if (e.key === 'Escape') {
+            autocompleteResults.classList.remove('show');
+            selectedIndex = -1;
+        }
+    });
+}
+
+// Update selected item visual feedback
+function updateSelectedItem(items, index) {
+    items.forEach((item, i) => {
+        if (i === index) {
+            item.classList.add('selected');
+            item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        } else {
+            item.classList.remove('selected');
+        }
+    });
+}
+
+// Highlight match in text
+function highlightMatch(text, search) {
+    const index = text.toLowerCase().indexOf(search.toLowerCase());
+    if (index === -1) return text;
+    
+    const before = text.substring(0, index);
+    const match = text.substring(index, index + search.length);
+    const after = text.substring(index + search.length);
+    
+    return `${before}<strong>${match}</strong>${after}`;
 }
 
 // Setup mobile sort listener
