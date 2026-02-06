@@ -5,6 +5,14 @@ const DATA_SOURCES = {
     participacoes: `data/data-participacoes.csv?v=${DATA_VERSION}`
 };
 
+// Cache de RegEx compiladas para melhor performance
+const REGEX_CACHE = {
+    digitsOnly: /\D/g,
+    circuitSuffix: /\s+\d+$/,
+    circuitRoman: /\s+[IVX]+$/,
+    leadingDigits: /^\d+/
+};
+
 let pilotoData = null;
 let participacoesData = [];
 
@@ -24,7 +32,7 @@ function formatPosition(pos) {
     if (!pos || pos === '-' || pos === 'N/A') return pos;
     const posStr = String(pos).trim();
     if (posStr.toUpperCase().includes('DNF') || posStr.toUpperCase().includes('DQ') || posStr.toUpperCase().includes('ABANDON')) return posStr;
-    const num = parseInt(posStr.replace(/\D/g, ''));
+    const num = parseInt(posStr.replace(REGEX_CACHE.digitsOnly, ''));
     if (isNaN(num)) return posStr;
     return num + 'º';
 }
@@ -33,7 +41,7 @@ function formatPosition(pos) {
 function getBadgeClass(pos) {
     if (!pos) return '';
     const posStr = String(pos).trim();
-    const num = parseInt(posStr.replace(/\D/g, ''));
+    const num = parseInt(posStr.replace(REGEX_CACHE.digitsOnly, ''));
     if (num === 1) return 'badge-1';
     if (num === 2) return 'badge-2';
     if (num === 3) return 'badge-3';
@@ -61,7 +69,7 @@ function formatLiga(ligaNome, cssClass = 'liga-display') {
 function normalizeCircuitName(circuitName) {
     if (!circuitName) return circuitName;
     // Remove sufixos como " 2", " 3", " II", " III", etc
-    return circuitName.replace(/\s+\d+$/, '').replace(/\s+[IVX]+$/, '').trim();
+    return circuitName.replace(REGEX_CACHE.circuitSuffix, '').replace(REGEX_CACHE.circuitRoman, '').trim();
 }
 
 // Check if transmission link is valid
