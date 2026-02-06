@@ -1,0 +1,471 @@
+/* Modal de Detalhes da Corrida */
+.corrida-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.corrida-modal {
+    background: var(--bg-primary);
+    border-radius: 16px;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    position: relative;
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.corrida-modal-video {
+    max-width: 1000px;
+}
+
+.corrida-modal-with-sidebar {
+    max-width: 1400px;
+}
+
+.corrida-modal-layout {
+    display: flex;
+    gap: 0;
+}
+
+.corrida-modal-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.corrida-modal-sidebar {
+    width: 320px;
+    background: var(--bg-secondary);
+    border-left: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+}
+
+.corrida-sidebar-header {
+    padding: 24px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.corrida-sidebar-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 6px 0;
+}
+
+.corrida-sidebar-count {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.corrida-sidebar-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+}
+
+.corrida-sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.corrida-sidebar-item.clickable-piloto {
+    cursor: pointer;
+}
+
+.corrida-sidebar-item.clickable-piloto:hover {
+    background: var(--bg-primary);
+    border-color: rgba(255, 102, 0, 0.2);
+    transform: translateX(4px);
+}
+
+.corrida-sidebar-item.current-piloto {
+    background: rgba(255, 102, 0, 0.1);
+    border-color: rgba(255, 102, 0, 0.3);
+}
+
+.you-badge {
+    display: inline-block;
+    background: rgba(255, 102, 0, 0.2);
+    color: var(--primary-color);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    text-transform: uppercase;
+}
+
+.sidebar-item-position {
+    font-weight: 700;
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    min-width: 45px;
+    text-align: center;
+    background: var(--bg-secondary);
+}
+
+.sidebar-item-position.resultado-vitoria {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #000000;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+.sidebar-item-position.resultado-segundo {
+    background: linear-gradient(135deg, #C0C0C0 0%, #E8E8E8 100%);
+    color: #000000;
+    box-shadow: 0 2px 8px rgba(192, 192, 192, 0.3);
+}
+
+.sidebar-item-position.resultado-podio {
+    background: linear-gradient(135deg, #CD7F32 0%, #E8A87C 100%);
+    color: #000000;
+    box-shadow: 0 2px 8px rgba(205, 127, 50, 0.3);
+}
+
+.sidebar-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.sidebar-item-nome {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-item-details {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.sidebar-item-equipe {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-item-badges {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+}
+
+.sidebar-item-badges span {
+    display: inline-block;
+}
+
+.corrida-modal-video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    background: #000;
+    border-radius: 0 0 16px 16px;
+    overflow: hidden;
+}
+
+.corrida-modal-no-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+    border-radius: 0 0 16px 16px;
+    overflow: hidden;
+}
+
+.corrida-modal-no-video::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-video-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 64px;
+    opacity: 0.3;
+    margin-top: -60px;
+}
+
+.no-video-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    opacity: 0.7;
+    margin-top: 10px;
+    white-space: nowrap;
+}
+
+.no-video-subtitle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    margin-top: 45px;
+    white-space: nowrap;
+}
+
+.corrida-video-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.corrida-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: var(--text-primary);
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.corrida-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.corrida-modal-header {
+    padding: 32px 32px 24px;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-primary);
+}
+
+.corrida-modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+}
+
+.corrida-modal-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.corrida-modal-subtitle .liga-display img {
+    max-height: 18px;
+    max-width: 80px;
+}
+
+.corrida-modal-body {
+    padding: 32px;
+}
+
+.corrida-modal-resultado {
+    text-align: center;
+    margin-bottom: 32px;
+    padding: 24px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+}
+
+.corrida-resultado-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.corrida-resultado-valor {
+    font-size: 48px;
+    font-weight: 700;
+    padding: 16px 32px;
+    border-radius: 12px;
+    display: inline-block;
+    min-width: 120px;
+}
+
+.corrida-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.corrida-modal-field {
+    background: var(--bg-secondary);
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.corrida-modal-field:hover {
+    border-color: rgba(255, 102, 0, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 102, 0, 0.1);
+}
+
+.corrida-field-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.corrida-field-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.corrida-modal-transmission {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+}
+
+.corrida-transmission-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #ff8533 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(255, 102, 0, 0.3);
+}
+
+.corrida-transmission-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+}
+
+.corrida-transmission-button:active {
+    transform: translateY(0);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .corrida-modal {
+        margin: 20px;
+        max-height: calc(100vh - 40px);
+    }
+    
+    .corrida-modal-layout {
+        flex-direction: column;
+    }
+    
+    .corrida-modal-sidebar {
+        width: 100%;
+        max-height: 300px;
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+    }
+    
+    .corrida-modal-header {
+        padding: 24px 20px 16px;
+    }
+    
+    .corrida-modal-title {
+        font-size: 20px;
+    }
+    
+    .corrida-modal-body {
+        padding: 20px;
+    }
+    
+    .corrida-resultado-valor {
+        font-size: 36px;
+        padding: 12px 24px;
+    }
+    
+    .corrida-modal-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}

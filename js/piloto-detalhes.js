@@ -263,11 +263,16 @@ function displayCircuitos() {
                         else if (final === '3' || final.includes('3º')) resultClass = 'resultado-podio';
                         else if (final.toUpperCase().includes('DNF') || final.toUpperCase().includes('ABANDON')) resultClass = 'resultado-dnf';
 
+                        const corridaData = JSON.stringify(c).replace(/"/g, '&quot;');
+                        
                         return `
-                            <div class="circuito-corrida-item">
-                                <span class="corrida-resultado ${resultClass}">${formatPosition(final)}</span>
-                                <span class="circuito-corrida-info">${ano} • ${formatLiga(liga, 'liga-inline')}${categoria ? ' ' + categoria : ''} ${temporada}${transmissaoLink ? ' ' + transmissaoLink : ''}</span>
-                                <span class="circuito-corrida-badges">${vitoria}${podio}${pole}${bestLap}${hatTrick}${chelem}${campeonatoPiloto}${campeonatoConstrutores}</span>
+                            <div class="circuito-corrida-item" onclick="openCorridaModal(this.getAttribute('data-corrida'))" data-corrida='${JSON.stringify(c)}'>
+                                <span class="circuito-corrida-resultado ${resultClass}">${formatPosition(final)}</span>
+                                <div class="circuito-corrida-info">
+                                    <div>${formatLiga(liga, 'liga-inline')} ${categoria ? categoria : ''}</div>
+                                    <div class="circuito-corrida-meta">${temporada} • ${ano}${transmissaoLink ? ' ' + transmissaoLink : ''}</div>
+                                </div>
+                                <div class="circuito-corrida-badges">${vitoria}${podio}${pole}${bestLap}${hatTrick}${chelem}${campeonatoPiloto}${campeonatoConstrutores}</div>
                             </div>
                         `;
                     }).join('')}
@@ -743,7 +748,7 @@ function displayStatDetails(type, container) {
                     else if (final.toUpperCase().includes('DNF') || final.toUpperCase().includes('ABANDON')) resultClass = 'resultado-dnf';
                     
                     return `
-                        <div class="titulo-corrida-item">
+                        <div class="titulo-corrida-item" onclick="openCorridaModal(this.getAttribute('data-corrida'))" data-corrida='${JSON.stringify(c)}'>
                             <div class="titulo-corrida-resultado ${resultClass}">${formatPosition(final)}</div>
                             <div class="titulo-corrida-pista">${pista}${transmissaoLink ? ' ' + transmissaoLink : ''}</div>
                             <div class="titulo-corrida-badges">${vitoria}${podio}${pole}${bestLap}${hatTrick}${chelem}${campeonatoPiloto}${campeonatoConstrutores}</div>
@@ -776,7 +781,7 @@ function displayStatDetails(type, container) {
             
             return `
             <div class="titulo-card-wrapper">
-                <div class="titulo-card titulo-card-evento">
+                <div class="titulo-card titulo-card-evento" onclick="openCorridaModal(this.getAttribute('data-corrida'))" data-corrida='${JSON.stringify(c)}' style="cursor: pointer;">
                     <div class="titulo-trophy">⭐</div>
                     <div class="titulo-content">
                         <div class="titulo-liga">${e.categoria}</div>
@@ -832,14 +837,15 @@ function displayStatDetails(type, container) {
     if (type === 'vitorias') {
         filteredData = pilotoParticipacoes.filter(c => {
             const final = String(c['Final'] || '').trim();
-            return final === '1' || final.includes('1º');
+            const finalNum = parseInt(String(final).replace(/[^\d]/g, '')) || 0;
+            return finalNum === 1;
         });
         title = '🥇 Vitórias';
     } else if (type === 'podios') {
         filteredData = pilotoParticipacoes.filter(c => {
             const final = String(c['Final'] || '').trim();
-            return final === '1' || final === '2' || final === '3' ||
-                   final.includes('1º') || final.includes('2º') || final.includes('3º');
+            const finalNum = parseInt(String(final).replace(/[^\d]/g, '')) || 0;
+            return finalNum >= 1 && finalNum <= 3;
         });
         title = '🏅 Pódios';
     } else if (type === 'poles') {
@@ -872,7 +878,7 @@ function displayStatDetails(type, container) {
                     const transmissaoLink = renderTransmissionLink(transmissao);
                     
                     return `
-                        <div class="stat-detail-item">
+                        <div class="stat-detail-item" onclick="openCorridaModal(this.getAttribute('data-corrida'))" data-corrida='${JSON.stringify(c)}' style="cursor: pointer;">
                             <div class="stat-detail-item-info">
                                 <span class="stat-detail-posicao ${getBadgeClass(final)}">${formatPosition(final)}</span>
                             </div>
@@ -1090,7 +1096,7 @@ function displayTemporadas() {
                             else if (final.toUpperCase().includes('DNF') || final.toUpperCase().includes('ABANDON')) resultClass = 'resultado-dnf';
                             
                             return `
-                                <div class="corrida-item">
+                                <div class="corrida-item" onclick="openCorridaModal(this.getAttribute('data-corrida'))" data-corrida='${JSON.stringify(c)}' style="cursor: pointer;">
                                     <div class="corrida-info">
                                         <span class="corrida-resultado ${resultClass}">${formatPosition(final)}</span>
                                     </div>
@@ -1511,7 +1517,7 @@ function toggleCampeonatoCorridas(element, liga, temporada, categoria) {
                 else if (final.toUpperCase().includes('DNF') || final.toUpperCase().includes('ABANDON')) resultClass = 'resultado-dnf';
                 
                 return `
-                    <div class="campeonato-corrida-item">
+                    <div class="campeonato-corrida-item" onclick="openCorridaModal(this.getAttribute('data-corrida'))" data-corrida='${JSON.stringify(c)}' style="cursor: pointer;">
                         <span class="corrida-resultado ${resultClass}">${formatPosition(final)}</span>
                         <span class="campeonato-corrida-pista">${pista}${transmissaoLink ? ' ' + transmissaoLink : ''}</span>
                         <span class="campeonato-corrida-badges">${vitoria}${podio}${pole}${bestLap}${hatTrick}${chelem}${campeonatoPiloto}${campeonatoConstrutores}</span>
@@ -1693,5 +1699,163 @@ function toggleSection(sectionId, button) {
         section.classList.add('section-collapsed');
         icon.style.transform = 'rotate(0deg)';
         button.innerHTML = '<span class="toggle-icon">▼</span> MOSTRAR';
+    }
+}
+
+// Open corrida details modal
+function openCorridaModal(corridaJson) {
+    const corrida = JSON.parse(corridaJson);
+    
+    const pista = corrida['Pista'] || 'N/A';
+    const liga = corrida['Liga'] || 'N/A';
+    const temporada = corrida['Temporada'] || 'N/A';
+    const categoria = corrida['Categoria'] || '';
+    const ano = corrida['Ano'] || 'N/A';
+    const transmissao = corrida['Link Transmissao'] || '';
+    const hasTransmission = isValidTransmissionLink(transmissao);
+    
+    // Buscar todos os pilotos Grip que correram nesta mesma etapa
+    const corridasNaEtapa = participacoesData.filter(p => {
+        return isValidParticipacao(p) &&
+               String(p['Liga'] || '').trim() === liga &&
+               String(p['Temporada'] || '').trim() === temporada &&
+               String(p['Categoria'] || '').trim() === categoria &&
+               String(p['Pista'] || '').trim() === pista;
+    });
+    
+    // Agrupar por piloto para evitar duplicatas (usando Map)
+    const pilotosMap = new Map();
+    corridasNaEtapa.forEach(p => {
+        const nome = String(p['Piloto'] || '').trim();
+        const final = String(p['Final'] || '').trim();
+        const equipe = String(p['Equipe'] || '').trim();
+        const finalNum = parseInt(String(final).replace(/[^\d]/g, '')) || 999;
+        
+        // Se já existe, manter o melhor resultado (menor número = melhor posição)
+        if (pilotosMap.has(nome)) {
+            const existing = pilotosMap.get(nome);
+            // Se o resultado atual é melhor (menor número), substituir
+            if (finalNum < existing.finalNum) {
+                // Recalcular tudo com o novo resultado
+            } else {
+                // Manter o existente
+                return;
+            }
+        }
+        
+        // Calcular badges
+        const vitoria = finalNum === 1 ? '<span title="Vitória">🥇</span>' : '';
+        const podio = (finalNum === 2 || finalNum === 3) ? '<span title="Pódio">🏅</span>' : '';
+        const pole = String(p['Pole'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Pole Position">🚩</span>' : '';
+        const bestLap = String(p['Best Lap'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Volta Rápida">⚡</span>' : '';
+        const hatTrick = String(p['Hat-Trick'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Hat-trick">🎩</span>' : '';
+        const chelem = String(p['Chelem'] || '').trim().toUpperCase() === 'SIM' ? '<span title="Chelem">👑</span>' : '';
+        
+        let resultClass = '';
+        if (finalNum === 1) resultClass = 'resultado-vitoria';
+        else if (finalNum === 2) resultClass = 'resultado-segundo';
+        else if (finalNum === 3) resultClass = 'resultado-podio';
+        
+        pilotosMap.set(nome, { 
+            nome, 
+            final, 
+            equipe, 
+            finalNum, 
+            resultClass,
+            badges: vitoria + podio + pole + bestLap + hatTrick + chelem
+        });
+    });
+    
+    const outrosGripados = Array.from(pilotosMap.values()).sort((a, b) => a.finalNum - b.finalNum);
+    
+    // Converter link do YouTube para embed (se houver)
+    let videoContent = '';
+    if (hasTransmission) {
+        let embedUrl = transmissao;
+        if (transmissao.includes('youtube.com/watch?v=')) {
+            const videoId = transmissao.split('v=')[1].split('&')[0];
+            embedUrl = `https://www.youtube.com/embed/${videoId}`;
+        } else if (transmissao.includes('youtu.be/')) {
+            const videoId = transmissao.split('youtu.be/')[1].split('?')[0];
+            embedUrl = `https://www.youtube.com/embed/${videoId}`;
+        }
+        
+        videoContent = `
+            <div class="corrida-modal-video-container">
+                <iframe 
+                    src="${embedUrl}" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    class="corrida-video-iframe">
+                </iframe>
+            </div>
+        `;
+    } else {
+        videoContent = `
+            <div class="corrida-modal-no-video">
+                <div class="no-video-icon">📹</div>
+                <div class="no-video-text">Transmissão não disponível</div>
+                <div class="no-video-subtitle">Confira os resultados dos pilotos Grip ao lado</div>
+            </div>
+        `;
+    }
+    
+    const modalHTML = `
+        <div class="corrida-modal-overlay" onclick="closeCorridaModal()">
+            <div class="corrida-modal corrida-modal-video corrida-modal-with-sidebar" onclick="event.stopPropagation()">
+                <button class="corrida-modal-close" onclick="closeCorridaModal()">✕</button>
+                
+                <div class="corrida-modal-layout">
+                    <div class="corrida-modal-main">
+                        <div class="corrida-modal-header">
+                            <h2 class="corrida-modal-title">${pista}</h2>
+                            <div class="corrida-modal-subtitle">${formatLiga(liga, 'liga-display')} ${categoria ? '• ' + categoria : ''} • ${temporada} • ${ano}</div>
+                        </div>
+                        
+                        ${videoContent}
+                    </div>
+                    
+                    <div class="corrida-modal-sidebar">
+                        <div class="corrida-sidebar-header">
+                            <h3 class="corrida-sidebar-title">🏎️ Pilotos Grip Racing</h3>
+                            <div class="corrida-sidebar-count">${outrosGripados.length} ${outrosGripados.length === 1 ? 'piloto' : 'pilotos'}</div>
+                        </div>
+                        
+                        <div class="corrida-sidebar-list">
+                            ${outrosGripados.map((piloto, index) => {
+                                const isCurrentPiloto = piloto.nome === pilotoData['Piloto'];
+                                const pilotoUrl = `piloto-detalhes.html?nome=${encodeURIComponent(piloto.nome)}`;
+                                
+                                return `
+                                <div class="corrida-sidebar-item ${isCurrentPiloto ? 'current-piloto' : 'clickable-piloto'}" ${!isCurrentPiloto ? `onclick="window.location.href='${pilotoUrl}'"` : ''}>
+                                    <div class="sidebar-item-position ${piloto.resultClass}">${formatPosition(piloto.final)}</div>
+                                    <div class="sidebar-item-info">
+                                        <div class="sidebar-item-nome">${piloto.nome}</div>
+                                        <div class="sidebar-item-details">
+                                            <span class="sidebar-item-equipe">${piloto.equipe}</span>
+                                            ${piloto.badges ? `<span class="sidebar-item-badges">${piloto.badges}</span>` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    document.body.style.overflow = 'hidden';
+}
+
+// Close corrida modal
+function closeCorridaModal() {
+    const modal = document.querySelector('.corrida-modal-overlay');
+    if (modal) {
+        modal.remove();
+        document.body.style.overflow = '';
     }
 }
