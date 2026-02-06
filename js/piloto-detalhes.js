@@ -834,7 +834,10 @@ function displayStatDetails(type, container) {
         return;
     }
     
-    if (type === 'vitorias') {
+    if (type === 'corridas') {
+        filteredData = pilotoParticipacoes;
+        title = '🏁 Todas as Corridas';
+    } else if (type === 'vitorias') {
         filteredData = pilotoParticipacoes.filter(c => {
             const final = String(c['Final'] || '').trim();
             const finalNum = parseInt(String(final).replace(/[^\d]/g, '')) || 0;

@@ -41,12 +41,13 @@
                         </div>
                         <div class="stat-expand-icon">▼</div>
                     </div>
-                    <div class="stat-card-large">
+                    <div class="stat-card-large stat-card-clickable" onclick="toggleStatDetail('corridas')" id="cardCorridas">
                         <div class="stat-icon">🏁</div>
                         <div class="stat-content">
                             <span class="stat-number-large" id="statCorridas">-</span>
                             <span class="stat-label-large">Corridas</span>
                         </div>
+                        <div class="stat-expand-icon">▼</div>
                     </div>
                     <div class="stat-card-large stat-card-clickable" onclick="toggleStatDetail('vitorias')" id="cardVitorias">
                         <div class="stat-icon">🥇</div>
@@ -84,6 +85,7 @@
                 
                 <!-- Stat Detail Sections -->
                 <div id="statDetailTitulos" class="stat-detail-section"></div>
+                <div id="statDetailCorridas" class="stat-detail-section"></div>
                 <div id="statDetailVitorias" class="stat-detail-section"></div>
                 <div id="statDetailPodios" class="stat-detail-section"></div>
                 <div id="statDetailPoles" class="stat-detail-section"></div>
