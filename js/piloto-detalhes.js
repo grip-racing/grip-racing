@@ -8,44 +8,6 @@ const DATA_SOURCES = {
 let pilotoData = null;
 let participacoesData = [];
 
-// Parse CSV
-function parseCSV(csv, url = '') {
-    const lines = csv.trim().split('\n');
-    if (lines.length === 0) return [];
-    
-    const headers = lines[0].split(',').map(h => h.trim());
-    
-    const parsed = lines.slice(1).map(line => {
-        const values = [];
-        let current = '';
-        let inQuotes = false;
-        
-        for (let i = 0; i < line.length; i++) {
-            const char = line[i];
-            if (char === '"') {
-                inQuotes = !inQuotes;
-            } else if (char === ',' && !inQuotes) {
-                values.push(current.trim());
-                current = '';
-            } else {
-                current += char;
-            }
-        }
-        values.push(current.trim());
-        
-        const obj = {};
-        headers.forEach((header, index) => {
-            obj[header] = values[index] || '';
-        });
-        return obj;
-    }).filter(obj => {
-        // Filtrar linhas vazias ou inválidas
-        return Object.values(obj).some(v => v && v.length > 0);
-    });
-    
-    return parsed;
-}
-
 // Validar se é uma participação válida (não é separador de ano)
 function isValidParticipacao(p) {
     // Ignorar linhas que são apenas separadores de ano (sem piloto, pista, etc)
@@ -55,30 +17,6 @@ function isValidParticipacao(p) {
     
     // Se não tem piloto E não tem pista E não tem resultado final, é separador
     return piloto !== '' || pista !== '' || final !== '';
-}
-
-// Fetch data
-async function fetchData(url) {
-    try {
-        console.log(`📥 Fetching: ${url}`);
-        const response = await fetch(url);
-        const text = await response.text();
-        console.log(`✅ Loaded ${url}: ${text.length} bytes`);
-        const parsed = parseCSV(text, url);
-        console.log(`✅ Parsed ${url}: ${parsed.length} rows`);
-        return parsed;
-    } catch (error) {
-        console.error('❌ Erro ao carregar dados:', error);
-        return [];
-    }
-}
-
-// Format number
-function formatNumber(num) {
-    if (!num || num === '-') return '-';
-    const numStr = String(num).replace(/\D/g, '');
-    if (!numStr) return num;
-    return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
 // Format position with ordinal
@@ -172,7 +110,7 @@ async function loadPilotoData() {
     console.log(`🏁 Carregando dados de ${pilotoNome}`);
     
     // Load piloto stats
-    const pilotos = await fetchData(DATA_SOURCES.pilotos);
+    const pilotos = await window.GripUtils.fetchData(DATA_SOURCES.pilotos);
     pilotoData = pilotos.find(p => 
         (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
     );
@@ -183,7 +121,7 @@ async function loadPilotoData() {
     }
     
     // Load participacoes
-    participacoesData = await fetchData(DATA_SOURCES.participacoes);
+    participacoesData = await window.GripUtils.fetchData(DATA_SOURCES.participacoes);
     
     displayPilotoInfo();
     displayPilotoStats();
@@ -257,8 +195,15 @@ function displayCircuitos() {
         }
     });
 
-    // Converter em array e ordenar por número de corridas
-    const circuitos = Object.values(circuitosMap).sort((a, b) => b.total - a.total);
+    // Converter em array e ordenar por número de corridas (decrescente) e depois alfabeticamente
+    const circuitos = Object.values(circuitosMap).sort((a, b) => {
+        // Primeiro por quantidade de corridas (maior para menor)
+        if (b.total !== a.total) {
+            return b.total - a.total;
+        }
+        // Depois alfabeticamente
+        return a.nome.localeCompare(b.nome, 'pt-BR');
+    });
 
     // Renderizar
     const circuitosHTML = circuitos.map((circ, index) => {
@@ -352,7 +297,7 @@ function toggleCircuito(element) {
 
 // Create radar chart
 async function createRadarChart() {
-    const pilotos = await fetchData(DATA_SOURCES.pilotos);
+    const pilotos = await window.GripUtils.fetchData(DATA_SOURCES.pilotos);
     
     // Get max values and top pilots for each stat
     const stats = ['titulos', 'corridas', 'vitorias', 'podios', 'poles', 'fastLaps'];
@@ -631,7 +576,7 @@ function displayStatDetails(type, container) {
             const temporada = String(c['Temporada'] || '').trim();
             const ano = String(c['Ano'] || '').trim();
             const categoria = String(c['Categoria'] || '').trim();
-            const key = `piloto|||${liga}|||${temporada}`;
+            const key = `piloto|||${liga}|||${temporada}|||${categoria}`;
             
             if (!titulosPilotoUnicos[key]) {
                 // Contar TODAS as corridas desta liga/temporada/categoria
@@ -662,7 +607,7 @@ function displayStatDetails(type, container) {
             const ano = String(c['Ano'] || '').trim();
             const categoria = String(c['Categoria'] || '').trim();
             const equipe = String(c['Equipe'] || '').trim();
-            const key = `construtor|||${liga}|||${temporada}`;
+            const key = `construtor|||${liga}|||${temporada}|||${categoria}`;
             
             if (!titulosConstrutoresUnicos[key]) {
                 // Contar TODAS as corridas desta liga/temporada/categoria
@@ -686,7 +631,7 @@ function displayStatDetails(type, container) {
                         )
                         .map(p => String(p['Piloto'] || '').trim())
                         .filter(nome => nome !== '')
-                )];
+                )].sort((a, b) => a.localeCompare(b, 'pt-BR'));
                 
                 titulosConstrutoresUnicos[key] = {
                     tipo: 'construtor',
@@ -749,6 +694,8 @@ function displayStatDetails(type, container) {
         
         const totalTitulos = titulosPiloto.length + titulosConstrutores.length;
         
+        const pilotoAtual = pilotoData['Piloto'] || '';
+        
         const renderTituloCard = (t, index) => `
             <div class="titulo-card-wrapper">
                 <div class="titulo-card ${t.tipo === 'construtor' ? 'titulo-card-construtor' : ''}" onclick="toggleTituloDetail('${t.tipo}-${index}')" style="cursor: pointer;">
@@ -757,7 +704,13 @@ function displayStatDetails(type, container) {
                         <div class="titulo-liga-main">${formatLiga(t.liga, 'liga-display-titulo')}</div>
                         <div class="titulo-temporada">${t.temporada}</div>
                         ${t.categoria ? `<div class="titulo-categoria">${t.categoria}</div>` : ''}
-                        ${t.tipo === 'construtor' && t.pilotos && t.pilotos.length > 0 ? `<div class="titulo-pilotos">${t.pilotos.map(p => `<span class="piloto-nome">${p}</span>`).join('')}</div>` : ''}
+                        ${t.tipo === 'construtor' && t.pilotos && t.pilotos.length > 0 ? `<div class="titulo-pilotos">${t.pilotos.map(p => {
+                            if (p.toLowerCase() === pilotoAtual.toLowerCase()) {
+                                return `<span class="piloto-nome piloto-atual">${p}</span>`;
+                            } else {
+                                return `<a href="piloto-detalhes.html?nome=${encodeURIComponent(p)}" class="piloto-nome piloto-link" onclick="event.stopPropagation()">${p}</a>`;
+                            }
+                        }).join('')}</div>` : ''}
                         <div class="titulo-info">
                             <span class="titulo-ano">${t.ano}</span>
                             <span class="titulo-corridas">${t.totalCorridas} corridas</span>
@@ -943,19 +896,46 @@ function displayStatDetails(type, container) {
 
 // Display piloto stats overview
 function displayPilotoStats() {
-    const titulos = parseInt(pilotoData['Tot. Títulos'] || pilotoData['Títulos'] || pilotoData['titulos'] || 0);
+    // Calcular títulos reais (apenas campeonatos, sem eventos)
+    const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
+    const todasParticipacoes = participacoesData.filter(p => 
+        isValidParticipacao(p) &&
+        (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
+    );
+    
+    // Contar campeonatos de piloto
+    const campeonatosPiloto = todasParticipacoes.filter(c => {
+        const campeao = String(c['Piloto Campeao'] || '').trim().toUpperCase();
+        return campeao === 'SIM';
+    });
+    
+    // Contar campeonatos de construtores
+    const campeonatosConstrutores = todasParticipacoes.filter(c => {
+        const construtores = String(c['Construtores'] || '').trim().toUpperCase();
+        return construtores === 'SIM' || construtores === 'TIME';
+    });
+    
+    // Agrupar títulos únicos
+    const titulosPilotoUnicos = new Set(campeonatosPiloto.map(c => 
+        `${c['Liga']}|||${c['Temporada']}|||${c['Categoria']}`
+    ));
+    const titulosConstrutoresUnicos = new Set(campeonatosConstrutores.map(c => 
+        `${c['Liga']}|||${c['Temporada']}|||${c['Categoria']}`
+    ));
+    
+    const titulos = titulosPilotoUnicos.size + titulosConstrutoresUnicos.size;
     const corridas = parseInt(pilotoData['Corridas'] || pilotoData['corridas'] || 0);
     const vitorias = parseInt(pilotoData['P1'] || pilotoData['Vitórias'] || pilotoData['vitorias'] || 0);
     const podios = parseInt(pilotoData['Pódios'] || pilotoData['Podios'] || pilotoData['podios'] || 0);
     const poles = parseInt(pilotoData['Poles'] || pilotoData['poles'] || 0);
     const fastLaps = parseInt(pilotoData['Fast Laps'] || pilotoData['fast_laps'] || 0);
     
-    document.getElementById('statTitulos').textContent = formatNumber(titulos);
-    document.getElementById('statCorridas').textContent = formatNumber(corridas);
-    document.getElementById('statVitorias').textContent = formatNumber(vitorias);
-    document.getElementById('statPodios').textContent = formatNumber(podios);
-    document.getElementById('statPoles').textContent = formatNumber(poles);
-    document.getElementById('statFastLaps').textContent = formatNumber(fastLaps);
+    document.getElementById('statTitulos').textContent = window.GripUtils.formatNumber(titulos);
+    document.getElementById('statCorridas').textContent = window.GripUtils.formatNumber(corridas);
+    document.getElementById('statVitorias').textContent = window.GripUtils.formatNumber(vitorias);
+    document.getElementById('statPodios').textContent = window.GripUtils.formatNumber(podios);
+    document.getElementById('statPoles').textContent = window.GripUtils.formatNumber(poles);
+    document.getElementById('statFastLaps').textContent = window.GripUtils.formatNumber(fastLaps);
 }
 
 // Display temporadas
@@ -1597,7 +1577,7 @@ function displayAdvancedStats() {
     document.getElementById('taxaTop10').textContent = taxaTop10;
     document.getElementById('etapasPorPodio').textContent = etapasPorPodio;
     document.getElementById('etapasPorVitoria').textContent = etapasPorVitoria;
-    document.getElementById('abandonos').textContent = formatNumber(abandonos);
+    document.getElementById('abandonos').textContent = window.GripUtils.formatNumber(abandonos);
 }
 
 // Display recordes
@@ -1670,7 +1650,7 @@ function displayRecordes() {
         </div>` : ''}
         <div class="recorde-item">
             <span class="recorde-label">Total de Etapas</span>
-            <span class="recorde-value">${formatNumber(pilotoParticipacoes.length)}</span>
+            <span class="recorde-value">${window.GripUtils.formatNumber(pilotoParticipacoes.length)}</span>
         </div>
     `;
     

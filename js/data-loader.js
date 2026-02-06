@@ -8,50 +8,9 @@ const DATA_SOURCES = {
     pilotos: 'data/data-pilotos.csv'
 };
 
-// Parse CSV to JSON (handles quoted fields with commas)
-function parseCSV(csv) {
-    const lines = csv.trim().split('\n');
-    const headers = lines[0].split(',').map(h => h.trim());
-    const data = [];
-    
-    for (let i = 1; i < lines.length; i++) {
-        if (!lines[i].trim()) continue;
-        
-        // Simple split for now (CSV doesn't seem to have complex quoting)
-        const values = lines[i].split(',');
-        const obj = {};
-        
-        headers.forEach((header, index) => {
-            obj[header] = values[index] ? values[index].trim() : '';
-        });
-        
-        data.push(obj);
-    }
-    
-    return data;
-}
-
-// Fetch data from local CSV files
-async function fetchData(url) {
-    try {
-        const response = await fetch(url);
-        const csv = await response.text();
-        return parseCSV(csv);
-    } catch (error) {
-        console.error('Erro ao buscar dados:', error);
-        return null;
-    }
-}
-
-// Format number with thousand separators
-function formatNumber(num) {
-    if (!num) return '0';
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
-
 // Update statistics on the page
 async function updateStatistics() {
-    const stats = await fetchData(DATA_SOURCES.estatisticas);
+    const stats = await window.GripUtils.fetchData(DATA_SOURCES.estatisticas);
     if (!stats || stats.length === 0) return;
     
     // First row has "Total" summary
@@ -84,20 +43,20 @@ async function updateStatistics() {
         const labelText = label.textContent.toLowerCase();
         
         if (labelText.includes('participações')) {
-            number.textContent = formatNumber(participacoes);
+            number.textContent = window.GripUtils.formatNumber(participacoes);
         } else if (labelText.includes('etapas')) {
-            number.textContent = formatNumber(etapas);
+            number.textContent = window.GripUtils.formatNumber(etapas);
         } else if (labelText.includes('campeonatos')) {
-            number.textContent = formatNumber(campeonatos);
+            number.textContent = window.GripUtils.formatNumber(campeonatos);
         } else if (labelText.includes('títulos')) {
-            number.textContent = formatNumber(totalTitulos);
+            number.textContent = window.GripUtils.formatNumber(totalTitulos);
         } else if (labelText.includes('pódios')) {
-            number.textContent = formatNumber(podios);
+            number.textContent = window.GripUtils.formatNumber(podios);
             label.textContent = `Pódios (${vitorias} Vitórias)`;
         } else if (labelText.includes('pole')) {
-            number.textContent = formatNumber(poles);
+            number.textContent = window.GripUtils.formatNumber(poles);
         } else if (labelText.includes('voltas')) {
-            number.textContent = formatNumber(fastLaps);
+            number.textContent = window.GripUtils.formatNumber(fastLaps);
         } else if (labelText.includes('taxa') || labelText.includes('top 10')) {
             if (participacoes > 0) {
                 const taxa = ((top10 / participacoes) * 100).toFixed(0);
@@ -117,26 +76,26 @@ async function updateStatistics() {
         // Update main paragraph with current stats
         const mainP = aboutText.querySelectorAll('p')[1];
         if (mainP) {
-            mainP.innerHTML = `Ao longo de 18 anos de história, construímos um legado impressionante com <strong>218 pilotos diferentes</strong> que representaram a equipe, acumulando <strong>${formatNumber(participacoes)} participações</strong> em <strong>${formatNumber(campeonatos)} campeonatos</strong> e <strong>${formatNumber(etapas)} etapas</strong>. Conquistamos <strong>${formatNumber(totalTitulos)} títulos</strong> (${titulos} de pilotos e ${construtores} de construtores), com <strong>${formatNumber(podios)} pódios</strong>, sendo ${vitorias} vitórias.`;
+            mainP.innerHTML = `Ao longo de 18 anos de história, construímos um legado impressionante com <strong>218 pilotos diferentes</strong> que representaram a equipe, acumulando <strong>${window.GripUtils.formatNumber(participacoes)} participações</strong> em <strong>${window.GripUtils.formatNumber(campeonatos)} campeonatos</strong> e <strong>${window.GripUtils.formatNumber(etapas)} etapas</strong>. Conquistamos <strong>${window.GripUtils.formatNumber(totalTitulos)} títulos</strong> (${titulos} de pilotos e ${construtores} de construtores), com <strong>${window.GripUtils.formatNumber(podios)} pódios</strong>, sendo ${vitorias} vitórias.`;
         }
         
         // Update detailed paragraph
         const detailP = aboutText.querySelectorAll('p')[2];
         if (detailP) {
-            detailP.innerHTML = `Nossa presença se estende por <strong>29 ligas distintas</strong>, com destaque para F1BC (6.962 participações e 108 títulos), Racing Bears (627 participações), RacersAv, iRacing e competições internacionais. A consistência é nossa marca: <strong>${formatNumber(top10)} finalizações no Top 10</strong>, <strong>${formatNumber(top5)} no Top 5</strong>, além de ${poles} pole positions e ${fastLaps} voltas mais rápidas. Mais que números, somos uma família unida pela paixão, respeito e fair play.`;
+            detailP.innerHTML = `Nossa presença se estende por <strong>29 ligas distintas</strong>, com destaque para F1BC (6.962 participações e 108 títulos), Racing Bears (627 participações), RacersAv, iRacing e competições internacionais. A consistência é nossa marca: <strong>${window.GripUtils.formatNumber(top10)} finalizações no Top 10</strong>, <strong>${window.GripUtils.formatNumber(top5)} no Top 5</strong>, além de ${poles} pole positions e ${fastLaps} voltas mais rápidas. Mais que números, somos uma família unida pela paixão, respeito e fair play.`;
         }
     }
     
     // Update footer stats
     const footerStats = document.querySelector('.footer-stats');
     if (footerStats) {
-        footerStats.textContent = `${formatNumber(participacoes)} Participações • ${formatNumber(podios)} Pódios • ${formatNumber(totalTitulos)} Títulos • ${formatNumber(campeonatos)} Campeonatos`;
+        footerStats.textContent = `${window.GripUtils.formatNumber(participacoes)} Participações • ${window.GripUtils.formatNumber(podios)} Pódios • ${window.GripUtils.formatNumber(totalTitulos)} Títulos • ${window.GripUtils.formatNumber(campeonatos)} Campeonatos`;
     }
 }
 
 // Update staff information
 async function updateStaff() {
-    const pilotos = await fetchData(DATA_SOURCES.pilotos);
+    const pilotos = await window.GripUtils.fetchData(DATA_SOURCES.pilotos);
     if (!pilotos || pilotos.length === 0) return;
         
     // Create a map of pilots by name (normalize names)

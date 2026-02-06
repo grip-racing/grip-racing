@@ -8,44 +8,9 @@ let allPilotos = [];
 let currentSort = { column: 'corridas', direction: 'desc' };
 let currentFilter = 'todos';
 
-// Parse CSV
-function parseCSV(csv) {
-    const lines = csv.trim().split('\n');
-    const headers = lines[0].split(',').map(h => h.trim());
-    
-    return lines.slice(1).map(line => {
-        const values = line.split(',').map(v => v.trim());
-        const obj = {};
-        headers.forEach((header, index) => {
-            obj[header] = values[index] || '';
-        });
-        return obj;
-    });
-}
-
-// Fetch data
-async function fetchData(url) {
-    try {
-        const response = await fetch(url);
-        const text = await response.text();
-        return parseCSV(text);
-    } catch (error) {
-        console.error('Erro ao carregar dados:', error);
-        return [];
-    }
-}
-
-// Format number
-function formatNumber(num) {
-    if (!num || num === '-') return '-';
-    const numStr = String(num).replace(/\D/g, '');
-    if (!numStr) return num;
-    return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-}
-
 // Load and display pilotos
 async function loadPilotos() {
-    const pilotos = await fetchData(DATA_SOURCES.pilotos);
+    const pilotos = await window.GripUtils.fetchData(DATA_SOURCES.pilotos);
     
     if (!pilotos || pilotos.length === 0) {
         document.getElementById('pilotosTableBody').innerHTML = '<tr><td colspan="9">Erro ao carregar dados</td></tr>';
@@ -85,15 +50,15 @@ function updateSummary() {
         return sum + podios;
     }, 0);
     
-    document.getElementById('totalPilotos').textContent = formatNumber(totalPilotos);
-    document.getElementById('totalCorridas').textContent = formatNumber(totalCorridas);
-    document.getElementById('totalPodios').textContent = formatNumber(totalPodios);
-    document.getElementById('totalCampeoes').textContent = formatNumber(campeoes);
+    document.getElementById('totalPilotos').textContent = window.GripUtils.formatNumber(totalPilotos);
+    document.getElementById('totalCorridas').textContent = window.GripUtils.formatNumber(totalCorridas);
+    document.getElementById('totalPodios').textContent = window.GripUtils.formatNumber(totalPodios);
+    document.getElementById('totalCampeoes').textContent = window.GripUtils.formatNumber(campeoes);
     
     // Update hero subtitle
     const heroTotal = document.getElementById('totalPilotosHero');
     if (heroTotal) {
-        heroTotal.textContent = formatNumber(totalPilotos);
+        heroTotal.textContent = window.GripUtils.formatNumber(totalPilotos);
     }
 }
 
@@ -144,21 +109,21 @@ function displayPilotos() {
                 <div class="piloto-name-wrapper">
                     <span class="piloto-name-text">${p.piloto}</span>
                     <div class="piloto-badges">
-                        <span class="stat-badge">🏁 ${formatNumber(p.corridas)}</span>
-                        <span class="stat-badge stat-badge-highlight">🏆 ${formatNumber(p.titulos)}</span>
-                        <span class="stat-badge">🏅 ${formatNumber(p.podios)}</span>
+                        <span class="stat-badge">🏁 ${window.GripUtils.formatNumber(p.corridas)}</span>
+                        <span class="stat-badge stat-badge-highlight">🏆 ${window.GripUtils.formatNumber(p.titulos)}</span>
+                        <span class="stat-badge">🏅 ${window.GripUtils.formatNumber(p.podios)}</span>
                     </div>
                 </div>
                 <button class="expand-btn" onclick="event.stopPropagation(); this.closest('tr').classList.toggle('expanded')"></button>
             </td>
-            <td data-label="Corridas" class="expandable-data">${formatNumber(p.corridas)}</td>
-            <td data-label="Títulos" class="expandable-data">${formatNumber(p.titulos)}</td>
-            <td data-label="Pódios" class="expandable-data">${formatNumber(p.podios)}</td>
-            <td data-label="Vit." class="expandable-data">${formatNumber(p.vitorias)}</td>
-            <td data-label="Poles" class="expandable-data">${formatNumber(p.poles)}</td>
-            <td data-label="Fast Laps" class="expandable-data hide-mobile">${formatNumber(p.fastLaps)}</td>
-            <td data-label="HT" class="expandable-data">${formatNumber(p.hatTricks)}</td>
-            <td data-label="CH" class="expandable-data">${formatNumber(p.chelems)}</td>
+            <td data-label="Corridas" class="expandable-data">${window.GripUtils.formatNumber(p.corridas)}</td>
+            <td data-label="Títulos" class="expandable-data">${window.GripUtils.formatNumber(p.titulos)}</td>
+            <td data-label="Pódios" class="expandable-data">${window.GripUtils.formatNumber(p.podios)}</td>
+            <td data-label="Vit." class="expandable-data">${window.GripUtils.formatNumber(p.vitorias)}</td>
+            <td data-label="Poles" class="expandable-data">${window.GripUtils.formatNumber(p.poles)}</td>
+            <td data-label="Fast Laps" class="expandable-data hide-mobile">${window.GripUtils.formatNumber(p.fastLaps)}</td>
+            <td data-label="HT" class="expandable-data">${window.GripUtils.formatNumber(p.hatTricks)}</td>
+            <td data-label="CH" class="expandable-data">${window.GripUtils.formatNumber(p.chelems)}</td>
             <td data-label="Estreia" class="expandable-data hide-mobile">${p.estreia}</td>
             <td data-label="Última" class="expandable-data hide-mobile">${p.ultima}</td>
         </tr>
@@ -227,12 +192,13 @@ function setupFilterListeners() {
     });
 }
 
-// Setup search listener
+// Setup search listener com debounce
 function setupSearchListener() {
     const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('input', () => {
+    const debouncedSearch = window.GripUtils.debounce(() => {
         displayPilotos();
-    });
+    }, 300);
+    searchInput.addEventListener('input', debouncedSearch);
 }
 
 // Setup mobile sort listener

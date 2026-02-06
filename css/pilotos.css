@@ -1701,8 +1701,54 @@
     gap: 2px;
 }
 
+.titulo-pilotos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+}
+
 .titulo-pilotos .piloto-nome {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.titulo-pilotos .piloto-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 12px;
+}
+
+.titulo-pilotos .piloto-link:hover {
+    color: #fff;
+    background: rgba(255, 102, 0, 0.15);
+    border-color: rgba(255, 102, 0, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(255, 102, 0, 0.2);
+}
+
+.titulo-pilotos .piloto-link:active {
+    transform: translateY(0);
+}
+
+.titulo-pilotos .piloto-atual {
+    font-weight: 600;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, rgba(255, 102, 0, 0.25) 0%, rgba(255, 102, 0, 0.15) 100%);
+    border: 1px solid rgba(255, 102, 0, 0.4);
+    font-size: 12px;
+    box-shadow: 0 0 12px rgba(255, 102, 0, 0.15);
 }
 
 .titulo-info {
