@@ -1629,6 +1629,18 @@ function displayAdvancedStats() {
     document.getElementById('etapasPorPodio').textContent = etapasPorPodio;
     document.getElementById('etapasPorVitoria').textContent = etapasPorVitoria;
     document.getElementById('abandonos').textContent = window.GripUtils.formatNumber(abandonos);
+    
+    // Ocultar estatísticas relacionadas a pódios se não houver pódios
+    const statTaxaPodios = document.getElementById('statTaxaPodios');
+    const statEtapasPorPodio = document.getElementById('statEtapasPorPodio');
+    if (statTaxaPodios) statTaxaPodios.style.display = podios > 0 ? '' : 'none';
+    if (statEtapasPorPodio) statEtapasPorPodio.style.display = podios > 0 ? '' : 'none';
+    
+    // Ocultar estatísticas relacionadas a vitórias se não houver vitórias
+    const statTaxaVitorias = document.getElementById('statTaxaVitorias');
+    const statEtapasPorVitoria = document.getElementById('statEtapasPorVitoria');
+    if (statTaxaVitorias) statTaxaVitorias.style.display = vitorias > 0 ? '' : 'none';
+    if (statEtapasPorVitoria) statEtapasPorVitoria.style.display = vitorias > 0 ? '' : 'none';
 }
 
 // Display recordes
@@ -1726,34 +1738,39 @@ function displayRecordes() {
         .map(([pista]) => pista);
     
     let dominioText = '';
-    if (circuitosDominantes.length === 1) {
-        dominioText = `${normalizeCircuitName(circuitosDominantes[0])} • ${maxVitoriasCircuito} 🥇`;
-    } else if (circuitosDominantes.length === 2) {
-        dominioText = `${normalizeCircuitName(circuitosDominantes[0])}, ${normalizeCircuitName(circuitosDominantes[1])} • ${maxVitoriasCircuito} 🥇`;
-    } else if (circuitosDominantes.length > 2) {
-        const todosCircuitos = circuitosDominantes.map(p => normalizeCircuitName(p)).join(', ');
-        dominioText = `<span title="${todosCircuitos}">${circuitosDominantes.length} circuitos • ${maxVitoriasCircuito} 🥇</span>`;
+    // Só mostrar domínio se tiver pelo menos 3 vitórias no circuito
+    if (maxVitoriasCircuito >= 3) {
+        if (circuitosDominantes.length === 1) {
+            dominioText = `${normalizeCircuitName(circuitosDominantes[0])} • ${maxVitoriasCircuito} 🥇`;
+        } else if (circuitosDominantes.length === 2) {
+            dominioText = `${normalizeCircuitName(circuitosDominantes[0])}, ${normalizeCircuitName(circuitosDominantes[1])} • ${maxVitoriasCircuito} 🥇`;
+        } else if (circuitosDominantes.length > 2) {
+            const todosCircuitos = circuitosDominantes.map(p => normalizeCircuitName(p)).join(', ');
+            dominioText = `<span title="${todosCircuitos}">${circuitosDominantes.length} circuitos • ${maxVitoriasCircuito} 🥇</span>`;
+        }
     }
     
     const html = `
-        ${maxVitoriasConsecutivas === 0 ? `
+        ${maxVitoriasConsecutivas === 0 && melhorResultado < 999 ? `
         <div class="recorde-item">
             <span class="recorde-label">🥇 Melhor Resultado</span>
-            <span class="recorde-value">${melhorResultado < 999 ? melhorResultado + 'º' : 'N/A'}</span>
+            <span class="recorde-value">${melhorResultado}º</span>
         </div>` : ''}
+        ${maxPodiosConsecutivos > 0 ? `
         <div class="recorde-item">
             <span class="recorde-label">🏅 Pódios Consecutivos</span>
             <span class="recorde-value">${maxPodiosConsecutivos}</span>
-        </div>
+        </div>` : ''}
         ${maxVitoriasConsecutivas > 0 ? `
         <div class="recorde-item">
             <span class="recorde-label">🔥 Sequência de Vitórias</span>
             <span class="recorde-value">${maxVitoriasConsecutivas}</span>
         </div>` : ''}
+        ${circuitosComVitoria > 0 ? `
         <div class="recorde-item">
             <span class="recorde-label">🗺️ Circuitos Vencidos</span>
             <span class="recorde-value">${circuitosComVitoria}</span>
-        </div>
+        </div>` : ''}
         ${dominioText ? `
         <div class="recorde-item">
             <span class="recorde-label">🏁 Domínio</span>
