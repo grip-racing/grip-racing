@@ -1849,6 +1849,33 @@
     box-shadow: 0 0 12px rgba(255, 102, 0, 0.15);
 }
 
+/* Tema light - ajustar cores dos pilotos */
+[data-theme="light"] .titulo-pilotos .piloto-nome.piloto-link,
+[data-theme="light"] .titulo-pilotos .piloto-link,
+:root:not([data-theme]) .titulo-pilotos .piloto-nome.piloto-link,
+:root:not([data-theme]) .titulo-pilotos .piloto-link {
+    color: #333 !important;
+    background: rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="light"] .titulo-pilotos .piloto-nome.piloto-link:hover,
+[data-theme="light"] .titulo-pilotos .piloto-link:hover,
+:root:not([data-theme]) .titulo-pilotos .piloto-nome.piloto-link:hover,
+:root:not([data-theme]) .titulo-pilotos .piloto-link:hover {
+    color: #000 !important;
+    background: rgba(255, 102, 0, 0.15) !important;
+    border-color: rgba(255, 102, 0, 0.4) !important;
+}
+
+[data-theme="light"] .titulo-pilotos .piloto-atual,
+:root:not([data-theme]) .titulo-pilotos .piloto-atual {
+    color: #1a1a1a !important;
+    font-weight: 700;
+    background: linear-gradient(135deg, rgba(255, 102, 0, 0.25) 0%, rgba(255, 102, 0, 0.15) 100%) !important;
+    border: 1px solid rgba(255, 102, 0, 0.5) !important;
+}
+
 .titulo-info {
     display: flex;
     align-items: center;
