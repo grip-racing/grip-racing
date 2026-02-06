@@ -1638,29 +1638,95 @@ function displayRecordes() {
         String(p['Chelem'] || '').trim().toUpperCase() === 'SIM'
     ).length;
     
+    // Count unique circuits with victories
+    const vitoriasParticipacoes = pilotoParticipacoes.filter(p => {
+        const final = String(p['Final'] || '').trim();
+        const numero = parseInt(final.replace(/[^\d]/g, '')) || 999;
+        return numero === 1;
+    });
+    
+    const circuitosComVitoria = new Set(
+        vitoriasParticipacoes.map(p => String(p['Pista'] || '').trim())
+    ).size;
+    
+    // Count consecutive victories
+    let maxVitoriasConsecutivas = 0;
+    let currentWinStreak = 0;
+    pilotoParticipacoes.forEach(p => {
+        const final = String(p['Final'] || '').trim();
+        const numero = parseInt(final.replace(/[^\d]/g, '')) || 999;
+        
+        if (numero === 1) {
+            currentWinStreak++;
+            maxVitoriasConsecutivas = Math.max(maxVitoriasConsecutivas, currentWinStreak);
+        } else {
+            currentWinStreak = 0;
+        }
+    });
+    
+    // Find circuit(s) with most victories
+    const vitoriasPerCircuit = {};
+    vitoriasParticipacoes.forEach(p => {
+        const pista = String(p['Pista'] || '').trim();
+        vitoriasPerCircuit[pista] = (vitoriasPerCircuit[pista] || 0) + 1;
+    });
+    
+    let maxVitoriasCircuito = 0;
+    Object.values(vitoriasPerCircuit).forEach(count => {
+        if (count > maxVitoriasCircuito) {
+            maxVitoriasCircuito = count;
+        }
+    });
+    
+    // Get all circuits with max victories
+    const circuitosDominantes = Object.entries(vitoriasPerCircuit)
+        .filter(([pista, count]) => count === maxVitoriasCircuito)
+        .map(([pista]) => pista);
+    
+    let dominioText = '';
+    if (circuitosDominantes.length === 1) {
+        dominioText = `${normalizeCircuitName(circuitosDominantes[0])} • ${maxVitoriasCircuito} 🥇`;
+    } else if (circuitosDominantes.length === 2) {
+        dominioText = `${normalizeCircuitName(circuitosDominantes[0])}, ${normalizeCircuitName(circuitosDominantes[1])} • ${maxVitoriasCircuito} 🥇`;
+    } else if (circuitosDominantes.length > 2) {
+        const todosCircuitos = circuitosDominantes.map(p => normalizeCircuitName(p)).join(', ');
+        dominioText = `<span title="${todosCircuitos}">${circuitosDominantes.length} circuitos • ${maxVitoriasCircuito} 🥇</span>`;
+    }
+    
     const html = `
+        ${maxVitoriasConsecutivas === 0 ? `
         <div class="recorde-item">
-            <span class="recorde-label">Melhor Resultado</span>
+            <span class="recorde-label">🥇 Melhor Resultado</span>
             <span class="recorde-value">${melhorResultado < 999 ? melhorResultado + 'º' : 'N/A'}</span>
-        </div>
+        </div>` : ''}
         <div class="recorde-item">
-            <span class="recorde-label">Pódios Consecutivos</span>
+            <span class="recorde-label">🏅 Pódios Consecutivos</span>
             <span class="recorde-value">${maxPodiosConsecutivos}</span>
         </div>
+        ${maxVitoriasConsecutivas > 0 ? `
+        <div class="recorde-item">
+            <span class="recorde-label">🔥 Sequência de Vitórias</span>
+            <span class="recorde-value">${maxVitoriasConsecutivas}</span>
+        </div>` : ''}
+        <div class="recorde-item">
+            <span class="recorde-label">🗺️ Circuitos Vencidos</span>
+            <span class="recorde-value">${circuitosComVitoria}</span>
+        </div>
+        ${dominioText ? `
+        <div class="recorde-item">
+            <span class="recorde-label">🏁 Domínio</span>
+            <span class="recorde-value">${dominioText}</span>
+        </div>` : ''}
         ${hatTricks > 0 ? `
-        <div class="recorde-item recorde-especial">
+        <div class="recorde-item">
             <span class="recorde-label" title="Pole + Vitória + Volta Rápida">🎩 Hat-tricks</span>
             <span class="recorde-value">${hatTricks}</span>
         </div>` : ''}
         ${chelems > 0 ? `
-        <div class="recorde-item recorde-especial">
+        <div class="recorde-item">
             <span class="recorde-label" title="Pole + Vitória + Volta Rápida + Liderou todas as voltas">👑 Chelems</span>
             <span class="recorde-value">${chelems}</span>
         </div>` : ''}
-        <div class="recorde-item">
-            <span class="recorde-label">Total de Etapas</span>
-            <span class="recorde-value">${window.GripUtils.formatNumber(pilotoParticipacoes.length)}</span>
-        </div>
     `;
     
     document.getElementById('recordesContainer').innerHTML = html;
