@@ -1222,6 +1222,9 @@
 
 .circuito-corridas-list {
     padding: 15px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .circuito-corrida-item {
@@ -1236,6 +1239,8 @@
     transition: all 0.3s ease;
     border: 1px solid transparent;
     cursor: pointer;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .circuito-corrida-item:hover {
@@ -1469,6 +1474,8 @@
     transition: max-height 0.4s ease;
     padding: 0 20px;
     margin-top: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .ano-item-wrapper.active .ano-temporadas {
@@ -1554,6 +1561,8 @@
     transition: max-height 0.4s ease;
     margin-top: 0;
     padding: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .temporada-item-wrapper.active .temporada-corridas-list {
@@ -2869,6 +2878,30 @@
     
     .campeonato-participacoes {
         font-size: 11px;
+    }
+    
+    /* Reduzir paddings para evitar overflow horizontal */
+    .ano-temporadas {
+        padding: 0 10px;
+    }
+    
+    .circuito-corridas-list {
+        padding: 10px;
+    }
+    
+    .temporada-item-wrapper.active .temporada-corridas-list {
+        padding: 8px;
+    }
+    
+    .circuito-corrida-item {
+        padding: 10px 8px;
+        gap: 8px;
+        grid-template-columns: 50px 1fr auto;
+    }
+    
+    .corrida-item {
+        padding: 10px 8px;
+        flex-wrap: nowrap;
     }
 }
 
