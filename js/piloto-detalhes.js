@@ -637,6 +637,17 @@ function showLeader(statName, top5) {
 }
 
 // Toggle stat detail display
+// Track sort order for each stat type
+const statSortOrder = {
+    corridas: 'desc',
+    vitorias: 'desc',
+    podios: 'desc',
+    poles: 'desc',
+    fastlaps: 'desc',
+    hattricks: 'desc',
+    chelems: 'desc'
+};
+
 function toggleStatDetail(type) {
     const detailSection = document.getElementById(`statDetail${type.charAt(0).toUpperCase() + type.slice(1)}`);
     const card = document.getElementById(`card${type.charAt(0).toUpperCase() + type.slice(1)}`);
@@ -978,6 +989,9 @@ function displayStatDetails(type, container) {
     
     if (type === 'corridas') {
         filteredData = pilotoParticipacoes;
+        if (statSortOrder[type] === 'desc') {
+            filteredData = [...filteredData].reverse();
+        }
         title = '🏁 Todas as Corridas';
     } else if (type === 'vitorias') {
         filteredData = pilotoParticipacoes.filter(c => {
@@ -985,6 +999,9 @@ function displayStatDetails(type, container) {
             const finalNum = parseInt(String(final).replace(/[^\d]/g, '')) || 0;
             return finalNum === 1;
         });
+        if (statSortOrder[type] === 'desc') {
+            filteredData = filteredData.reverse();
+        }
         title = '🥇 Vitórias';
     } else if (type === 'podios') {
         filteredData = pilotoParticipacoes.filter(c => {
@@ -992,36 +1009,60 @@ function displayStatDetails(type, container) {
             const finalNum = parseInt(String(final).replace(/[^\d]/g, '')) || 0;
             return finalNum >= 1 && finalNum <= 3;
         });
+        if (statSortOrder[type] === 'desc') {
+            filteredData = filteredData.reverse();
+        }
         title = '🏅 Pódios';
     } else if (type === 'poles') {
         filteredData = pilotoParticipacoes.filter(c => {
             const pole = String(c['Pole'] || '').trim().toLowerCase();
             return pole === 'sim';
         });
+        if (statSortOrder[type] === 'desc') {
+            filteredData = filteredData.reverse();
+        }
         title = '⚡ Pole Positions';
     } else if (type === 'fastlaps') {
         filteredData = pilotoParticipacoes.filter(c => {
             const bestLap = String(c['Best Lap'] || '').trim().toLowerCase();
             return bestLap === 'sim';
         });
+        if (statSortOrder[type] === 'desc') {
+            filteredData = filteredData.reverse();
+        }
         title = '⏱️ Voltas Mais Rápidas';
     } else if (type === 'hattricks') {
         filteredData = pilotoParticipacoes.filter(c => {
             const hatTrick = String(c['Hat-Trick'] || '').trim().toLowerCase();
             return hatTrick === 'sim';
         });
+        if (statSortOrder[type] === 'desc') {
+            filteredData = filteredData.reverse();
+        }
         title = '🎩 Hat-tricks';
     } else if (type === 'chelems') {
         filteredData = pilotoParticipacoes.filter(c => {
             const chelem = String(c['Chelem'] || '').trim().toLowerCase();
             return chelem === 'sim';
         });
+        if (statSortOrder[type] === 'desc') {
+            filteredData = filteredData.reverse();
+        }
         title = '👑 Chelems';
     }
     
+    const sortIcon = statSortOrder[type] === 'desc' ? '↓' : '↑';
+    const sortLabel = statSortOrder[type] === 'desc' ? 'Recente' : 'Antigo';
+    
     const html = `
         <div class="stat-detail-content">
-            <h3 class="stat-detail-title">${title} <span class="stat-detail-count">(${filteredData.length})</span></h3>
+            <div class="stat-detail-header">
+                <h3 class="stat-detail-title">${title} <span class="stat-detail-count">(${filteredData.length})</span></h3>
+                <button class="stat-sort-btn" onclick="event.stopPropagation(); toggleStatSort('${type}')" title="Ordenar por ${sortLabel === 'Recente' ? 'mais antigo' : 'mais recente'}">
+                    <span class="sort-icon">${sortIcon}</span>
+                    <span class="sort-label">${sortLabel}</span>
+                </button>
+            </div>
             <div class="stat-detail-list">
                 ${filteredData.map(c => {
                     const pistaOriginal = c['Pista'] || 'Desconhecida';
@@ -1055,6 +1096,15 @@ function displayStatDetails(type, container) {
     `;
     
     container.innerHTML = html;
+}
+
+// Toggle sort order for stat details
+function toggleStatSort(type) {
+    statSortOrder[type] = statSortOrder[type] === 'desc' ? 'asc' : 'desc';
+    const detailSection = document.getElementById(`statDetail${type.charAt(0).toUpperCase() + type.slice(1)}`);
+    if (detailSection) {
+        displayStatDetails(type, detailSection);
+    }
 }
 
 // Display piloto stats overview
