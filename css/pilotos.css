@@ -808,6 +808,9 @@
     margin-bottom: 15px;
     box-shadow: 0 5px 20px var(--card-shadow);
     transition: all 0.3s ease;
+    overflow-x: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .content-card:first-child {
@@ -1134,10 +1137,15 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    overflow-x: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .circuito-item-wrapper {
     margin-bottom: 12px;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 .circuito-item {
@@ -1150,6 +1158,9 @@
     border-radius: 8px;
     transition: all 0.3s ease;
     cursor: pointer;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .circuito-item:hover {
@@ -1405,6 +1416,8 @@
 /* Ano expandível */
 .ano-item-wrapper {
     margin-bottom: 15px;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 .ano-item {
@@ -1417,6 +1430,9 @@
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .ano-item:hover {
@@ -1485,6 +1501,8 @@
 /* Temporada expandível (dentro do ano) */
 .temporada-item-wrapper {
     margin-bottom: 12px;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 .temporada-item {
@@ -1497,6 +1515,9 @@
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .temporada-item:hover {
@@ -1584,6 +1605,9 @@
     gap: 12px;
     cursor: pointer;
     border: 1px solid transparent;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .corrida-item:hover {
@@ -2546,6 +2570,22 @@
         padding: 0 15px;
         max-width: 100%;
         width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .content-card {
+        padding: 15px;
+        overflow-x: hidden;
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .circuitos-container,
+    .ano-item-wrapper,
+    .temporada-item-wrapper,
+    .circuito-item-wrapper {
+        overflow-x: hidden;
+        max-width: 100%;
     }
     
     .pilotos-main .container {
