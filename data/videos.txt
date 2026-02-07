@@ -1,0 +1,29 @@
+# Arquivo de memes/vídeos
+# Formato: URL_DO_VIDEO|TITULO|DESCRICAO
+# Para criar categorias, use: [CATEGORIA: Nome da Categoria]
+# Suporta YouTube, Twitch Clips, Streamable, etc.
+
+[CATEGORIA: Melhores Momentos]
+https://www.youtube.com/watch?v=J8IAV2cXlVg|Melhores Ultrapassagens 2020|As ultrapassagens mais épicas da temporada 2020
+https://www.youtube.com/watch?v=4FgOw4DKKXc|Melhores Ultrapassagens 2021|As manobras mais insanas da temporada 2021
+
+[CATEGORIA: Temporadas Antigas]
+https://www.youtube.com/watch?v=4ea0vmSb8Ik|Equipe Jeito Grip|O jeito GRIP de correr
+https://www.youtube.com/watch?v=mLUio89Rm_Q|GRIP Racing 2010/1|Nostalgia pura da primeira etapa de 2010
+https://www.youtube.com/watch?v=vMIb9d9icN8|GRIP Racing 2010/3|Terceira etapa da temporada 2010
+https://www.youtube.com/watch?v=Q-MgF8zWbGI|Augusto Maia 2016/3|Corrida histórica de Augusto Maia em 2016
+
+[CATEGORIA: Memes]
+https://www.youtube.com/watch?v=cLbvFnW99Gc|Acidente Jacarepaguá|O famoso acidente entre Rodrigo e Freshi em Jacarepaguá
+https://www.youtube.com/watch?v=t5NEk8X2NnE|Matheus Saliba Mode|Quando você está em último e lembra que é Matheus Saliba
+
+[CATEGORIA: Forfun]
+https://www.youtube.com/watch?v=-zbwSQvw3Zw|Forfun Montreal|Corrida descontraída em Montreal
+https://www.youtube.com/watch?v=7KeGGkHXDfs|Forfun Interlagos|Diversão garantida no templo do automobilismo brasileiro
+https://www.youtube.com/watch?v=n0WkwsRXNtM|Forfun Daytona - Parte 1|Primeira parte da maratona em Daytona
+https://www.youtube.com/watch?v=x512r98JmFA|Forfun Daytona - Parte 2|A emocionante conclusão em Daytona
+https://www.youtube.com/watch?v=bC56i-0Y88g|Forfun Monaco - Parte 1|Navegando pelas ruas estreitas de Mônaco
+https://www.youtube.com/watch?v=WRrFqT9djII|Forfun Monaco - Parte 2|Mais emoção no principado de Mônaco
+https://www.youtube.com/watch?v=XtnU5KQJ0PU|Forfun Goiânia|Corrida no coração do Brasil
+https://www.youtube.com/watch?v=s5NciBv6gaw|Forfun Cascavel + Velopark|Dupla etapa de pura adrenalina
+https://www.youtube.com/watch?v=Dx9fgA1JQHY|Race of Champions|A corrida dos campeões da GRIP Racing
