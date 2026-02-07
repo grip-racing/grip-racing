@@ -2341,7 +2341,10 @@ function openCorridaModal(corridaJson) {
     const categoria = corrida['Categoria'] || '';
     const ano = corrida['Ano'] || 'N/A';
     const transmissao = corrida['Link Transmissao'] || '';
-    const hasTransmission = isValidTransmissionLink(transmissao);
+    
+    // Parse múltiplos links de transmissão
+    const transmissionLinks = parseTransmissionLinks(transmissao);
+    const hasTransmission = transmissionLinks.length > 0;
     
     // Buscar todos os pilotos Grip que correram nesta mesma etapa
     const corridasNaEtapa = participacoesData.filter(p => {
@@ -2397,29 +2400,58 @@ function openCorridaModal(corridaJson) {
     
     const outrosGripados = Array.from(pilotosMap.values()).sort((a, b) => a.finalNum - b.finalNum);
     
-    // Converter link do YouTube para embed (se houver)
+    // Converter link(s) do YouTube para embed (se houver)
     let videoContent = '';
     if (hasTransmission) {
-        let embedUrl = transmissao;
-        if (transmissao.includes('youtube.com/watch?v=')) {
-            const videoId = transmissao.split('v=')[1].split('&')[0];
-            embedUrl = `https://www.youtube.com/embed/${videoId}`;
-        } else if (transmissao.includes('youtu.be/')) {
-            const videoId = transmissao.split('youtu.be/')[1].split('?')[0];
-            embedUrl = `https://www.youtube.com/embed/${videoId}`;
-        }
+        const convertToEmbed = (url) => {
+            if (url.includes('youtube.com/watch?v=')) {
+                const videoId = url.split('v=')[1].split('&')[0];
+                return `https://www.youtube.com/embed/${videoId}`;
+            } else if (url.includes('youtu.be/')) {
+                const videoId = url.split('youtu.be/')[1].split('?')[0];
+                return `https://www.youtube.com/embed/${videoId}`;
+            }
+            return url;
+        };
         
-        videoContent = `
-            <div class="corrida-modal-video-container">
-                <iframe 
-                    src="${embedUrl}" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen
-                    class="corrida-video-iframe">
-                </iframe>
-            </div>
-        `;
+        const embedUrls = transmissionLinks.map(convertToEmbed);
+        
+        if (embedUrls.length === 1) {
+            // Vídeo único - sem carrossel
+            videoContent = `
+                <div class="corrida-modal-video-container">
+                    <iframe 
+                        src="${embedUrls[0]}" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        class="corrida-video-iframe">
+                    </iframe>
+                </div>
+            `;
+        } else {
+            // Múltiplos vídeos - com carrossel
+            const carouselId = 'modal-video-carousel';
+            videoContent = `
+                <div class="corrida-modal-video-carousel" id="${carouselId}">
+                    <div class="corrida-modal-video-container">
+                        <iframe 
+                            src="${embedUrls[0]}" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            class="corrida-video-iframe modal-carousel-iframe">
+                        </iframe>
+                    </div>
+                    <div class="modal-video-carousel-controls">
+                        <button class="modal-carousel-btn modal-carousel-prev" onclick="changeModalVideo(-1)">◀ Anterior</button>
+                        <span class="modal-carousel-counter">Vídeo <span class="current-video">1</span>/${embedUrls.length}</span>
+                        <button class="modal-carousel-btn modal-carousel-next" onclick="changeModalVideo(1)">Próximo ▶</button>
+                    </div>
+                    <div class="modal-carousel-data" style="display:none;">${embedUrls.join('||')}</div>
+                </div>
+            `;
+        }
     } else {
         videoContent = `
             <div class="corrida-modal-no-video">
@@ -2487,4 +2519,25 @@ function closeCorridaModal() {
         modal.remove();
         document.body.style.overflow = '';
     }
+}
+
+// Change video in modal carousel
+function changeModalVideo(direction) {
+    const carousel = document.getElementById('modal-video-carousel');
+    if (!carousel) return;
+    
+    const dataEl = carousel.querySelector('.modal-carousel-data');
+    const iframe = carousel.querySelector('.modal-carousel-iframe');
+    const counterEl = carousel.querySelector('.current-video');
+    
+    const videos = dataEl.textContent.split('||');
+    const currentSrc = iframe.getAttribute('src');
+    let currentIndex = videos.indexOf(currentSrc);
+    
+    // Calculate new index with wrapping
+    currentIndex = (currentIndex + direction + videos.length) % videos.length;
+    
+    // Update iframe and counter
+    iframe.setAttribute('src', videos[currentIndex]);
+    counterEl.textContent = currentIndex + 1;
 }
