@@ -8,6 +8,11 @@ let allPilotos = [];
 let currentSort = { column: 'corridas', direction: 'desc' };
 let currentFilter = 'todos';
 
+// Paginação para mobile
+let currentPage = 1;
+const ITEMS_PER_PAGE_MOBILE = 30;
+const ITEMS_PER_PAGE_DESKTOP = 9999; // Mostra todos no desktop
+
 // Load and display pilotos
 async function loadPilotos() {
     const pilotos = await window.GripUtils.fetchData(DATA_SOURCES.pilotos);
@@ -96,14 +101,24 @@ function displayPilotos() {
         }
     });
     
+    // Verificar se é mobile
+    const isMobile = window.innerWidth <= 768;
+    const itemsPerPage = isMobile ? ITEMS_PER_PAGE_MOBILE : ITEMS_PER_PAGE_DESKTOP;
+    
     // Render table
     const tbody = document.getElementById('pilotosTableBody');
     if (filteredPilotos.length === 0) {
         tbody.innerHTML = '<tr><td colspan="11" style="text-align: center; padding: 40px;">Nenhum piloto encontrado</td></tr>';
+        hideLoadMoreButton();
         return;
     }
     
-    tbody.innerHTML = filteredPilotos.map(p => `
+    // Determinar quantos itens mostrar
+    const totalItems = filteredPilotos.length;
+    const itemsToShow = currentPage * itemsPerPage;
+    const displayPilotos = filteredPilotos.slice(0, Math.min(itemsToShow, totalItems));
+    
+    tbody.innerHTML = displayPilotos.map(p => `
         <tr>
             <td data-label="Piloto" class="piloto-name-cell">
                 <div class="piloto-name-wrapper">
@@ -138,6 +153,67 @@ function displayPilotos() {
             }
         });
     });
+    
+    // Gerenciar botão "Carregar Mais"
+    if (isMobile && displayPilotos.length < totalItems) {
+        showLoadMoreButton(displayPilotos.length, totalItems);
+    } else {
+        hideLoadMoreButton();
+    }
+}
+
+// Gerenciar botão "Carregar Mais"
+function showLoadMoreButton(shown, total) {
+    let btn = document.getElementById('loadMoreBtn');
+    if (!btn) {
+        // Criar botão se não existe
+        const container = document.querySelector('.table-container');
+        btn = document.createElement('div');
+        btn.id = 'loadMoreBtn';
+        btn.className = 'load-more-container';
+        btn.innerHTML = `
+            <button class="load-more-btn">
+                <span class="load-more-text">Carregar Mais</span>
+                <span class="load-more-count"></span>
+            </button>
+        `;
+        container.after(btn);
+        
+        // Adicionar listener
+        btn.querySelector('.load-more-btn').addEventListener('click', loadMore);
+    }
+    
+    btn.style.display = 'block';
+    btn.querySelector('.load-more-count').textContent = `Mostrando ${shown} de ${total} pilotos`;
+}
+
+function hideLoadMoreButton() {
+    const btn = document.getElementById('loadMoreBtn');
+    if (btn) {
+        btn.style.display = 'none';
+    }
+}
+
+function loadMore() {
+    currentPage++;
+    displayPilotos();
+    
+    // Scroll suave para os novos itens
+    const table = document.querySelector('.pilotos-table');
+    if (table) {
+        const rows = table.querySelectorAll('tbody tr');
+        const lastVisibleRow = rows[rows.length - ITEMS_PER_PAGE_MOBILE - 1];
+        if (lastVisibleRow) {
+            setTimeout(() => {
+                lastVisibleRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+    }
+}
+
+// Resetar paginação quando filtros mudam
+function resetPagination() {
+    currentPage = 1;
 }
 
 // Setup sort listeners
@@ -153,6 +229,7 @@ function setupSortListeners() {
                 currentSort.direction = 'desc';
             }
             
+            resetPagination();
             updateSortUI();
             displayPilotos();
         });
@@ -187,6 +264,7 @@ function setupFilterListeners() {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentFilter = btn.dataset.filter;
+            resetPagination();
             displayPilotos();
         });
     });
@@ -200,6 +278,7 @@ function setupSearchListener() {
     
     // Debounce para performance
     const debouncedSearch = window.GripUtils.debounce(() => {
+        resetPagination();
         displayPilotos();
     }, 300);
     
@@ -316,9 +395,22 @@ function setupMobileSortListener() {
             const [column, direction] = e.target.value.split('-');
             currentSort.column = column;
             currentSort.direction = direction;
+            resetPagination();
             displayPilotos();
         });
     }
+}
+
+// Listener para redimensionamento (mobile <-> desktop)
+function setupResizeListener() {
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            resetPagination();
+            displayPilotos();
+        }, 250);
+    });
 }
 
 // Initialize
@@ -328,4 +420,5 @@ document.addEventListener('DOMContentLoaded', () => {
     setupFilterListeners();
     setupSearchListener();
     setupMobileSortListener();
+    setupResizeListener();
 });

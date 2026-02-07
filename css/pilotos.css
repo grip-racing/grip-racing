@@ -527,8 +527,78 @@
     background: var(--card-bg);
     border: 2px solid var(--border-color);
     border-radius: 20px;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 10px 40px var(--card-shadow);
+}
+
+/* Load More Button */
+.load-more-container {
+    padding: 20px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.load-more-btn {
+    background: linear-gradient(135deg, #ff6b00 0%, #ff8533 100%);
+    color: white;
+    border: none;
+    padding: 22px 60px;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 10px 30px rgba(255, 107, 0, 0.35);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    overflow: hidden;
+    min-width: 280px;
+}
+
+.load-more-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.load-more-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 35px rgba(255, 107, 0, 0.4);
+}
+
+.load-more-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.load-more-btn:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 6px 20px rgba(255, 107, 0, 0.35);
+}
+
+.load-more-text {
+    position: relative;
+    z-index: 1;
+}
+
+.load-more-count {
+    font-size: 12px;
+    opacity: 0.95;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.3px;
 }
 
 .pilotos-table {
@@ -551,7 +621,27 @@
 }
 
 .pilotos-table thead {
-    background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, rgba(255, 107, 0, 0.05) 100%);
+    position: sticky;
+    top: 65px;
+    z-index: 100;
+    background: var(--card-bg);
+}
+
+.pilotos-table thead::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 107, 0, 0.1) 0%, 
+        rgba(255, 107, 0, 0.05) 100%);
+    z-index: -1;
+    border-radius: 18px 18px 0 0;
+}
+
+.pilotos-table thead tr {
     border-bottom: 2px solid rgba(255, 107, 0, 0.2);
 }
 
@@ -564,6 +654,16 @@
     text-transform: uppercase;
     letter-spacing: 1.5px;
     border-bottom: none;
+    background: transparent;
+    position: relative;
+}
+
+.pilotos-table th:first-child {
+    border-top-left-radius: 18px;
+}
+
+.pilotos-table th:last-child {
+    border-top-right-radius: 18px;
 }
 
 .pilotos-table th.sortable {
@@ -2557,16 +2657,15 @@
 }
 
 @media (max-width: 768px) {
-    /* Prevent horizontal overflow */
-    * {
-        max-width: 100%;
-    }
+    /* Prevent horizontal overflow - removed universal selector to avoid breaking fixed elements */
     
     body {
         overflow-x: hidden;
     }
     
-    .container {
+    /* Don't apply overflow-x to navbar container */
+    .pilotos-main .container,
+    .piloto-detalhes-main .container {
         padding: 0 15px;
         max-width: 100%;
         width: 100%;
@@ -2586,10 +2685,6 @@
     .circuito-item-wrapper {
         overflow-x: hidden;
         max-width: 100%;
-    }
-    
-    .pilotos-main .container {
-        padding: 0 15px;
     }
     
     .pilotos-hero {
@@ -2699,6 +2794,25 @@
         white-space: nowrap;
         flex: 1;
         min-width: 80px;
+    }
+    
+    /* Load More Button - Mobile */
+    .load-more-container {
+        padding: 15px;
+        margin-top: 20px;
+    }
+    
+    .load-more-btn {
+        padding: 20px 40px;
+        font-size: 16px;
+        width: 100%;
+        max-width: 100%;
+        min-width: auto;
+        border-radius: 50px;
+    }
+    
+    .load-more-count {
+        font-size: 12px;
     }
     
     .stats-grid-large {
