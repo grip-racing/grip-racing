@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://gripracing.com.br/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 0
+
+# Diretórios permitidos
+Allow: /css/
+Allow: /js/
+Allow: /assets/
+
+# Bloquear arquivos de configuração
+Disallow: /data/
+Disallow: /*.ps1$
+Disallow: /*.md$
+Disallow: /ESTRUTURA.md
+Disallow: /README.md
