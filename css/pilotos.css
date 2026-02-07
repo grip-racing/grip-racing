@@ -2684,6 +2684,13 @@
     font-size: 10px;
     color: var(--text-secondary);
     text-align: right;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.comparison-leader:hover {
+    color: #ff6b00;
+    text-decoration: underline;
 }
 
 .comparison-you {

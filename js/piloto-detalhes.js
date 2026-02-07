@@ -396,32 +396,32 @@ async function createRadarChart() {
         <div class="stats-comparison hidden">
             <div class="comparison-item">
                 <span class="comparison-label">Títulos</span>
-                <span class="comparison-leader">${topPilots.titulos} (${maxStats.titulos})</span>
+                <a href="piloto-detalhes.html?nome=${encodeURIComponent(topPilots.titulos)}" class="comparison-leader">${topPilots.titulos} (${maxStats.titulos})</a>
                 <span class="comparison-you">${currentStats.titulos} (${percentages.titulos.toFixed(0)}%)</span>
             </div>
             <div class="comparison-item">
                 <span class="comparison-label">Corridas</span>
-                <span class="comparison-leader">${topPilots.corridas} (${maxStats.corridas})</span>
+                <a href="piloto-detalhes.html?nome=${encodeURIComponent(topPilots.corridas)}" class="comparison-leader">${topPilots.corridas} (${maxStats.corridas})</a>
                 <span class="comparison-you">${currentStats.corridas} (${percentages.corridas.toFixed(0)}%)</span>
             </div>
             <div class="comparison-item">
                 <span class="comparison-label">Vitórias</span>
-                <span class="comparison-leader">${topPilots.vitorias} (${maxStats.vitorias})</span>
+                <a href="piloto-detalhes.html?nome=${encodeURIComponent(topPilots.vitorias)}" class="comparison-leader">${topPilots.vitorias} (${maxStats.vitorias})</a>
                 <span class="comparison-you">${currentStats.vitorias} (${percentages.vitorias.toFixed(0)}%)</span>
             </div>
             <div class="comparison-item">
                 <span class="comparison-label">Voltas Rápidas</span>
-                <span class="comparison-leader">${topPilots.fastLaps} (${maxStats.fastLaps})</span>
+                <a href="piloto-detalhes.html?nome=${encodeURIComponent(topPilots.fastLaps)}" class="comparison-leader">${topPilots.fastLaps} (${maxStats.fastLaps})</a>
                 <span class="comparison-you">${currentStats.fastLaps} (${percentages.fastLaps.toFixed(0)}%)</span>
             </div>
             <div class="comparison-item">
                 <span class="comparison-label">Poles</span>
-                <span class="comparison-leader">${topPilots.poles} (${maxStats.poles})</span>
+                <a href="piloto-detalhes.html?nome=${encodeURIComponent(topPilots.poles)}" class="comparison-leader">${topPilots.poles} (${maxStats.poles})</a>
                 <span class="comparison-you">${currentStats.poles} (${percentages.poles.toFixed(0)}%)</span>
             </div>
             <div class="comparison-item">
                 <span class="comparison-label">Pódios</span>
-                <span class="comparison-leader">${topPilots.podios} (${maxStats.podios})</span>
+                <a href="piloto-detalhes.html?nome=${encodeURIComponent(topPilots.podios)}" class="comparison-leader">${topPilots.podios} (${maxStats.podios})</a>
                 <span class="comparison-you">${currentStats.podios} (${percentages.podios.toFixed(0)}%)</span>
             </div>
         </div>
