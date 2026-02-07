@@ -1,5 +1,5 @@
 // Piloto detalhes page script
-const DATA_VERSION = '1.0.13'; // Incrementar quando atualizar os dados
+const DATA_VERSION = '1.0.14'; // Incrementar quando atualizar os dados
 const DATA_SOURCES = {
     pilotos: `data/data-pilotos.csv?v=${DATA_VERSION}`,
     participacoes: `data/data-participacoes.csv?v=${DATA_VERSION}`
@@ -90,10 +90,57 @@ function isValidTransmissionLink(link) {
     return trimmed.startsWith('http://') || trimmed.startsWith('https://');
 }
 
-// Render transmission link icon
+// Parse multiple transmission links separated by ||
+function parseTransmissionLinks(transmissionField) {
+    if (!transmissionField || transmissionField.trim() === '') return [];
+    return transmissionField.split('||')
+        .map(link => link.trim())
+        .filter(link => isValidTransmissionLink(link));
+}
+
+// Render transmission link icon (single or carousel)
 function renderTransmissionLink(link) {
-    if (!isValidTransmissionLink(link)) return '';
-    return `<a href="${link.trim()}" target="_blank" rel="noopener noreferrer" class="transmission-link" title="Ver transmissão">📺</a>`;
+    const links = parseTransmissionLinks(link);
+    if (links.length === 0) return '';
+    
+    if (links.length === 1) {
+        // Single link - render as before
+        return `<a href="${links[0]}" target="_blank" rel="noopener noreferrer" class="transmission-link" title="Ver transmissão">📺</a>`;
+    }
+    
+    // Multiple links - render carousel
+    const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+    return `
+        <span class="transmission-carousel" id="${carouselId}">
+            <button class="carousel-btn carousel-prev" onclick="event.stopPropagation(); changeVideo('${carouselId}', -1)" title="Vídeo anterior">◀</button>
+            <a href="${links[0]}" target="_blank" rel="noopener noreferrer" class="transmission-link carousel-current" title="Ver transmissão (1/${links.length})">📺</a>
+            <button class="carousel-btn carousel-next" onclick="event.stopPropagation(); changeVideo('${carouselId}', 1)" title="Próximo vídeo">▶</button>
+            <span class="carousel-counter">1/${links.length}</span>
+            <span class="carousel-data" style="display:none;">${links.join('||')}</span>
+        </span>
+    `;
+}
+
+// Change video in carousel
+function changeVideo(carouselId, direction) {
+    const carousel = document.getElementById(carouselId);
+    if (!carousel) return;
+    
+    const dataEl = carousel.querySelector('.carousel-data');
+    const linkEl = carousel.querySelector('.carousel-current');
+    const counterEl = carousel.querySelector('.carousel-counter');
+    
+    const links = dataEl.textContent.split('||');
+    const currentLink = linkEl.getAttribute('href');
+    let currentIndex = links.indexOf(currentLink);
+    
+    // Calculate new index with wrapping
+    currentIndex = (currentIndex + direction + links.length) % links.length;
+    
+    // Update link and counter
+    linkEl.setAttribute('href', links[currentIndex]);
+    linkEl.setAttribute('title', `Ver transmissão (${currentIndex + 1}/${links.length})`);
+    counterEl.textContent = `${currentIndex + 1}/${links.length}`;
 }
 
 // Format championship badges for display
