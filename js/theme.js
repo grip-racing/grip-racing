@@ -59,6 +59,9 @@
         
         localStorage.setItem(THEME_KEY, newTheme);
         applyTheme(newTheme);
+        
+        // Dispatch custom event for theme change
+        window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
     }
     
     // Initialize theme on page load

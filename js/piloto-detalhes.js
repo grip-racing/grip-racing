@@ -150,6 +150,11 @@ async function loadPilotoData() {
     displayAdvancedStats();
     displayRecordes();
     createRadarChart();
+    
+    // Listen for theme changes and recreate radar chart
+    window.addEventListener('themeChanged', function() {
+        createRadarChart();
+    });
 }
 
 // Exibir agrupamento por circuito
@@ -319,6 +324,9 @@ function toggleCircuito(element) {
     }
 }
 
+// Global variable to store chart instance
+let radarChartInstance = null;
+
 // Create radar chart
 async function createRadarChart() {
     const pilotos = await window.GripUtils.fetchData(DATA_SOURCES.pilotos);
@@ -433,7 +441,12 @@ async function createRadarChart() {
     
     const ctx = canvas;
     
-    new Chart(ctx, {
+    // Destroy previous chart instance if exists
+    if (radarChartInstance) {
+        radarChartInstance.destroy();
+    }
+    
+    radarChartInstance = new Chart(ctx, {
         type: 'radar',
         data: {
             labels: ['Títulos', 'Corridas', 'Vitórias', 'Voltas Rápidas', 'Poles', 'Pódios'],
@@ -480,16 +493,34 @@ async function createRadarChart() {
                         },
                         font: {
                             size: 12
-                        }
+                        },
+                        color: function(context) {
+                            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                            return isDark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)';
+                        },
+                        backdropColor: 'transparent'
                     },
                     pointLabels: {
                         font: {
                             size: 14,
                             weight: '600'
+                        },
+                        color: function(context) {
+                            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                            return isDark ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 0, 0, 0.9)';
                         }
                     },
                     grid: {
-                        color: 'rgba(0, 0, 0, 0.1)'
+                        color: function(context) {
+                            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                            return isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+                        }
+                    },
+                    angleLines: {
+                        color: function(context) {
+                            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                            return isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+                        }
                     }
                 }
             },
