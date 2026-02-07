@@ -725,6 +725,14 @@
     max-height: 20px;
     max-width: 100px;
     object-fit: contain;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/* Remover fundo no tema dark */
+[data-theme="dark"] .campeonato-liga-logo img {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .campeonato-participacoes {
@@ -2080,6 +2088,19 @@
     height: auto;
     width: auto;
     object-fit: contain;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/* Fundo escuro para logos no tema dark */
+[data-theme="dark"] .liga-display img,
+[data-theme="dark"] .liga-display-titulo img,
+[data-theme="dark"] .liga-display-small img,
+[data-theme="dark"] .stat-detail-liga img,
+[data-theme="dark"] .corrida-liga img,
+[data-theme="dark"] .liga-inline img {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Logo nos títulos grandes */

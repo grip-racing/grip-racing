@@ -21,6 +21,11 @@ async function loadHeader() {
             
             // Reativa o menu mobile após carregar o header
             setupMobileMenu();
+            
+            // Update logos after header is loaded
+            if (window.updateThemeLogos) {
+                window.updateThemeLogos();
+            }
         }
     } catch (error) {
         console.error('Erro ao carregar header:', error);
@@ -40,6 +45,11 @@ async function loadFooter() {
             const currentYearElement = document.getElementById('currentYear');
             if (currentYearElement) {
                 currentYearElement.textContent = new Date().getFullYear();
+            }
+            
+            // Update logos after footer is loaded
+            if (window.updateThemeLogos) {
+                window.updateThemeLogos();
             }
         }
     } catch (error) {

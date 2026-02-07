@@ -21,6 +21,9 @@
         
         // Update theme toggle icon
         updateThemeIcon(theme);
+        
+        // Update logos
+        updateLogos(theme);
     }
     
     // Update theme toggle button icon
@@ -30,6 +33,24 @@
             themeIcon.textContent = theme === DARK_THEME ? '☀️' : '🌙';
         }
     }
+    
+    // Update logos based on theme
+    function updateLogos(theme) {
+        const logos = document.querySelectorAll('.logo-theme');
+        logos.forEach(logo => {
+            const lightLogo = logo.getAttribute('data-logo-light');
+            const darkLogo = logo.getAttribute('data-logo-dark');
+            
+            if (lightLogo && darkLogo) {
+                logo.src = theme === DARK_THEME ? darkLogo : lightLogo;
+            }
+        });
+    }
+    
+    // Expose function globally for components loader
+    window.updateThemeLogos = function() {
+        updateLogos(getSavedTheme());
+    };
     
     // Toggle theme
     function toggleTheme() {

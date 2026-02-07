@@ -551,6 +551,13 @@ function toggleStatDetail(type) {
         displayStatDetails(type, detailSection);
         setTimeout(() => {
             detailSection.style.maxHeight = detailSection.scrollHeight + 'px';
+            
+            // Scroll to detail section on mobile
+            if (window.innerWidth <= 768) {
+                setTimeout(() => {
+                    detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            }
         }, 10);
     } else {
         detailSection.style.maxHeight = '0';
