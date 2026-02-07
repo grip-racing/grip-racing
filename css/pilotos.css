@@ -8,9 +8,251 @@
     transition: background-color 0.3s ease;
 }
 
+/* Leader Modal */
+.leader-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.leader-modal-content {
+    background: var(--card-bg);
+    border: 2px solid #ff6b00;
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.leader-modal-content h3 {
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    color: #ff6b00;
+    text-align: center;
+}
+
+.top-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.top-item {
+    display: grid;
+    grid-template-columns: 40px 1fr auto auto;
+    gap: 12px;
+    align-items: center;
+    padding: 12px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.top-item:hover {
+    background: var(--bg-tertiary);
+    transform: translateX(5px);
+}
+
+.top-podium {
+    border: 2px solid rgba(255, 107, 0, 0.3);
+}
+
+.top-position {
+    font-size: 20px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.top-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.top-value {
+    font-size: 18px;
+    font-weight: 900;
+    color: #ff6b00;
+    text-align: right;
+}
+
+.top-corridas {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: right;
+}
+
+.leader-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 10px 0;
+    text-align: center;
+}
+
+.leader-value {
+    font-size: 28px;
+    font-weight: 900;
+    color: #ff6b00;
+    margin: 10px 0 5px 0;
+    text-align: center;
+}
+
+.leader-corridas {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 5px 0 15px 0;
+    text-align: center;
+}
+
+.leader-extra {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 5px 0 15px 0;
+    text-align: center;
+}
+
+.leader-modal-content button {
+    width: 100%;
+    padding: 12px;
+    background: #ff6b00;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.leader-modal-content button:hover {
+    background: #ff8533;
+    transform: translateY(-2px);
+}
+
+/* Rank Badge */
+.rank-badge {
+    font-size: 0.85em;
+    color: #ff6b00;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+.rank-badge:hover {
+    background: rgba(255, 107, 0, 0.1);
+    color: #ff8533;
+}
+
+/* Stat Rank Badge - positioned in top right of card */
+.stat-rank-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255, 107, 0, 0.15);
+    color: #ff6b00;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    border: 1px solid rgba(255, 107, 0, 0.3);
+}
+
+.stat-rank-badge:hover {
+    background: rgba(255, 107, 0, 0.25);
+    transform: scale(1.05);
+    border-color: #ff6b00;
+}
+
+/* Podium badges */
+.stat-rank-badge.rank-1 {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.3) 100%);
+    color: #FFD700;
+    border-color: rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.stat-rank-badge.rank-1:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0.4) 100%);
+    border-color: #FFD700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.stat-rank-badge.rank-2 {
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.2) 0%, rgba(192, 192, 192, 0.3) 100%);
+    color: #C0C0C0;
+    border-color: rgba(192, 192, 192, 0.5);
+    box-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
+}
+
+.stat-rank-badge.rank-2:hover {
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.3) 0%, rgba(192, 192, 192, 0.4) 100%);
+    border-color: #C0C0C0;
+    box-shadow: 0 0 15px rgba(192, 192, 192, 0.5);
+}
+
+.stat-rank-badge.rank-3 {
+    background: linear-gradient(135deg, rgba(205, 127, 50, 0.2) 0%, rgba(205, 127, 50, 0.3) 100%);
+    color: #CD7F32;
+    border-color: rgba(205, 127, 50, 0.5);
+    box-shadow: 0 0 10px rgba(205, 127, 50, 0.3);
+}
+
+.stat-rank-badge.rank-3:hover {
+    background: linear-gradient(135deg, rgba(205, 127, 50, 0.3) 0%, rgba(205, 127, 50, 0.4) 100%);
+    border-color: #CD7F32;
+    box-shadow: 0 0 15px rgba(205, 127, 50, 0.5);
+}
+
+.stat-card-large {
+    position: relative;
+}
+
+.stat-card-large.no-ranking {
+    cursor: default;
+}
+
+.stat-card-large.no-ranking:hover {
+    transform: none;
+    border-color: var(--border-color);
+}
+
 /* Hero Section */
 .pilotos-hero {
-    padding: 110px 20px 40px;
+    padding: 100px 20px 30px;
     background: linear-gradient(135deg, rgba(255, 107, 0, 0.05) 0%, rgba(255, 107, 0, 0) 100%);
     border-bottom: 1px solid rgba(255, 107, 0, 0.15);
     position: relative;
@@ -425,7 +667,7 @@
 }
 
 .piloto-hero {
-    padding: 120px 20px 50px;
+    padding: 100px 20px 35px;
     background: linear-gradient(135deg, rgba(255, 107, 0, 0.05) 0%, rgba(255, 107, 0, 0) 100%);
     border-bottom: 1px solid rgba(255, 107, 0, 0.15);
     position: relative;
@@ -484,7 +726,7 @@
 /* Stats Overview */
 .piloto-stats-overview {
     padding: 15px 20px 0;
-    background: transparent;
+    background: var(--bg-primary);
 }
 
 .stats-grid-large {
@@ -1482,15 +1724,16 @@
 
 .stat-expand-icon {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 10px;
     color: var(--text-muted);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .stat-card-clickable.active .stat-expand-icon {
-    transform: rotate(180deg);
+    transform: translateX(-50%) rotate(180deg);
     color: #ff6b00;
 }
 
@@ -2224,11 +2467,11 @@
     }
     
     .pilotos-hero {
-        padding: 80px 15px 30px;
+        padding: 75px 15px 25px;
     }
     
     .piloto-hero {
-        padding: 90px 15px 25px;
+        padding: 75px 15px 25px;
     }
     
     .piloto-name {

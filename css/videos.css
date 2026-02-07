@@ -10,7 +10,7 @@
 
 /* Hero Section */
 .videos-hero {
-    padding: 110px 20px 40px;
+    padding: 100px 20px 30px;
     background: linear-gradient(135deg, rgba(255, 107, 0, 0.05) 0%, rgba(255, 107, 0, 0) 100%);
     border-bottom: 1px solid rgba(255, 107, 0, 0.15);
     position: relative;
@@ -145,7 +145,7 @@
 /* Responsive */
 @media (max-width: 768px) {
     .videos-hero {
-        padding: 90px 15px 30px;
+        padding: 75px 15px 25px;
     }
 
     .videos-hero .hero-title {

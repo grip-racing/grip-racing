@@ -556,10 +556,48 @@ function displayPilotoInfo() {
     document.title = `${nome} - Grip Racing`;
 }
 
+// Show leader modal with top 5
+function showLeader(statName, top5) {
+    const existingModal = document.querySelector('.leader-modal');
+    if (existingModal) existingModal.remove();
+    
+    const modal = document.createElement('div');
+    modal.className = 'leader-modal';
+    
+    const top5Html = top5.map((p, i) => {
+        const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}º`;
+        return `
+            <div class="top-item ${i < 3 ? 'top-podium' : ''}">
+                <span class="top-position">${medal}</span>
+                <span class="top-name">${p.name}</span>
+                <span class="top-value">${p.value}</span>
+                <span class="top-corridas">🏁 ${p.corridas}</span>
+            </div>
+        `;
+    }).join('');
+    
+    modal.innerHTML = `
+        <div class="leader-modal-content">
+            <h3>🏆 Top 5 em ${statName}</h3>
+            <div class="top-list">
+                ${top5Html}
+            </div>
+            <button onclick="this.parentElement.parentElement.remove()">Fechar</button>
+        </div>
+    `;
+    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+    document.body.appendChild(modal);
+}
+
 // Toggle stat detail display
 function toggleStatDetail(type) {
     const detailSection = document.getElementById(`statDetail${type.charAt(0).toUpperCase() + type.slice(1)}`);
     const card = document.getElementById(`card${type.charAt(0).toUpperCase() + type.slice(1)}`);
+    
+    // Don't allow toggle if card has no ranking
+    if (card && card.classList.contains('no-ranking')) {
+        return;
+    }
     
     // Close all other details
     document.querySelectorAll('.stat-detail-section').forEach(section => {
@@ -973,7 +1011,7 @@ function displayStatDetails(type, container) {
 }
 
 // Display piloto stats overview
-function displayPilotoStats() {
+async function displayPilotoStats() {
     // Calcular títulos reais (apenas campeonatos, sem eventos)
     const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
     const todasParticipacoes = participacoesData.filter(p => 
@@ -1002,6 +1040,14 @@ function displayPilotoStats() {
     ));
     
     const titulos = titulosPilotoUnicos.size + titulosConstrutoresUnicos.size;
+    
+    // Contar eventos vencidos
+    const eventosVencidos = todasParticipacoes.filter(c => {
+        const campeao = String(c['Piloto Campeao'] || '').trim().toUpperCase();
+        return campeao === 'EVENTO';
+    });
+    const totalEventos = eventosVencidos.length;
+    
     const corridas = parseInt(pilotoData['Corridas'] || pilotoData['corridas'] || 0);
     const vitorias = parseInt(pilotoData['P1'] || pilotoData['Vitórias'] || pilotoData['vitorias'] || 0);
     const podios = parseInt(pilotoData['Pódios'] || pilotoData['Podios'] || pilotoData['podios'] || 0);
@@ -1017,14 +1063,175 @@ function displayPilotoStats() {
         String(p['Chelem'] || '').trim().toUpperCase() === 'SIM'
     ).length;
     
-    getCachedElement('statTitulos').textContent = window.GripUtils.formatNumber(titulos);
-    getCachedElement('statCorridas').textContent = window.GripUtils.formatNumber(corridas);
-    getCachedElement('statVitorias').textContent = window.GripUtils.formatNumber(vitorias);
-    getCachedElement('statPodios').textContent = window.GripUtils.formatNumber(podios);
-    getCachedElement('statPoles').textContent = window.GripUtils.formatNumber(poles);
-    getCachedElement('statFastLaps').textContent = window.GripUtils.formatNumber(fastLaps);
+    // Get all pilots for ranking
+    const pilotos = await window.GripUtils.fetchData(DATA_SOURCES.pilotos);
+    
+    // Helper to create ranking badge with click handler
+    const createRankBadge = (currentValue, allPilotos, statGetter, statName, formatValue, cardId) => {
+        if (corridas < 25) return; // Não mostrar ranking para pilotos com menos de 25 corridas
+        if (currentValue === 0) return;
+        
+        const sorted = allPilotos
+            .filter(p => parseInt(p['Corridas'] || 0) >= 25) // Apenas pilotos com 25+ corridas
+            .map(p => ({ 
+                name: p['Piloto'] || p['piloto'], 
+                value: statGetter(p),
+                corridas: parseInt(p['Corridas'] || 0)
+            }))
+            .filter(p => p.value > 0)
+            .sort((a, b) => b.value - a.value);
+        
+        const rank = sorted.findIndex(p => p.value === currentValue) + 1;
+        if (rank === 0) return;
+        
+        const top5 = sorted.slice(0, 5).map(p => ({
+            name: p.name,
+            value: formatValue(p.value),
+            corridas: window.GripUtils.formatNumber(p.corridas)
+        }));
+        
+        const badge = document.createElement('div');
+        badge.className = 'stat-rank-badge';
+        if (rank === 1) badge.classList.add('rank-1');
+        else if (rank === 2) badge.classList.add('rank-2');
+        else if (rank === 3) badge.classList.add('rank-3');
+        badge.textContent = `${rank}º`;
+        badge.title = 'Clique para ver o top 5';
+        badge.onclick = (e) => {
+            e.stopPropagation();
+            showLeader(statName, top5);
+        };
+        
+        const card = document.getElementById(cardId);
+        if (card) {
+            // Remove badge anterior se existir
+            const oldBadge = card.querySelector('.stat-rank-badge');
+            if (oldBadge) oldBadge.remove();
+            card.appendChild(badge);
+            card.classList.add('has-ranking');
+        }
+    };
+    
+    // Helper to remove ranking from card
+    const removeRankingFromCard = (cardId) => {
+        if (corridas < 25) {
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.classList.remove('has-ranking');
+                // Não remove stat-card-clickable, apenas esconde o badge
+                const badge = card.querySelector('.stat-rank-badge');
+                if (badge) badge.remove();
+            }
+        }
+    };
+    
+    // Display stats - lógica especial para títulos/eventos
+    const statTitulosEl = getCachedElement('statTitulos');
+    const cardTitulosEl = document.getElementById('cardTitulos');
+    
+    if (titulos === 0 && totalEventos > 0) {
+        // Mostrar eventos ao invés de títulos
+        statTitulosEl.textContent = window.GripUtils.formatNumber(totalEventos);
+        const labelEl = cardTitulosEl.querySelector('.stat-label');
+        if (labelEl) labelEl.textContent = 'Eventos';
+        const iconEl = cardTitulosEl.querySelector('.stat-icon');
+        if (iconEl) iconEl.textContent = '⭐';
+        // Não criar badge de ranking para eventos
+    } else {
+        // Mostrar títulos normalmente
+        statTitulosEl.textContent = window.GripUtils.formatNumber(titulos);
+        const labelEl = cardTitulosEl.querySelector('.stat-label');
+        if (labelEl) labelEl.textContent = 'Títulos';
+        const iconEl = cardTitulosEl.querySelector('.stat-icon');
+        if (iconEl) iconEl.textContent = '🏆';
+        
+        createRankBadge(titulos, pilotos, p => {
+            // Calcular títulos únicos para cada piloto
+            const pNome = p['Piloto'] || p['piloto'] || '';
+            const pParticipacoes = participacoesData.filter(part => 
+                isValidParticipacao(part) &&
+                (part['Piloto'] || part['piloto'] || '').toLowerCase() === pNome.toLowerCase()
+            );
+            const pCampeonatosPiloto = pParticipacoes.filter(c => String(c['Piloto Campeao'] || '').trim().toUpperCase() === 'SIM');
+            const pCampeonatosConstrutores = pParticipacoes.filter(c => {
+                const construtores = String(c['Construtores'] || '').trim().toUpperCase();
+                return construtores === 'SIM' || construtores === 'TIME';
+            });
+            const pTitulosPiloto = new Set(pCampeonatosPiloto.map(c => `PILOTO|||${c['Liga']}|||${c['Temporada']}|||${c['Categoria']}`));
+            const pTitulosConstrutores = new Set(pCampeonatosConstrutores.map(c => `CONSTRUTOR|||${c['Liga']}|||${c['Temporada']}|||${c['Categoria']}`));
+            return pTitulosPiloto.size + pTitulosConstrutores.size;
+        }, 'Títulos', v => window.GripUtils.formatNumber(v), 'cardTitulos');
+    }
+    
+    const corridasEl = getCachedElement('statCorridas');
+    corridasEl.textContent = window.GripUtils.formatNumber(corridas);
+    createRankBadge(corridas, pilotos, p => parseInt(p['Corridas'] || 0), 'Corridas', v => window.GripUtils.formatNumber(v), 'cardCorridas');
+    
+    const vitoriasEl = getCachedElement('statVitorias');
+    vitoriasEl.textContent = window.GripUtils.formatNumber(vitorias);
+    createRankBadge(vitorias, pilotos, p => parseInt(p['P1'] || p['Vitórias'] || p['vitorias'] || 0), 'Vitórias', v => window.GripUtils.formatNumber(v), 'cardVitorias');
+    
+    const podiosEl = getCachedElement('statPodios');
+    podiosEl.textContent = window.GripUtils.formatNumber(podios);
+    createRankBadge(podios, pilotos, p => parseInt(p['Pódios'] || p['Podios'] || p['podios'] || 0), 'Pódios', v => window.GripUtils.formatNumber(v), 'cardPodios');
+    
+    const polesEl = getCachedElement('statPoles');
+    polesEl.textContent = window.GripUtils.formatNumber(poles);
+    createRankBadge(poles, pilotos, p => parseInt(p['Poles'] || p['poles'] || 0), 'Poles', v => window.GripUtils.formatNumber(v), 'cardPoles');
+    
+    const fastLapsEl = getCachedElement('statFastLaps');
+    fastLapsEl.textContent = window.GripUtils.formatNumber(fastLaps);
+    createRankBadge(fastLaps, pilotos, p => parseInt(p['Fast Laps'] || p['fast_laps'] || 0), 'Fast Laps', v => window.GripUtils.formatNumber(v), 'cardFastlaps');
+    
     getCachedElement('statHatTricks').textContent = window.GripUtils.formatNumber(hatTricks);
+    createRankBadge(hatTricks, pilotos, p => {
+        // Calcular hat-tricks para cada piloto
+        const pNome = p['Piloto'] || p['piloto'] || '';
+        const pParticipacoes = participacoesData.filter(part => 
+            isValidParticipacao(part) &&
+            (part['Piloto'] || part['piloto'] || '').toLowerCase() === pNome.toLowerCase()
+        );
+        return pParticipacoes.filter(part => String(part['Hat-Trick'] || '').trim().toUpperCase() === 'SIM').length;
+    }, 'Hat-tricks', v => window.GripUtils.formatNumber(v), 'cardHattricks');
+    
     getCachedElement('statChelems').textContent = window.GripUtils.formatNumber(chelems);
+    createRankBadge(chelems, pilotos, p => {
+        // Calcular chelems para cada piloto
+        const pNome = p['Piloto'] || p['piloto'] || '';
+        const pParticipacoes = participacoesData.filter(part => 
+            isValidParticipacao(part) &&
+            (part['Piloto'] || part['piloto'] || '').toLowerCase() === pNome.toLowerCase()
+        );
+        return pParticipacoes.filter(part => String(part['Chelem'] || '').trim().toUpperCase() === 'SIM').length;
+    }, 'Chelems', v => window.GripUtils.formatNumber(v), 'cardChelems');
+    
+    // Remove ranking indicators from cards without rankings (< 25 corridas)
+    if (corridas < 25) {
+        ['cardTitulos', 'cardCorridas', 'cardVitorias', 'cardPodios', 'cardPoles', 'cardFastlaps', 'cardHattricks', 'cardChelems'].forEach(removeRankingFromCard);
+    }
+    
+    // Remove seta e clique quando valor é 0 (sem dados para mostrar)
+    const checkAndDisableCard = (cardId, value) => {
+        if (value === 0) {
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.classList.remove('stat-card-clickable');
+                card.classList.add('no-ranking');
+                card.style.pointerEvents = 'none';
+                const expandIcon = card.querySelector('.stat-expand-icon');
+                if (expandIcon) expandIcon.style.display = 'none';
+            }
+        }
+    };
+    
+    // Para títulos, verificar ambos títulos e eventos
+    checkAndDisableCard('cardTitulos', titulos + totalEventos);
+    checkAndDisableCard('cardVitorias', vitorias);
+    checkAndDisableCard('cardPodios', podios);
+    checkAndDisableCard('cardPoles', poles);
+    checkAndDisableCard('cardFastlaps', fastLaps);
+    checkAndDisableCard('cardHattricks', hatTricks);
+    checkAndDisableCard('cardChelems', chelems);
 }
 
 // Display temporadas
@@ -1645,7 +1852,7 @@ function toggleCampeonatoCorridas(element, liga, temporada, categoria) {
 }
 
 // Display advanced stats
-function displayAdvancedStats() {
+async function displayAdvancedStats() {
     const corridas = parseInt(pilotoData['Corridas'] || pilotoData['corridas'] || 0);
     const vitorias = parseInt(pilotoData['P1'] || pilotoData['Vitórias'] || pilotoData['vitorias'] || 0);
     const podios = parseInt(pilotoData['Pódios'] || pilotoData['Podios'] || pilotoData['podios'] || 0);
@@ -1661,12 +1868,231 @@ function displayAdvancedStats() {
     const etapasPorVitoria = pilotoData['Etapas Por Vitória'] || pilotoData['etapas_por_vitoria'] || 
                              (vitorias > 0 ? (corridas / vitorias).toFixed(1) : '-');
     
-    document.getElementById('taxaPodios').textContent = taxaPodios;
-    document.getElementById('taxaVitorias').textContent = taxaVitorias;
+    // Get all pilots for ranking calculation
+    const pilotos = await window.GripUtils.fetchData(DATA_SOURCES.pilotos);
+    
+    // Calculate percentage rankings
+    const calcPercentageRanking = (statGetter, lowerIsBetter = false) => {
+        if (corridas < 25) return '-'; // Não mostrar ranking para pilotos com menos de 25 corridas
+        if (corridas === 0) return '-';
+        const currentValue = statGetter(pilotoData);
+        const currentCorridas = parseInt(pilotoData['Corridas'] || 0);
+        if (currentCorridas === 0 || currentValue === 0) return '-';
+        
+        const currentRate = (currentValue / currentCorridas) * 100;
+        
+        const rates = pilotos
+            .filter(p => parseInt(p['Corridas'] || 0) >= 25) // Apenas pilotos com 25+ corridas
+            .map(p => {
+                const pCorridas = parseInt(p['Corridas'] || 0);
+                const pStat = statGetter(p);
+                return pCorridas > 0 ? (pStat / pCorridas) * 100 : 0;
+            })
+            .filter(r => r > 0)
+            .sort((a, b) => lowerIsBetter ? a - b : b - a);
+        
+        return rates.filter(r => lowerIsBetter ? r < currentRate : r > currentRate).length + 1;
+    };
+    
+    // Calculate absolute value rankings
+    const calcRanking = (statGetter, lowerIsBetter = false) => {
+        if (corridas < 25) return '-'; // Não mostrar ranking para pilotos com menos de 25 corridas
+        const currentValue = statGetter(pilotoData);
+        if (currentValue === 0 || currentValue === '-') return '-';
+        
+        const sorted = pilotos
+            .filter(p => parseInt(p['Corridas'] || 0) >= 25) // Apenas pilotos com 25+ corridas
+            .map(p => statGetter(p))
+            .filter(v => v > 0 && v !== '-')
+            .sort((a, b) => lowerIsBetter ? a - b : b - a);
+        
+        return sorted.indexOf(currentValue) + 1;
+    };
+    
+    // Find leaders for each stat
+    const findLeader = (statGetter, formatFn) => {
+        const sorted = pilotos
+            .map(p => ({ name: p['Piloto'] || p['piloto'], value: statGetter(p) }))
+            .filter(p => p.value > 0)
+            .sort((a, b) => b.value - a.value);
+        return sorted[0] ? { name: sorted[0].name, value: formatFn(sorted[0].value) } : null;
+    };
+    
+    const rankTaxaPodios = calcPercentageRanking(p => parseInt(p['Pódios'] || p['Podios'] || p['podios'] || 0));
+    const rankTaxaVitorias = calcPercentageRanking(p => parseInt(p['P1'] || p['Vitórias'] || p['vitorias'] || 0));
+    const rankTaxaAbandonos = calcPercentageRanking(p => parseInt(p['Abandonos'] || p['abandonos'] || 0), true); // Menor é melhor
+    
+    // Get top 5 for percentage stats
+    const getTop5Percentage = (statGetter, formatFn, lowerIsBetter = false) => {
+        const rates = pilotos
+            .filter(p => parseInt(p['Corridas'] || 0) >= 25) // Apenas pilotos com 25+ corridas
+            .map(p => {
+                const pCorridas = parseInt(p['Corridas'] || 0);
+                const pStat = statGetter(p);
+                const rate = pCorridas > 0 ? (pStat / pCorridas) * 100 : 0;
+                return { name: p['Piloto'] || p['piloto'], value: rate, corridas: pCorridas };
+            })
+            .filter(r => r.value > 0)
+            .sort((a, b) => lowerIsBetter ? a.value - b.value : b.value - a.value);
+        return rates.slice(0, 5).map(p => ({
+            name: p.name,
+            value: formatFn(p.value),
+            corridas: window.GripUtils.formatNumber(p.corridas)
+        }));
+    };
+    
+    const top5TaxaPodios = getTop5Percentage(p => parseInt(p['Pódios'] || p['Podios'] || p['podios'] || 0), v => v.toFixed(1) + '%');
+    const top5TaxaVitorias = getTop5Percentage(p => parseInt(p['P1'] || p['Vitórias'] || p['vitorias'] || 0), v => v.toFixed(1) + '%');
+    const top5TaxaTop10 = getTop5Percentage(p => parseInt(p['Top 10'] || p['top_10'] || 0), v => v.toFixed(1) + '%');
+    const top5TaxaAbandonos = getTop5Percentage(p => parseInt(p['Abandonos'] || p['abandonos'] || 0), v => v.toFixed(1) + '%', true); // Menor é melhor
+    
+    // Get top 5 for etapas stats (menor é melhor)
+    const getTop5Etapas = (statGetter, formatFn) => {
+        const rates = pilotos
+            .filter(p => parseInt(p['Corridas'] || 0) >= 25)
+            .map(p => {
+                const pCorridas = parseInt(p['Corridas'] || 0);
+                const pStat = statGetter(p);
+                const rate = pStat > 0 ? pCorridas / pStat : 0;
+                return { name: p['Piloto'] || p['piloto'], value: rate, corridas: pCorridas };
+            })
+            .filter(r => r.value > 0)
+            .sort((a, b) => a.value - b.value); // Menor é melhor
+        return rates.slice(0, 5).map(p => ({
+            name: p.name,
+            value: formatFn(p.value),
+            corridas: window.GripUtils.formatNumber(p.corridas)
+        }));
+    };
+    
+    const top5EtapasPorPodio = getTop5Etapas(p => parseInt(p['Pódios'] || p['Podios'] || p['podios'] || 0), v => v.toFixed(1));
+    const top5EtapasPorVitoria = getTop5Etapas(p => parseInt(p['P1'] || p['Vitórias'] || p['vitorias'] || 0), v => v.toFixed(1));
+    
+    // Calculate rankings for new stats
+    const rankTaxaTop10 = calcPercentageRanking(p => parseInt(p['Top 10'] || p['top_10'] || 0));
+    const rankEtapasPorPodio = podios > 0 ? (() => {
+        if (corridas < 25) return '-';
+        const currentRate = corridas / podios;
+        const rates = pilotos
+            .filter(p => parseInt(p['Corridas'] || 0) >= 25)
+            .map(p => {
+                const pCorridas = parseInt(p['Corridas'] || 0);
+                const pPodios = parseInt(p['Pódios'] || p['Podios'] || p['podios'] || 0);
+                return pPodios > 0 ? pCorridas / pPodios : 0;
+            })
+            .filter(r => r > 0)
+            .sort((a, b) => a - b); // Menor é melhor
+        return rates.filter(r => r < currentRate).length + 1;
+    })() : '-';
+    
+    const rankEtapasPorVitoria = vitorias > 0 ? (() => {
+        if (corridas < 25) return '-';
+        const currentRate = corridas / vitorias;
+        const rates = pilotos
+            .filter(p => parseInt(p['Corridas'] || 0) >= 25)
+            .map(p => {
+                const pCorridas = parseInt(p['Corridas'] || 0);
+                const pVitorias = parseInt(p['P1'] || p['Vitórias'] || p['vitorias'] || 0);
+                return pVitorias > 0 ? pCorridas / pVitorias : 0;
+            })
+            .filter(r => r > 0)
+            .sort((a, b) => a - b); // Menor é melhor
+        return rates.filter(r => r < currentRate).length + 1;
+    })() : '-';
+    
+    const taxaPodiosEl = document.getElementById('taxaPodios');
+    taxaPodiosEl.textContent = taxaPodios;
+    if (rankTaxaPodios !== '-' && top5TaxaPodios.length > 0) {
+        const badge = document.createElement('span');
+        badge.className = 'rank-badge';
+        badge.textContent = ` (${rankTaxaPodios}º)`;
+        badge.title = 'Clique para ver o top 5';
+        badge.onclick = (e) => {
+            e.stopPropagation();
+            showLeader('Taxa de Pódios', top5TaxaPodios);
+        };
+        taxaPodiosEl.appendChild(badge);
+    }
+    
+    const taxaVitoriasEl = document.getElementById('taxaVitorias');
+    taxaVitoriasEl.textContent = taxaVitorias;
+    if (rankTaxaVitorias !== '-' && top5TaxaVitorias.length > 0) {
+        const badge = document.createElement('span');
+        badge.className = 'rank-badge';
+        badge.textContent = ` (${rankTaxaVitorias}º)`;
+        badge.title = 'Clique para ver o top 5';
+        badge.onclick = (e) => {
+            e.stopPropagation();
+            showLeader('Taxa de Vitórias', top5TaxaVitorias);
+        };
+        taxaVitoriasEl.appendChild(badge);
+    }
+    
     document.getElementById('taxaTop10').textContent = taxaTop10;
+    if (rankTaxaTop10 !== '-' && top5TaxaTop10.length > 0) {
+        const taxaTop10El = document.getElementById('taxaTop10');
+        const badge = document.createElement('span');
+        badge.className = 'rank-badge';
+        if (rankTaxaTop10 === 1) badge.classList.add('rank-1');
+        else if (rankTaxaTop10 === 2) badge.classList.add('rank-2');
+        else if (rankTaxaTop10 === 3) badge.classList.add('rank-3');
+        badge.textContent = ` (${rankTaxaTop10}º)`;
+        badge.title = 'Clique para ver o top 5';
+        badge.onclick = (e) => {
+            e.stopPropagation();
+            showLeader('Taxa de Top 10', top5TaxaTop10);
+        };
+        taxaTop10El.appendChild(badge);
+    }
+    
     document.getElementById('etapasPorPodio').textContent = etapasPorPodio;
+    if (rankEtapasPorPodio !== '-' && top5EtapasPorPodio.length > 0) {
+        const etapasPorPodioEl = document.getElementById('etapasPorPodio');
+        const badge = document.createElement('span');
+        badge.className = 'rank-badge';
+        if (rankEtapasPorPodio === 1) badge.classList.add('rank-1');
+        else if (rankEtapasPorPodio === 2) badge.classList.add('rank-2');
+        else if (rankEtapasPorPodio === 3) badge.classList.add('rank-3');
+        badge.textContent = ` (${rankEtapasPorPodio}º)`;
+        badge.title = 'Clique para ver o top 5';
+        badge.onclick = (e) => {
+            e.stopPropagation();
+            showLeader('Etapas por Pódio', top5EtapasPorPodio);
+        };
+        etapasPorPodioEl.appendChild(badge);
+    }
+    
     document.getElementById('etapasPorVitoria').textContent = etapasPorVitoria;
-    document.getElementById('abandonos').textContent = window.GripUtils.formatNumber(abandonos);
+    if (rankEtapasPorVitoria !== '-' && top5EtapasPorVitoria.length > 0) {
+        const etapasPorVitoriaEl = document.getElementById('etapasPorVitoria');
+        const badge = document.createElement('span');
+        badge.className = 'rank-badge';
+        if (rankEtapasPorVitoria === 1) badge.classList.add('rank-1');
+        else if (rankEtapasPorVitoria === 2) badge.classList.add('rank-2');
+        else if (rankEtapasPorVitoria === 3) badge.classList.add('rank-3');
+        badge.textContent = ` (${rankEtapasPorVitoria}º)`;
+        badge.title = 'Clique para ver o top 5';
+        badge.onclick = (e) => {
+            e.stopPropagation();
+            showLeader('Etapas por Vitória', top5EtapasPorVitoria);
+        };
+        etapasPorVitoriaEl.appendChild(badge);
+    }
+    
+    const taxaAbandonos = corridas > 0 ? ((abandonos / corridas) * 100).toFixed(1) + '%' : '-';
+    const abandonosEl = document.getElementById('abandonos');
+    abandonosEl.textContent = taxaAbandonos;
+    if (rankTaxaAbandonos !== '-' && top5TaxaAbandonos.length > 0) {
+        const badge = document.createElement('span');
+        badge.className = 'rank-badge';
+        badge.textContent = ` (${rankTaxaAbandonos}º)`;
+        badge.title = 'Clique para ver o top 5';
+        badge.onclick = (e) => {
+            e.stopPropagation();
+            showLeader('Taxa de Abandono', top5TaxaAbandonos);
+        };
+        abandonosEl.appendChild(badge);
+    }
     
     // Ocultar estatísticas relacionadas a pódios se não houver pódios
     const statTaxaPodios = document.getElementById('statTaxaPodios');
