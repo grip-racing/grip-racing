@@ -19,9 +19,9 @@ async function loadEventosData() {
     try {
         const participacoes = await fetchData('data/data-participacoes.csv');
         
-        // Filtrar apenas eventos (Categoria = WES ou Liga = iRacing)
+        // Filtrar apenas eventos (Categoria começa com WES ou Liga = iRacing)
         const eventosParticipacoes = participacoes.filter(p => 
-            (p.Categoria === 'WES' || p.Liga === 'iRacing') && 
+            (p.Categoria && p.Categoria.startsWith('WES') || p.Liga === 'iRacing') && 
             p.Pista && 
             p.Pista.trim() !== ''
         );
@@ -32,7 +32,7 @@ async function loadEventosData() {
         eventosParticipacoes.forEach(p => {
             // Para WES, o nome está na Categoria; para iRacing, está na Categoria também
             const nomeEvento = p.Categoria;
-            const tipoEvento = p.Categoria === 'WES' ? 'WES' : 'iRacing';
+            const tipoEvento = (p.Categoria && p.Categoria.startsWith('WES')) ? 'WES' : 'iRacing';
             const eventoKey = `${nomeEvento}_${tipoEvento}_${p.Temporada}_${p.Pista}`;
             
             if (!eventosMap.has(eventoKey)) {
