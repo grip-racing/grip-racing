@@ -15,7 +15,7 @@
     <!-- Pilotos -->
     <url>
         <loc>https://gripracing.com.br/pilotos.html</loc>
-        <lastmod>2026-02-07</lastmod>
+        <lastmod>2026-02-08</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -23,15 +23,23 @@
     <!-- Detalhes de Piloto -->
     <url>
         <loc>https://gripracing.com.br/piloto-detalhes.html</loc>
-        <lastmod>2026-02-07</lastmod>
+        <lastmod>2026-02-08</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
+    </url>
+
+    <!-- Eventos -->
+    <url>
+        <loc>https://gripracing.com.br/eventos.html</loc>
+        <lastmod>2026-02-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
     </url>
 
     <!-- Vídeos -->
     <url>
         <loc>https://gripracing.com.br/videos.html</loc>
-        <lastmod>2026-02-07</lastmod>
+        <lastmod>2026-02-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>

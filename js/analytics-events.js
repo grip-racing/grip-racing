@@ -328,6 +328,11 @@ function setupTracking() {
         trackRaceClick();
         trackBackToPilots();
         trackLeaderView();
+    } else if (currentPage.includes('eventos.html')) {
+        // Página de eventos
+        trackPilotSearch(); // Reutiliza busca
+        trackPilotFilters(); // Reutiliza filtros
+        trackColumnSort(); // Reutiliza ordenação
     } else if (currentPage.includes('videos.html')) {
         // Página de vídeos
         trackVideoClick();
