@@ -2,6 +2,18 @@
  * eventos.js - Gerenciamento da página de eventos especiais (WES e iRacing)
  */
 
+// Format liga with logo or text
+function formatLiga(ligaNome, cssClass = 'liga-display') {
+    if (!ligaNome) return '';
+    const ligaNormalizada = ligaNome.toLowerCase().replace(/\s+/g, '');
+    const logoPath = `assets/ligas/${ligaNormalizada}.png`;
+    
+    return `<span class="${cssClass}">
+        <img src="${logoPath}" alt="${ligaNome}" title="${ligaNome}" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+        <span class="liga-text" style="display:none;">${ligaNome}</span>
+    </span>`;
+}
+
 let allEventos = [];
 let displayEventos = [];
 let currentFilter = 'all';
@@ -176,7 +188,10 @@ function renderEventos() {
     const eventosToShow = displayEventos.slice(0, endIndex);
 
     tbody.innerHTML = eventosToShow.map(evento => {
-        const tipoBadge = `<span class="liga-badge ${evento.tipo.toLowerCase()}">${evento.tipo}</span>`;
+        // Usar logo da liga se disponível
+        const ligaParaLogo = evento.tipo === 'WES' ? 'F1BC' : evento.liga;
+        const ligaHtml = formatLiga(ligaParaLogo, 'liga-display-evento');
+        
         const resultadoBadge = getResultadoBadge(evento.melhorResultado);
         const pilotosHtml = evento.pilotos.slice(0, 3).map(p => 
             `<span class="piloto-tag">${p}</span>`
@@ -187,7 +202,7 @@ function renderEventos() {
         return `
             <tr onclick="showEventoModal('${evento.nome}', '${evento.tipo}', '${evento.temporada}', '${evento.pista}')">
                 <td data-label="Evento">${evento.nome}</td>
-                <td data-label="Tipo">${tipoBadge}</td>
+                <td data-label="Tipo">${ligaHtml}</td>
                 <td data-label="Pista">${evento.pista}</td>
                 <td data-label="Temporada">${evento.temporada}</td>
                 <td data-label="Resultado">${resultadoBadge}</td>
@@ -245,8 +260,10 @@ function showEventoModal(nome, tipo, temporada, pista) {
 
     // Preencher informações do header
     document.getElementById('modalEventoNome').textContent = evento.nome;
-    document.getElementById('modalEventoLiga').textContent = tipo;
-    document.getElementById('modalEventoLiga').className = `evento-liga-tag ${tipo.toLowerCase()}`;
+    
+    // Usar logo da liga
+    const ligaParaLogo = tipo === 'WES' ? 'F1BC' : evento.liga;
+    document.getElementById('modalEventoLiga').innerHTML = formatLiga(ligaParaLogo, 'evento-liga-logo');
     document.getElementById('modalEventoPista').textContent = `📍 ${evento.pista}`;
     document.getElementById('modalEventoTemporada').textContent = `📅 ${evento.temporada}`;
 
