@@ -1,0 +1,1388 @@
+/* ============================================
+   PILOTO DETALHES V2 - DESIGN LIMPO
+   ============================================ */
+
+.piloto-v2-main {
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+/* Container */
+.container-v2 {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ============================================
+   HERO SECTION - COMPACTO
+   ============================================ */
+
+.piloto-v2-hero {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    border-bottom: 1px solid rgba(255, 107, 0, 0.2);
+    padding: 40px 0;
+}
+
+.back-link-v2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    transition: all 0.2s ease;
+}
+
+.back-link-v2:hover {
+    color: #ff6b00;
+}
+
+.hero-v2-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.hero-v2-left {
+    flex: 1;
+}
+
+.piloto-name-v2 {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.piloto-subtitle-v2 {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.hero-medals {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.medals-separator {
+    width: 1px;
+    height: 24px;
+    background: var(--border-color);
+    margin: 0 4px;
+}
+
+.hero-medal-item,
+.hero-medal-group {
+    position: relative;
+    font-size: 24px;
+    cursor: help;
+    transition: transform 0.2s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.hero-medal-item:hover,
+.hero-medal-group:hover {
+    transform: scale(1.2);
+}
+
+.medal-emoji {
+    font-size: 24px;
+}
+
+.medal-count {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.hero-medal-item .medal-tooltip,
+.hero-medal-group .medal-tooltip {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.95);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.6;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+    min-width: 160px;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hero-medal-item .medal-tooltip::after,
+.hero-medal-group .medal-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.95);
+}
+
+.hero-medal-item:hover .medal-tooltip,
+.hero-medal-group:hover .medal-tooltip {
+    opacity: 1;
+}
+
+/* ============================================
+   STATS BAR - COMPACTO EM LINHA
+   ============================================ */
+
+.piloto-v2-stats-bar {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 20px 0;
+}
+
+.stats-bar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    gap: 16px;
+}
+
+.stat-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: var(--bg-tertiary);
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.stat-bar-item:hover {
+    border-color: rgba(255, 107, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.stat-bar-item.highlight {
+    background: rgba(255, 107, 0, 0.1);
+    border-color: #ff6b00;
+}
+
+.stat-bar-icon {
+    font-size: 28px;
+    line-height: 1;
+    opacity: 0.9;
+}
+
+.stat-bar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.stat-bar-value {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.stat-bar-item.highlight .stat-bar-value {
+    color: #ff6b00;
+}
+
+.stat-bar-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-ranking {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 3px;
+    opacity: 0.7;
+}
+
+/* ============================================
+   CONTENT LAYOUT
+   ============================================ */
+
+.piloto-v2-content {
+    padding: 40px 0 60px;
+}
+
+.content-v2-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 30px;
+}
+
+/* Main Content */
+.content-v2-main {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.content-v2-card {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    overflow: visible;
+}
+
+.content-v2-card:hover {
+    border-color: rgba(255, 107, 0, 0.2);
+}
+
+.card-v2-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ============================================
+   HISTORY TABS
+   ============================================ */
+
+.history-tabs-v2 {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0;
+}
+
+.history-tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    position: relative;
+}
+
+.history-tab-btn .tab-icon {
+    font-size: 16px;
+}
+
+.history-tab-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 107, 0, 0.05);
+}
+
+.history-tab-btn.active {
+    color: #ff6b00;
+    border-bottom-color: #ff6b00;
+}
+
+.history-tabs-content {
+    position: relative;
+    overflow: visible;
+    min-height: 200px;
+}
+
+.history-tab-panel {
+    display: none;
+    animation: fadeIn 0.3s ease;
+    overflow: visible;
+}
+
+.history-tab-panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive tabs */
+@media (max-width: 768px) {
+    .history-tabs-v2 {
+        flex-direction: column;
+        gap: 0;
+        border-bottom: none;
+    }
+    
+    .history-tab-btn {
+        border-bottom: none;
+        border-left: 3px solid transparent;
+        margin-bottom: 0;
+        margin-left: -2px;
+        padding: 12px 16px;
+    }
+    
+    .history-tab-btn.active {
+        border-bottom-color: transparent;
+        border-left-color: #ff6b00;
+        background: rgba(255, 107, 0, 0.1);
+    }
+    
+    .history-tab-btn .tab-label {
+        font-size: 13px;
+    }
+}
+
+/* Chart Container */
+.chart-v2-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+.chart-v2-container canvas {
+    width: 100% !important;
+    height: 300px !important;
+}
+
+/* Temporadas, Campeonatos, Circuitos */
+.temporadas-v2-container,
+.campeonatos-v2-container,
+.circuitos-v2-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: visible;
+}
+
+/* Sidebar */
+.content-v2-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar-v2-card {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-v2-card:hover {
+    border-color: rgba(255, 107, 0, 0.2);
+}
+
+.sidebar-v2-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(255, 107, 0, 0.2);
+}
+
+/* Sidebar Stats */
+.sidebar-v2-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar-stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.sidebar-stat-item:hover {
+    background: rgba(255, 107, 0, 0.05);
+}
+
+.sidebar-stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.sidebar-stat-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ff6b00;
+}
+
+/* Recordes */
+.recordes-v2-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recorde-v2-item {
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border-left: 3px solid #ff6b00;
+    border-radius: 6px;
+}
+
+.recorde-v2-label {
+    display: block;
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.recorde-v2-value {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Loading text */
+.loading-text {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 20px;
+    font-size: 14px;
+}
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .content-v2-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .content-v2-sidebar {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .piloto-v2-hero {
+        padding: 20px 0;
+    }
+    
+    .hero-v2-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .piloto-number-v2 {
+        font-size: 24px;
+    }
+    
+    .piloto-name-v2 {
+        font-size: 28px;
+    }
+    
+    .stats-bar-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .stat-bar-item {
+        padding: 12px;
+    }
+    
+    .stat-bar-icon {
+        font-size: 24px;
+    }
+    
+    .stat-bar-value {
+        font-size: 20px;
+    }
+    
+    .chart-v2-container {
+        height: 250px;
+    }
+    
+    .chart-v2-container canvas {
+        height: 250px !important;
+    }
+    
+    .content-v2-sidebar {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   TEMPORADAS - ANO E TEMPORADA EXPANDABLE
+   ============================================ */
+
+.ano-item-wrapper-v2 {
+    margin-bottom: 12px;
+}
+
+.ano-item-v2 {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    transition: all 0.2s ease;
+}
+
+.ano-item-v2:hover {
+    border-color: #ff6b00;
+    transform: translateX(3px);
+}
+
+.ano-header-left-v2 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.ano-nome-v2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.ano-info-v2 {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.ano-stats-mini-v2 {
+    display: flex;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.ano-expand-v2 {
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+}
+
+.ano-temporadas-v2 {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 15px;
+}
+
+.ano-item-wrapper-v2.active .ano-temporadas-v2 {
+    padding: 15px;
+}
+
+.temporada-item-wrapper-v2 {
+    margin-bottom: 10px;
+}
+
+.temporada-item-v2 {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: all 0.2s ease;
+}
+
+.temporada-item-v2:hover {
+    border-color: rgba(255, 107, 0, 0.5);
+}
+
+.temporada-header-left-v2 {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+}
+
+.temporada-nome-v2 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.temporada-corridas-v2 {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.temporada-stats-mini-v2 {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+}
+
+.temporada-toggle-v2 {
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+}
+
+.temporada-corridas-list-v2 {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0;
+}
+
+.temporada-item-wrapper-v2.active .temporada-corridas-list-v2 {
+    padding-top: 10px;
+}
+
+/* Corrida item */
+.corrida-item-v2 {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+}
+
+.corrida-item-v2:hover {
+    background: var(--card-bg);
+    border-color: #ff6b00;
+}
+
+.corrida-resultado-v2 {
+    min-width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 6px;
+    background: var(--card-bg);
+}
+
+.resultado-vitoria-v2 {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #1a1a1a;
+}
+
+.resultado-segundo-v2 {
+    background: linear-gradient(135deg, #C0C0C0, #888);
+    color: #1a1a1a;
+}
+
+.resultado-podio-v2 {
+    background: linear-gradient(135deg, #CD7F32, #8B4513);
+    color: white;
+}
+
+.resultado-dnf-v2 {
+    background: rgba(255, 0, 0, 0.2);
+    color: #ff4444;
+}
+
+.corrida-principal-v2 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.corrida-pista-v2 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.corrida-liga-categoria-v2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.corrida-categoria-v2 {
+    padding: 2px 8px;
+    background: rgba(255, 107, 0, 0.1);
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.corrida-badges-v2 {
+    display: flex;
+    gap: 6px;
+    font-size: 16px;
+}
+
+.liga-logo-v2 {
+    height: 16px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.liga-text-v2 {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* ============================================
+   CAMPEONATOS (LEAGUES)
+   ============================================ */
+
+.campeonato-item-v2 {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+}
+
+.campeonato-item-v2:hover {
+    border-color: #ff6b00;
+    transform: translateX(3px);
+}
+
+.campeonato-header-v2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.campeonato-info-v2 {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* ============================================
+   CIRCUITOS (TRACKS)
+   ============================================ */
+
+.circuito-item-v2 {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+}
+
+.circuito-item-v2:hover {
+    border-color: #ff6b00;
+    transform: translateX(3px);
+}
+
+.circuito-nome-v2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.circuito-info-v2 {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.circuito-melhor-v2 {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* Corridas clicáveis */
+.corrida-item-v2 {
+    cursor: pointer;
+}
+
+.corrida-item-v2:hover {
+    background: var(--card-bg);
+    border-color: #ff6b00;
+    transform: translateX(2px);
+}
+
+/* Radar chart */
+.radar-v2-container {
+    padding: 20px 10px;
+}
+
+.radar-v2-container canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+.radar-leaders {
+    margin-top: 20px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+.radar-leader-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    background: var(--bg-primary);
+    border-radius: 6px;
+    font-size: 12px;
+    gap: 10px;
+}
+
+.radar-leader-label {
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.radar-leader-name {
+    color: var(--text-primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.radar-leader-name:hover {
+    color: #ff6b00;
+}
+
+.radar-leader-value {
+    font-weight: 700;
+    color: #ff6b00;
+    white-space: nowrap;
+    text-align: right;
+}
+
+/* Campeonatos expansíveis */
+.campeonato-item-wrapper-v2 {
+    margin-bottom: 12px;
+}
+
+.campeonato-item-v2 {
+    cursor: pointer;
+    position: relative;
+    padding-right: 40px;
+}
+
+.campeonato-expand-v2 {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+}
+
+.campeonato-detail-v2 {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 15px;
+}
+
+.campeonato-item-wrapper-v2.active .campeonato-detail-v2 {
+    padding: 15px;
+}
+
+.campeonato-temporada-wrapper-v2 {
+    margin-bottom: 8px;
+}
+
+.campeonato-temporada-v2 {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    padding-right: 40px;
+}
+
+.campeonato-temporada-v2:hover {
+    border-color: rgba(255, 107, 0, 0.5);
+}
+
+.campeonato-temporada-nome-v2 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.campeonato-temporada-stats-v2 {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.campeonato-temporada-expand-v2 {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+}
+
+.campeonato-temporada-corridas-v2 {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 10px;
+}
+
+.campeonato-temporada-wrapper-v2.active .campeonato-temporada-corridas-v2 {
+    padding: 10px;
+}
+
+.campeonato-corrida-item-v2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.campeonato-corrida-item-v2:hover {
+    border-color: #ff6b00;
+    transform: translateX(2px);
+}
+
+.campeonato-corrida-resultado-v2 {
+    min-width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 6px;
+    background: var(--bg-primary);
+}
+
+.campeonato-corrida-pista-v2 {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.campeonato-corrida-badges-v2 {
+    display: flex;
+    gap: 6px;
+    font-size: 14px;
+}
+
+/* Corridas dentro dos campeonatos */
+.corrida-campeonato-item-v2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.corrida-campeonato-item-v2:hover {
+    border-color: #ff6b00;
+    background: rgba(255, 107, 0, 0.05);
+    transform: translateX(3px);
+}
+
+.corrida-campeonato-pista-v2 {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.corrida-campeonato-resultado-v2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.corrida-campeonato-posicao-v2 {
+    min-width: 35px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 5px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.corrida-campeonato-badges-v2 {
+    display: flex;
+    gap: 4px;
+    font-size: 14px;
+}
+
+/* Circuitos expansíveis */
+.circuito-item-wrapper-v2 {
+    margin-bottom: 12px;
+}
+
+.circuito-item-v2 {
+    cursor: pointer;
+    position: relative;
+    padding-right: 40px;
+}
+
+.circuito-expand-v2 {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+}
+
+.circuito-detail-v2 {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 15px;
+}
+
+.circuito-item-wrapper-v2.active .circuito-detail-v2 {
+    padding: 15px;
+}
+
+.circuito-corrida-item-v2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.circuito-corrida-item-v2:hover {
+    background: var(--card-bg);
+    border-color: #ff6b00;
+}
+
+.circuito-corrida-resultado-v2 {
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 6px;
+    background: var(--card-bg);
+}
+
+.circuito-corrida-info-v2 {
+    flex: 1;
+    font-size: 13px;
+}
+
+.circuito-corrida-meta-v2 {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.circuito-corrida-badges-v2 {
+    display: flex;
+    gap: 6px;
+    font-size: 14px;
+}
+
+/* Recordes clicáveis */
+.recorde-clickable {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.recorde-clickable:hover {
+    background: var(--bg-primary);
+    transform: translateX(3px);
+}
+
+.recorde-ranking {
+    font-size: 11px;
+    color: #ff6b00;
+    font-weight: 700;
+    margin-left: 6px;
+}
+
+/* Modal Top 5 */
+.top5-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.top5-modal {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.top5-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.top5-modal-close:hover {
+    color: #ff6b00;
+}
+
+.top5-modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.top5-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.top5-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 18px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.top5-item.top5-current {
+    background: rgba(255, 107, 0, 0.1);
+    border-color: #ff6b00;
+}
+
+.top5-item:not(.top5-current):hover {
+    border-color: rgba(255, 107, 0, 0.5);
+    transform: translateX(3px);
+}
+
+.top5-position {
+    font-size: 20px;
+    font-weight: 700;
+    min-width: 35px;
+    text-align: center;
+}
+
+.top5-nome {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.top5-valor {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ff6b00;
+}
+
+/* Modal Detalhado de Estatística */
+.stat-detail-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.stat-detail-modal {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.stat-detail-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    z-index: 1;
+}
+
+.stat-detail-modal-close:hover {
+    color: #ff6b00;
+}
+
+.stat-detail-modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.stat-detail-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stat-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 18px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.stat-detail-clickable {
+    cursor: pointer;
+}
+
+.stat-detail-clickable:hover {
+    border-color: #ff6b00;
+    transform: translateX(3px);
+}
+
+.stat-detail-item-content {
+    flex: 1;
+}
+
+.stat-detail-item-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.stat-detail-item-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.stat-detail-item-badges {
+    font-size: 16px;
+    display: flex;
+    gap: 6px;
+}

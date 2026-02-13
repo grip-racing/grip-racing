@@ -149,7 +149,7 @@ function displayPilotos() {
         tr.addEventListener('click', (e) => {
             if (!e.target.classList.contains('expand-btn')) {
                 const pilotoNome = tr.querySelector('.piloto-name-text').textContent.trim();
-                window.location.href = `piloto-detalhes.html?nome=${encodeURIComponent(pilotoNome)}`;
+                window.location.href = `piloto-detalhes-v2.html?nome=${encodeURIComponent(pilotoNome)}`;
             }
         });
     });
@@ -326,7 +326,7 @@ function setupSearchListener() {
         const item = e.target.closest('.autocomplete-item');
         if (item) {
             const piloto = item.dataset.piloto;
-            window.location.href = `piloto-detalhes.html?nome=${encodeURIComponent(piloto)}`;
+            window.location.href = `piloto-detalhes-v2.html?nome=${encodeURIComponent(piloto)}`;
         } else if (!e.target.closest('.search-box')) {
             // Fechar autocomplete se clicar fora
             autocompleteResults.classList.remove('show');
@@ -354,7 +354,7 @@ function setupSearchListener() {
             if (selectedIndex >= 0 && items[selectedIndex]) {
                 e.preventDefault();
                 const piloto = items[selectedIndex].dataset.piloto;
-                window.location.href = `piloto-detalhes.html?nome=${encodeURIComponent(piloto)}`;
+                window.location.href = `piloto-detalhes-v2.html?nome=${encodeURIComponent(piloto)}`;
             }
         } else if (e.key === 'Escape') {
             autocompleteResults.classList.remove('show');

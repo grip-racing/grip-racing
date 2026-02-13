@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piloto - Grip Racing</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EXXYMDS32C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EXXYMDS32C');
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pilotos-v2.css">
+    <link rel="stylesheet" href="css/modal-corrida.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <div id="header-container"></div>
+
+    <main class="piloto-v2-main">
+        <!-- Hero compacto -->
+        <section class="piloto-v2-hero">
+            <div class="container-v2">
+                <a href="pilotos.html" class="back-link-v2">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Voltar
+                </a>
+                
+                <div class="hero-v2-content">
+                    <div class="hero-v2-left">
+                        <h1 class="piloto-name-v2" id="pilotoNameV2">Rodrigo de Sousa</h1>
+                        <div class="piloto-subtitle-v2" id="pilotoSubtitleV2">2018 - 2024</div>
+                    </div>
+                    
+                    <div class="hero-medals" id="heroMedals">
+                        <!-- Medalhas e títulos serão inseridos aqui -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats compactos em linha -->
+        <section class="piloto-v2-stats-bar">
+            <div class="container-v2">
+                <div class="stats-bar-grid">
+                    <div class="stat-bar-item">
+                        <div class="stat-bar-icon">🏆</div>
+                        <div class="stat-bar-content">
+                            <div class="stat-bar-value" id="statBarTitles">-</div>
+                            <div class="stat-bar-label">Títulos</div>
+                        </div>
+                    </div>
+                    <div class="stat-bar-item">
+                        <div class="stat-bar-icon">🥇</div>
+                        <div class="stat-bar-content">
+                            <div class="stat-bar-value" id="statBarWins">-</div>
+                            <div class="stat-bar-label">Vitórias</div>
+                        </div>
+                    </div>
+                    <div class="stat-bar-item">
+                        <div class="stat-bar-icon">🏅</div>
+                        <div class="stat-bar-content">
+                            <div class="stat-bar-value" id="statBarPodiums">-</div>
+                            <div class="stat-bar-label">Pódios</div>
+                        </div>
+                    </div>
+                    <div class="stat-bar-item">
+                        <div class="stat-bar-icon">🏁</div>
+                        <div class="stat-bar-content">
+                            <div class="stat-bar-value" id="statBarRaces">-</div>
+                            <div class="stat-bar-label">Corridas</div>
+                        </div>
+                    </div>
+                    <div class="stat-bar-item">
+                        <div class="stat-bar-icon">⚡</div>
+                        <div class="stat-bar-content">
+                            <div class="stat-bar-value" id="statBarPoles">-</div>
+                            <div class="stat-bar-label">Poles</div>
+                        </div>
+                    </div>
+                    <div class="stat-bar-item">
+                        <div class="stat-bar-icon">⏱️</div>
+                        <div class="stat-bar-content">
+                            <div class="stat-bar-value" id="statBarFastLaps">-</div>
+                            <div class="stat-bar-label">Fast Laps</div>
+                        </div>
+                    </div>
+                    <div class="stat-bar-item">
+                        <div class="stat-bar-icon">🎩</div>
+                        <div class="stat-bar-content">
+                            <div class="stat-bar-value" id="statBarHatTricks">-</div>
+                            <div class="stat-bar-label">Hat-tricks</div>
+                        </div>
+                    </div>
+                    <div class="stat-bar-item">
+                        <div class="stat-bar-icon">👑</div>
+                        <div class="stat-bar-content">
+                            <div class="stat-bar-value" id="statBarChelems">-</div>
+                            <div class="stat-bar-label">Chelems</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conteúdo principal -->
+        <section class="piloto-v2-content">
+            <div class="container-v2">
+                <div class="content-v2-layout">
+                    <!-- Coluna principal -->
+                    <div class="content-v2-main">
+                        <!-- Performance por Ano -->
+                        <div class="content-v2-card">
+                            <h2 class="card-v2-title">📊 Performance por Ano</h2>
+                            <div class="chart-v2-container">
+                                <canvas id="yearlyPerformanceChartV2"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Tabs de Histórico -->
+                        <div class="content-v2-card">
+                            <div class="history-tabs-v2">
+                                <button class="history-tab-btn active" data-tab="temporadas">
+                                    <span class="tab-icon">📅</span>
+                                    <span class="tab-label">Histórico por Ano</span>
+                                </button>
+                                <button class="history-tab-btn" data-tab="campeonatos">
+                                    <span class="tab-icon">🏆</span>
+                                    <span class="tab-label">Campeonatos por Liga</span>
+                                </button>
+                                <button class="history-tab-btn" data-tab="circuitos">
+                                    <span class="tab-icon">🏁</span>
+                                    <span class="tab-label">Histórico de Circuitos</span>
+                                </button>
+                            </div>
+
+                            <div class="history-tabs-content">
+                                <!-- Histórico por Ano -->
+                                <div id="tabTemporadas" class="history-tab-panel active">
+                                    <div id="temporadasContainerV2" class="temporadas-v2-container">
+                                        <p class="loading-text">Carregando histórico...</p>
+                                    </div>
+                                </div>
+
+                                <!-- Campeonatos por Liga -->
+                                <div id="tabCampeonatos" class="history-tab-panel">
+                                    <div id="campeonatosContainerV2" class="campeonatos-v2-container">
+                                        <p class="loading-text">Carregando campeonatos...</p>
+                                    </div>
+                                </div>
+
+                                <!-- Histórico de Circuitos -->
+                                <div id="tabCircuitos" class="history-tab-panel">
+                                    <div id="circuitosContainerV2" class="circuitos-v2-container">
+                                        <p class="loading-text">Carregando circuitos...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <aside class="content-v2-sidebar">
+                        <!-- Estatísticas Avançadas -->
+                        <div class="sidebar-v2-card">
+                            <h3 class="sidebar-v2-title">Estatísticas</h3>
+                            <div class="sidebar-v2-stats">
+                                <div class="sidebar-stat-item">
+                                    <span class="sidebar-stat-label">Taxa de Pódios</span>
+                                    <span class="sidebar-stat-value" id="taxaPodiosV2">-</span>
+                                </div>
+                                <div class="sidebar-stat-item">
+                                    <span class="sidebar-stat-label">Taxa de Vitórias</span>
+                                    <span class="sidebar-stat-value" id="taxaVitoriasV2">-</span>
+                                </div>
+                                <div class="sidebar-stat-item">
+                                    <span class="sidebar-stat-label">Taxa de Top 10</span>
+                                    <span class="sidebar-stat-value" id="taxaTop10V2">-</span>
+                                </div>
+                                <div class="sidebar-stat-item">
+                                    <span class="sidebar-stat-label">Etapas/Pódio</span>
+                                    <span class="sidebar-stat-value" id="etapasPorPodioV2">-</span>
+                                </div>
+                                <div class="sidebar-stat-item">
+                                    <span class="sidebar-stat-label">Etapas/Vitória</span>
+                                    <span class="sidebar-stat-value" id="etapasPorVitoriaV2">-</span>
+                                </div>
+                                <div class="sidebar-stat-item">
+                                    <span class="sidebar-stat-label">Taxa de Abandono</span>
+                                    <span class="sidebar-stat-value" id="abandonosV2">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Destaques -->
+                        <div class="sidebar-v2-card">
+                            <h3 class="sidebar-v2-title">Destaques</h3>
+                            <div id="recordesContainerV2" class="recordes-v2-container">
+                                <p class="loading-text">Calculando...</p>
+                            </div>
+                        </div>
+
+                        <!-- Gráfico Radar -->
+                        <div class="sidebar-v2-card">
+                            <h3 class="sidebar-v2-title">Comparação com Líderes</h3>
+                            <div class="radar-v2-container">
+                                <canvas id="statsRadarChartV2"></canvas>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/components-loader.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/piloto-detalhes-v2.js"></script>
+    <script src="js/analytics-events.js"></script>
+</body>
+</html>
