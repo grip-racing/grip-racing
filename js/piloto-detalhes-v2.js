@@ -1,5 +1,5 @@
 // Piloto detalhes v2 - Design limpo
-const DATA_VERSION = '1.0.21'; // Incrementar quando atualizar os dados
+const DATA_VERSION = '1.0.22'; // Incrementar quando atualizar os dados
 const DATA_SOURCES = {
     pilotos: `data/data-pilotos.csv?v=${DATA_VERSION}`,
     participacoes: `data/data-participacoes.csv?v=${DATA_VERSION}`
@@ -23,6 +23,178 @@ let pilotoData = null;
 let participacoesData = [];
 let allPilotosData = [];
 let pilotoParticipacoes = []; // Cache das participações do piloto atual
+
+// Track sort order for each stat type
+const statSortOrder = {
+    races: 'desc',
+    wins: 'desc',
+    podiums: 'desc',
+    poles: 'desc',
+    fastlaps: 'desc',
+    hattricks: 'desc',
+    chelems: 'desc'
+};
+
+// Toggle stat sort order and refresh modal
+function toggleStatSort(type) {
+    statSortOrder[type] = statSortOrder[type] === 'desc' ? 'asc' : 'desc';
+    // Update modal content without closing it
+    updateStatDetailModalContent(type);
+}
+
+// Update modal content without recreating it
+function updateStatDetailModalContent(statType) {
+    const modalExists = document.querySelector('.stat-detail-modal-overlay');
+    if (!modalExists) return;
+    
+    // Regenerate items with new sort order
+    let items = [];
+    let icon = '';
+    let title = '';
+    
+    switch(statType) {
+        case 'races':
+            title = 'Corridas';
+            icon = '🏁';
+            items = pilotoParticipacoes.map(p => ({
+                title: `${normalizeCircuitNameV2(p['Pista'])}`,
+                subtitle: `${formatLigaV2(p['Liga'])} • ${p['Temporada']} • ${p['Ano']}`,
+                badges: getBadgesForRace(p),
+                clickable: true,
+                data: p
+            }));
+            break;
+            
+        case 'wins':
+            title = 'Vitórias';
+            icon = '🥇';
+            items = pilotoParticipacoes
+                .filter(p => String(p['Final'] || '').trim() === '1' || String(p['Final'] || '').trim().toUpperCase() === 'P1')
+                .map(p => ({
+                    title: `${normalizeCircuitNameV2(p['Pista'])}`,
+                    subtitle: `${formatLigaV2(p['Liga'])} • ${p['Temporada']} • ${p['Ano']}`,
+                    badges: getBadgesForRace(p),
+                    clickable: true,
+                    data: p
+                }));
+            break;
+            
+        case 'podiums':
+            title = 'Pódios';
+            icon = '�';
+            items = pilotoParticipacoes
+                .filter(p => {
+                    const final = String(p['Final'] || '').trim();
+                    const finalNum = parseInt(final.replace(/[^\d]/g, ''));
+                    return finalNum >= 1 && finalNum <= 3;
+                })
+                .map(p => ({
+                    title: `${normalizeCircuitNameV2(p['Pista'])}`,
+                    subtitle: `${formatLigaV2(p['Liga'])} • ${p['Temporada']} • ${p['Ano']}`,
+                    badges: getBadgesForRace(p),
+                    clickable: true,
+                    data: p
+                }));
+            break;
+            
+        case 'poles':
+            title = 'Pole Positions';
+            icon = '⚡';
+            items = pilotoParticipacoes
+                .filter(p => String(p['Pole'] || '').trim().toUpperCase() === 'SIM')
+                .map(p => ({
+                    title: `${normalizeCircuitNameV2(p['Pista'])}`,
+                    subtitle: `${formatLigaV2(p['Liga'])} • ${p['Temporada']} • ${p['Ano']}`,
+                    badges: getBadgesForRace(p),
+                    clickable: true,
+                    data: p
+                }));
+            break;
+            
+        case 'fastlaps':
+            title = 'Voltas Rápidas';
+            icon = '⏱️';
+            items = pilotoParticipacoes
+                .filter(p => String(p['Best Lap'] || '').trim().toUpperCase() === 'SIM')
+                .map(p => ({
+                    title: `${normalizeCircuitNameV2(p['Pista'])}`,
+                    subtitle: `${formatLigaV2(p['Liga'])} • ${p['Temporada']} • ${p['Ano']}`,
+                    badges: getBadgesForRace(p),
+                    clickable: true,
+                    data: p
+                }));
+            break;
+            
+        case 'hattricks':
+            title = 'Hat-tricks';
+            icon = '🎩';
+            items = pilotoParticipacoes
+                .filter(p => String(p['Hat-Trick'] || '').trim().toUpperCase() === 'SIM')
+                .map(p => ({
+                    title: `${normalizeCircuitNameV2(p['Pista'])}`,
+                    subtitle: `${formatLigaV2(p['Liga'])} • ${p['Temporada']} • ${p['Ano']}`,
+                    badges: getBadgesForRace(p),
+                    clickable: true,
+                    data: p
+                }));
+            break;
+            
+        case 'chelems':
+            title = 'Grand Chelems';
+            icon = '👑';
+            items = pilotoParticipacoes
+                .filter(p => String(p['Chelem'] || '').trim().toUpperCase() === 'SIM')
+                .map(p => ({
+                    title: `${normalizeCircuitNameV2(p['Pista'])}`,
+                    subtitle: `${formatLigaV2(p['Liga'])} • ${p['Temporada']} • ${p['Ano']}`,
+                    badges: getBadgesForRace(p),
+                    clickable: true,
+                    data: p
+                }));
+            break;
+    }
+    
+    // Apply sorting
+    if (statSortOrder[statType] === 'desc') {
+        items.reverse();
+    }
+    
+    // Update sort button
+    const sortIcon = statSortOrder[statType] === 'desc' ? '↓' : '↑';
+    const sortLabel = statSortOrder[statType] === 'desc' ? 'Recente' : 'Antigo';
+    
+    // Update DOM elements
+    const modalTitle = modalExists.querySelector('.stat-detail-modal-title');
+    const sortContainer = modalExists.querySelector('.stat-sort-container-v2');
+    const itemsList = modalExists.querySelector('.stat-detail-list');
+    
+    if (modalTitle) {
+        modalTitle.innerHTML = `${icon} ${title} (${items.length})`;
+    }
+    
+    if (sortContainer) {
+        const sortBtn = sortContainer.querySelector('.stat-sort-btn-v2');
+        if (sortBtn) {
+            sortBtn.title = `Ordenar por ${sortLabel === 'Recente' ? 'mais antigo' : 'mais recente'}`;
+            const sortIconEl = sortBtn.querySelector('.sort-icon-v2');
+            const sortLabelEl = sortBtn.querySelector('.sort-label-v2');
+            if (sortIconEl) sortIconEl.textContent = sortIcon;
+            if (sortLabelEl) sortLabelEl.textContent = sortLabel;
+        }
+    }
+    
+    if (itemsList) {
+        itemsList.innerHTML = items.map(item => `
+            <div class="stat-detail-item ${item.clickable ? 'stat-detail-clickable' : ''}" ${item.clickable ? `onclick="closeStatDetailModal(); openCorridaModalV2(this.getAttribute('data-corrida'));" data-corrida='${JSON.stringify(item.data).replace(/'/g, "&apos;")}'` : ''}>
+                <div class="stat-detail-item-content">
+                    <div class="stat-detail-item-title">${item.title}</div>
+                    <div class="stat-detail-item-subtitle">${item.subtitle}</div>
+                </div>
+                ${item.badges ? `<div class="stat-detail-item-badges">${item.badges}</div>` : ''}
+            </div>
+        `).join('');
+    }
+}
 
 // Função para voltar para a página de origem
 function goBack(event) {
@@ -884,6 +1056,15 @@ function showStatDetailModal(statType) {
             break;
     }
     
+    // Apply sorting (titles don't need sorting as they're grouped)
+    if (statType !== 'titles' && statSortOrder[statType] === 'desc') {
+        items.reverse();
+    }
+    
+    // Prepare sort button
+    const sortIcon = statSortOrder[statType] === 'desc' ? '↓' : '↑';
+    const sortLabel = statSortOrder[statType] === 'desc' ? 'Recente' : 'Antigo';
+    
     const modalHTML = `
         <div class="stat-detail-modal-overlay" onclick="closeStatDetailModal()">
             <div class="stat-detail-modal" onclick="event.stopPropagation()">
@@ -898,6 +1079,14 @@ function showStatDetailModal(statType) {
                     </div>
                     ` : `<button class="stat-detail-top5-btn" onclick="closeStatDetailModal(); showTop5Modal('${top5Data.statKey}', '${top5Data.icon}', '${top5Data.label}', null, '${statType}');">🏆 Ver Top 5 Global</button>`
                 ) : ''}
+                ${statType !== 'titles' ? `
+                <div class="stat-sort-container-v2">
+                    <button class="stat-sort-btn-v2" onclick="event.stopPropagation(); toggleStatSort('${statType}')" title="Ordenar por ${sortLabel === 'Recente' ? 'mais antigo' : 'mais recente'}">
+                        <span class="sort-icon-v2">${sortIcon}</span>
+                        <span class="sort-label-v2">${sortLabel}</span>
+                    </button>
+                </div>
+                ` : ''}
                 <div class="stat-detail-list">
                     ${items.map(item => `
                         <div class="stat-detail-item ${item.clickable ? 'stat-detail-clickable' : ''}" ${item.clickable ? `onclick="closeStatDetailModal(); openCorridaModalV2(this.getAttribute('data-corrida'));" data-corrida='${JSON.stringify(item.data).replace(/'/g, "&apos;")}'` : ''}>
