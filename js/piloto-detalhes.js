@@ -19,6 +19,16 @@ const DOM_CACHE = {};
 let pilotoData = null;
 let participacoesData = [];
 
+// Função para voltar para a página de origem
+function goBack(event) {
+    event.preventDefault();
+    if (window.history.length > 1 && document.referrer) {
+        window.history.back();
+    } else {
+        window.location.href = 'pilotos.html';
+    }
+}
+
 // Validar se é uma participação válida (não é separador de ano)
 function isValidParticipacao(p) {
     // Ignorar linhas que são apenas separadores de ano (sem piloto, pista, etc)

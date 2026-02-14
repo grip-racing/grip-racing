@@ -797,7 +797,11 @@
     padding: 10px 18px;
     border-radius: 8px;
     border: 1px solid rgba(255, 107, 0, 0.2);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.back-link svg {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .back-link:hover {
@@ -806,6 +810,10 @@
     border-color: #ff6b00;
     transform: translateX(-5px);
     box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
+}
+
+.back-link:hover svg {
+    transform: translateX(-3px);
 }
 
 .piloto-name {

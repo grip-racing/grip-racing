@@ -24,6 +24,17 @@ let participacoesData = [];
 let allPilotosData = [];
 let pilotoParticipacoes = []; // Cache das participações do piloto atual
 
+// Função para voltar para a página de origem
+function goBack(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (window.history.length > 1 && document.referrer) {
+        window.history.back();
+    } else {
+        window.location.href = 'pilotos.html';
+    }
+}
+
 // Validar participação
 function isValidParticipacao(p) {
     const piloto = String(p['Piloto'] || '').trim();
