@@ -1900,20 +1900,16 @@ function displayPrimeirosMarcos() {
         { key: 'primeiroTituloEquipes', icon: '👥', title: 'Primeiro Título de Equipes', color: '#4cc9f0' }
     ];
     
-    const html = marcosConfig.map(config => {
+    // Filtrar apenas marcos alcançados
+    const marcosAlcancados = marcosConfig.filter(config => marcos[config.key]);
+    
+    if (marcosAlcancados.length === 0) {
+        container.innerHTML = '<p class="loading-text">Nenhum marco alcançado ainda</p>';
+        return;
+    }
+    
+    const html = marcosAlcancados.map(config => {
         const marco = marcos[config.key];
-        if (!marco) {
-            return `
-                <div class="marco-item-v2 marco-nao-alcancado">
-                    <div class="marco-icon-v2" style="color: ${config.color}; opacity: 0.3;">${config.icon}</div>
-                    <div class="marco-content-v2">
-                        <div class="marco-title-v2">${config.title}</div>
-                        <div class="marco-info-v2">Ainda não alcançado</div>
-                    </div>
-                </div>
-            `;
-        }
-        
         const pista = marco['Pista'] || 'N/A';
         const liga = formatLigaV2(marco['Liga'] || '');
         const temporada = marco['Temporada'] || '';
