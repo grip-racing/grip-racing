@@ -220,14 +220,38 @@ function getStatValue(piloto, key, aliases) {
 function getGlobalRanking(statKey, aliases, value) {
     if (value === 0) return 999;
     
-    // Get all values for this stat
-    const allValues = allPilotosData.map(p => getStatValue(p, statKey, aliases));
+    // Get all values for this stat (only pilots with value > 0)
+    const allValues = allPilotosData
+        .map(p => getStatValue(p, statKey, aliases))
+        .filter(v => v > 0);
     
-    // Get unique values and sort descending
-    const uniqueValues = [...new Set(allValues)].sort((a, b) => b - a);
+    // Count how many pilots have MORE than this value
+    const pilotsAbove = allValues.filter(v => v > value).length;
     
-    // Find position (1-based)
-    return uniqueValues.indexOf(value) + 1;
+    // Ranking is number of pilots above + 1
+    return pilotsAbove + 1;
+}
+
+// Helper: get global ranking for combined stats (e.g., Títulos + Construtores)
+function getGlobalRankingCombined(statKeys, aliasesArray, value) {
+    if (value === 0) return 999;
+    
+    // Get all combined values (only pilots with value > 0)
+    const allValues = allPilotosData
+        .map(p => {
+            let total = 0;
+            statKeys.forEach((key, index) => {
+                total += getStatValue(p, key, aliasesArray[index]);
+            });
+            return total;
+        })
+        .filter(v => v > 0);
+    
+    // Count how many pilots have MORE than this value
+    const pilotsAbove = allValues.filter(v => v > value).length;
+    
+    // Ranking is number of pilots above + 1
+    return pilotsAbove + 1;
 }
 
 // Helper: get global ranking from participations data
@@ -344,7 +368,7 @@ function displayStatsBar() {
     
     // Calcular rankings
     const rankingCorridas = getGlobalRanking('Corridas', ['corridas'], corridas);
-    const rankingTitulos = getGlobalRanking('Títulos', ['titulos'], titulos) + getGlobalRanking('Construtores', ['construtores'], construtores);
+    const rankingTitulos = totalTitulos > 0 ? getGlobalRankingCombined(['Títulos', 'Construtores'], [['titulos'], ['construtores']], totalTitulos) : 0;
     const rankingPodios = getGlobalRanking('Pódios', ['Podios', 'podios'], podios);
     const rankingVitorias = getGlobalRanking('P1', ['Vitórias', 'vitorias'], vitorias);
     const rankingPoles = getGlobalRanking('Poles', ['poles'], poles);
@@ -356,6 +380,14 @@ function displayStatsBar() {
     const totalHatTricks = calculateTotalPilotsWithStat('Hat-Trick');
     const totalChelems = calculateTotalPilotsWithStat('Chelem');
     
+    // Calcular total de pilotos com valores > 0 para cada estatística
+    const totalComCorridas = calculateTotalPilotsWithStatValue('Corridas', ['corridas']);
+    const totalComTitulos = calculateTotalPilotsWithCombinedStatValue(['Títulos', 'Construtores'], [['titulos'], ['construtores']]);
+    const totalComPodios = calculateTotalPilotsWithStatValue('Pódios', ['Podios', 'podios']);
+    const totalComVitorias = calculateTotalPilotsWithStatValue('P1', ['Vitórias', 'vitorias']);
+    const totalComPoles = calculateTotalPilotsWithStatValue('Poles', ['poles']);
+    const totalComFastLaps = calculateTotalPilotsWithStatValue('Fast Laps', ['fast_laps']);
+    
     document.getElementById('statBarRaces').textContent = window.GripUtils.formatNumber(corridas);
     document.getElementById('statBarTitles').textContent = window.GripUtils.formatNumber(totalTitulos);
     document.getElementById('statBarPodiums').textContent = window.GripUtils.formatNumber(podios);
@@ -366,12 +398,12 @@ function displayStatsBar() {
     document.getElementById('statBarChelems').textContent = window.GripUtils.formatNumber(chelems);
     
     // Adicionar rankings e cliques
-    addDetailedStatCard('statBarRaces', rankingCorridas, allPilotosData.length, 'races', corridas);
-    addDetailedStatCard('statBarTitles', Math.min(rankingTitulos, allPilotosData.length), allPilotosData.length, 'titles', totalTitulos);
-    addDetailedStatCard('statBarPodiums', rankingPodios, allPilotosData.length, 'podiums', podios);
-    addDetailedStatCard('statBarWins', rankingVitorias, allPilotosData.length, 'wins', vitorias);
-    addDetailedStatCard('statBarPoles', rankingPoles, allPilotosData.length, 'poles', poles);
-    addDetailedStatCard('statBarFastLaps', rankingFastLaps, allPilotosData.length, 'fastlaps', fastLaps);
+    addDetailedStatCard('statBarRaces', rankingCorridas, totalComCorridas, 'races', corridas);
+    addDetailedStatCard('statBarTitles', rankingTitulos, totalComTitulos, 'titles', totalTitulos);
+    addDetailedStatCard('statBarPodiums', rankingPodios, totalComPodios, 'podiums', podios);
+    addDetailedStatCard('statBarWins', rankingVitorias, totalComVitorias, 'wins', vitorias);
+    addDetailedStatCard('statBarPoles', rankingPoles, totalComPoles, 'poles', poles);
+    addDetailedStatCard('statBarFastLaps', rankingFastLaps, totalComFastLaps, 'fastlaps', fastLaps);
     addDetailedStatCard('statBarHatTricks', rankingHatTricks, totalHatTricks, 'hattricks', hatTricks);
     addDetailedStatCard('statBarChelems', rankingChelems, totalChelems, 'chelems', chelems);
 }
@@ -421,6 +453,22 @@ function calculateTotalPilotsWithStat(field) {
     });
     
     return Object.keys(pilotCounts).length;
+}
+
+// Calculate total pilots with a specific stat value > 0
+function calculateTotalPilotsWithStatValue(statKey, aliases) {
+    return allPilotosData.filter(p => getStatValue(p, statKey, aliases) > 0).length;
+}
+
+// Calculate total pilots with combined stat value > 0 (e.g., Títulos + Construtores)
+function calculateTotalPilotsWithCombinedStatValue(statKeys, aliasesArray) {
+    return allPilotosData.filter(p => {
+        let total = 0;
+        statKeys.forEach((key, index) => {
+            total += getStatValue(p, key, aliasesArray[index]);
+        });
+        return total > 0;
+    }).length;
 }
 
 // Add Top 5 stat card (for Hat-tricks and Chelems)
@@ -477,28 +525,36 @@ function showTop5Modal(statKey, label, icon, titleType = null, fromDetailModal =
     if (statKey === 'Títulos' && titleType) {
         const pilotTitles = {};
         
-        participacoesData.forEach(p => {
-            if (!isValidParticipacao(p)) return;
-            const nome = p['Piloto'] || p['piloto'] || '';
-            if (!nome) return;
-            
-            const isPilotoCampeao = String(p['Piloto Campeao'] || '').trim().toUpperCase() === 'SIM';
-            const isConstrutores = ['SIM', 'TIME'].includes(String(p['Construtores'] || '').trim().toUpperCase());
-            
-            if (titleType === 'individual' && isPilotoCampeao) {
-                pilotTitles[nome] = (pilotTitles[nome] || 0) + 1;
-            } else if (titleType === 'construtores' && isConstrutores) {
-                pilotTitles[nome] = (pilotTitles[nome] || 0) + 1;
-            } else if (titleType === 'geral') {
-                // Para geral, contar TODOS os títulos (individual + construtores)
-                if (isPilotoCampeao) {
-                    pilotTitles[nome] = (pilotTitles[nome] || 0) + 1;
+        if (titleType === 'individual') {
+            // Títulos individuais da planilha de pilotos
+            allPilotosData.forEach(p => {
+                const nome = p['Piloto'] || p['piloto'];
+                const titulos = getStatValue(p, 'Títulos', ['titulos']);
+                if (titulos > 0) {
+                    pilotTitles[nome] = titulos;
                 }
-                if (isConstrutores) {
-                    pilotTitles[nome] = (pilotTitles[nome] || 0) + 1;
+            });
+        } else if (titleType === 'construtores') {
+            // Títulos de construtores da planilha de pilotos
+            allPilotosData.forEach(p => {
+                const nome = p['Piloto'] || p['piloto'];
+                const construtores = getStatValue(p, 'Construtores', ['construtores']);
+                if (construtores > 0) {
+                    pilotTitles[nome] = construtores;
                 }
-            }
-        });
+            });
+        } else if (titleType === 'geral') {
+            // Títulos totais (individual + construtores) da planilha de pilotos
+            allPilotosData.forEach(p => {
+                const nome = p['Piloto'] || p['piloto'];
+                const titulos = getStatValue(p, 'Títulos', ['titulos']);
+                const construtores = getStatValue(p, 'Construtores', ['construtores']);
+                const total = titulos + construtores;
+                if (total > 0) {
+                    pilotTitles[nome] = total;
+                }
+            });
+        }
         
         const sortedData = Object.entries(pilotTitles)
             .map(([nome, valor]) => ({ nome, valor }))
