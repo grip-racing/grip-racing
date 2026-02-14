@@ -90,6 +90,7 @@ async function loadPilotoData() {
     displayTemporadas();
     displayCampeonatos();
     displayCircuitos();
+    displayPrimeirosMarcos();
     initHistoryTabs();
     
     // Theme change listener
@@ -1638,6 +1639,121 @@ function displayCircuitos() {
     }).join('');
     
     container.innerHTML = html;
+}
+
+// Display primeiros marcos
+function displayPrimeirosMarcos() {
+    const container = document.getElementById('marcosContainerV2');
+    if (pilotoParticipacoes.length === 0) {
+        container.innerHTML = '<p class="loading-text">Nenhum dado disponível</p>';
+        return;
+    }
+    
+    // Ordenar participações cronologicamente (ano, temporada, data)
+    const participacoesOrdenadas = [...pilotoParticipacoes].sort((a, b) => {
+        const anoA = parseInt(a['Ano']) || 0;
+        const anoB = parseInt(b['Ano']) || 0;
+        if (anoA !== anoB) return anoA - anoB;
+        
+        const tempA = a['Temporada'] || '';
+        const tempB = b['Temporada'] || '';
+        return tempA.localeCompare(tempB);
+    });
+    
+    // Encontrar marcos
+    const marcos = {};
+    
+    // Primeira corrida
+    if (participacoesOrdenadas.length > 0) {
+        marcos.primeiraCorrida = participacoesOrdenadas[0];
+    }
+    
+    // Primeira vitória
+    marcos.primeiraVitoria = participacoesOrdenadas.find(p => String(p['Final'] || '').trim() === '1');
+    
+    // Primeiro pódio
+    marcos.primeiroPodio = participacoesOrdenadas.find(p => {
+        const final = String(p['Final'] || '').trim();
+        return final === '1' || final === '2' || final === '3';
+    });
+    
+    // Primeira pole
+    marcos.primeiraPole = participacoesOrdenadas.find(p => String(p['Pole'] || '').trim().toUpperCase() === 'SIM');
+    
+    // Primeira fast lap
+    marcos.primeiraFastLap = participacoesOrdenadas.find(p => String(p['Best Lap'] || '').trim().toUpperCase() === 'SIM');
+    
+    // Primeiro hat-trick
+    marcos.primeiroHatTrick = participacoesOrdenadas.find(p => String(p['Hat-Trick'] || '').trim().toUpperCase() === 'SIM');
+    
+    // Primeiro chelem
+    marcos.primeiroChelem = participacoesOrdenadas.find(p => String(p['Chelem'] || '').trim().toUpperCase() === 'SIM');
+    
+    // Primeiro título individual
+    marcos.primeiroTituloIndividual = participacoesOrdenadas.find(p => String(p['Piloto Campeao'] || '').trim().toUpperCase() === 'SIM');
+    
+    // Primeiro título de equipes/construtores
+    marcos.primeiroTituloEquipes = participacoesOrdenadas.find(p => {
+        const val = String(p['Construtores'] || '').trim().toUpperCase();
+        return val === 'SIM' || val === 'TIME';
+    });
+    
+    // Renderizar marcos
+    const marcosConfig = [
+        { key: 'primeiraCorrida', icon: '🏁', title: 'Primeira Corrida', color: '#666' },
+        { key: 'primeiroPodio', icon: '🏅', title: 'Primeiro Pódio', color: '#cd7f32' },
+        { key: 'primeiraVitoria', icon: '🥇', title: 'Primeira Vitória', color: '#ffd700' },
+        { key: 'primeiraPole', icon: '🚩', title: 'Primeira Pole Position', color: '#ff6b00' },
+        { key: 'primeiraFastLap', icon: '⚡', title: 'Primeira Volta Mais Rápida', color: '#9d4edd' },
+        { key: 'primeiroHatTrick', icon: '🎩', title: 'Primeiro Hat-Trick', color: '#e63946' },
+        { key: 'primeiroChelem', icon: '👑', title: 'Primeiro Chelem', color: '#f77f00' },
+        { key: 'primeiroTituloIndividual', icon: '🏆', title: 'Primeiro Título Individual', color: '#06ffa5' },
+        { key: 'primeiroTituloEquipes', icon: '👥', title: 'Primeiro Título de Equipes', color: '#4cc9f0' }
+    ];
+    
+    const html = marcosConfig.map(config => {
+        const marco = marcos[config.key];
+        if (!marco) {
+            return `
+                <div class="marco-item-v2 marco-nao-alcancado">
+                    <div class="marco-icon-v2" style="color: ${config.color}; opacity: 0.3;">${config.icon}</div>
+                    <div class="marco-content-v2">
+                        <div class="marco-title-v2">${config.title}</div>
+                        <div class="marco-info-v2">Ainda não alcançado</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        const pista = marco['Pista'] || 'N/A';
+        const liga = formatLigaV2(marco['Liga'] || '');
+        const temporada = marco['Temporada'] || '';
+        const ano = marco['Ano'] || '';
+        const categoria = marco['Categoria'] || '';
+        const final = String(marco['Final'] || '-').trim();
+        
+        // Formatar posição (adicionar P apenas para números)
+        const isNumeric = /^\d+$/.test(final);
+        const resultadoFormatado = final !== '-' ? (isNumeric ? `P${final}` : final) : '';
+        
+        return `
+            <div class="marco-item-v2" onclick="openCorridaModalV2(this.getAttribute('data-corrida'))" data-corrida='${JSON.stringify(marco).replace(/'/g, "&apos;")}'>
+                <div class="marco-icon-v2" style="color: ${config.color};">${config.icon}</div>
+                <div class="marco-content-v2">
+                    <div class="marco-title-v2">${config.title}</div>
+                    <div class="marco-info-v2">
+                        <strong>${pista}</strong>
+                        ${resultadoFormatado ? `<span class="marco-resultado-v2">${resultadoFormatado}</span>` : ''}
+                    </div>
+                    <div class="marco-meta-v2">
+                        ${liga} ${categoria ? '• ' + categoria : ''} • ${temporada} • ${ano}
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    container.innerHTML = `<div class="marcos-grid-v2">${html}</div>`;
 }
 
 // Helper functions

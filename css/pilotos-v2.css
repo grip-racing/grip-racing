@@ -1503,6 +1503,98 @@
     gap: 6px;
 }
 
+/* ============================================
+   PRIMEIROS MARCOS
+   ============================================ */
+
+.marcos-grid-v2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+}
+
+.marco-item-v2 {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.marco-item-v2:hover {
+    border-color: #ff6b00;
+    background: rgba(255, 107, 0, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.2);
+}
+
+.marco-item-v2.marco-nao-alcancado {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.marco-item-v2.marco-nao-alcancado:hover {
+    border-color: var(--border-color);
+    background: var(--card-bg);
+    transform: none;
+    box-shadow: none;
+}
+
+.marco-icon-v2 {
+    font-size: 32px;
+    line-height: 1;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.marco-content-v2 {
+    flex: 1;
+    min-width: 0;
+}
+
+.marco-title-v2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.marco-info-v2 {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.marco-info-v2 strong {
+    color: var(--text-primary);
+}
+
+.marco-resultado-v2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;
+    background: #ff6b00;
+    color: white;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 11px;
+}
+
+.marco-meta-v2 {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
 /* Responsivo para botões de títulos */
 @media (max-width: 768px) {
     .stat-detail-top5-buttons {
@@ -1513,5 +1605,17 @@
     .stat-detail-top5-btn-small {
         width: 100%;
         padding: 10px 16px;
+    }
+    
+    .marcos-grid-v2 {
+        grid-template-columns: 1fr;
+    }
+    
+    .marco-item-v2 {
+        padding: 16px;
+    }
+    
+    .marco-icon-v2 {
+        font-size: 28px;
     }
 }
