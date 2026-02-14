@@ -372,8 +372,8 @@ function displayStatsBar() {
     addDetailedStatCard('statBarWins', rankingVitorias, allPilotosData.length, 'wins', vitorias);
     addDetailedStatCard('statBarPoles', rankingPoles, allPilotosData.length, 'poles', poles);
     addDetailedStatCard('statBarFastLaps', rankingFastLaps, allPilotosData.length, 'fastlaps', fastLaps);
-    addTop5StatCard('statBarHatTricks', rankingHatTricks, totalHatTricks, 'Hat-Trick', 'Hat-tricks', '🎩', hatTricks);
-    addTop5StatCard('statBarChelems', rankingChelems, totalChelems, 'Chelem', 'Grand Chelems', '👑', chelems);
+    addDetailedStatCard('statBarHatTricks', rankingHatTricks, totalHatTricks, 'hattricks', hatTricks);
+    addDetailedStatCard('statBarChelems', rankingChelems, totalChelems, 'chelems', chelems);
 }
 
 function addDetailedStatCard(elementId, ranking, total, statType, value) {
@@ -450,11 +450,66 @@ function addTop5StatCard(elementId, ranking, total, statKey, label, icon, value)
     }
 }
 
+// Função auxiliar para pegar top N incluindo empates na última posição
+function getTopNWithTies(data, n = 5) {
+    if (data.length <= n) return data;
+    
+    const result = data.slice(0, n);
+    const lastValue = result[n - 1].valor;
+    
+    // Adicionar todos os empates com o último valor
+    for (let i = n; i < data.length; i++) {
+        if (data[i].valor === lastValue) {
+            result.push(data[i]);
+        } else {
+            break;
+        }
+    }
+    
+    return result;
+}
+
 // Modal com Top 5
-function showTop5Modal(statKey, label, icon) {
+function showTop5Modal(statKey, label, icon, titleType = null, fromDetailModal = null) {
     let top5Data = [];
     
-    if (statKey === 'Hat-Trick' || statKey === 'Chelem') {
+    // Se for títulos e tiver um tipo específico
+    if (statKey === 'Títulos' && titleType) {
+        const pilotTitles = {};
+        
+        participacoesData.forEach(p => {
+            if (!isValidParticipacao(p)) return;
+            const nome = p['Piloto'] || p['piloto'] || '';
+            if (!nome) return;
+            
+            const isPilotoCampeao = String(p['Piloto Campeao'] || '').trim().toUpperCase() === 'SIM';
+            const isConstrutores = ['SIM', 'TIME'].includes(String(p['Construtores'] || '').trim().toUpperCase());
+            
+            if (titleType === 'individual' && isPilotoCampeao) {
+                pilotTitles[nome] = (pilotTitles[nome] || 0) + 1;
+            } else if (titleType === 'construtores' && isConstrutores) {
+                pilotTitles[nome] = (pilotTitles[nome] || 0) + 1;
+            } else if (titleType === 'geral') {
+                // Para geral, contar TODOS os títulos (individual + construtores)
+                if (isPilotoCampeao) {
+                    pilotTitles[nome] = (pilotTitles[nome] || 0) + 1;
+                }
+                if (isConstrutores) {
+                    pilotTitles[nome] = (pilotTitles[nome] || 0) + 1;
+                }
+            }
+        });
+        
+        const sortedData = Object.entries(pilotTitles)
+            .map(([nome, valor]) => ({ nome, valor }))
+            .sort((a, b) => b.valor - a.valor);
+        top5Data = getTopNWithTies(sortedData, 5);
+        
+        // Atualizar label baseado no tipo
+        if (titleType === 'individual') label = 'Títulos Individuais';
+        if (titleType === 'construtores') label = 'Títulos de Construtores';
+        if (titleType === 'geral') label = 'Títulos Totais';
+    } else if (statKey === 'Hat-Trick' || statKey === 'Chelem') {
         // Calcular de participações
         const pilotCounts = {};
         
@@ -469,10 +524,10 @@ function showTop5Modal(statKey, label, icon) {
             }
         });
         
-        top5Data = Object.entries(pilotCounts)
+        const sortedData = Object.entries(pilotCounts)
             .map(([nome, valor]) => ({ nome, valor }))
-            .sort((a, b) => b.valor - a.valor)
-            .slice(0, 5);
+            .sort((a, b) => b.valor - a.valor);
+        top5Data = getTopNWithTies(sortedData, 5);
     } else {
         // Estatísticas regulares
         const statKeys = {
@@ -486,7 +541,7 @@ function showTop5Modal(statKey, label, icon) {
         
         const keys = statKeys[statKey] || [statKey];
         
-        top5Data = allPilotosData
+        const sortedData = allPilotosData
             .map(p => {
                 let valor = 0;
                 for (const key of keys) {
@@ -499,26 +554,38 @@ function showTop5Modal(statKey, label, icon) {
                 return { nome: p['Piloto'] || p['piloto'], valor };
             })
             .filter(p => p.valor > 0)
-            .sort((a, b) => b.valor - a.valor)
-            .slice(0, 5);
+            .sort((a, b) => b.valor - a.valor);
+        top5Data = getTopNWithTies(sortedData, 5);
     }
     
     const currentPiloto = pilotoData['Piloto'] || pilotoData['piloto'];
+    
+    // Calcular posições com empates
+    const positionsWithTies = [];
+    let currentPosition = 1;
+    for (let i = 0; i < top5Data.length; i++) {
+        if (i > 0 && top5Data[i].valor !== top5Data[i - 1].valor) {
+            currentPosition = i + 1;
+        }
+        positionsWithTies.push(currentPosition);
+    }
     
     const modalHTML = `
         <div class="top5-modal-overlay" onclick="closeTop5Modal()">
             <div class="top5-modal" onclick="event.stopPropagation()">
                 <button class="top5-modal-close" onclick="closeTop5Modal()">✕</button>
                 <h2 class="top5-modal-title">${icon} Top 5 - ${label}</h2>
+                ${fromDetailModal ? `<button class="top5-modal-back" onclick="closeTop5Modal(); showStatDetailModal('${fromDetailModal}');">← Voltar</button>` : ''}
                 <div class="top5-list">
                     ${top5Data.map((item, index) => {
                         const isCurrentPiloto = item.nome === currentPiloto;
                         const pilotoUrl = `piloto-detalhes-v2.html?nome=${encodeURIComponent(item.nome)}`;
-                        const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '';
+                        const position = positionsWithTies[index];
+                        const medal = position === 1 ? '🥇' : position === 2 ? '🥈' : position === 3 ? '🥉' : '';
                         
                         return `
                             <div class="top5-item ${isCurrentPiloto ? 'top5-current' : ''}" ${!isCurrentPiloto ? `onclick="window.location.href='${pilotoUrl}'" style="cursor: pointer;"` : ''}>
-                                <span class="top5-position">${medal || `#${index + 1}`}</span>
+                                <span class="top5-position">${medal || `#${position}`}</span>
                                 <span class="top5-nome">${item.nome}</span>
                                 <span class="top5-valor">${item.valor}</span>
                             </div>
@@ -552,11 +619,13 @@ function showStatDetailModal(statType) {
     let title = '';
     let icon = '';
     let items = [];
+    let top5Data = null; // Para mapear o statType ao top5
     
     switch(statType) {
         case 'titles':
             title = 'Títulos';
             icon = '🏆';
+            top5Data = { statKey: 'Títulos', icon: '🏆', label: 'Títulos', multipleTitleButtons: true };
             // Agrupar por temporada com títulos
             const titulos = {};
             let totalTitulosPiloto = 0;
@@ -612,6 +681,7 @@ function showStatDetailModal(statType) {
         case 'wins':
             title = 'Vitórias';
             icon = '🥇';
+            top5Data = { statKey: 'P1', icon: '🥇', label: 'Vitórias' };
             items = pilotoParticipacoes
                 .filter(p => String(p['Final'] || '').trim() === '1')
                 .map(p => ({
@@ -626,6 +696,7 @@ function showStatDetailModal(statType) {
         case 'podiums':
             title = 'Pódios';
             icon = '🏅';
+            top5Data = { statKey: 'Pódios', icon: '🏅', label: 'Pódios' };
             items = pilotoParticipacoes
                 .filter(p => {
                     const final = String(p['Final'] || '').trim();
@@ -646,6 +717,7 @@ function showStatDetailModal(statType) {
         case 'races':
             title = 'Corridas';
             icon = '🏁';
+            top5Data = { statKey: 'Corridas', icon: '🏁', label: 'Corridas' };
             items = pilotoParticipacoes.map(p => {
                 const final = String(p['Final'] || '').trim();
                 return {
@@ -661,6 +733,7 @@ function showStatDetailModal(statType) {
         case 'poles':
             title = 'Pole Positions';
             icon = '⚡';
+            top5Data = { statKey: 'Poles', icon: '⚡', label: 'Pole Positions' };
             items = pilotoParticipacoes
                 .filter(p => String(p['Pole'] || '').trim().toUpperCase() === 'SIM')
                 .map(p => ({
@@ -675,8 +748,39 @@ function showStatDetailModal(statType) {
         case 'fastlaps':
             title = 'Voltas Rápidas';
             icon = '⏱️';
+            top5Data = { statKey: 'Fast Laps', icon: '⏱️', label: 'Voltas Rápidas' };
             items = pilotoParticipacoes
                 .filter(p => String(p['Best Lap'] || '').trim().toUpperCase() === 'SIM')
+                .map(p => ({
+                    title: `${normalizeCircuitNameV2(p['Pista'])}`,
+                    subtitle: `${formatLigaV2(p['Liga'])} • ${p['Temporada']} • ${p['Ano']}`,
+                    badges: getBadgesForRace(p),
+                    clickable: true,
+                    data: p
+                }));
+            break;
+            
+        case 'hattricks':
+            title = 'Hat-tricks';
+            icon = '🎩';
+            top5Data = { statKey: 'Hat-Trick', icon: '🎩', label: 'Hat-tricks' };
+            items = pilotoParticipacoes
+                .filter(p => String(p['Hat-Trick'] || '').trim().toUpperCase() === 'SIM')
+                .map(p => ({
+                    title: `${normalizeCircuitNameV2(p['Pista'])}`,
+                    subtitle: `${formatLigaV2(p['Liga'])} • ${p['Temporada']} • ${p['Ano']}`,
+                    badges: getBadgesForRace(p),
+                    clickable: true,
+                    data: p
+                }));
+            break;
+            
+        case 'chelems':
+            title = 'Grand Chelems';
+            icon = '👑';
+            top5Data = { statKey: 'Chelem', icon: '👑', label: 'Grand Chelems' };
+            items = pilotoParticipacoes
+                .filter(p => String(p['Chelem'] || '').trim().toUpperCase() === 'SIM')
                 .map(p => ({
                     title: `${normalizeCircuitNameV2(p['Pista'])}`,
                     subtitle: `${formatLigaV2(p['Liga'])} • ${p['Temporada']} • ${p['Ano']}`,
@@ -692,6 +796,15 @@ function showStatDetailModal(statType) {
             <div class="stat-detail-modal" onclick="event.stopPropagation()">
                 <button class="stat-detail-modal-close" onclick="closeStatDetailModal()">✕</button>
                 <h2 class="stat-detail-modal-title">${icon} ${title} (${items.length > 0 && items[0].totalCount ? items[0].totalCount : items.length})</h2>
+                ${top5Data ? (
+                    top5Data.multipleTitleButtons ? `
+                    <div class="stat-detail-top5-buttons">
+                        <button class="stat-detail-top5-btn stat-detail-top5-btn-small" onclick="closeStatDetailModal(); showTop5Modal('${top5Data.statKey}', '${top5Data.icon}', '${top5Data.label}', 'individual', 'titles');">🏆 Individual</button>
+                        <button class="stat-detail-top5-btn stat-detail-top5-btn-small" onclick="closeStatDetailModal(); showTop5Modal('${top5Data.statKey}', '${top5Data.icon}', '${top5Data.label}', 'construtores', 'titles');">👥 Construtores</button>
+                        <button class="stat-detail-top5-btn stat-detail-top5-btn-small" onclick="closeStatDetailModal(); showTop5Modal('${top5Data.statKey}', '${top5Data.icon}', '${top5Data.label}', 'geral', 'titles');">🌟 Geral</button>
+                    </div>
+                    ` : `<button class="stat-detail-top5-btn" onclick="closeStatDetailModal(); showTop5Modal('${top5Data.statKey}', '${top5Data.icon}', '${top5Data.label}', null, '${statType}');">🏆 Ver Top 5 Global</button>`
+                ) : ''}
                 <div class="stat-detail-list">
                     ${items.map(item => `
                         <div class="stat-detail-item ${item.clickable ? 'stat-detail-clickable' : ''}" ${item.clickable ? `onclick="closeStatDetailModal(); openCorridaModalV2(this.getAttribute('data-corrida'));" data-corrida='${JSON.stringify(item.data).replace(/'/g, "&apos;")}'` : ''}>

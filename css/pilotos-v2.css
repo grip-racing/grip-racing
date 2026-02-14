@@ -1239,6 +1239,26 @@
     text-align: center;
 }
 
+.top5-modal-back {
+    display: block;
+    margin: -10px auto 20px;
+    padding: 8px 16px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.top5-modal-back:hover {
+    background: rgba(255, 107, 0, 0.1);
+    border-color: #ff6b00;
+    transform: translateX(-2px);
+}
+
 .top5-list {
     display: flex;
     flex-direction: column;
@@ -1339,6 +1359,45 @@
     text-align: center;
 }
 
+.stat-detail-top5-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-detail-top5-btn {
+    display: block;
+    margin: 0 auto 20px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #ff6b00, #ff8533);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 107, 0, 0.3);
+}
+
+.stat-detail-top5-btn-small {
+    display: inline-block;
+    margin: 0;
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+.stat-detail-top5-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.5);
+}
+
+.stat-detail-top5-btn:active {
+    transform: translateY(0);
+}
+
 .stat-detail-list {
     display: flex;
     flex-direction: column;
@@ -1385,4 +1444,17 @@
     font-size: 16px;
     display: flex;
     gap: 6px;
+}
+
+/* Responsivo para botões de títulos */
+@media (max-width: 768px) {
+    .stat-detail-top5-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .stat-detail-top5-btn-small {
+        width: 100%;
+        padding: 10px 16px;
+    }
 }
