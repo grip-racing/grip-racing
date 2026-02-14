@@ -1297,7 +1297,7 @@ function createYearlyChart() {
     pilotoParticipacoes.forEach(p => {
         const ano = p['Ano'] || 'Desconhecido';
         if (!anoStats[ano]) {
-            anoStats[ano] = { corridas: 0, vitorias: 0, podios: 0, top10: 0 };
+            anoStats[ano] = { corridas: 0, vitorias: 0, podios: 0, top10: 0, titulos: 0 };
         }
         anoStats[ano].corridas++;
         const final = String(p['Final'] || '').trim();
@@ -1311,6 +1311,14 @@ function createYearlyChart() {
         if (finalNum >= 1 && finalNum <= 10) {
             anoStats[ano].top10++;
         }
+        // Contar títulos (individual + construtores)
+        if (String(p['Piloto Campeao'] || '').trim().toUpperCase() === 'SIM') {
+            anoStats[ano].titulos++;
+        }
+        const construtoresVal = String(p['Construtores'] || '').trim().toUpperCase();
+        if (construtoresVal === 'SIM' || construtoresVal === 'TIME') {
+            anoStats[ano].titulos++;
+        }
     });
     
     const anos = Object.keys(anoStats).sort();
@@ -1318,6 +1326,7 @@ function createYearlyChart() {
     const vitoriasData = anos.map(ano => anoStats[ano].vitorias);
     const podiosData = anos.map(ano => anoStats[ano].podios);
     const top10Data = anos.map(ano => anoStats[ano].top10);
+    const titulosData = anos.map(ano => anoStats[ano].titulos);
     
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const textColor = isDark ? '#e0e0e0' : '#333';
@@ -1359,6 +1368,14 @@ function createYearlyChart() {
                     borderColor: '#FFD700',
                     borderWidth: 2,
                     order: 4
+                },
+                {
+                    label: 'Títulos',
+                    data: titulosData,
+                    backgroundColor: 'rgba(6, 255, 165, 0.8)',
+                    borderColor: '#06ffa5',
+                    borderWidth: 2,
+                    order: 5
                 }
             ]
         },
