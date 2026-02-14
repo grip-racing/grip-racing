@@ -1297,15 +1297,19 @@ function createYearlyChart() {
     pilotoParticipacoes.forEach(p => {
         const ano = p['Ano'] || 'Desconhecido';
         if (!anoStats[ano]) {
-            anoStats[ano] = { corridas: 0, vitorias: 0, podios: 0 };
+            anoStats[ano] = { corridas: 0, vitorias: 0, podios: 0, top10: 0 };
         }
         anoStats[ano].corridas++;
-        if (String(p['Final'] || '').trim() === '1') {
+        const final = String(p['Final'] || '').trim();
+        if (final === '1') {
             anoStats[ano].vitorias++;
         }
-        const final = parseInt(String(p['Final'] || '').replace(/\\D/g, ''));
-        if (final >= 1 && final <= 3) {
+        const finalNum = parseInt(final.replace(/[^\d]/g, ''));
+        if (finalNum >= 1 && finalNum <= 3) {
             anoStats[ano].podios++;
+        }
+        if (finalNum >= 1 && finalNum <= 10) {
+            anoStats[ano].top10++;
         }
     });
     
@@ -1313,6 +1317,7 @@ function createYearlyChart() {
     const corridasData = anos.map(ano => anoStats[ano].corridas);
     const vitoriasData = anos.map(ano => anoStats[ano].vitorias);
     const podiosData = anos.map(ano => anoStats[ano].podios);
+    const top10Data = anos.map(ano => anoStats[ano].top10);
     
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const textColor = isDark ? '#e0e0e0' : '#333';
@@ -1329,7 +1334,15 @@ function createYearlyChart() {
                     backgroundColor: 'rgba(255, 107, 0, 0.3)',
                     borderColor: '#ff6b00',
                     borderWidth: 2,
-                    order: 3
+                    order: 1
+                },
+                {
+                    label: 'Top 10',
+                    data: top10Data,
+                    backgroundColor: 'rgba(100, 200, 255, 0.4)',
+                    borderColor: '#64c8ff',
+                    borderWidth: 2,
+                    order: 2
                 },
                 {
                     label: 'Pódios',
@@ -1337,7 +1350,7 @@ function createYearlyChart() {
                     backgroundColor: 'rgba(255, 153, 0, 0.5)',
                     borderColor: '#ff9900',
                     borderWidth: 2,
-                    order: 2
+                    order: 3
                 },
                 {
                     label: 'Vitórias',
@@ -1345,7 +1358,7 @@ function createYearlyChart() {
                     backgroundColor: 'rgba(255, 215, 0, 0.8)',
                     borderColor: '#FFD700',
                     borderWidth: 2,
-                    order: 1
+                    order: 4
                 }
             ]
         },
@@ -1441,6 +1454,11 @@ function displayTemporadas() {
         }).length;
         const totalPoles = corridasDoAno.filter(c => String(c['Pole'] || '').trim().toUpperCase() === 'SIM').length;
         const totalFastLaps = corridasDoAno.filter(c => String(c['Best Lap'] || '').trim().toUpperCase() === 'SIM').length;
+        const totalTop10 = corridasDoAno.filter(c => {
+            const final = String(c['Final'] || '').trim();
+            const finalNum = parseInt(final.replace(/[^\d]/g, ''));
+            return finalNum >= 1 && finalNum <= 10;
+        }).length;
         
         const qtdCampeonatosPiloto = corridasDoAno.filter(c => String(c['Piloto Campeao'] || '').trim().toUpperCase() === 'SIM').length;
         const qtdCampeonatosConstrutores = corridasDoAno.filter(c => {
@@ -1458,6 +1476,7 @@ function displayTemporadas() {
                     <div class="ano-stats-mini-v2">
                         ${totalVitorias > 0 ? `<span>🥇 ${totalVitorias}</span>` : ''}
                         ${totalPodios > 0 ? `<span>🏅 ${totalPodios}</span>` : ''}
+                        ${totalTop10 > 0 ? `<span>🔟 ${totalTop10}</span>` : ''}
                         ${totalPoles > 0 ? `<span>🚩 ${totalPoles}</span>` : ''}
                         ${totalFastLaps > 0 ? `<span>⚡ ${totalFastLaps}</span>` : ''}
                     </div>
@@ -1473,6 +1492,11 @@ function displayTemporadas() {
                         }).length;
                         const poles = corridas.filter(c => String(c['Pole'] || '').trim().toUpperCase() === 'SIM').length;
                         const fastLaps = corridas.filter(c => String(c['Best Lap'] || '').trim().toUpperCase() === 'SIM').length;
+                        const top10 = corridas.filter(c => {
+                            const final = String(c['Final'] || '').trim();
+                            const finalNum = parseInt(final.replace(/[^\d]/g, ''));
+                            return finalNum >= 1 && finalNum <= 10;
+                        }).length;
                         
                         const qtdCampeonatosPiloto = corridas.filter(c => String(c['Piloto Campeao'] || '').trim().toUpperCase() === 'SIM').length;
                         const qtdCampeonatosConstrutores = corridas.filter(c => {
@@ -1528,6 +1552,7 @@ function displayTemporadas() {
                                     <div class="temporada-stats-mini-v2">
                                         ${vitorias > 0 ? `<span>🥇 ${vitorias}</span>` : ''}
                                         ${podios > 0 ? `<span>🏅 ${podios}</span>` : ''}
+                                        ${top10 > 0 ? `<span>🔟 ${top10}</span>` : ''}
                                         ${poles > 0 ? `<span>🚩 ${poles}</span>` : ''}
                                         ${fastLaps > 0 ? `<span>⚡ ${fastLaps}</span>` : ''}
                                     </div>
