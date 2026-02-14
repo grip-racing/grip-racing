@@ -16,9 +16,13 @@ const REGEX_CACHE = {
 // Cache de elementos DOM
 const DOM_CACHE = {};
 
+// Cache de estatísticas globais (calculado uma vez)
+const STATS_CACHE = {};
+
 let pilotoData = null;
 let participacoesData = [];
 let allPilotosData = [];
+let pilotoParticipacoes = []; // Cache das participações do piloto atual
 
 // Validar participação
 function isValidParticipacao(p) {
@@ -56,6 +60,12 @@ async function loadPilotoData() {
     }
     
     participacoesData = await window.GripUtils.fetchData(DATA_SOURCES.participacoes);
+    
+    // Cache das participações do piloto (usado em várias funções)
+    pilotoParticipacoes = participacoesData.filter(p => 
+        isValidParticipacao(p) &&
+        (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
+    );
     
     // Display all
     displayPilotoInfo();
@@ -127,13 +137,7 @@ function displayHeroMedals() {
         }
     });
     
-    // Hat-tricks e Chelems a partir dos dados de participação
-    const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
-    const pilotoParticipacoes = participacoesData.filter(p => 
-        isValidParticipacao(p) &&
-        (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
-    );
-    
+    // Hat-tricks e Chelems a partir dos dados de participação (usando cache)
     if (pilotoParticipacoes.length > 0) {
         const hatTricks = pilotoParticipacoes.filter(p => 
             String(p['Hat-Trick'] || '').trim().toUpperCase() === 'SIM'
@@ -348,6 +352,9 @@ function getTopMedalsForStat(statName, value) {
 
 // Display stats bar
 function displayStatsBar() {
+    // Pre-calcular totais em cache
+    precalculateStatTotals();
+    
     const corridas = parseInt(pilotoData['Corridas'] || pilotoData['corridas'] || 0);
     const titulos = parseInt(pilotoData['Títulos'] || pilotoData['titulos'] || 0);
     const construtores = parseInt(pilotoData['Construtores'] || pilotoData['construtores'] || 0);
@@ -357,12 +364,7 @@ function displayStatsBar() {
     const poles = parseInt(pilotoData['Poles'] || pilotoData['poles'] || 0);
     const fastLaps = parseInt(pilotoData['Fast Laps'] || pilotoData['fast_laps'] || 0);
     
-    // Calcular hat-tricks e chelems a partir das participações
-    const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
-    const pilotoParticipacoes = participacoesData.filter(p => 
-        isValidParticipacao(p) &&
-        (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
-    );
+    // Usar cache de participações do piloto
     const hatTricks = pilotoParticipacoes.filter(p => String(p['Hat-Trick'] || '').trim().toUpperCase() === 'SIM').length;
     const chelems = pilotoParticipacoes.filter(p => String(p['Chelem'] || '').trim().toUpperCase() === 'SIM').length;
     
@@ -457,18 +459,45 @@ function calculateTotalPilotsWithStat(field) {
 
 // Calculate total pilots with a specific stat value > 0
 function calculateTotalPilotsWithStatValue(statKey, aliases) {
-    return allPilotosData.filter(p => getStatValue(p, statKey, aliases) > 0).length;
+    const cacheKey = `total_${statKey}_${aliases.join('_')}`;
+    if (STATS_CACHE[cacheKey] !== undefined) {
+        return STATS_CACHE[cacheKey];
+    }
+    const total = allPilotosData.filter(p => getStatValue(p, statKey, aliases) > 0).length;
+    STATS_CACHE[cacheKey] = total;
+    return total;
 }
 
 // Calculate total pilots with combined stat value > 0 (e.g., Títulos + Construtores)
 function calculateTotalPilotsWithCombinedStatValue(statKeys, aliasesArray) {
-    return allPilotosData.filter(p => {
-        let total = 0;
+    const cacheKey = `total_combined_${statKeys.join('_')}`;
+    if (STATS_CACHE[cacheKey] !== undefined) {
+        return STATS_CACHE[cacheKey];
+    }
+    const total = allPilotosData.filter(p => {
+        let totalValue = 0;
         statKeys.forEach((key, index) => {
-            total += getStatValue(p, key, aliasesArray[index]);
+            totalValue += getStatValue(p, key, aliasesArray[index]);
         });
-        return total > 0;
+        return totalValue > 0;
     }).length;
+    STATS_CACHE[cacheKey] = total;
+    return total;
+}
+
+// Pre-calculate all stat totals in a single pass for better performance
+function precalculateStatTotals() {
+    if (STATS_CACHE.precalculated) return;
+    
+    // Calcular todos os totais de uma vez
+    calculateTotalPilotsWithStatValue('Corridas', ['corridas']);
+    calculateTotalPilotsWithCombinedStatValue(['Títulos', 'Construtores'], [['titulos'], ['construtores']]);
+    calculateTotalPilotsWithStatValue('Pódios', ['Podios', 'podios']);
+    calculateTotalPilotsWithStatValue('P1', ['Vitórias', 'vitorias']);
+    calculateTotalPilotsWithStatValue('Poles', ['poles']);
+    calculateTotalPilotsWithStatValue('Fast Laps', ['fast_laps']);
+    
+    STATS_CACHE.precalculated = true;
 }
 
 // Add Top 5 stat card (for Hat-tricks and Chelems)
@@ -666,11 +695,7 @@ function closeTop5Modal() {
 
 // Modal detalhado de estatística
 function showStatDetailModal(statType) {
-    const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
-    const pilotoParticipacoes = participacoesData.filter(p => 
-        isValidParticipacao(p) &&
-        (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
-    );
+    // Usar cache de participações do piloto
     
     let title = '';
     let icon = '';
@@ -932,11 +957,7 @@ function displayAdvancedStats() {
 
 // Display recordes
 function displayRecordes() {
-    const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
-    const pilotoParticipacoes = participacoesData.filter(p => 
-        isValidParticipacao(p) &&
-        (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
-    );
+    // Usar cache de participações do piloto
     
     if (pilotoParticipacoes.length === 0) {
         document.getElementById('recordesContainerV2').innerHTML = '<p class="loading-text">Sem dados</p>';
@@ -1069,14 +1090,8 @@ function createYearlyChart() {
     if (existingChart) existingChart.destroy();
     
     const ctx = canvas.getContext('2d');
-    const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
     
-    // Agrupar por ano
-    const pilotoParticipacoes = participacoesData.filter(p => 
-        isValidParticipacao(p) &&
-        (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
-    );
-    
+    // Agrupar por ano - usa cache global
     const anoStats = {};
     pilotoParticipacoes.forEach(p => {
         const ano = p['Ano'] || 'Desconhecido';
@@ -1188,12 +1203,7 @@ function createYearlyChart() {
 
 // Display temporadas (expandable by year and season)
 function displayTemporadas() {
-const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
-    const pilotoParticipacoes = participacoesData.filter(p => 
-        isValidParticipacao(p) &&
-        (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
-    );
-    
+    // Usar cache de participações do piloto
     const container = document.getElementById('temporadasContainerV2');
     if (pilotoParticipacoes.length === 0) {
         container.innerHTML = '<p class="loading-text">Nenhuma participação encontrada</p>';
@@ -1338,12 +1348,7 @@ const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
 
 // Display campeonatos (leagues with championships)
 function displayCampeonatos() {
-    const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
-    const pilotoParticipacoes = participacoesData.filter(p => 
-        isValidParticipacao(p) &&
-        (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
-    );
-    
+    // Usar cache de participações do piloto
     const container = document.getElementById('campeonatosContainerV2');
     if (pilotoParticipacoes.length === 0) {
         container.innerHTML = '<p class="loading-text">Nenhum dado disponível</p>';
@@ -1501,12 +1506,7 @@ function displayCampeonatos() {
 
 // Display circuitos (tracks with stats)
 function displayCircuitos() {
-    const pilotoNome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
-    const pilotoParticipacoes = participacoesData.filter(p => 
-        isValidParticipacao(p) &&
-        (p['Piloto'] || p['piloto'] || '').toLowerCase() === pilotoNome.toLowerCase()
-    );
-    
+    // Usar cache de participações do piloto
     const container = document.getElementById('circuitosContainerV2');
     if (pilotoParticipacoes.length === 0) {
         container.innerHTML = '<p class="loading-text">Nenhum dado disponível</p>';

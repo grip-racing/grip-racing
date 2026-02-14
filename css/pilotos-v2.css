@@ -767,6 +767,13 @@
     height: 16px;
     width: auto;
     vertical-align: middle;
+    padding: 3px 6px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .liga-logo-v2 {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .liga-text-v2 {
