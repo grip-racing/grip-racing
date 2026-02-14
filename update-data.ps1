@@ -52,26 +52,36 @@ Write-Host ""
 # Incrementar versão do cache
 Write-Host "🔄 Incrementando versão do cache..." -NoNewline
 try {
-    $jsFile = "js\piloto-detalhes.js"
-    $content = Get-Content $jsFile -Raw
+    $jsFiles = @("js\piloto-detalhes.js", "js\piloto-detalhes-v2.js")
+    $newVersion = $null
+    $filesUpdated = 0
     
-    # Encontrar a versão atual
-    if ($content -match "const DATA_VERSION = '(\d+)\.(\d+)\.(\d+)'") {
-        $major = [int]$matches[1]
-        $minor = [int]$matches[2]
-        $patch = [int]$matches[3]
+    foreach ($jsFile in $jsFiles) {
+        $content = Get-Content $jsFile -Raw
         
-        # Incrementar patch version
-        $patch++
-        $newVersion = "$major.$minor.$patch"
+        # Encontrar a versão atual (apenas no primeiro arquivo)
+        if ($null -eq $newVersion -and $content -match "const DATA_VERSION = '(\d+)\.(\d+)\.(\d+)'") {
+            $major = [int]$matches[1]
+            $minor = [int]$matches[2]
+            $patch = [int]$matches[3]
+            
+            # Incrementar patch version
+            $patch++
+            $newVersion = "$major.$minor.$patch"
+        }
         
         # Substituir no arquivo
-        $content = $content -replace "const DATA_VERSION = '\d+\.\d+\.\d+'", "const DATA_VERSION = '$newVersion'"
-        Set-Content $jsFile -Value $content -NoNewline
-        
-        Write-Host " ✅ v$newVersion" -ForegroundColor Green
+        if ($null -ne $newVersion) {
+            $content = $content -replace "const DATA_VERSION = '(\d+)\.(\d+)\.(\d+)'", "const DATA_VERSION = '$newVersion'"
+            Set-Content $jsFile -Value $content -NoNewline
+            $filesUpdated++
+        }
+    }
+    
+    if ($filesUpdated -eq $jsFiles.Count) {
+        Write-Host " ✅ v$newVersion ($filesUpdated arquivos)" -ForegroundColor Green
     } else {
-        Write-Host " ⚠️ Versão não encontrada" -ForegroundColor Yellow
+        Write-Host " ⚠️ Apenas $filesUpdated/$($jsFiles.Count) arquivos atualizados" -ForegroundColor Yellow
     }
 } catch {
     Write-Host " ❌ Erro: $_" -ForegroundColor Red

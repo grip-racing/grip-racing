@@ -1,9 +1,20 @@
 // Piloto detalhes v2 - Design limpo
-const DATA_VERSION = '1.0.20';
+const DATA_VERSION = '1.0.21'; // Incrementar quando atualizar os dados
 const DATA_SOURCES = {
     pilotos: `data/data-pilotos.csv?v=${DATA_VERSION}`,
     participacoes: `data/data-participacoes.csv?v=${DATA_VERSION}`
 };
+
+// Cache de RegEx compiladas para melhor performance
+const REGEX_CACHE = {
+    digitsOnly: /\D/g,
+    circuitSuffix: /\s+\d+$/,
+    circuitRoman: /\s+[IVX]+$/,
+    leadingDigits: /^\d+/
+};
+
+// Cache de elementos DOM
+const DOM_CACHE = {};
 
 let pilotoData = null;
 let participacoesData = [];
@@ -1450,11 +1461,28 @@ function displayCircuitos() {
 }
 
 // Helper functions
-function normalizeCircuitNameV2(circuitName) {
-    if (!circuitName) return circuitName;
-    return circuitName.replace(/\s+(2|3|4|5|II|III|IV|V)$/i, '').replace(/\s+(I|II|III|IV|V)$/i, '').trim();
+
+// Get cached DOM element
+function getCachedElement(id) {
+    if (!DOM_CACHE[id]) {
+        DOM_CACHE[id] = document.getElementById(id);
+    }
+    return DOM_CACHE[id];
 }
 
+// Check if mobile
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+// Normalize circuit name (remove suffixes like " 2", " 3", etc)
+function normalizeCircuitNameV2(circuitName) {
+    if (!circuitName) return circuitName;
+    // Remove sufixos como " 2", " 3", " II", " III", etc
+    return circuitName.replace(REGEX_CACHE.circuitSuffix, '').replace(REGEX_CACHE.circuitRoman, '').trim();
+}
+
+// Format liga with logo or text
 function formatLigaV2(ligaNome) {
     if (!ligaNome) return '';
     const ligaNormalizada = ligaNome.toLowerCase().replace(/\s+/g, '');
@@ -1462,13 +1490,40 @@ function formatLigaV2(ligaNome) {
     return `<img src="${logoPath}" alt="${ligaNome}" title="${ligaNome}" class="liga-logo-v2" onerror="this.style.display='none';this.outerHTML='<span class=\\'liga-text-v2\\'>${ligaNome}</span>';">`;
 }
 
+// Format position with ordinal
 function formatPositionV2(pos) {
     if (!pos || pos === '-' || pos === 'N/A') return pos;
     const posStr = String(pos).trim();
     if (posStr.toUpperCase().includes('DNF') || posStr.toUpperCase().includes('DQ') || posStr.toUpperCase().includes('ABANDON')) return posStr;
-    const num = parseInt(posStr.replace(/[^\d]/g, ''));
+    const num = parseInt(posStr.replace(REGEX_CACHE.digitsOnly, ''));
     if (isNaN(num)) return posStr;
     return num + 'º';
+}
+
+// Get badge class for position
+function getBadgeClassV2(pos) {
+    if (!pos) return '';
+    const posStr = String(pos).trim();
+    const num = parseInt(posStr.replace(REGEX_CACHE.digitsOnly, ''));
+    if (num === 1) return 'badge-1';
+    if (num === 2) return 'badge-2';
+    if (num === 3) return 'badge-3';
+    return '';
+}
+
+// Check if transmission link is valid
+function isValidTransmissionLink(link) {
+    if (!link || link.trim() === '' || link === '#N/A' || link === 'N/A' || link === '-') return false;
+    const trimmed = link.trim();
+    return trimmed.startsWith('http://') || trimmed.startsWith('https://');
+}
+
+// Parse multiple transmission links separated by ||
+function parseTransmissionLinks(transmissionField) {
+    if (!transmissionField || transmissionField.trim() === '') return [];
+    return transmissionField.split('||')
+        .map(link => link.trim())
+        .filter(link => isValidTransmissionLink(link));
 }
 
 // Toggle functions
