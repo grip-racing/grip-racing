@@ -1,5 +1,5 @@
 // Piloto detalhes v2 - Design limpo
-const DATA_VERSION = '1.0.23'; // Incrementar quando atualizar os dados
+const DATA_VERSION = '1.0.24'; // Incrementar quando atualizar os dados
 const DATA_SOURCES = {
     pilotos: `data/data-pilotos.csv?v=${DATA_VERSION}`,
     participacoes: `data/data-participacoes.csv?v=${DATA_VERSION}`
@@ -23,6 +23,7 @@ let pilotoData = null;
 let participacoesData = [];
 let allPilotosData = [];
 let pilotoParticipacoes = []; // Cache das participações do piloto atual
+let fotosDisponiveis = new Set();
 
 // Track sort order for each stat type
 const statSortOrder = {
@@ -228,7 +229,16 @@ async function loadPilotoData() {
         window.location.href = 'pilotos.html';
         return;
     }
-    
+
+    // Carregar manifest de fotos disponíveis (evita request desnecessário)
+    try {
+        const res = await fetch('assets/pilotos/manifest.json');
+        if (res.ok) {
+            const lista = await res.json();
+            fotosDisponiveis = new Set(lista);
+        }
+    } catch (_) { /* sem fotos disponíveis */ }
+
     // Load data
     const pilotos = await window.GripUtils.fetchData(DATA_SOURCES.pilotos);
     allPilotosData = pilotos;
@@ -289,12 +299,13 @@ function displayPilotoInfo() {
     document.getElementById('pilotoSubtitleV2').textContent = `${estreia} - ${ultima}`;
     document.title = `${nome} - Grip Racing`;
 
-    // Foto do piloto
+    // Foto do piloto — só tenta se estiver no manifest
     const imgEl = document.getElementById('pilotoPhotoV2');
     const photoEl = document.getElementById('heroPilotoPhoto');
-    if (imgEl && photoEl && nome) {
+    const fotoNome = pilotoFotoNome(nome);
+    if (imgEl && photoEl && nome && fotosDisponiveis.has(fotoNome)) {
         imgEl.onload = () => { photoEl.style.display = 'block'; };
-        imgEl.src = `assets/pilotos/${pilotoFotoNome(nome)}.png`;
+        imgEl.src = `assets/pilotos/${fotoNome}.png`;
     }
 }
 

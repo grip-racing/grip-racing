@@ -87,6 +87,19 @@ try {
     Write-Host " ❌ Erro: $_" -ForegroundColor Red
 }
 
+# Regenerar manifest de fotos de pilotos
+Write-Host "📸 Atualizando manifest de fotos de pilotos..." -NoNewline
+try {
+    $fotosDir = "assets\pilotos"
+    $fotos = @(Get-ChildItem -Path $fotosDir -Filter "*.png" | ForEach-Object {
+        $_.BaseName
+    } | Sort-Object)
+    $manifest = ConvertTo-Json -InputObject $fotos -Compress
+    Set-Content "$fotosDir\manifest.json" -Value $manifest -NoNewline
+    Write-Host " ✅ ($($fotos.Count) foto(s))" -ForegroundColor Green
+} catch {
+    Write-Host " ❌ Erro: $_" -ForegroundColor Red
+}
+
 Write-Host ""
 Write-Host "🚀 Dados atualizados! Recarregue o site no navegador." -ForegroundColor Cyan
-Write-Host "🚀 Dados atualizados! Recarregue o site no navegador." -ForegroundColor Yellow

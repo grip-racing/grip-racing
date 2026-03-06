@@ -7,6 +7,7 @@ const DATA_SOURCES = {
 let allPilotos = [];
 let currentSort = { column: 'corridas', direction: 'desc' };
 let currentFilter = 'todos';
+let fotosDisponiveis = new Set();
 
 // Paginação para mobile
 let currentPage = 1;
@@ -15,6 +16,15 @@ const ITEMS_PER_PAGE_DESKTOP = 9999; // Mostra todos no desktop
 
 // Load and display pilotos
 async function loadPilotos() {
+    // Carregar manifest de fotos disponíveis (evita metralhada de requests)
+    try {
+        const res = await fetch('assets/pilotos/manifest.json');
+        if (res.ok) {
+            const lista = await res.json();
+            fotosDisponiveis = new Set(lista);
+        }
+    } catch (_) { /* sem fotos disponíveis */ }
+
     const pilotos = await window.GripUtils.fetchData(DATA_SOURCES.pilotos);
     
     if (!pilotos || pilotos.length === 0) {
@@ -120,11 +130,14 @@ function displayPilotos() {
     
     tbody.innerHTML = displayPilotos.map(p => {
         const fotoNome = p.piloto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '');
+        const avatarHtml = fotosDisponiveis.has(fotoNome)
+            ? `<img src="assets/pilotos/${fotoNome}.png" class="piloto-avatar-mini" alt="">`
+            : '';
         return `
         <tr>
             <td data-label="Piloto" class="piloto-name-cell">
                 <div class="piloto-name-wrapper">
-                    <img src="assets/pilotos/${fotoNome}.png" class="piloto-avatar-mini" onerror="this.style.display='none'" alt="">
+                    ${avatarHtml}
                     <span class="piloto-name-text">${p.piloto}</span>
                     <div class="piloto-badges">
                         <span class="stat-badge">🏁 ${window.GripUtils.formatNumber(p.corridas)}</span>
