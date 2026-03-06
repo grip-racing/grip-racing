@@ -272,6 +272,14 @@ async function loadPilotoData() {
 }
 
 // Display piloto info
+function pilotoFotoNome(nome) {
+    return nome
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, '');
+}
+
 function displayPilotoInfo() {
     const nome = pilotoData['Piloto'] || pilotoData['piloto'] || '';
     const estreia = pilotoData['Estreia'] || pilotoData['estreia'] || '-';
@@ -280,6 +288,14 @@ function displayPilotoInfo() {
     document.getElementById('pilotoNameV2').textContent = nome;
     document.getElementById('pilotoSubtitleV2').textContent = `${estreia} - ${ultima}`;
     document.title = `${nome} - Grip Racing`;
+
+    // Foto do piloto
+    const imgEl = document.getElementById('pilotoPhotoV2');
+    const photoEl = document.getElementById('heroPilotoPhoto');
+    if (imgEl && photoEl && nome) {
+        imgEl.onload = () => { photoEl.style.display = 'block'; };
+        imgEl.src = `assets/pilotos/${pilotoFotoNome(nome)}.png`;
+    }
 }
 
 // Display hero medals for top 3 global rankings

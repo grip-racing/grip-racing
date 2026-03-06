@@ -118,10 +118,13 @@ function displayPilotos() {
     const itemsToShow = currentPage * itemsPerPage;
     const displayPilotos = filteredPilotos.slice(0, Math.min(itemsToShow, totalItems));
     
-    tbody.innerHTML = displayPilotos.map(p => `
+    tbody.innerHTML = displayPilotos.map(p => {
+        const fotoNome = p.piloto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '');
+        return `
         <tr>
             <td data-label="Piloto" class="piloto-name-cell">
                 <div class="piloto-name-wrapper">
+                    <img src="assets/pilotos/${fotoNome}.png" class="piloto-avatar-mini" onerror="this.style.display='none'" alt="">
                     <span class="piloto-name-text">${p.piloto}</span>
                     <div class="piloto-badges">
                         <span class="stat-badge">🏁 ${window.GripUtils.formatNumber(p.corridas)}</span>
@@ -142,7 +145,8 @@ function displayPilotos() {
             <td data-label="Estreia" class="expandable-data hide-mobile">${p.estreia}</td>
             <td data-label="Última" class="expandable-data hide-mobile">${p.ultima}</td>
         </tr>
-    `).join('');
+    `;
+    }).join('');
     
     // Adicionar evento de clique para navegação (exceto no botão)
     tbody.querySelectorAll('tr').forEach(tr => {

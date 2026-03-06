@@ -613,7 +613,25 @@
 
 /* Desktop: ensure name wrapper doesn't affect layout */
 .piloto-name-wrapper {
-    display: inline;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.piloto-avatar-mini {
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    min-width: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-right: 8px;
+    border: 1px solid var(--border-color);
+    display: block;
 }
 
 .expand-btn {
@@ -2930,6 +2948,10 @@
         gap: 10px;
         width: 100%;
         padding-right: 40px;
+    }
+
+    .piloto-avatar-mini {
+        display: none;
     }
     
     .piloto-name-text {

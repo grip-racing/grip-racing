@@ -87,7 +87,24 @@
 .piloto-v2-hero {
     background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
     border-bottom: 1px solid rgba(255, 107, 0, 0.2);
-    padding: 100px 0 40px 0;
+    padding: 100px 0 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-v2-photo {
+    position: absolute;
+    right: max(20px, calc((100vw - 1400px) / 2 + 20px));
+    bottom: 0;
+    pointer-events: none;
+    line-height: 0;
+}
+
+.hero-v2-photo img {
+    height: 155px;
+    max-height: 100%;
+    width: auto;
+    display: block;
 }
 
 .hero-v2-content {
@@ -95,6 +112,8 @@
     justify-content: space-between;
     align-items: center;
     gap: 30px;
+    padding-right: 180px;
+    padding-bottom: 40px;
 }
 
 .hero-v2-left {
@@ -555,11 +574,17 @@
     .piloto-v2-hero {
         padding: 100px 0 20px 0;
     }
-    
+
+    .hero-v2-photo {
+        display: none !important;
+    }
+
     .hero-v2-content {
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
+        padding-right: 0;
+        padding-bottom: 0;
     }
     
     .piloto-number-v2 {
