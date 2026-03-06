@@ -8843,14 +8843,14 @@ DNS,GT3,Spa-Francorchamps,Marcelo Eduardo,-,-,-,-,-,-,-,Racing Bears,2023-2,2023
 4,GT3,Hockenheim,Luis Almeida,-,-,-,-,-,-,-,Racing Bears,2023-2,2023,GT3/Racing Bears/2023-2,GT3/Racing Bears/2023-2/Hockenheim,#N/A
 3,GT3,Hockenheim,Fernando Melo,-,-,-,-,-,-,-,Racing Bears,2023-2,2023,GT3/Racing Bears/2023-2,GT3/Racing Bears/2023-2/Hockenheim,#N/A
 19,GT3,Hockenheim,Robert Johen,-,-,-,-,-,-,-,Racing Bears,2023-2,2023,GT3/Racing Bears/2023-2,GT3/Racing Bears/2023-2/Hockenheim,#N/A
-5,Marcas,Santa Cruz do Sul,Rodrigo de Sousa,,-,-,-,-,-,-,Vorc Series,2023-2,2023,Marcas/Vorc Series/2023-2,Marcas/Vorc Series/2023-2/Santa Cruz do Sul,https://www.youtube.com/watch?v=gS4zAGcU3Uo
-DNF,Marcas,Santa Cruz do Sul,Felipe Faria,,-,-,-,-,-,-,Vorc Series,2023-2,2023,Marcas/Vorc Series/2023-2,Marcas/Vorc Series/2023-2/Santa Cruz do Sul,https://www.youtube.com/watch?v=gS4zAGcU3Uo
-7,Marcas,Santa Cruz do Sul 2,Felipe Faria,,-,-,-,-,-,-,Vorc Series,2023-2,2023,Marcas/Vorc Series/2023-2,Marcas/Vorc Series/2023-2/Santa Cruz do Sul 2,#N/A
-12,Marcas,Santa Cruz do Sul 2,Rodrigo de Sousa,,-,-,-,-,-,-,Vorc Series,2023-2,2023,Marcas/Vorc Series/2023-2,Marcas/Vorc Series/2023-2/Santa Cruz do Sul 2,#N/A
-3,Marcas,Interlagos,Rodrigo de Sousa,,-,-,-,-,-,-,Vorc Series,2023-2,2023,Marcas/Vorc Series/2023-2,Marcas/Vorc Series/2023-2/Interlagos,https://www.youtube.com/watch?v=q3N5Xpt-T8E
-DNF,Marcas,Interlagos,Felipe Faria,,-,-,-,-,-,-,Vorc Series,2023-2,2023,Marcas/Vorc Series/2023-2,Marcas/Vorc Series/2023-2/Interlagos,https://www.youtube.com/watch?v=q3N5Xpt-T8E
-5,Marcas,Interlagos 2,Rodrigo de Sousa,,-,-,-,-,-,-,Vorc Series,2023-2,2023,Marcas/Vorc Series/2023-2,Marcas/Vorc Series/2023-2/Interlagos 2,#N/A
-7,Marcas,Interlagos 2,Felipe Faria,,-,-,-,-,-,-,Vorc Series,2023-2,2023,Marcas/Vorc Series/2023-2,Marcas/Vorc Series/2023-2/Interlagos 2,#N/A
+5,Marcas,Santa Cruz do Sul,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2023-2,2023,Marcas/VORC Series/2023-2,Marcas/VORC Series/2023-2/Santa Cruz do Sul,https://www.youtube.com/watch?v=gS4zAGcU3Uo
+DNF,Marcas,Santa Cruz do Sul,Felipe Faria,,-,-,-,-,-,-,VORC Series,2023-2,2023,Marcas/VORC Series/2023-2,Marcas/VORC Series/2023-2/Santa Cruz do Sul,https://www.youtube.com/watch?v=gS4zAGcU3Uo
+7,Marcas,Santa Cruz do Sul 2,Felipe Faria,,-,-,-,-,-,-,VORC Series,2023-2,2023,Marcas/VORC Series/2023-2,Marcas/VORC Series/2023-2/Santa Cruz do Sul 2,#N/A
+12,Marcas,Santa Cruz do Sul 2,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2023-2,2023,Marcas/VORC Series/2023-2,Marcas/VORC Series/2023-2/Santa Cruz do Sul 2,#N/A
+3,Marcas,Interlagos,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2023-2,2023,Marcas/VORC Series/2023-2,Marcas/VORC Series/2023-2/Interlagos,https://www.youtube.com/watch?v=q3N5Xpt-T8E
+DNF,Marcas,Interlagos,Felipe Faria,,-,-,-,-,-,-,VORC Series,2023-2,2023,Marcas/VORC Series/2023-2,Marcas/VORC Series/2023-2/Interlagos,https://www.youtube.com/watch?v=q3N5Xpt-T8E
+5,Marcas,Interlagos 2,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2023-2,2023,Marcas/VORC Series/2023-2,Marcas/VORC Series/2023-2/Interlagos 2,#N/A
+7,Marcas,Interlagos 2,Felipe Faria,,-,-,-,-,-,-,VORC Series,2023-2,2023,Marcas/VORC Series/2023-2,Marcas/VORC Series/2023-2/Interlagos 2,#N/A
 3,GT4,Watkins Glen,Matheus Saliba,-,-,-,-,-,-,-,Racing Bears,2023-2,2023,GT4/Racing Bears/2023-2,GT4/Racing Bears/2023-2/Watkins Glen,#N/A
 4,GT4,Watkins Glen,Flavio Felicio,-,SIM,-,-,-,-,-,Racing Bears,2023-2,2023,GT4/Racing Bears/2023-2,GT4/Racing Bears/2023-2/Watkins Glen,#N/A
 5,GT4,Watkins Glen,Rubens Algazi,-,-,-,-,-,-,-,Racing Bears,2023-2,2023,GT4/Racing Bears/2023-2,GT4/Racing Bears/2023-2/Watkins Glen,#N/A
@@ -9197,6 +9197,10 @@ DNF,GT3 Sport,Spa-Francorchamps 2,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1B
 4,GT3 Sport,Donington,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1BC,2025-1,2025,GT3 Sport/F1BC/2025-1,GT3 Sport/F1BC/2025-1/Donington,#N/A
 4,GT3 Sport,Mount Panorama,Flavio Felicio,Grip Racing,-,-,-,-,-,SIM,F1BC,2025-1,2025,GT3 Sport/F1BC/2025-1,GT3 Sport/F1BC/2025-1/Mount Panorama,#N/A
 12,GT3 Sport,Mount Panorama,Demetrio Fontclara,Grip Racing,SIM,-,-,-,-,TIME,F1BC,2025-1,2025,GT3 Sport/F1BC/2025-1,GT3 Sport/F1BC/2025-1/Mount Panorama,#N/A
+23,Marcas,Curitiba,Rodrigo de Sousa,,-,-,-,-,-,-,AVRS,2025-1,2025,Marcas/AVRS/2025-1,Marcas/AVRS/2025-1/Curitiba,https://www.youtube.com/live/au_Y1k1XQTc
+12,Marcas,Curitiba 2,Rodrigo de Sousa,,-,-,-,-,-,-,AVRS,2025-1,2025,Marcas/AVRS/2025-1,Marcas/AVRS/2025-1/Curitiba 2,#N/A
+9,Marcas,Goiania,Rodrigo de Sousa,,-,-,-,-,-,-,AVRS,2025-1,2025,Marcas/AVRS/2025-1,Marcas/AVRS/2025-1/Goiania,https://www.youtube.com/watch?v=SIGvmjEF3EM
+11,Marcas,Goiania 2,Rodrigo de Sousa,,-,-,-,-,-,-,AVRS,2025-1,2025,Marcas/AVRS/2025-1,Marcas/AVRS/2025-1/Goiania 2,#N/A
 2025-2,,,,,,,,,,,,,,,,
 1,GT3 Sport,Spielberg,Demetrio Fontclara,Grip Racing,SIM,SIM,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Spielberg,#N/A
 9,GT3 Sport,Spielberg,Flavio Felicio,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Spielberg,#N/A
@@ -9210,6 +9214,11 @@ DNF,GT3 Sport,Road America,Fred Quintao,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,2025
 DNF,GT3 Sport,Road Atlanta,Flavio Felicio,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Road Atlanta,#N/A
 1,GT3 Sport,Sebring,Demetrio Fontclara,Grip Racing,SIM,SIM,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Sebring,#N/A
 3,GT3 Sport,Monza,Demetrio Fontclara,Grip Racing,-,-,-,-,SIM,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Monza,#N/A
+4,Sprint Race,Londrina,Rodrigo de Sousa,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Londrina,https://www.youtube.com/watch?v=odLtkfuyplQ
+2,Sprint Race,Cascavel,Rodrigo de Sousa,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Cascavel,https://youtube.com/live/0A4y3WyCdBY?feature=share
+2,Sprint Race,Goiania,Rodrigo de Sousa,,-,SIM,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Goiania,https://www.youtube.com/watch?v=zk3YuM2vv_E
+2,Sprint Race,Curitiba,Rodrigo de Sousa,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Curitiba,https://www.youtube.com/watch?v=Uf_Sg2DR-IU
+4,Sprint Race,Interlagos,Rodrigo de Sousa,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Interlagos,https://www.youtube.com/watch?v=GtwkpBxYiQY
 2025-3,,,,,,,,,,,,,,,,
 2,WES Le Mans 24h,Le Mans,Andrey Fajardo,Grip Racing,-,-,-,-,-,-,F1BC,2025-3,2025,WES Le Mans 24h/F1BC/2025-3,WES Le Mans 24h/F1BC/2025-3/Le Mans,#N/A
 2,WES Le Mans 24h,Le Mans,Carlos Junior,Grip Racing,-,-,-,-,-,-,F1BC,2025-3,2025,WES Le Mans 24h/F1BC/2025-3,WES Le Mans 24h/F1BC/2025-3/Le Mans,#N/A
