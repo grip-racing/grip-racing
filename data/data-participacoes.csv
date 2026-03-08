@@ -9110,7 +9110,24 @@ DNF,P3,Brasilia,Isabel Costa,,-,-,-,-,-,-,Racing Bears,2023-3,2023,P3/Racing Bea
 2,P3,Nurburgring,Flavio Felicio,,-,-,-,-,SIM,-,Racing Bears,2023-3,2023,P3/Racing Bears/2023-3,P3/Racing Bears/2023-3/Nurburgring,https://www.youtube.com/watch?v=M08QFzYAqoo
 4,P3,Nurburgring,Felipe Faria,,-,-,-,-,-,-,Racing Bears,2023-3,2023,P3/Racing Bears/2023-3,P3/Racing Bears/2023-3/Nurburgring,https://www.youtube.com/watch?v=M08QFzYAqoo
 5,P3,Nurburgring,Robert Johen,,-,-,-,-,-,-,Racing Bears,2023-3,2023,P3/Racing Bears/2023-3,P3/Racing Bears/2023-3/Nurburgring,https://www.youtube.com/watch?v=M08QFzYAqoo
+13,DTM,Yahuarcocha,Sandro Goulart,,-,-,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Yahuarcocha,#N/A
+14,DTM,Yahuarcocha,Robert Johen,,-,-,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Yahuarcocha,#N/A
+16,DTM,Jerez,Robert Johen,,-,-,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Jerez,#N/A
+10,DTM,Adelaide,Robert Johen,,-,-,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Adelaide,#N/A
+8,DTM,Cascais,Robert Johen,,-,-,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Cascais,#N/A
+DNF,DTM,Jacarepagua,Sandro Goulart,,-,-,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Jacarepagua,#N/A
+16,DTM,Jacarepagua,Robert Johen,,-,-,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Jacarepagua,#N/A
 2024-1,,,,,,,,,,,,,,,,
+1,LMDH,Imola,Matheus Saliba,,-,-,-,-,SIM,-,Racing Bears,2024-1,2024,LMDH/Racing Bears/2024-1,LMDH/Racing Bears/2024-1/Imola,#N/A
+3,LMDH,Le Mans,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2024-1,2024,LMDH/Racing Bears/2024-1,LMDH/Racing Bears/2024-1/Le Mans,#N/A
+4,LMDH,Interlagos,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2024-1,2024,LMDH/Racing Bears/2024-1,LMDH/Racing Bears/2024-1/Interlagos,#N/A
+10,LMDH,Monza,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2024-1,2024,LMDH/Racing Bears/2024-1,LMDH/Racing Bears/2024-1/Monza,#N/A
+1,LMDH,Daytona,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2024-1,2024,LMDH/Racing Bears/2024-1,LMDH/Racing Bears/2024-1/Daytona,#N/A
+10,GT3,Suzuka,Robert Johen,,-,-,-,-,-,-,Racing Bears,2024-1,2024,GT3/Racing Bears/2024-1,GT3/Racing Bears/2024-1/Suzuka,#N/A
+9,GT3,Road America,Robert Johen,,-,-,-,-,-,-,Racing Bears,2024-1,2024,GT3/Racing Bears/2024-1,GT3/Racing Bears/2024-1/Road America,#N/A
+10,GT3,Barcelona,Robert Johen,,-,-,-,-,-,-,Racing Bears,2024-1,2024,GT3/Racing Bears/2024-1,GT3/Racing Bears/2024-1/Barcelona,#N/A
+9,GT3,Spa Francorchamps,Robert Johen,,-,-,-,-,-,-,Racing Bears,2024-1,2024,GT3/Racing Bears/2024-1,GT3/Racing Bears/2024-1/Spa Francorchamps,#N/A
+13,GT3,Le Mans,Robert Johen,,-,-,-,-,-,-,Racing Bears,2024-1,2024,GT3/Racing Bears/2024-1,GT3/Racing Bears/2024-1/Le Mans,#N/A
 1,Sprint Race,Velo Citta,Rodrigo de Sousa,,SIM,SIM,SIM,-,-,-,RacersAv,2024-1,2024,Sprint Race/RacersAv/2024-1,Sprint Race/RacersAv/2024-1/Velo Citta,https://www.youtube.com/watch?v=l1nmMrsq0ao
 3,Sprint Race,Velo Citta,Pablo Cenjor,,-,-,-,-,-,-,RacersAv,2024-1,2024,Sprint Race/RacersAv/2024-1,Sprint Race/RacersAv/2024-1/Velo Citta,https://www.youtube.com/watch?v=l1nmMrsq0ao
 4,Sprint Race,Velo Citta,Flavio Felicio,,-,-,-,-,-,-,RacersAv,2024-1,2024,Sprint Race/RacersAv/2024-1,Sprint Race/RacersAv/2024-1/Velo Citta,https://www.youtube.com/watch?v=l1nmMrsq0ao
@@ -9141,6 +9158,7 @@ DNF,Sprint Race,Cascavel,Flavio Felicio,,-,-,-,-,-,-,RacersAv,2024-1,2024,Sprint
 4,Sprint Race,Goiania,Flavio Felicio,,-,-,-,-,-,-,RacersAv,2024-1,2024,Sprint Race/RacersAv/2024-1,Sprint Race/RacersAv/2024-1/Goiania,https://www.youtube.com/watch?v=C4jBTP6fzWg
 6,Sprint Race,Goiania,Robert Johen,,-,-,-,-,-,-,RacersAv,2024-1,2024,Sprint Race/RacersAv/2024-1,Sprint Race/RacersAv/2024-1/Goiania,https://www.youtube.com/watch?v=C4jBTP6fzWg
 2024-2,,,,,,,,,,,,,,,,
+8,GT1,Hockenheim,Rubens Algazi,,-,-,-,-,-,-,Racing Bears,2024-2,2024,GT1/Racing Bears/2024-2,GT1/Racing Bears/2024-2/Hockenheim,#N/A
 9,GT3 Pro,Interlagos,Matheus Beraldo,Grip Racing,-,-,-,-,-,-,F1BC,2024-2,2024,GT3 Pro/F1BC/2024-2,GT3 Pro/F1BC/2024-2/Interlagos,#N/A
 32,GT3 Pro,Interlagos,Carlos Junior,Grip Racing,-,-,-,-,-,-,F1BC,2024-2,2024,GT3 Pro/F1BC/2024-2,GT3 Pro/F1BC/2024-2/Interlagos,#N/A
 3,GT3 Pro,Interlagos 2,Matheus Beraldo,Grip Racing,-,-,-,-,-,-,F1BC,2024-2,2024,GT3 Pro/F1BC/2024-2,GT3 Pro/F1BC/2024-2/Interlagos 2,#N/A
@@ -9210,6 +9228,17 @@ DNF,GT3 Pro,Hockenheim 2,Carlos Junior,Grip Racing,-,-,-,-,-,-,F1BC,2024-3,2024,
 DNF,GT3 Sport,Algarve 2,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1BC,2024-3,2024,GT3 Sport/F1BC/2024-3,GT3 Sport/F1BC/2024-3/Algarve 2,#N/A
 24,GT3 Sport,Brands Hatch,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1BC,2024-3,2024,GT3 Sport/F1BC/2024-3,GT3 Sport/F1BC/2024-3/Brands Hatch,#N/A
 DNF,GT3 Sport,Brands Hatch 2,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1BC,2024-3,2024,GT3 Sport/F1BC/2024-3,GT3 Sport/F1BC/2024-3/Brands Hatch 2,#N/A
+12,F-INTER,Spielberg,Robert Johen,,-,-,-,-,-,-,Racing Bears,2024-3,2024,F-INTER/Racing Bears/2024-3,F-INTER/Racing Bears/2024-3/Spielberg,#N/A
+DNF,F-INTER,Spielberg,Marcelo Eduardo,,-,-,-,-,-,-,Racing Bears,2024-3,2024,F-INTER/Racing Bears/2024-3,F-INTER/Racing Bears/2024-3/Spielberg,#N/A
+11,F-INTER,Nurburgring,Marcelo Eduardo,,-,-,-,-,-,-,Racing Bears,2024-3,2024,F-INTER/Racing Bears/2024-3,F-INTER/Racing Bears/2024-3/Nurburgring,#N/A
+5,F-INTER,Interlagos,Marcelo Eduardo,,-,-,-,-,-,-,Racing Bears,2024-3,2024,F-INTER/Racing Bears/2024-3,F-INTER/Racing Bears/2024-3/Interlagos,#N/A
+13,F-INTER,Interlagos,Robert Johen,,-,-,-,-,-,-,Racing Bears,2024-3,2024,F-INTER/Racing Bears/2024-3,F-INTER/Racing Bears/2024-3/Interlagos,#N/A
+10,F-INTER,Brands Hatch,Marcelo Eduardo,,-,-,-,-,-,-,Racing Bears,2024-3,2024,F-INTER/Racing Bears/2024-3,F-INTER/Racing Bears/2024-3/Brands Hatch,#N/A
+DNF,F-INTER,Brands Hatch,Robert Johen,,-,-,-,-,-,-,Racing Bears,2024-3,2024,F-INTER/Racing Bears/2024-3,F-INTER/Racing Bears/2024-3/Brands Hatch,#N/A
+10,GT4,Laguna Seca,Rubens Algazi,,-,-,-,-,-,-,Racing Bears,2024-3,2024,GT4/Racing Bears/2024-3,GT4/Racing Bears/2024-3/Laguna Seca,#N/A
+5,GT4,Indianapolis,Rubens Algazi,,-,-,-,-,-,-,Racing Bears,2024-3,2024,GT4/Racing Bears/2024-3,GT4/Racing Bears/2024-3/Indianapolis,#N/A
+20,GT4,Indianapolis,Robert Johen,,-,-,-,-,-,-,Racing Bears,2024-3,2024,GT4/Racing Bears/2024-3,GT4/Racing Bears/2024-3/Indianapolis,#N/A
+20,GT4,Donington,Robert Johen,,-,-,-,-,-,-,Racing Bears,2024-3,2024,GT4/Racing Bears/2024-3,GT4/Racing Bears/2024-3/Donington,#N/A
 2024-4,,,,,,,,,,,,,,,,
 2,GT3 Sport,Le Mans,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1BC,2024-4,2024,GT3 Sport/F1BC/2024-4,GT3 Sport/F1BC/2024-4/Le Mans,#N/A
 6,GT3 Sport,Le Mans 2,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1BC,2024-4,2024,GT3 Sport/F1BC/2024-4,GT3 Sport/F1BC/2024-4/Le Mans 2,#N/A
@@ -9222,6 +9251,13 @@ DNF,GT3 Sport,Sebring 2,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1BC,2024-4,2
 17,GT3 Sport,Spa-Francorchamps,Demetrio Fontclara,Grip Racing,SIM,-,-,-,-,-,F1BC,2024-4,2024,GT3 Sport/F1BC/2024-4,GT3 Sport/F1BC/2024-4/Spa-Francorchamps,#N/A
 DNF,GT3 Sport,Spa-Francorchamps 2,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1BC,2024-4,2024,GT3 Sport/F1BC/2024-4,GT3 Sport/F1BC/2024-4/Spa-Francorchamps 2,#N/A
 2025-1,,,,,,,,,,,,,,,,
+2,GT3,Road America,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2025-1,2025,GT3/Racing Bears/2025-1,GT3/Racing Bears/2025-1/Road America,#N/A
+23,GT3,Road America,Sandro Goulart,,-,-,-,-,-,-,Racing Bears,2025-1,2025,GT3/Racing Bears/2025-1,GT3/Racing Bears/2025-1/Road America,#N/A
+4,GT3,Mosport,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2025-1,2025,GT3/Racing Bears/2025-1,GT3/Racing Bears/2025-1/Mosport,#N/A
+DNF,GT3,Mosport,Sandro Goulart,,-,-,-,-,-,-,Racing Bears,2025-1,2025,GT3/Racing Bears/2025-1,GT3/Racing Bears/2025-1/Mosport,#N/A
+5,GT3,Watkins Glen,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2025-1,2025,GT3/Racing Bears/2025-1,GT3/Racing Bears/2025-1/Watkins Glen,#N/A
+2,GT3,Road Atlanta,Matheus Saliba,,-,SIM,-,-,-,-,Racing Bears,2025-1,2025,GT3/Racing Bears/2025-1,GT3/Racing Bears/2025-1/Road Atlanta,#N/A
+3,GT3,Sebring,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2025-1,2025,GT3/Racing Bears/2025-1,GT3/Racing Bears/2025-1/Sebring,#N/A
 2,GT3 Sport,Jerez,Flavio Felicio,Grip Racing,-,-,-,-,-,-,F1BC,2025-1,2025,GT3 Sport/F1BC/2025-1,GT3 Sport/F1BC/2025-1/Jerez,#N/A
 3,GT3 Sport,Jerez,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1BC,2025-1,2025,GT3 Sport/F1BC/2025-1,GT3 Sport/F1BC/2025-1/Jerez,#N/A
 3,GT3 Sport,Suzuka,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1BC,2025-1,2025,GT3 Sport/F1BC/2025-1,GT3 Sport/F1BC/2025-1/Suzuka,#N/A
@@ -9244,6 +9280,40 @@ DNF,GT3 Sport,Spa-Francorchamps 2,Demetrio Fontclara,Grip Racing,-,-,-,-,-,-,F1B
 9,Marcas,Goiania,Rodrigo de Sousa,,-,-,-,-,-,-,AVRS,2025-1,2025,Marcas/AVRS/2025-1,Marcas/AVRS/2025-1/Goiania,https://www.youtube.com/watch?v=SIGvmjEF3EM
 11,Marcas,Goiania 2,Rodrigo de Sousa,,-,-,-,-,-,-,AVRS,2025-1,2025,Marcas/AVRS/2025-1,Marcas/AVRS/2025-1/Goiania 2,#N/A
 2025-2,,,,,,,,,,,,,,,,
+11,Calhambeque,Taruma,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Calhambeque/Racing Bears/2025-2,Calhambeque/Racing Bears/2025-2/Taruma,#N/A
+15,Calhambeque,Goiania,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Calhambeque/Racing Bears/2025-2,Calhambeque/Racing Bears/2025-2/Goiania,#N/A
+DNF,Calhambeque,Goiania,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Calhambeque/Racing Bears/2025-2,Calhambeque/Racing Bears/2025-2/Goiania,#N/A
+16,Calhambeque,Cascavel,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Calhambeque/Racing Bears/2025-2,Calhambeque/Racing Bears/2025-2/Cascavel,#N/A
+DNF,Calhambeque,Cascavel,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Calhambeque/Racing Bears/2025-2,Calhambeque/Racing Bears/2025-2/Cascavel,#N/A
+11,Calhambeque,Interlagos,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Calhambeque/Racing Bears/2025-2,Calhambeque/Racing Bears/2025-2/Interlagos,#N/A
+22,Calhambeque,Interlagos,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Calhambeque/Racing Bears/2025-2,Calhambeque/Racing Bears/2025-2/Interlagos,#N/A
+2,G40,Le Mans,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Le Mans,#N/A
+5,G40,Le Mans,Fred Quintao,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Le Mans,#N/A
+8,G40,Le Mans,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Le Mans,#N/A
+16,G40,Le Mans,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Le Mans,#N/A
+23,G40,Le Mans,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Le Mans,#N/A
+26,G40,Le Mans,Itallo Rocha,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Le Mans,#N/A
+4,G40,Thermas de Rio Hondo,Fred Quintao,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Thermas de Rio Hondo,#N/A
+6,G40,Thermas de Rio Hondo,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Thermas de Rio Hondo,#N/A
+7,G40,Thermas de Rio Hondo,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Thermas de Rio Hondo,#N/A
+8,G40,Thermas de Rio Hondo,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Thermas de Rio Hondo,#N/A
+25,G40,Thermas de Rio Hondo,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Thermas de Rio Hondo,#N/A
+29,G40,Thermas de Rio Hondo,Itallo Rocha,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Thermas de Rio Hondo,#N/A
+30,G40,Thermas de Rio Hondo,Bernardo Purri,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Thermas de Rio Hondo,#N/A
+2,G40,Spielberg,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Spielberg,#N/A
+9,G40,Spielberg,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Spielberg,#N/A
+12,G40,Spielberg,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Spielberg,#N/A
+DNF,G40,Spielberg,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Spielberg,#N/A
+DNF,G40,Spielberg,Fred Quintao,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Spielberg,#N/A
+DNF,G40,Spielberg,Bernardo Purri,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Spielberg,#N/A
+1,G40,Nurburgring,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Nurburgring,#N/A
+2,G40,Nurburgring,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Nurburgring,#N/A
+13,G40,Nurburgring,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Nurburgring,#N/A
+16,G40,Nurburgring,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Nurburgring,#N/A
+2,G40,Silverstone,Matheus Saliba,,-,-,-,-,SIM,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Silverstone,#N/A
+5,G40,Silverstone,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Silverstone,#N/A
+9,G40,Silverstone,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Silverstone,#N/A
+17,G40,Silverstone,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Silverstone,#N/A
 1,GT3 Sport,Spielberg,Demetrio Fontclara,Grip Racing,SIM,SIM,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Spielberg,#N/A
 9,GT3 Sport,Spielberg,Flavio Felicio,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Spielberg,#N/A
 14,GT3 Sport,Spielberg,Fred Quintao,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Spielberg,#N/A
@@ -9256,21 +9326,78 @@ DNF,GT3 Sport,Road America,Fred Quintao,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,2025
 DNF,GT3 Sport,Road Atlanta,Flavio Felicio,Grip Racing,-,-,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Road Atlanta,#N/A
 1,GT3 Sport,Sebring,Demetrio Fontclara,Grip Racing,SIM,SIM,-,-,-,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Sebring,#N/A
 3,GT3 Sport,Monza,Demetrio Fontclara,Grip Racing,-,-,-,-,SIM,-,F1BC,2025-2,2025,GT3 Sport/F1BC/2025-2,GT3 Sport/F1BC/2025-2/Monza,#N/A
+3,GT3,Interlagos,Pablo Cenjor,,,,,,,,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Interlagos,#N/A
+9,GT3,Interlagos,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Interlagos,#N/A
+4,GT3,Spa Francorchamps,Fernando Melo,,,,,,,,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Spa Francorchamps,#N/A
+12,GT3,Spa Francorchamps,Pablo Cenjor,,,,,,,,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Spa Francorchamps,#N/A
+18,GT3,Spa Francorchamps,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Spa Francorchamps,#N/A
+6,GT3,Monza,Pablo Cenjor,,,,,,,,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Monza,#N/A
+8,GT3,Monza,Fernando Melo,,,,,,,,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Monza,#N/A
+9,GT3,Monza,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Monza,#N/A
+DNF,GT3,Monza,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Monza,#N/A
+2,GT3,Barcelona,Pablo Cenjor,,,,,,,,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Barcelona,#N/A
+9,GT3,Barcelona,Fernando Melo,,,,,,,,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Barcelona,#N/A
+DNF,GT3,Barcelona,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Barcelona,#N/A
+3,GT3,Imola,Fernando Melo,,,,,,,,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Imola,#N/A
+5,GT3,Imola,Pablo Cenjor,,,,,,,,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Imola,#N/A
+DNF,GT3,Imola,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Imola,#N/A
+DNF,GT3,Imola,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Imola,#N/A
 4,Sprint Race,Londrina,Rodrigo de Sousa,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Londrina,https://www.youtube.com/watch?v=odLtkfuyplQ
+8,Sprint Race,Londrina,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Londrina,https://www.youtube.com/watch?v=odLtkfuyplQ
+11,Sprint Race,Londrina,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Londrina,https://www.youtube.com/watch?v=odLtkfuyplQ
+12,Sprint Race,Londrina,Felipe Faria,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Londrina,https://www.youtube.com/watch?v=odLtkfuyplQ
+13,Sprint Race,Londrina,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Londrina,https://www.youtube.com/watch?v=odLtkfuyplQ
 2,Sprint Race,Cascavel,Rodrigo de Sousa,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Cascavel,https://youtube.com/live/0A4y3WyCdBY?feature=share
+4,Sprint Race,Cascavel,Felipe Faria,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Cascavel,https://youtube.com/live/0A4y3WyCdBY?feature=share
+8,Sprint Race,Cascavel,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Cascavel,https://youtube.com/live/0A4y3WyCdBY?feature=share
+10,Sprint Race,Cascavel,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Cascavel,https://youtube.com/live/0A4y3WyCdBY?feature=share
+18,Sprint Race,Cascavel,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Cascavel,https://youtube.com/live/0A4y3WyCdBY?feature=share
 2,Sprint Race,Goiania,Rodrigo de Sousa,,-,SIM,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Goiania,https://www.youtube.com/watch?v=zk3YuM2vv_E
+5,Sprint Race,Goiania,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Goiania,https://www.youtube.com/watch?v=zk3YuM2vv_E
+6,Sprint Race,Goiania,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Goiania,https://www.youtube.com/watch?v=zk3YuM2vv_E
+10,Sprint Race,Goiania,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Goiania,https://www.youtube.com/watch?v=zk3YuM2vv_E
+16,Sprint Race,Goiania,Felipe Faria,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Goiania,https://www.youtube.com/watch?v=zk3YuM2vv_E
 2,Sprint Race,Curitiba,Rodrigo de Sousa,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Curitiba,https://www.youtube.com/watch?v=Uf_Sg2DR-IU
+3,Sprint Race,Curitiba,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Curitiba,https://www.youtube.com/watch?v=Uf_Sg2DR-IU
+7,Sprint Race,Curitiba,Felipe Faria,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Curitiba,https://www.youtube.com/watch?v=Uf_Sg2DR-IU
+8,Sprint Race,Curitiba,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Curitiba,https://www.youtube.com/watch?v=Uf_Sg2DR-IU
+12,Sprint Race,Curitiba,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Curitiba,https://www.youtube.com/watch?v=Uf_Sg2DR-IU
+3,Sprint Race,Interlagos,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Interlagos,https://www.youtube.com/watch?v=GtwkpBxYiQY
 4,Sprint Race,Interlagos,Rodrigo de Sousa,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Interlagos,https://www.youtube.com/watch?v=GtwkpBxYiQY
+6,Sprint Race,Interlagos,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Interlagos,https://www.youtube.com/watch?v=GtwkpBxYiQY
+11,Sprint Race,Interlagos,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Interlagos,https://www.youtube.com/watch?v=GtwkpBxYiQY
+DNF,Sprint Race,Interlagos,Felipe Faria,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Interlagos,https://www.youtube.com/watch?v=GtwkpBxYiQY
 2025-3,,,,,,,,,,,,,,,,
 2,WES Le Mans 24h,Le Mans,Andrey Fajardo,Grip Racing,-,-,-,-,-,-,F1BC,2025-3,2025,WES Le Mans 24h/F1BC/2025-3,WES Le Mans 24h/F1BC/2025-3/Le Mans,#N/A
 2,WES Le Mans 24h,Le Mans,Carlos Junior,Grip Racing,-,-,-,-,-,-,F1BC,2025-3,2025,WES Le Mans 24h/F1BC/2025-3,WES Le Mans 24h/F1BC/2025-3/Le Mans,#N/A
 2,WES Le Mans 24h,Le Mans,Matheus Beraldo,Grip Racing,-,-,-,-,-,-,F1BC,2025-3,2025,WES Le Mans 24h/F1BC/2025-3,WES Le Mans 24h/F1BC/2025-3/Le Mans,#N/A
 1,WES Interlagos 12h,Interlagos,Matheus Beraldo,Grip Racing,-,-,-,-,EVENTO,-,F1BC,2025-3,2025,WES Interlagos 12h/F1BC/2025-3,WES Interlagos 12h/F1BC/2025-3/Interlagos,#N/A
 1,WES Interlagos 12h,Interlagos,Andrey Fajardo,Grip Racing,-,-,-,-,EVENTO,-,F1BC,2025-3,2025,WES Interlagos 12h/F1BC/2025-3,WES Interlagos 12h/F1BC/2025-3/Interlagos,#N/A
+13,GT3,Le Mans,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Le Mans,#N/A
+15,GT3,Le Mans,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Le Mans,#N/A
+17,GT3,Le Mans,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Le Mans,#N/A
+8,GT3,Spa Francorchamps,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Spa Francorchamps,#N/A
+11,GT3,Spa Francorchamps,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Spa Francorchamps,#N/A
+20,GT3,Spa Francorchamps,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Spa Francorchamps,#N/A
+5,GT3,Suzuka,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Suzuka,#N/A
+8,GT3,Suzuka,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Suzuka,#N/A
+12,GT3,Suzuka,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Suzuka,#N/A
+DNF,GT3,Suzuka,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Suzuka,#N/A
+7,GT3,Bathurst,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Bathurst,#N/A
+10,GT3,Bathurst,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Bathurst,#N/A
+12,GT3,Bathurst,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Bathurst,#N/A
+8,GT3,Nurburgring,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Nurburgring,#N/A
+9,GT3,Nurburgring,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT3/Racing Bears/2025-3,GT3/Racing Bears/2025-3/Nurburgring,#N/A
+DNF,GT1,Silverstone,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-3,2025,GT1/Racing Bears/2025-3,GT1/Racing Bears/2025-3/Silverstone,#N/A
 2025-4,,,,,,,,,,,,,,,,
 1,WES Spa 24h,Spa-Francorchamps,Matheus Beraldo,Grip Racing,-,-,-,-,EVENTO,-,F1BC,2025-4,2025,WES Spa 24h/F1BC/2025-4,WES Spa 24h/F1BC/2025-4/Spa-Francorchamps,https://www.youtube.com/watch?v=h50pcX5G-7Q||https://www.youtube.com/watch?v=jX91AFcqGY8||https://www.youtube.com/watch?v=Jr1VZF_wunI
 1,WES Spa 24h,Spa-Francorchamps,Carlos Junior,,-,-,-,-,EVENTO,-,F1BC,2025-4,2025,WES Spa 24h/F1BC/2025-4,WES Spa 24h/F1BC/2025-4/Spa-Francorchamps,https://www.youtube.com/watch?v=h50pcX5G-7Q||https://www.youtube.com/watch?v=jX91AFcqGY8||https://www.youtube.com/watch?v=Jr1VZF_wunI
 1,WES Spa 24h,Spa-Francorchamps,Andrey Fajardo,,-,-,-,-,EVENTO,-,F1BC,2025-4,2025,WES Spa 24h/F1BC/2025-4,WES Spa 24h/F1BC/2025-4/Spa-Francorchamps,https://www.youtube.com/watch?v=h50pcX5G-7Q||https://www.youtube.com/watch?v=jX91AFcqGY8||https://www.youtube.com/watch?v=Jr1VZF_wunI
+22,GT2,Le Mans,Henrique Bettega,,-,-,-,-,-,-,Racing Bears,2025-4,2025,GT2/Racing Bears/2025-4,GT2/Racing Bears/2025-4/Le Mans,#N/A
+16,GT2,Mosport,Henrique Bettega,,-,-,-,-,-,-,Racing Bears,2025-4,2025,GT2/Racing Bears/2025-4,GT2/Racing Bears/2025-4/Mosport,#N/A
+17,GT2,Spa Francorchamps,Henrique Bettega,,-,-,-,-,-,-,Racing Bears,2025-4,2025,GT2/Racing Bears/2025-4,GT2/Racing Bears/2025-4/Spa Francorchamps,#N/A
+12,GT2,Kyalami,Henrique Bettega,,-,-,-,-,-,-,Racing Bears,2025-4,2025,GT2/Racing Bears/2025-4,GT2/Racing Bears/2025-4/Kyalami,#N/A
+12,GT2,Road Atlanta,Henrique Bettega,,-,-,-,-,-,-,Racing Bears,2025-4,2025,GT2/Racing Bears/2025-4,GT2/Racing Bears/2025-4/Road Atlanta,#N/A
 2026-1,,,,,,,,,,,,,,,,
 5,WES Daytona 24h,Daytona,Matheus Beraldo,,-,-,-,-,-,-,F1BC,2026-1,2026,WES Daytona 24h/F1BC/2026-1,WES Daytona 24h/F1BC/2026-1/Daytona,https://www.youtube.com/watch?v=gntH9jUHEKM&pp=ygUMZjFiYyBkYXl0b25h||https://www.youtube.com/watch?v=zh2WfdcZL5E&pp=ygUMZjFiYyBkYXl0b25h||https://www.youtube.com/watch?v=WWWma9LRyQw&pp=ygUMZjFiYyBkYXl0b25h
 5,WES Daytona 24h,Daytona,Gustavo Ximenes,,-,-,-,-,-,-,F1BC,2026-1,2026,WES Daytona 24h/F1BC/2026-1,WES Daytona 24h/F1BC/2026-1/Daytona,https://www.youtube.com/watch?v=gntH9jUHEKM&pp=ygUMZjFiYyBkYXl0b25h||https://www.youtube.com/watch?v=zh2WfdcZL5E&pp=ygUMZjFiYyBkYXl0b25h||https://www.youtube.com/watch?v=WWWma9LRyQw&pp=ygUMZjFiYyBkYXl0b25h
@@ -9306,3 +9433,11 @@ DNF,WES Bathurst 12h PRO,Bathurst ,Matheus Beraldo,,-,-,-,-,-,-,F1BC,2026-1,2026
 DNF,WES Bathurst 12h PRO,Bathurst ,Andrey Fajardo,,-,-,-,-,-,-,F1BC,2026-1,2026,WES Bathurst 12h PRO/F1BC/2026-1,WES Bathurst 12h PRO/F1BC/2026-1/Bathurst ,#N/A
 2,WES Bathurst 12h AM,Bathurst ,Flavio Felicio ,,-,-,-,-,-,-,F1BC,2026-1,2026,WES Bathurst 12h AM/F1BC/2026-1,WES Bathurst 12h AM/F1BC/2026-1/Bathurst ,#N/A
 2,WES Bathurst 12h AM,Bathurst ,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-1,2026,WES Bathurst 12h AM/F1BC/2026-1,WES Bathurst 12h AM/F1BC/2026-1/Bathurst ,#N/A
+9,GT3,Monza,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Monza,#N/A
+DNF,GT3,Monza,Luiz Humberto,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Monza,#N/A
+16,GT3,Monza,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Monza,#N/A
+11,GT3,Virginia,Luiz Humberto,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Virginia,#N/A
+16,GT3,Virginia,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Virginia,#N/A
+17,GT3,Interlagos,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Interlagos,#N/A
+18,GT3,Interlagos,Luiz Humberto,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Interlagos,#N/A
+13,GT3,Imola,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Imola,#N/A
