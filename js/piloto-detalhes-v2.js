@@ -1,5 +1,5 @@
 // Piloto detalhes v2 - Design limpo
-const DATA_VERSION = '1.0.29'; // Incrementar quando atualizar os dados
+const DATA_VERSION = '1.0.30'; // Incrementar quando atualizar os dados
 const DATA_SOURCES = {
     pilotos: `data/data-pilotos.csv?v=${DATA_VERSION}`,
     participacoes: `data/data-participacoes.csv?v=${DATA_VERSION}`
