@@ -130,24 +130,46 @@ async function updateStaff() {
         }
         
         if (pilotoData) {
-            const titulos = pilotoData['Tot. Títulos'] || pilotoData['Títulos'] || '0';
-            const poles = pilotoData['Poles'] || '0';
-            const podios = pilotoData['Pódios'] || pilotoData['Podios'] || '0';
-            const top10 = pilotoData['Top 10'] || '0';
-            
+            const titulosInd = parseInt(pilotoData['Títulos'] || 0);
+            const titulosConst = parseInt(pilotoData['Construtores'] || 0);
+            const totTitulos = parseInt(pilotoData['Tot. Títulos'] || 0);
+            const poles = parseInt(pilotoData['Poles'] || 0);
+            const podios = parseInt(pilotoData['Podios'] || pilotoData['Pódios'] || 0);
+            const top10 = parseInt(pilotoData['Top 10'] || 0);
+            const corridas = parseInt(pilotoData['Corridas'] || 0);
+            const vitorias = parseInt(pilotoData['P1'] || 0);
+            const fastLaps = parseInt(pilotoData['Fast Laps'] || 0);
+
             // Update badges
             const badges = card.querySelectorAll('.highlight-badge');
             badges.forEach(badge => {
                 const text = badge.textContent.toLowerCase();
                 
                 if (text.includes('título')) {
-                    badge.textContent = `🏆 ${titulos} Títulos`;
+                    badge.textContent = `🏆 ${totTitulos} Títulos`;
                 } else if (text.includes('pole')) {
                     badge.textContent = `⚡ ${poles} Poles`;
                 } else if (text.includes('pódio')) {
                     badge.textContent = `🏍️ ${podios} Pódios`;
                 } else if (text.includes('top 10')) {
                     badge.textContent = `🎯 ${top10} Top 10s`;
+                } else if (text.includes('v. rápidas') || text.includes('rápida')) {
+                    badge.textContent = `⚡ ${fastLaps} V. Rápidas`;
+                }
+            });
+
+            // Update description stat elements
+            card.querySelectorAll('[data-stat]').forEach(el => {
+                switch (el.getAttribute('data-stat')) {
+                    case 'tot-titulos':   el.textContent = totTitulos; break;
+                    case 'titulos-ind':   el.textContent = titulosInd; break;
+                    case 'titulos-const': el.textContent = titulosConst; break;
+                    case 'poles':         el.textContent = poles; break;
+                    case 'podios':        el.textContent = podios; break;
+                    case 'top10':         el.textContent = top10; break;
+                    case 'corridas':      el.textContent = corridas; break;
+                    case 'vitorias':      el.textContent = vitorias; break;
+                    case 'fast-laps':     el.textContent = fastLaps; break;
                 }
             });
         }
