@@ -52,4 +52,28 @@
         <priority>0.8</priority>
     </url>
 
+    <!-- Ferramentas -->
+    <url>
+        <loc>https://gripracing.com.br/ferramentas.html</loc>
+        <lastmod>2026-07-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Ferramentas: Calculadora de Combustível -->
+    <url>
+        <loc>https://gripracing.com.br/ferramentas/fuel-calc/</loc>
+        <lastmod>2026-07-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Ferramentas: rFactor 2 Setup Builder -->
+    <url>
+        <loc>https://gripracing.com.br/ferramentas/rf2-setup/</loc>
+        <lastmod>2026-07-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
 </urlset>

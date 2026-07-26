@@ -3,14 +3,17 @@
 // Load Header
 async function loadHeader() {
     try {
-        const response = await fetch('components/header.html');
+        const response = await fetch('/components/header.html');
         const html = await response.text();
         const headerContainer = document.getElementById('header-container');
         if (headerContainer) {
             headerContainer.innerHTML = html;
-            
+
             // Marca a página ativa com base na URL atual
-            const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
+            const path = window.location.pathname;
+            const currentPage = path.startsWith('/ferramentas')
+                ? 'ferramentas'
+                : (path.split('/').pop().replace('.html', '') || 'index');
             const links = document.querySelectorAll('.nav-menu a');
             links.forEach(link => {
                 const page = link.getAttribute('data-page');
@@ -35,7 +38,7 @@ async function loadHeader() {
 // Load Footer
 async function loadFooter() {
     try {
-        const response = await fetch('components/footer.html');
+        const response = await fetch('/components/footer.html');
         const html = await response.text();
         const footerContainer = document.getElementById('footer-container');
         if (footerContainer) {
