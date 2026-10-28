@@ -44,6 +44,50 @@ function parseCSV(csv, url = '') {
     return parsed;
 }
 
+// Colunas somáveis do CSV de pilotos
+const PILOTO_SUM_COLUMNS = [
+    'Títulos', 'Construtores', 'Tot. Títulos', 'Corridas', 'Podios', 'P1', 'P2', 'P3',
+    'Top 5', 'Top 10', 'Poles', 'Fast Laps', 'Abandonos', 'DQ', 'Hat-Tricks', 'Chelems'
+];
+
+// Razão "etapas por X" no mesmo formato da planilha
+function etapasPor(corridas, divisor, vazio) {
+    return divisor > 0 ? (Math.round((corridas / divisor) * 100) / 100).toString() : vazio;
+}
+
+// Junta linhas do mesmo piloto (ex.: nome com espaço sobrando na planilha
+// vira uma segunda linha; depois do trim do parser, os nomes ficam iguais)
+function mergePilotosDuplicados(pilotos) {
+    const porNome = new Map();
+
+    pilotos.forEach(row => {
+        const nome = (row['Piloto'] || '').replace(/\s+/g, ' ').trim();
+        if (!nome) return;
+
+        const atual = porNome.get(nome);
+        if (!atual) {
+            porNome.set(nome, { ...row, Piloto: nome });
+            return;
+        }
+
+        PILOTO_SUM_COLUMNS.forEach(col => {
+            if (col in atual || col in row) {
+                atual[col] = String((parseInt(atual[col]) || 0) + (parseInt(row[col]) || 0));
+            }
+        });
+        if (row['Estreia'] && (!atual['Estreia'] || row['Estreia'] < atual['Estreia'])) atual['Estreia'] = row['Estreia'];
+        if (row['Ultima'] && (!atual['Ultima'] || row['Ultima'] > atual['Ultima'])) atual['Ultima'] = row['Ultima'];
+
+        const corridas = parseInt(atual['Corridas']) || 0;
+        const abandonos = (parseInt(atual['Abandonos']) || 0) + (parseInt(atual['DQ']) || 0);
+        atual['Etapas por DNF/DQ'] = etapasPor(corridas, abandonos, '0');
+        atual['Etapas Por Podio'] = etapasPor(corridas, parseInt(atual['Podios']) || 0, 'N/A');
+        atual['Etapas Por Vitoria'] = etapasPor(corridas, parseInt(atual['P1']) || 0, 'N/A');
+    });
+
+    return [...porNome.values()];
+}
+
 // Fetch data with cache
 async function fetchData(url) {
     try {
@@ -58,7 +102,10 @@ async function fetchData(url) {
         const response = await fetch(url);
         const text = await response.text();
         console.log(`✅ Loaded ${url}: ${text.length} bytes`);
-        const parsed = parseCSV(text, url);
+        let parsed = parseCSV(text, url);
+        if (url.includes('data-pilotos')) {
+            parsed = mergePilotosDuplicados(parsed);
+        }
         console.log(`✅ Parsed ${url}: ${parsed.length} rows`);
         
         // Store in cache
