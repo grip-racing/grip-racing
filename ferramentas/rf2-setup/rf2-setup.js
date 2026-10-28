@@ -988,16 +988,20 @@ function renderLaunchPanel(toolId, schema) {
   const selectedTpl = allTemplates.find(t => t.id === selectedTemplateId);
   const canDelete = selectedTpl && !selectedTpl.builtin;
   const deleteBtn = canDelete
-    ? `<button class="btn-template-delete" onclick="deleteUserTemplate('${toolId}','${escapeHtml(selectedTemplateId)}')" title="${escapeHtml(uiStrings.deleteTemplate)}">✕</button>`
+    ? `<button class="btn-template-delete" onclick="deleteUserTemplate('${toolId}','${escapeHtml(selectedTemplateId)}')" title="${escapeHtml(uiStrings.deleteTemplate)}" aria-label="${escapeHtml(uiStrings.deleteTemplate)}">✕</button>`
     : '';
 
   return `
     <div class="tool-launch-panel">
-      <button class="btn-back" onclick="history.back()">${uiStrings.back}</button>
+      <a class="btn-back" href="/ferramentas.html">← Ferramentas</a>
+      <div class="launch-garage-head">
+        <span class="launch-garage-kicker">Garagem</span>
+        <h2 class="launch-garage-title">Escolha o carro e comece</h2>
+      </div>
       <div class="template-selector-section">
-        <div class="template-section-label">${uiStrings.selectTemplate}</div>
+        <label class="template-section-label" for="template-select-${toolId}">${uiStrings.selectTemplate}</label>
         <div class="template-selector-row">
-          <select class="setup-select" onchange="onTemplateChange('${toolId}', this.value)">
+          <select class="setup-select" id="template-select-${toolId}" onchange="onTemplateChange('${toolId}', this.value)">
             ${templateOptions}
           </select>
           ${deleteBtn}
@@ -1293,11 +1297,11 @@ function renderTool(schema) {
     <div class="tool-workspace-header">
       <button class="btn-back" onclick="goToLaunchPanel()">${uiStrings.back}</button>
       <div class="setup-header-inputs">
-        <input type="text" class="setup-name-input" id="setup-name"
+        <input type="text" class="setup-name-input" id="setup-name" aria-label="Nome do setup"
           value="${escapeHtml(currentSetupName)}"
           placeholder="${escapeHtml(uiStrings.setupNamePlaceholder)}"
           oninput="currentSetupName = this.value"/>
-        <input type="text" class="setup-track-input" id="setup-track"
+        <input type="text" class="setup-track-input" id="setup-track" aria-label="Pista"
           value="${escapeHtml(currentTrackName)}"
           placeholder="${escapeHtml(uiStrings.trackPlaceholder)}"
           oninput="currentTrackName = this.value"/>
@@ -1385,6 +1389,7 @@ function renderTool(schema) {
   document.getElementById('tool-renderer').innerHTML = html;
   initDiffBadges();
   applyFieldVisibility();
+  rf2PaintSliders();
 }
 
 // =============================================
@@ -1432,14 +1437,14 @@ function renderField(catKey, subKey, fieldKey, field) {
   const cfgPanel = `
     <div class="field-config" id="cfg-${uid}">
       <div class="cfg-inputs">
-        <div class="cfg-label-input"><span class="cfg-label">min</span>
-          <input type="number" class="cfg-input" value="${field.min}" step="${field.step}" onchange="updateFieldMeta('${uid}','min',this.value)"/></div>
-        <div class="cfg-label-input"><span class="cfg-label">max</span>
-          <input type="number" class="cfg-input" value="${field.max}" step="${field.step}" onchange="updateFieldMeta('${uid}','max',this.value)"/></div>
-        <div class="cfg-label-input"><span class="cfg-label">step</span>
-          <input type="number" class="cfg-input" value="${field.step}" step="any" onchange="updateFieldMeta('${uid}','step',this.value)"/></div>
-        <div class="cfg-label-input"><span class="cfg-label">default</span>
-          <input type="number" class="cfg-input" value="${field.default}" step="${field.step}" onchange="updateFieldMeta('${uid}','default',this.value)"/></div>
+        <label class="cfg-label-input"><span class="cfg-label">min</span>
+          <input type="number" class="cfg-input" value="${field.min}" step="${field.step}" onchange="updateFieldMeta('${uid}','min',this.value)"/></label>
+        <label class="cfg-label-input"><span class="cfg-label">max</span>
+          <input type="number" class="cfg-input" value="${field.max}" step="${field.step}" onchange="updateFieldMeta('${uid}','max',this.value)"/></label>
+        <label class="cfg-label-input"><span class="cfg-label">step</span>
+          <input type="number" class="cfg-input" value="${field.step}" step="any" onchange="updateFieldMeta('${uid}','step',this.value)"/></label>
+        <label class="cfg-label-input"><span class="cfg-label">default</span>
+          <input type="number" class="cfg-input" value="${field.default}" step="${field.step}" onchange="updateFieldMeta('${uid}','default',this.value)"/></label>
       </div>
       <label class="cfg-adjustable-row">
         <input type="checkbox" class="cfg-adjustable-check" ${isAdjustable ? 'checked' : ''} onchange="updateAdjustable('${uid}', this.checked)"/>
@@ -1468,8 +1473,8 @@ function renderField(catKey, subKey, fieldKey, field) {
             <span class="field-label">${label}</span>${symSpan}
           </div>
           <div class="field-controls">
-            ${knowledge ? `<button class="field-info-btn" onclick="toggleFieldInfo('${uid}')">ℹ</button>` : ''}
-            <button class="field-cfg-btn" onclick="toggleFieldConfig('${uid}')">⚙</button>
+            ${knowledge ? `<button class="field-info-btn" onclick="toggleFieldInfo('${uid}')" aria-label="Explicação: ${label}" title="O que este ajuste faz">ℹ</button>` : ''}
+            <button class="field-cfg-btn" onclick="toggleFieldConfig('${uid}')" aria-label="Limites: ${label}" title="Editar mínimo, máximo e passo">⚙</button>
           </div>
         </div>
         <div class="sides-row">
@@ -1481,10 +1486,10 @@ function renderField(catKey, subKey, fieldKey, field) {
             </div>
             <input type="range" class="setup-slider" id="${uid}__L"
               min="${field.min}" max="${field.max}" step="${field.step}" value="${vL}"
-              oninput="updateSlider('${uid}',this.value,'L')" ${isDisabled ? 'disabled' : ''}/>
+              oninput="updateSlider('${uid}',this.value,'L')" aria-label="${label} ${lbl}" ${isDisabled ? 'disabled' : ''}/>
           </div>
           <button class="field-link-btn${isLinked ? ' linked' : ''}" id="link-${uid}"
-            onclick="toggleLink('${uid}')" title="${uiStrings.linked}">${isLinked ? '🔒' : '🔓'}</button>
+            onclick="toggleLink('${uid}')" title="${uiStrings.linked}" aria-label="${uiStrings.linked}: ${label}">${isLinked ? '🔒' : '🔓'}</button>
           <div class="side-col">
             <div class="side-top">
               <span class="side-label">${rbl}</span>
@@ -1493,7 +1498,7 @@ function renderField(catKey, subKey, fieldKey, field) {
             </div>
             <input type="range" class="setup-slider" id="${uid}__R"
               min="${field.min}" max="${field.max}" step="${field.step}" value="${vR}"
-              oninput="updateSlider('${uid}',this.value,'R')" ${isDisabled ? 'disabled' : ''}/>
+              oninput="updateSlider('${uid}',this.value,'R')" aria-label="${label} ${rbl}" ${isDisabled ? 'disabled' : ''}/>
           </div>
         </div>
         ${infoPanelHtml}
@@ -1509,13 +1514,13 @@ function renderField(catKey, subKey, fieldKey, field) {
         <div class="field-controls">
           <span class="field-value" id="val-${uid}">${formatFieldDisplay(fieldKey, Number(value), decimals, unit)}</span>
           <span class="field-diff-badge" id="diff-${uid}" style="display:none"></span>
-          ${knowledge ? `<button class="field-info-btn" onclick="toggleFieldInfo('${uid}')">ℹ</button>` : ''}
-          <button class="field-cfg-btn" onclick="toggleFieldConfig('${uid}')">⚙</button>
+          ${knowledge ? `<button class="field-info-btn" onclick="toggleFieldInfo('${uid}')" aria-label="Explicação: ${label}" title="O que este ajuste faz">ℹ</button>` : ''}
+          <button class="field-cfg-btn" onclick="toggleFieldConfig('${uid}')" aria-label="Limites: ${label}" title="Editar mínimo, máximo e passo">⚙</button>
         </div>
       </div>
       <input type="range" class="setup-slider" id="${uid}"
         min="${field.min}" max="${field.max}" step="${field.step}" value="${value}"
-        oninput="updateSlider('${uid}', this.value)"
+        oninput="updateSlider('${uid}', this.value)" aria-label="${label}"
         ${isDisabled ? 'disabled' : ''}/>
       ${infoPanelHtml}
       ${cfgPanel}
@@ -1727,6 +1732,7 @@ function toggleLink(uid) {  const isNowLinked = !getLinkState(uid);
     if (dR) dR.textContent = Number(leftVal).toFixed(decimals) + unit;
     updateDiffBadgeSide(uid, 'R', leftVal, field);
     updateSymWarning(uid);
+    rf2PaintSliders(uid);
     refreshAnalyzeBadge();
   }
 }
@@ -1775,6 +1781,7 @@ function updateSlider(uid, rawValue, side) {
   if (document.getElementById('row-' + uid)?.classList.contains('info-open')) {
     populateFieldInfoEffects(uid);
   }
+  rf2PaintSliders(uid);
   refreshAnalyzeBadge();
 }
 
@@ -1860,6 +1867,7 @@ function updateFieldMeta(uid, property, rawValue) {
     const unit = field.unit ? ' ' + field.unit : '';
     const display = document.getElementById('val-' + uid);
     if (display) display.textContent = clamped.toFixed(decimals) + unit;
+    rf2PaintSliders(uid);
   }
   // 'default' only persists in schema for Reset — no live DOM update needed
 }
@@ -2111,6 +2119,23 @@ function navigateToField(catKey, subKey, fieldKey) {
 // INIT
 // =============================================
 
-if (document.body.dataset.tool === 'rf2-setup') {
+// Espera os demais scripts (rf2-svm.js etc.) carregarem antes de montar a tela,
+// senão o botão "Importar .svm" não aparece na primeira renderização.
+if (document.body.dataset.tool === 'rf2-setup') document.addEventListener('DOMContentLoaded', () => {
   launchTool('rf2-setup');
+});
+
+// =============================================
+// APRESENTAÇÃO: preenchimento da trilha dos sliders (--fill)
+// Só visual — não altera valores.
+// =============================================
+function rf2PaintSliders(uid) {
+  const els = uid
+    ? [uid, uid + '__L', uid + '__R'].map(id => document.getElementById(id)).filter(Boolean)
+    : document.querySelectorAll('input.setup-slider');
+  els.forEach(el => {
+    const min = parseFloat(el.min), max = parseFloat(el.max), v = parseFloat(el.value);
+    const pct = max > min ? ((v - min) / (max - min)) * 100 : 0;
+    el.style.setProperty('--fill', Math.min(100, Math.max(0, pct)) + '%');
+  });
 }

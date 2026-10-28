@@ -520,3 +520,72 @@
         gap: 12px;
     }
 }
+
+/* ===== Racing skin (cantos vivos, faixa laranja, tipografia condensada) ===== */
+.corrida-modal {
+    border-radius: 0;
+    border-top: 5px solid var(--orange);
+}
+
+.corrida-modal-title,
+.corrida-sidebar-title {
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.corrida-modal-title {
+    font-size: 32px;
+    line-height: 1;
+}
+
+.corrida-modal-close {
+    width: 44px;
+    height: 44px;
+    border-radius: 0;
+    background: var(--bg-tertiary);
+}
+
+.corrida-modal-close:hover {
+    background: var(--orange);
+    color: #111;
+    transform: none;
+}
+
+.corrida-modal-close:focus-visible,
+.modal-carousel-btn:focus-visible,
+.corrida-transmission-button:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 2px;
+}
+
+.corrida-sidebar-item,
+.sidebar-item-position,
+.corrida-modal-resultado,
+.corrida-resultado-valor,
+.corrida-modal-field,
+.modal-carousel-btn,
+.corrida-transmission-button {
+    border-radius: 0;
+}
+
+.corrida-sidebar-item.clickable-piloto:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: -3px;
+}
+
+.sidebar-item-position,
+.corrida-resultado-valor {
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-style: italic;
+    font-weight: 800;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .corrida-modal-overlay,
+    .corrida-modal {
+        animation: none;
+    }
+}

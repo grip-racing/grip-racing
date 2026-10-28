@@ -2,146 +2,122 @@
 // GRIP RACING - JAVASCRIPT
 // ========================================
 
-// Navbar scroll effect
-const navbar = document.querySelector('.navbar');
-let lastScroll = 0;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fmt = (n) => Number(n).toLocaleString('pt-BR');
 
-if (navbar) {
+// Navbar: estado "scrolled" (header é injetado depois, então busca a cada frame)
+(() => {
+    let ticking = false;
+    const update = () => {
+        const navbar = document.querySelector('.navbar');
+        if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 40);
+        ticking = false;
+    };
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(update);
         }
-        
-        lastScroll = currentScroll;
-    });
-}
+    }, { passive: true });
+    document.addEventListener('DOMContentLoaded', update);
+})();
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const offsetTop = target.offsetTop - 80;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// Simple AOS (Animate On Scroll) implementation
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('aos-animate');
-        }
-    });
-}, observerOptions);
-
-// Observe all elements with data-aos attribute
+// Simple AOS (Animate On Scroll)
 document.addEventListener('DOMContentLoaded', () => {
     const aosElements = document.querySelectorAll('[data-aos]');
-    aosElements.forEach(element => {
-        observer.observe(element);
-    });
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+        aosElements.forEach(el => el.classList.add('aos-animate'));
+        return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('aos-animate');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    aosElements.forEach(el => observer.observe(el));
 });
 
-// Counter animation for stats
-const animateCounter = (element, target, duration = 2000) => {
-    let start = 0;
-    const increment = target / (duration / 16);
-    
-    const timer = setInterval(() => {
-        start += increment;
-        if (start >= target) {
-            element.textContent = window.formatNumber ? window.formatNumber(target) : target;
-            clearInterval(timer);
-        } else {
-            element.textContent = window.formatNumber ? window.formatNumber(Math.floor(start)) : Math.floor(start);
-        }
-    }, 16);
-};
+// ========================================
+// HOME - estatísticas dinâmicas
+// ========================================
 
-// Trigger counter animation when stats section is visible
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const statNumbers = entry.target.querySelectorAll('.stat-number');
-            statNumbers.forEach(stat => {
-                const text = stat.textContent.trim();
-                // Remove pontos e outros caracteres não numéricos para obter o número real
-                const cleanNumber = text.replace(/\./g, '').replace(/\D/g, '');
-                
-                if (text.includes('+')) {
-                    const number = parseInt(cleanNumber);
-                    if (!isNaN(number)) {
-                        stat.textContent = '0';
-                        animateCounter(stat, number);
-                        // Adiciona o + depois da animação
-                        setTimeout(() => {
-                            stat.textContent = stat.textContent + '+';
-                        }, 2000);
-                    }
-                } else if (cleanNumber && !isNaN(parseInt(cleanNumber))) {
-                    const number = parseInt(cleanNumber);
-                    stat.textContent = '0';
-                    animateCounter(stat, number);
-                }
-            });
-            statsObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
+const homeStats = {};
 
-const statsSection = document.querySelector('.stats');
-if (statsSection) {
-    statsObserver.observe(statsSection);
+// Contador estilo "cronômetro": anima de 0 até o valor final
+function runCounter(el, target, duration = 1600) {
+    if (prefersReducedMotion) {
+        el.textContent = fmt(target);
+        return;
+    }
+    const start = performance.now();
+    const step = (now) => {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = fmt(Math.round(target * eased));
+        if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
 }
 
-// Add hover effect to staff cards
-const staffCards = document.querySelectorAll('.staff-card');
-staffCards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0) scale(1)';
-    });
-});
+function setText(id, value) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+}
 
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero-content');
-    if (hero && scrolled < window.innerHeight) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-        hero.style.opacity = 1 - (scrolled / window.innerHeight);
+// Painel de telemetria: anima quando estiver visível E com dados carregados
+function setupTelemetry() {
+    const panel = document.querySelector('.telemetry');
+    if (!panel) return;
+
+    let visible = false;
+    let started = false;
+    const start = () => {
+        if (started || !visible || !homeStats.loaded) return;
+        started = true;
+        panel.classList.add('is-live');
+        panel.querySelectorAll('.stat-number[data-value]').forEach(el => {
+            runCounter(el, parseInt(el.dataset.value, 10) || 0);
+        });
+    };
+
+    panel.addEventListener('stats:ready', start);
+
+    if (!('IntersectionObserver' in window)) {
+        visible = true;
+        start();
+        return;
     }
-});
+    const io = new IntersectionObserver((entries) => {
+        if (entries.some(e => e.isIntersecting)) {
+            visible = true;
+            io.disconnect();
+            start();
+        }
+    }, { threshold: 0.3 });
+    io.observe(panel);
+}
+
+function applyFooterStats() {
+    if (!homeStats.loaded) return;
+    setText('footerParticipacoes', fmt(homeStats.participacoes));
+    setText('footerTitulos', fmt(homeStats.titulos));
+    setText('footerPodios', fmt(homeStats.podios));
+    setText('footerCampeonatos', fmt(homeStats.campeonatos));
+}
 
 // Load dynamic stats
 async function loadDynamicStats() {
     try {
-        // Fetch stats from data-stats.csv (consolidated data)
-        const statsResponse = await fetch('data/data-stats.csv');
+        const statsResponse = await fetch('/data/data-stats.csv');
         const statsText = await statsResponse.text();
         const statsLines = statsText.trim().split('\n');
-        
+
         // Parse the "Total" row (line 2)
         const totalLine = statsLines[1].split(',');
-        
+
         const totalTitulosIndividuais = parseInt(totalLine[1]) || 0;
         const totalTitulosConstrutores = parseInt(totalLine[2]) || 0;
         const totalTitulos = totalTitulosIndividuais + totalTitulosConstrutores;
@@ -154,102 +130,75 @@ async function loadDynamicStats() {
         const totalFastLaps = parseInt(totalLine[11]) || 0;
         const totalCampeonatos = parseInt(totalLine[14]) || 0;
         const totalEtapas = parseInt(totalLine[15]) || 0;
-        
-        // Calculate % Taxa Top 10
         const taxaTop10 = totalParticipacoes > 0 ? Math.round((totalTop10 / totalParticipacoes) * 100) : 0;
-        
-        // Get total pilotos from data-pilotos.csv for about section
-        const pilotosResponse = await fetch('data/data-pilotos.csv');
+
+        Object.assign(homeStats, {
+            loaded: true,
+            participacoes: totalParticipacoes,
+            titulos: totalTitulos,
+            podios: totalPodios,
+            campeonatos: totalCampeonatos
+        });
+        applyFooterStats();
+
+        // Daqui para baixo só existe na home
+        if (!document.querySelector('.page-home')) return;
+
+        const pilotosResponse = await fetch('/data/data-pilotos.csv');
         const pilotosText = await pilotosResponse.text();
-        const pilotosLines = pilotosText.trim().split('\n');
-        const totalPilotos = pilotosLines.length - 1;
-        
-        // Update stat cards
-        const statParticipacoes = document.getElementById('statParticipacoes');
-        const statEtapas = document.getElementById('statEtapas');
-        const statCampeonatos = document.getElementById('statCampeonatos');
-        const statTitulos = document.getElementById('statTitulos');
-        const statTitulosIndividuais = document.getElementById('statTitulosIndividuais');
-        const statTitulosConstrutores = document.getElementById('statTitulosConstrutores');
-        const statPodios = document.getElementById('statPodios');
-        const statVitorias = document.getElementById('statVitorias');
-        const statPoles = document.getElementById('statPoles');
-        const statFastLaps = document.getElementById('statFastLaps');
-        const statTaxaTop10 = document.getElementById('statTaxaTop10');
-        
-        if (statParticipacoes) statParticipacoes.textContent = totalParticipacoes;
-        if (statEtapas) statEtapas.textContent = totalEtapas;
-        if (statCampeonatos) statCampeonatos.textContent = totalCampeonatos;
-        if (statTitulos) statTitulos.textContent = totalTitulos;
-        if (statTitulosIndividuais) statTitulosIndividuais.textContent = totalTitulosIndividuais;
-        if (statTitulosConstrutores) statTitulosConstrutores.textContent = totalTitulosConstrutores;
-        if (statPodios) statPodios.textContent = totalPodios;
-        if (statVitorias) statVitorias.textContent = totalVitorias;
-        if (statPoles) statPoles.textContent = totalPoles;
-        if (statFastLaps) statFastLaps.textContent = totalFastLaps;
-        if (statTaxaTop10) statTaxaTop10.textContent = taxaTop10;
-        
-        // Update about section - text
-        const pilotosAbout = document.getElementById('totalPilotosAbout');
-        const participacoesAbout = document.getElementById('totalParticipacoesAbout');
-        const campeonatosAbout = document.getElementById('totalCampeonatosAbout');
-        const etapasAbout = document.getElementById('totalEtapasAbout');
-        const titulosAbout = document.getElementById('totalTitulosAbout');
-        const titulosIndivAbout = document.getElementById('totalTitulosIndivAbout');
-        const titulosConstAbout = document.getElementById('totalTitulosConstAbout');
-        const podiosAbout = document.getElementById('totalPodiosAbout');
-        const vitoriasAbout = document.getElementById('totalVitoriasAbout');
-        const top10About = document.getElementById('totalTop10About');
-        const top5About = document.getElementById('totalTop5About');
-        const polesAbout = document.getElementById('totalPolesAbout');
-        const fastLapsAbout = document.getElementById('totalFastLapsAbout');
-        
-        if (pilotosAbout) pilotosAbout.textContent = totalPilotos;
-        if (participacoesAbout) participacoesAbout.textContent = totalParticipacoes.toLocaleString('pt-BR');
-        if (campeonatosAbout) campeonatosAbout.textContent = totalCampeonatos;
-        if (etapasAbout) etapasAbout.textContent = totalEtapas.toLocaleString('pt-BR');
-        if (titulosAbout) titulosAbout.textContent = totalTitulos;
-        if (titulosIndivAbout) titulosIndivAbout.textContent = totalTitulosIndividuais;
-        if (titulosConstAbout) titulosConstAbout.textContent = totalTitulosConstrutores;
-        if (podiosAbout) podiosAbout.textContent = totalPodios.toLocaleString('pt-BR');
-        if (vitoriasAbout) vitoriasAbout.textContent = totalVitorias;
-        if (top10About) top10About.textContent = totalTop10.toLocaleString('pt-BR');
-        if (top5About) top5About.textContent = totalTop5.toLocaleString('pt-BR');
-        if (polesAbout) polesAbout.textContent = totalPoles;
-        if (fastLapsAbout) fastLapsAbout.textContent = totalFastLaps;
-        
-        // Update about section - feature cards
-        const featureTitulos = document.getElementById('featureTitulos');
-        const featureTitulosIndiv = document.getElementById('featureTitulosIndiv');
-        const featureTitulosConst = document.getElementById('featureTitulosConst');
-        const featureVitorias = document.getElementById('featureVitorias');
-        const featurePodios = document.getElementById('featurePodios');
-        const featurePilotos = document.getElementById('featurePilotos');
-        
-        if (featureTitulos) featureTitulos.textContent = totalTitulos;
-        if (featureTitulosIndiv) featureTitulosIndiv.textContent = totalTitulosIndividuais;
-        if (featureTitulosConst) featureTitulosConst.textContent = totalTitulosConstrutores;
-        if (featureVitorias) featureVitorias.textContent = totalVitorias;
-        if (featurePodios) featurePodios.textContent = totalPodios.toLocaleString('pt-BR');
-        if (featurePilotos) featurePilotos.textContent = totalPilotos;
-        
-        // Load league-specific stats from participacoes.csv
-        await loadLeagueStats();
-        
-        // Update pilotos section
-        const pilotosSectionEl = document.getElementById('totalPilotosSection');
-        if (pilotosSectionEl) pilotosSectionEl.textContent = totalPilotos;
-        
-        // Update footer
-        const footerParticipacoes = document.getElementById('footerParticipacoes');
-        const footerTitulos = document.getElementById('footerTitulos');
-        const footerPodios = document.getElementById('footerPodios');
-        
-        if (footerParticipacoes) footerParticipacoes.textContent = totalParticipacoes.toLocaleString('pt-BR');
-        if (footerTitulos) footerTitulos.textContent = totalTitulos;
-        if (footerPodios) footerPodios.textContent = totalPodios.toLocaleString('pt-BR');
-        
-        // Load league-specific stats
+        const totalPilotos = pilotosText.trim().split('\n').length - 1;
+
+        // Painel de telemetria: valor final em data-value (o contador anima até ele)
+        const counters = {
+            statParticipacoes: totalParticipacoes,
+            statEtapas: totalEtapas,
+            statCampeonatos: totalCampeonatos,
+            statTitulos: totalTitulos,
+            statPodios: totalPodios,
+            statPoles: totalPoles,
+            statFastLaps: totalFastLaps,
+            statTaxaTop10: taxaTop10
+        };
+        Object.entries(counters).forEach(([id, value]) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.dataset.value = value;
+            el.textContent = fmt(value);
+        });
+        setText('statTitulosIndividuais', fmt(totalTitulosIndividuais));
+        setText('statTitulosConstrutores', fmt(totalTitulosConstrutores));
+        setText('statVitorias', fmt(totalVitorias));
+
+        const split = document.getElementById('tmSplitFill');
+        if (split && totalTitulos > 0) {
+            split.style.setProperty('--fill', `${(totalTitulosIndividuais / totalTitulos) * 100}%`);
+        }
+        const gauge = document.getElementById('tmGaugeFill');
+        if (gauge) gauge.style.setProperty('--fill', `${taxaTop10}%`);
+
+        // Sobre
+        setText('totalPilotosAbout', fmt(totalPilotos));
+        setText('featurePilotos', fmt(totalPilotos));
+        setText('totalTop10About', fmt(totalTop10));
+        setText('totalTop5About', fmt(totalTop5));
+        setText('totalVitoriasAbout', fmt(totalVitorias));
+        // IDs legados (mantidos caso voltem ao HTML)
+        setText('totalParticipacoesAbout', fmt(totalParticipacoes));
+        setText('totalCampeonatosAbout', fmt(totalCampeonatos));
+        setText('totalEtapasAbout', fmt(totalEtapas));
+        setText('totalTitulosAbout', fmt(totalTitulos));
+        setText('totalTitulosIndivAbout', fmt(totalTitulosIndividuais));
+        setText('totalTitulosConstAbout', fmt(totalTitulosConstrutores));
+        setText('totalPodiosAbout', fmt(totalPodios));
+        setText('totalPolesAbout', fmt(totalPoles));
+        setText('totalFastLapsAbout', fmt(totalFastLaps));
+
+        // Equipe
+        setText('totalPilotosSection', fmt(totalPilotos));
+
+        const panel = document.querySelector('.telemetry');
+        if (panel) panel.dispatchEvent(new CustomEvent('stats:ready'));
+
         await loadLeagueStats();
     } catch (error) {
         console.error('❌ Erro ao carregar estatísticas:', error);
@@ -259,11 +208,10 @@ async function loadDynamicStats() {
 // Load league-specific statistics
 async function loadLeagueStats() {
     try {
-        const response = await fetch('data/data-participacoes.csv');
+        const response = await fetch('/data/data-participacoes.csv');
         const text = await response.text();
         const lines = text.trim().split('\n');
-        
-        // Parse CSV
+
         const participacoes = lines.slice(1).map(line => {
             const values = line.split(',');
             return {
@@ -272,79 +220,56 @@ async function loadLeagueStats() {
                 pilotoCampeao: values[9]?.trim() || '',
                 construtores: values[10]?.trim() || ''
             };
-        }).filter(p => p.liga); // Remove empty leagues
-        
-        // Calculate unique leagues
-        const uniqueLeagues = new Set(participacoes.map(p => p.liga));
-        const totalLigas = uniqueLeagues.size;
-        
-        // Calculate F1BC stats
-        const f1bcData = participacoes.filter(p => p.liga === 'F1BC');
-        const f1bcParticipacoes = f1bcData.length;
-        
-        // Count unique championships with titles (one per temporada)
-        const f1bcCampeonatosComTitulos = new Set();
-        f1bcData.forEach(p => {
-            if ((p.pilotoCampeao === 'SIM' || p.construtores === 'SIM' || p.construtores === 'TIME') && p.temporada) {
-                f1bcCampeonatosComTitulos.add(p.temporada);
-            }
+        }).filter(p => p.liga);
+
+        const totalLigas = new Set(participacoes.map(p => p.liga)).size;
+
+        const leagueStats = (liga) => {
+            const data = participacoes.filter(p => p.liga === liga);
+            const comTitulos = new Set();
+            data.forEach(p => {
+                if ((p.pilotoCampeao === 'SIM' || p.construtores === 'SIM' || p.construtores === 'TIME') && p.temporada) {
+                    comTitulos.add(p.temporada);
+                }
+            });
+            return { participacoes: data.length, titulos: comTitulos.size };
+        };
+
+        const f1bc = leagueStats('F1BC');
+        const rb = leagueStats('Racing Bears');
+        const racersav = leagueStats('RacersAv');
+        const iracing = leagueStats('iRacing');
+
+        setText('totalLigasAbout', totalLigas);
+        setText('featureLigas', totalLigas);
+        setText('f1bcParticipacoesAbout', fmt(f1bc.participacoes));
+        setText('f1bcTitulosAbout', fmt(f1bc.titulos));
+        setText('rbParticipacoesAbout', fmt(rb.participacoes));
+        setText('rbTitulosAbout', fmt(rb.titulos));
+        setText('racersavParticipacoesAbout', fmt(racersav.participacoes));
+        setText('racersavTitulosAbout', fmt(racersav.titulos));
+        setText('iracingParticipacoesAbout', fmt(iracing.participacoes));
+
+        // Barras proporcionais da tabela de ligas
+        const values = {
+            f1bcParticipacoesAbout: f1bc.participacoes,
+            rbParticipacoesAbout: rb.participacoes,
+            racersavParticipacoesAbout: racersav.participacoes,
+            iracingParticipacoesAbout: iracing.participacoes
+        };
+        const max = Math.max(1, ...Object.values(values));
+        document.querySelectorAll('[data-bar-for]').forEach(bar => {
+            const v = values[bar.dataset.barFor] || 0;
+            bar.style.setProperty('--fill', `${Math.max(2, (v / max) * 100)}%`);
         });
-        const f1bcTitulos = f1bcCampeonatosComTitulos.size;
-        
-        // Calculate Racing Bears stats
-        const rbData = participacoes.filter(p => p.liga === 'Racing Bears');
-        const rbParticipacoes = rbData.length;
-        const rbCampeonatosComTitulos = new Set();
-        rbData.forEach(p => {
-            if ((p.pilotoCampeao === 'SIM' || p.construtores === 'SIM' || p.construtores === 'TIME') && p.temporada) {
-                rbCampeonatosComTitulos.add(p.temporada);
-            }
-        });
-        const rbTitulos = rbCampeonatosComTitulos.size;
-        
-        // Calculate RacersAv stats
-        const racersavData = participacoes.filter(p => p.liga === 'RacersAv');
-        const racersavParticipacoes = racersavData.length;
-        const racersavCampeonatosComTitulos = new Set();
-        racersavData.forEach(p => {
-            if ((p.pilotoCampeao === 'SIM' || p.construtores === 'SIM' || p.construtores === 'TIME') && p.temporada) {
-                racersavCampeonatosComTitulos.add(p.temporada);
-            }
-        });
-        const racersavTitulos = racersavCampeonatosComTitulos.size;
-        
-        // Calculate iRacing stats
-        const iracingParticipacoes = participacoes.filter(p => p.liga === 'iRacing').length;
-        
-        // Update UI
-        const totalLigasEl = document.getElementById('totalLigasAbout');
-        const featureLigas = document.getElementById('featureLigas');
-        const f1bcParticipacoesEl = document.getElementById('f1bcParticipacoesAbout');
-        const f1bcTitulosEl = document.getElementById('f1bcTitulosAbout');
-        const rbParticipacoesEl = document.getElementById('rbParticipacoesAbout');
-        const rbTitulosEl = document.getElementById('rbTitulosAbout');
-        const racersavParticipacoesEl = document.getElementById('racersavParticipacoesAbout');
-        const racersavTitulosEl = document.getElementById('racersavTitulosAbout');
-        const iracingParticipacoesEl = document.getElementById('iracingParticipacoesAbout');
-        
-        if (totalLigasEl) totalLigasEl.textContent = totalLigas;
-        if (featureLigas) featureLigas.textContent = totalLigas;
-        if (f1bcParticipacoesEl) f1bcParticipacoesEl.textContent = f1bcParticipacoes.toLocaleString('pt-BR');
-        if (f1bcTitulosEl) f1bcTitulosEl.textContent = f1bcTitulos;
-        if (rbParticipacoesEl) rbParticipacoesEl.textContent = rbParticipacoes;
-        if (rbTitulosEl) rbTitulosEl.textContent = rbTitulos;
-        if (racersavParticipacoesEl) racersavParticipacoesEl.textContent = racersavParticipacoes;
-        if (racersavTitulosEl) racersavTitulosEl.textContent = racersavTitulos;
-        if (iracingParticipacoesEl) iracingParticipacoesEl.textContent = iracingParticipacoes;
     } catch (error) {
         console.error('❌ Erro ao carregar estatísticas de ligas:', error);
     }
 }
 
-// Load stats on page load
-if (document.querySelector('.about-text')) {
-    loadDynamicStats();
-}
+setupTelemetry();
+document.addEventListener('footerLoaded', applyFooterStats);
+loadDynamicStats();
 
 // Console easter egg
 console.log('%c🏁 GRIP RACING 🏁', 'color: #FF6B00; font-size: 30px; font-weight: bold;');

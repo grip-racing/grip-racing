@@ -1,13 +1,11 @@
 /* ========================================
    FERRAMENTAS - Estilos compartilhados
-   (catálogo + páginas de ferramentas)
+   (catálogo "pit wall" + páginas de ferramentas)
    ======================================== */
 
 /* Aliases para as variáveis usadas pelo código portado das
    ferramentas (Calculadora de Combustível / rF2 Setup Builder),
-   remapeadas para a identidade visual da Grip Racing. Isso evita
-   reescrever centenas de var(--cyan)/var(--font-head) etc. nos
-   arquivos CSS/JS das ferramentas. */
+   remapeadas para a identidade visual da Grip Racing. */
 :root {
     --cyan: var(--orange);
     --blue: var(--orange-dark);
@@ -16,23 +14,56 @@
     --border: var(--border-color);
     --text: var(--text-primary);
     --text-dim: var(--text-secondary);
-    --font-head: 'Montserrat', sans-serif;
+    --font-head: var(--font-display, 'Saira Condensed', 'Montserrat', sans-serif);
     --font-main: 'Montserrat', sans-serif;
     --font-mono: ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
     --surface: var(--bg-tertiary);
     --surface2: var(--bg-secondary);
     --bg: #FFFFFF;
+
+    /* Laranja para TEXTO (o #FF6B00 puro não passa AA sobre branco) */
+    --accent-ink: #B34700;
+    /* Linhas um pouco mais fortes que --border-color para painéis técnicos */
+    --rule: rgba(0, 0, 0, 0.16);
+    --panel-head: #F1F2F4;
+
+    /* Tela do MFD (sempre escura, como um display de painel) */
+    --mfd-bg: #0B0C0E;
+    --mfd-line: rgba(255, 255, 255, 0.10);
+    --mfd-dim: #A3A8B0;
+    --mfd-text: #F4F5F7;
+    --mfd-orange: #FF7A1A;
+    --mfd-green: #3DDC84;
+    --mfd-yellow: #FFD23F;
+    --mfd-amber: #FF9A3D;
+    --mfd-red: #FF5252;
+}
+
+[data-theme="dark"] {
+    --accent-ink: #FF8533;
+    --rule: rgba(255, 255, 255, 0.14);
+    --panel-head: #202024;
+}
+
+/* Foco visível consistente em todas as ferramentas e no catálogo */
+.ferramentas-catalog-section :focus-visible,
+.tool-workspace :focus-visible,
+.history-overlay :focus-visible,
+.analysis-overlay :focus-visible,
+.modal-overlay :focus-visible {
+    outline: 3px solid var(--orange) !important;
+    outline-offset: 2px;
 }
 
 /* ---- Hero da página ---- */
 .ferramentas-hero {
-    padding: 160px 0 60px;
+    padding: 150px 0 64px;
     text-align: center;
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border-color);
 }
 .ferramentas-hero .hero-title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-display, 'Montserrat', sans-serif);
     font-weight: 900;
     font-size: clamp(2rem, 5vw, 3rem);
     color: var(--text-primary);
@@ -41,11 +72,51 @@
 .ferramentas-hero .hero-subtitle {
     color: var(--text-secondary);
     font-size: 1.1rem;
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+/* Tag/breadcrumb acima do título */
+.hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding: 5px 16px;
+    background: var(--race-ink, #111);
+    color: #FFFFFF;
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transform: skewX(var(--race-skew, -12deg));
+    border-left: 6px solid var(--orange);
+}
+.hero-kicker > * { transform: skewX(calc(var(--race-skew, -12deg) * -1)); }
+.hero-kicker a {
+    color: #FFFFFF;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+}
+.hero-kicker a:hover,
+.hero-kicker a:focus-visible { border-bottom-color: var(--orange); }
+.hero-kicker .sep { color: var(--orange); }
+[data-theme="dark"] .hero-kicker { background: #F2F2F2; color: #111; }
+[data-theme="dark"] .hero-kicker a { color: #111; }
+
+/* Páginas de ferramenta: hero mais compacto — o foco é a ferramenta */
+body[data-tool] .ferramentas-hero {
+    padding: 128px 0 44px;
+}
+body[data-tool] .ferramentas-hero .hero-title {
+    font-size: clamp(36px, 5vw, 56px);
 }
 
 /* ---- Workspace das ferramentas ---- */
 .tool-workspace {
-    padding: 3rem 0 5rem;
+    padding: 2.5rem 0 5rem;
 }
 
 body[data-tool] {
@@ -60,34 +131,93 @@ body[data-tool] .tool-workspace {
 /* ---- Botão Voltar ---- */
 .btn-back {
     align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 44px;
     background: transparent;
     border: none;
     color: var(--text-secondary);
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
     cursor: pointer;
-    padding: 0;
-    opacity: 0.7;
-    transition: opacity 0.15s, color 0.15s;
-    letter-spacing: 0.03em;
-    margin-bottom: 1rem;
+    padding: 0 0.25rem;
+    transition: color 0.15s;
+    margin-bottom: 0.5rem;
 }
-.btn-back:hover { opacity: 1; color: var(--orange); }
+.btn-back:hover { color: var(--accent-ink); }
 
-/* ---- Cards do catálogo ---- */
+/* ========================================
+   CATÁLOGO — "PIT WALL"
+   ======================================== */
+.ferramentas-catalog-section {
+    padding: 4rem 0 5rem;
+}
+
+.pitwall-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--text-primary);
+}
+.pitwall-head h2 {
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin: 0;
+}
+.pitwall-head p {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+}
+.pitwall-head .live-dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #2ECC40;
+    margin-right: 6px;
+    box-shadow: 0 0 0 3px rgba(46, 204, 64, 0.2);
+    animation: livePulse 1.6s ease-in-out infinite;
+}
+@keyframes livePulse {
+    50% { box-shadow: 0 0 0 7px rgba(46, 204, 64, 0); }
+}
+
 .tools-catalog {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem;
 }
+@media (max-width: 860px) {
+    .tools-catalog { grid-template-columns: 1fr; }
+}
+
+/* Card base (mantido por compatibilidade com racing.css) */
 .tool-menu-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 1.5rem;
     cursor: pointer;
-    transition: var(--transition);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     display: flex;
     flex-direction: column;
     gap: 0.65rem;
@@ -96,47 +226,340 @@ body[data-tool] .tool-workspace {
     text-decoration: none;
     color: inherit;
 }
-.tool-menu-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--orange), var(--orange-dark));
-    opacity: 0;
-    transition: opacity 0.3s;
+
+/* "Box" da garagem: tela de telemetria + ficha técnica + CTA */
+.tool-bay {
+    padding: 0;
+    gap: 0;
+    min-height: 100%;
 }
-.tool-menu-card:hover {
+.tool-bay:hover,
+.tool-bay:focus-visible {
     border-color: var(--orange);
-    box-shadow: var(--shadow-glow);
+    box-shadow: 0 18px 40px -18px rgba(255, 107, 0, 0.45);
     transform: translateY(-4px);
 }
-.tool-menu-card:hover::before { opacity: 1; }
-.tool-menu-icon { font-size: 2rem; line-height: 1; }
-.tool-menu-card h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--text-primary);
-    margin: 0;
+
+.tool-bay-screen {
+    position: relative;
+    background: var(--mfd-bg);
+    color: var(--mfd-text);
+    padding: 1.25rem 1.5rem 1.4rem;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    overflow: hidden;
+    border-bottom: 4px solid var(--orange);
 }
-.tool-menu-card p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin: 0;
-    line-height: 1.5;
+/* Linhas de varredura e grade sutis */
+.tool-bay-screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 3px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px) 0 0 / 40px 100%;
+    pointer-events: none;
 }
-.tool-menu-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.25rem; }
-.tool-menu-tags span {
-    font-size: 0.7rem;
-    padding: 0.15rem 0.5rem;
-    background: rgba(255, 107, 0, 0.08);
-    border: 1px solid rgba(255, 107, 0, 0.2);
-    border-radius: 4px;
-    color: var(--orange);
+.tool-bay-screen > * { position: relative; }
+
+.screen-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mfd-dim);
+}
+.screen-top b { color: var(--mfd-orange); font-weight: 700; }
+
+.shift-lights {
+    display: flex;
+    gap: 5px;
+}
+.shift-lights i {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #26282C;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.shift-lights i:nth-child(-n+3) { background: var(--mfd-green); }
+.shift-lights i:nth-child(n+4):nth-child(-n+5) { background: var(--mfd-yellow); }
+.tool-bay:hover .shift-lights i:nth-child(n+6) { background: var(--mfd-red); }
+.tool-bay:hover .shift-lights i:nth-child(n+4):nth-child(-n+5),
+.tool-bay:hover .shift-lights i:nth-child(-n+3) { animation: shiftBlink 0.5s steps(2) infinite; }
+@keyframes shiftBlink { 50% { opacity: 0.35; } }
+
+.screen-readout {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+.screen-big {
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(56px, 7vw, 84px);
+    line-height: 0.85;
+    font-variant-numeric: tabular-nums;
+    color: var(--mfd-text);
+}
+.screen-big small {
+    font-size: 0.42em;
+    color: var(--mfd-orange);
+    margin-left: 4px;
+}
+.screen-side {
+    display: grid;
+    gap: 4px;
+    padding-bottom: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--mfd-dim);
+}
+.screen-side span b {
+    color: var(--mfd-text);
+    font-weight: 700;
+    margin-right: 6px;
 }
 
-/* ---- Catálogo: seção ---- */
-.ferramentas-catalog-section {
-    padding: 3rem 0 5rem;
+.screen-gauge {
+    height: 10px;
+    background: #1D1F23;
+    position: relative;
+    overflow: hidden;
+}
+.screen-gauge::after {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--g, 60%);
+    background: linear-gradient(90deg, var(--mfd-green), var(--mfd-yellow) 70%, var(--mfd-orange));
+    transition: width 0.6s ease;
+}
+.tool-bay:hover .screen-gauge::after { width: 92%; }
+
+/* Mini faders do setup */
+.screen-faders {
+    display: grid;
+    gap: 9px;
+}
+.fader {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr 3.5rem;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--mfd-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+.fader output {
+    color: var(--mfd-text);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.fader .track {
+    height: 6px;
+    background: #24262B;
+    position: relative;
+}
+.fader .track::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--v, 50%);
+    background: var(--mfd-orange);
+    transition: width 0.5s ease;
+}
+.fader .track::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: calc(var(--v, 50%) - 3px);
+    width: 6px;
+    height: 16px;
+    background: #FFFFFF;
+    transition: left 0.5s ease;
+}
+.tool-bay:hover .fader:nth-child(1) { --v: 70%; }
+.tool-bay:hover .fader:nth-child(2) { --v: 38%; }
+.tool-bay:hover .fader:nth-child(3) { --v: 61%; }
+
+.tool-bay-body {
+    padding: 1.5rem 1.5rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+    position: relative;
+}
+.tool-bay-num {
+    position: absolute;
+    right: 1rem;
+    top: 0.25rem;
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 96px;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--border-color);
+    pointer-events: none;
+    user-select: none;
+}
+.tool-bay-kicker {
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+}
+.tool-bay-title {
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(30px, 3.4vw, 42px);
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin: 0;
+    max-width: 85%;
+}
+.tool-bay-body p {
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    margin: 0;
+}
+.tool-bay-specs {
+    list-style: none;
+    margin: 0.25rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+}
+.tool-bay-specs li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.92rem;
+    color: var(--text-primary);
+}
+.tool-bay-specs li::before {
+    content: '';
+    flex: 0 0 auto;
+    width: 10px;
+    height: 10px;
+    background: var(--orange);
+    transform: skewX(var(--race-skew, -12deg));
+}
+
+.tool-bay-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1.25rem 1.5rem 1.5rem;
+}
+.tool-menu-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.tool-menu-tags span {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.55rem;
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.tool-bay-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 48px;
+    padding: 0 1.6rem;
+    background: var(--orange);
+    color: #111111;
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+    transition: background 0.2s, color 0.2s;
+}
+/* Texto escuro sobre laranja: 7:1 (branco sobre #FF6B00 não passa AA) */
+.tool-bay-cta svg { transition: transform 0.2s; }
+.tool-bay:hover .tool-bay-cta { background: var(--race-ink, #111); color: #FFFFFF; }
+.tool-bay:hover .tool-bay-cta svg { transform: translateX(4px); }
+[data-theme="dark"] .tool-bay:hover .tool-bay-cta { background: #FFFFFF; color: #111; }
+
+/* Faixa de informações abaixo dos cards */
+.pitwall-notes {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 1px solid var(--rule);
+    background: var(--card-bg);
+}
+.pitwall-notes > div {
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+}
+.pitwall-notes > div + div { border-left: 1px solid var(--rule); }
+.pitwall-notes svg { flex: 0 0 auto; color: var(--orange); margin-top: 2px; }
+.pitwall-notes strong {
+    display: block;
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-primary);
+}
+.pitwall-notes span {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+}
+@media (max-width: 860px) {
+    .pitwall-notes { grid-template-columns: 1fr; }
+    .pitwall-notes > div + div { border-left: none; border-top: 1px solid var(--rule); }
+}
+
+@media (max-width: 480px) {
+    .ferramentas-hero { padding: 120px 0 48px; }
+    .ferramentas-catalog-section { padding: 2.5rem 0 4rem; }
+    .tool-bay-screen { padding: 1rem 1.1rem 1.2rem; min-height: 0; }
+    .tool-bay-body { padding: 1.25rem 1.1rem 0.5rem; }
+    .tool-bay-foot { padding: 1rem 1.1rem 1.25rem; }
+    .tool-bay-cta { width: 100%; justify-content: center; }
+    .tool-bay-num { font-size: 72px; }
+    .fader { grid-template-columns: 6rem 1fr 3.2rem; font-size: 0.68rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tool-menu-card,
+    .tool-bay,
+    .tool-bay * { transition: none !important; animation: none !important; }
+    .tool-bay:hover,
+    .tool-bay:focus-visible { transform: none; }
+    .pitwall-head .live-dot { animation: none; }
 }

@@ -1,27 +1,39 @@
-<nav class="navbar">
+<a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+<nav class="navbar" aria-label="Navegação principal">
     <div class="container">
-        <a href="/index.html" class="navbar-logo">
-            <img src="/assets/Grip Racing Logo - Orange Black.png" alt="Grip Racing Logo" class="logo-theme" data-logo-light="/assets/Grip Racing Logo - Orange Black.png" data-logo-dark="/assets/Grip Racing Logo - Orange White.png">
+        <a href="/index.html" class="navbar-logo" aria-label="Grip Racing — página inicial">
+            <img src="/assets/Grip Racing Logo - Orange Black.png" alt="Grip Racing" class="logo-theme" data-logo-light="/assets/Grip Racing Logo - Orange Black.png" data-logo-dark="/assets/Grip Racing Logo - Orange White.png">
         </a>
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
         <ul class="nav-menu" id="navMenu">
             <li><a href="/index.html#home" data-page="home">Início</a></li>
-            <li><a href="/index.html#about" data-page="about">Sobre</a></li>
-            <li><a href="/index.html#achievements" data-page="achievements">História</a></li>
-            <li><a href="/index.html#staff" data-page="staff">Equipe</a></li>
-            <li><a href="/index.html#contact" data-page="contact">Contato</a></li>
+            <li class="nav-dropdown">
+                <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="navSubEquipe">
+                    A Equipe
+                    <svg class="nav-caret" viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                </button>
+                <ul class="nav-submenu" id="navSubEquipe">
+                    <li><a href="/index.html#about" data-page="about">Sobre</a></li>
+                    <li><a href="/index.html#achievements" data-page="achievements">História</a></li>
+                    <li><a href="/index.html#staff" data-page="staff">Staff</a></li>
+                    <li><a href="/index.html#memorial" data-page="memorial">In Memoriam</a></li>
+                    <li><a href="/index.html#contact" data-page="contact">Contato</a></li>
+                </ul>
+            </li>
             <li><a href="/pilotos.html" data-page="pilotos">Pilotos</a></li>
             <li><a href="/eventos.html" data-page="eventos">Eventos</a></li>
             <li><a href="/videos.html" data-page="videos">Vídeos</a></li>
-            <li><a href="/inscricoes.html" data-page="inscricoes">Inscrições</a></li>
             <li><a href="/ferramentas.html" data-page="ferramentas">Ferramentas</a></li>
+            <li class="nav-cta-item"><a href="/inscricoes.html" data-page="inscricoes" class="nav-cta">Inscrições</a></li>
         </ul>
-        <button id="themeToggle" class="theme-toggle" aria-label="Alternar tema">
-            <span class="theme-icon">🌙</span>
-        </button>
+        <div class="nav-actions">
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+                <span class="theme-icon" aria-hidden="true">🌙</span>
+            </button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </div>
 </nav>

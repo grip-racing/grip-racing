@@ -21,28 +21,30 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pilotos-v2.css">
     <link rel="stylesheet" href="css/modal-corrida.css">
+    <link rel="stylesheet" href="css/racing.css">
 </head>
 <body>
     <!-- Navigation -->
     <div id="header-container"></div>
     
-    <!-- Botão Voltar no Header -->
-    <button class="back-link-v2" onclick="goBack(event)" aria-label="Voltar">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
-        </svg>
-    </button>
-
     <main class="piloto-v2-main">
-        <!-- Hero compacto -->
-        <section class="piloto-v2-hero">
+        <!-- Hero: driver card -->
+        <section class="piloto-v2-hero driver-hero">
+            <span class="driver-hero-code" id="driverCodeV2" aria-hidden="true"></span>
             <div class="container-v2">
+                <a href="pilotos.html" class="back-link-v2" onclick="goBack(event)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    <span>Todos os pilotos</span>
+                </a>
                 <div class="hero-v2-content">
                     <div class="hero-v2-left">
-                        <h1 class="piloto-name-v2" id="pilotoNameV2">Rodrigo de Sousa</h1>
-                        <div class="piloto-subtitle-v2" id="pilotoSubtitleV2">2018 - 2024</div>
+                        <span class="driver-kicker">Piloto Grip Racing</span>
+                        <h1 class="piloto-name-v2" id="pilotoNameV2">Carregando...</h1>
+                        <div class="piloto-subtitle-v2" id="pilotoSubtitleV2"></div>
                     </div>
-                    
+
                     <div class="hero-medals" id="heroMedals">
                         <!-- Medalhas e títulos serão inseridos aqui -->
                     </div>
@@ -59,56 +61,56 @@
             <div class="container-v2">
                 <div class="stats-bar-grid">
                     <div class="stat-bar-item">
-                        <div class="stat-bar-icon">🏆</div>
+                        <div class="stat-bar-icon" aria-hidden="true">🏆</div>
                         <div class="stat-bar-content">
                             <div class="stat-bar-value" id="statBarTitles">-</div>
                             <div class="stat-bar-label">Títulos</div>
                         </div>
                     </div>
                     <div class="stat-bar-item">
-                        <div class="stat-bar-icon">🥇</div>
+                        <div class="stat-bar-icon" aria-hidden="true">🥇</div>
                         <div class="stat-bar-content">
                             <div class="stat-bar-value" id="statBarWins">-</div>
                             <div class="stat-bar-label">Vitórias</div>
                         </div>
                     </div>
                     <div class="stat-bar-item">
-                        <div class="stat-bar-icon">🏅</div>
+                        <div class="stat-bar-icon" aria-hidden="true">🏅</div>
                         <div class="stat-bar-content">
                             <div class="stat-bar-value" id="statBarPodiums">-</div>
                             <div class="stat-bar-label">Pódios</div>
                         </div>
                     </div>
                     <div class="stat-bar-item">
-                        <div class="stat-bar-icon">🏁</div>
+                        <div class="stat-bar-icon" aria-hidden="true">🏁</div>
                         <div class="stat-bar-content">
                             <div class="stat-bar-value" id="statBarRaces">-</div>
                             <div class="stat-bar-label">Corridas</div>
                         </div>
                     </div>
                     <div class="stat-bar-item">
-                        <div class="stat-bar-icon">⚡</div>
+                        <div class="stat-bar-icon" aria-hidden="true">⚡</div>
                         <div class="stat-bar-content">
                             <div class="stat-bar-value" id="statBarPoles">-</div>
                             <div class="stat-bar-label">Poles</div>
                         </div>
                     </div>
                     <div class="stat-bar-item">
-                        <div class="stat-bar-icon">⏱️</div>
+                        <div class="stat-bar-icon" aria-hidden="true">⏱️</div>
                         <div class="stat-bar-content">
                             <div class="stat-bar-value" id="statBarFastLaps">-</div>
                             <div class="stat-bar-label">Fast Laps</div>
                         </div>
                     </div>
                     <div class="stat-bar-item">
-                        <div class="stat-bar-icon">🎩</div>
+                        <div class="stat-bar-icon" aria-hidden="true">🎩</div>
                         <div class="stat-bar-content">
                             <div class="stat-bar-value" id="statBarHatTricks">-</div>
                             <div class="stat-bar-label">Hat-tricks</div>
                         </div>
                     </div>
                     <div class="stat-bar-item">
-                        <div class="stat-bar-icon">👑</div>
+                        <div class="stat-bar-icon" aria-hidden="true">👑</div>
                         <div class="stat-bar-content">
                             <div class="stat-bar-value" id="statBarChelems">-</div>
                             <div class="stat-bar-label">Chelems</div>
@@ -126,7 +128,7 @@
                     <div class="content-v2-main">
                         <!-- Performance por Ano -->
                         <div class="content-v2-card">
-                            <h2 class="card-v2-title">📊 Performance por Ano</h2>
+                            <h2 class="card-v2-title">Performance por ano</h2>
                             <div class="chart-v2-container">
                                 <canvas id="yearlyPerformanceChartV2"></canvas>
                             </div>
@@ -134,49 +136,49 @@
 
                         <!-- Tabs de Histórico -->
                         <div class="content-v2-card">
-                            <div class="history-tabs-v2">
-                                <button class="history-tab-btn active" data-tab="temporadas">
-                                    <span class="tab-icon">📅</span>
+                            <div class="history-tabs-v2" role="tablist" aria-label="Histórico do piloto">
+                                <button type="button" class="history-tab-btn active" role="tab" aria-selected="true" aria-controls="tabTemporadas" data-tab="temporadas">
+                                    <span class="tab-icon" aria-hidden="true">📅</span>
                                     <span class="tab-label">Histórico por Ano</span>
                                 </button>
-                                <button class="history-tab-btn" data-tab="campeonatos">
-                                    <span class="tab-icon">🏆</span>
+                                <button type="button" class="history-tab-btn" role="tab" aria-selected="false" aria-controls="tabCampeonatos" data-tab="campeonatos">
+                                    <span class="tab-icon" aria-hidden="true">🏆</span>
                                     <span class="tab-label">Campeonatos por Liga</span>
                                 </button>
-                                <button class="history-tab-btn" data-tab="circuitos">
-                                    <span class="tab-icon">🏁</span>
+                                <button type="button" class="history-tab-btn" role="tab" aria-selected="false" aria-controls="tabCircuitos" data-tab="circuitos">
+                                    <span class="tab-icon" aria-hidden="true">🏁</span>
                                     <span class="tab-label">Histórico de Circuitos</span>
                                 </button>
-                                <button class="history-tab-btn" data-tab="marcos">
-                                    <span class="tab-icon">🌟</span>
+                                <button type="button" class="history-tab-btn" role="tab" aria-selected="false" aria-controls="tabMarcos" data-tab="marcos">
+                                    <span class="tab-icon" aria-hidden="true">🌟</span>
                                     <span class="tab-label">Primeiros Marcos</span>
                                 </button>
                             </div>
 
                             <div class="history-tabs-content">
                                 <!-- Histórico por Ano -->
-                                <div id="tabTemporadas" class="history-tab-panel active">
+                                <div id="tabTemporadas" class="history-tab-panel active" role="tabpanel">
                                     <div id="temporadasContainerV2" class="temporadas-v2-container">
                                         <p class="loading-text">Carregando histórico...</p>
                                     </div>
                                 </div>
 
                                 <!-- Campeonatos por Liga -->
-                                <div id="tabCampeonatos" class="history-tab-panel">
+                                <div id="tabCampeonatos" class="history-tab-panel" role="tabpanel">
                                     <div id="campeonatosContainerV2" class="campeonatos-v2-container">
                                         <p class="loading-text">Carregando campeonatos...</p>
                                     </div>
                                 </div>
 
                                 <!-- Histórico de Circuitos -->
-                                <div id="tabCircuitos" class="history-tab-panel">
+                                <div id="tabCircuitos" class="history-tab-panel" role="tabpanel">
                                     <div id="circuitosContainerV2" class="circuitos-v2-container">
                                         <p class="loading-text">Carregando circuitos...</p>
                                     </div>
                                 </div>
 
                                 <!-- Primeiros Marcos -->
-                                <div id="tabMarcos" class="history-tab-panel">
+                                <div id="tabMarcos" class="history-tab-panel" role="tabpanel">
                                     <div id="marcosContainerV2" class="marcos-v2-container">
                                         <p class="loading-text">Carregando marcos...</p>
                                     </div>

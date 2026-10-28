@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Conheça os 218 pilotos que fizeram história na Grip Racing. Estatísticas completas, títulos, pódios e participações em corridas virtuais.">
     <meta name="keywords" content="pilotos grip racing, estatísticas pilotos, ranking pilotos, sim racing brasil, pilotos automobilismo virtual">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://gripracing.com.br/pilotos.html">
-    
+
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gripracing.com.br/pilotos.html">
     <meta property="og:title" content="Pilotos - Grip Racing">
     <meta property="og:description" content="218 pilotos que fizeram história na Grip Racing. Veja estatísticas completas de títulos, pódios e participações.">
     <meta property="og:image" content="https://gripracing.com.br/assets/Grip Racing Logo - Orange Black.png">
-    
+
     <title>Pilotos - Grip Racing | 218 Pilotos e suas Estatísticas</title>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-    
+
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EXXYMDS32C"></script>
     <script>
@@ -30,102 +30,153 @@
       gtag('js', new Date());
       gtag('config', 'G-EXXYMDS32C');
     </script>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pilotos.css">
+    <link rel="stylesheet" href="css/racing.css">
 </head>
 <body>
     <!-- Navigation -->
     <div id="header-container"></div>
 
     <main class="pilotos-main">
-        <section class="pilotos-hero">
+        <section class="pilotos-hero grid-hero">
             <div class="container">
-                <h1 class="hero-title">Nossos Pilotos</h1>
-                <p class="hero-subtitle"><span id="totalPilotosHero">-</span> pilotos que fizeram história com a Grip Racing</p>
-                <p class="hero-hint">💡 Clique em qualquer piloto para ver estatísticas detalhadas</p>
+                <div class="grid-hero-inner">
+                    <div class="grid-hero-text">
+                        <span class="race-kicker">Grid histórico · Grip Racing</span>
+                        <h1 class="hero-title">Nossos Pilotos</h1>
+                        <p class="hero-subtitle"><span id="totalPilotosHero">-</span> pilotos que fizeram história com a Grip Racing. Escolha uma métrica, encontre um nome e abra a ficha completa.</p>
+                    </div>
+                    <dl class="telemetry-strip" aria-label="Resumo do grid">
+                        <div class="tele-cell">
+                            <dt class="tele-label">Pilotos</dt>
+                            <dd class="tele-value" id="totalPilotos">-</dd>
+                        </div>
+                        <div class="tele-cell">
+                            <dt class="tele-label">Largadas</dt>
+                            <dd class="tele-value" id="totalCorridas">-</dd>
+                        </div>
+                        <div class="tele-cell">
+                            <dt class="tele-label">Pódios</dt>
+                            <dd class="tele-value" id="totalPodios">-</dd>
+                        </div>
+                        <div class="tele-cell tele-cell-hot">
+                            <dt class="tele-label">Campeões</dt>
+                            <dd class="tele-value" id="totalCampeoes">-</dd>
+                        </div>
+                    </dl>
+                </div>
             </div>
         </section>
 
         <section class="pilotos-content">
             <div class="container">
-                <div class="stats-summary">
-                    <div class="summary-card">
-                        <span class="summary-number" id="totalPilotos">218</span>
-                        <span class="summary-label">Total de Pilotos</span>
-                    </div>
-                    <div class="summary-card">
-                        <span class="summary-number" id="totalCorridas">-</span>
-                        <span class="summary-label">Total de Participações</span>
-                    </div>
-                    <div class="summary-card">
-                        <span class="summary-number" id="totalPodios">-</span>
-                        <span class="summary-label">Pódios</span>
-                    </div>
-                    <div class="summary-card">
-                        <span class="summary-number" id="totalCampeoes">-</span>
-                        <span class="summary-label">Campeões</span>
-                    </div>
-                </div>
+                <!-- Pódio da métrica selecionada -->
+                <section class="podium-section" aria-labelledby="podiumTitle">
+                    <header class="board-header">
+                        <h2 class="board-title" id="podiumTitle">
+                            <span class="board-title-kicker">Top 3 de todos os tempos</span>
+                            <span id="podiumMetricLabel">Corridas</span>
+                        </h2>
+                        <div class="metric-chips" role="group" aria-label="Métrica do pódio e da classificação">
+                            <button type="button" class="metric-chip" data-metric="titulos" aria-pressed="false">Títulos</button>
+                            <button type="button" class="metric-chip" data-metric="vitorias" aria-pressed="false">Vitórias</button>
+                            <button type="button" class="metric-chip" data-metric="podios" aria-pressed="false">Pódios</button>
+                            <button type="button" class="metric-chip" data-metric="poles" aria-pressed="false">Poles</button>
+                            <button type="button" class="metric-chip" data-metric="fastLaps" aria-pressed="false">Voltas rápidas</button>
+                            <button type="button" class="metric-chip" data-metric="corridas" aria-pressed="true">Corridas</button>
+                        </div>
+                    </header>
+                    <ol class="podium" id="podium"></ol>
+                </section>
 
-                <div class="pilotos-controls">
-                    <div class="search-box">
-                        <input type="text" id="searchInput" placeholder="Buscar piloto..." autocomplete="off">
-                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.35-4.35"></path>
-                        </svg>
-                        <div id="autocompleteResults" class="autocomplete-results"></div>
-                    </div>
-                    
-                    <div class="filter-controls">
-                        <button class="filter-btn active" data-filter="todos">Todos</button>
-                        <button class="filter-btn" data-filter="campeoes">Campeões</button>
-                    </div>
-                </div>
+                <!-- Classificação geral -->
+                <section class="leaderboard" aria-labelledby="leaderboardTitle">
+                    <header class="board-header">
+                        <h2 class="board-title" id="leaderboardTitle">
+                            <span class="board-title-kicker">Classificação geral</span>
+                            Timing board
+                        </h2>
+                        <p class="results-count" id="resultsCount" aria-live="polite"></p>
+                    </header>
 
-                <div class="mobile-sort-controls">
-                    <label for="mobileSortSelect">Ordenar por:</label>
-                    <select id="mobileSortSelect" class="mobile-sort-select">
-                        <option value="corridas-desc">Corridas (maior → menor)</option>
-                        <option value="corridas-asc">Corridas (menor → maior)</option>
-                        <option value="titulos-desc">Títulos (maior → menor)</option>
-                        <option value="titulos-asc">Títulos (menor → maior)</option>
-                        <option value="podios-desc">Pódios (maior → menor)</option>
-                        <option value="podios-asc">Pódios (menor → maior)</option>
-                        <option value="piloto-asc">Nome (A → Z)</option>
-                        <option value="piloto-desc">Nome (Z → A)</option>
-                    </select>
-                </div>
+                    <div class="pilotos-controls">
+                        <div class="search-box">
+                            <label for="searchInput" class="sr-only">Buscar piloto</label>
+                            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            <input type="search" id="searchInput" placeholder="Buscar piloto..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="autocompleteResults">
+                            <div id="autocompleteResults" class="autocomplete-results" role="listbox" aria-label="Sugestões de pilotos"></div>
+                        </div>
 
-                <div class="table-container">
-                    <table class="pilotos-table" id="pilotosTable">
-                        <thead>
-                            <tr>
-                                <th class="sortable" data-sort="piloto">Piloto <span class="sort-icon">↕</span></th>
-                                <th class="sortable" data-sort="corridas">Corridas <span class="sort-icon">↕</span></th>
-                                <th class="sortable" data-sort="titulos">Títulos <span class="sort-icon">↕</span></th>
-                                <th class="sortable" data-sort="podios">Pódios <span class="sort-icon">↕</span></th>
-                                <th class="sortable" data-sort="vitorias" title="Vitórias">Vit. <span class="sort-icon">↕</span></th>
-                                <th class="sortable" data-sort="poles">Poles <span class="sort-icon">↕</span></th>
-                                <th class="sortable hide-mobile" data-sort="fast-laps" title="Fast Laps (Voltas Mais Rápidas)">FL <span class="sort-icon">↕</span></th>
-                                <th class="sortable" data-sort="hatTricks" title="Hat-Tricks (Pole + Vitória + Volta Mais Rápida)">HT <span class="sort-icon">↕</span></th>
-                                <th class="sortable" data-sort="chelems" title="Chelems (Pole + Todas as Voltas na Liderança + Vitória + Volta Mais Rápida)">CH <span class="sort-icon">↕</span></th>
-                                <th class="sortable hide-mobile" data-sort="estreia">Estreia <span class="sort-icon">↕</span></th>
-                                <th class="sortable hide-mobile" data-sort="ultima">Última <span class="sort-icon">↕</span></th>
-                            </tr>
-                        </thead>
-                        <tbody id="pilotosTableBody">
-                            <tr class="loading-row">
-                                <td colspan="11">
-                                    <div class="loading-spinner"></div>
-                                    <p>Carregando dados dos pilotos...</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        <div class="filter-controls" role="group" aria-label="Filtrar pilotos">
+                            <button type="button" class="filter-btn active" data-filter="todos" aria-pressed="true">Todos</button>
+                            <button type="button" class="filter-btn" data-filter="campeoes" aria-pressed="false">Campeões</button>
+                            <button type="button" class="filter-btn" data-filter="vencedores" aria-pressed="false">Vencedores</button>
+                            <button type="button" class="filter-btn" data-filter="ativos" aria-pressed="false">Ativos <span id="activeSeasonLabel"></span></button>
+                        </div>
+
+                        <div class="mobile-sort-controls">
+                            <label for="mobileSortSelect">Ordenar</label>
+                            <select id="mobileSortSelect" class="mobile-sort-select">
+                                <option value="corridas-desc">Corridas (mais)</option>
+                                <option value="titulos-desc">Títulos (mais)</option>
+                                <option value="vitorias-desc">Vitórias (mais)</option>
+                                <option value="podios-desc">Pódios (mais)</option>
+                                <option value="poles-desc">Poles (mais)</option>
+                                <option value="fastLaps-desc">Voltas rápidas (mais)</option>
+                                <option value="hatTricks-desc">Hat-tricks (mais)</option>
+                                <option value="chelems-desc">Chelems (mais)</option>
+                                <option value="corridas-asc">Corridas (menos)</option>
+                                <option value="estreia-asc">Estreia (mais antiga)</option>
+                                <option value="ultima-desc">Última corrida (recente)</option>
+                                <option value="piloto-asc">Nome (A → Z)</option>
+                                <option value="piloto-desc">Nome (Z → A)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="timing-legend">
+                        <span class="legend-item"><span class="legend-bar legend-champ" aria-hidden="true"></span>Campeão</span>
+                        <span class="legend-item"><span class="legend-bar legend-winner" aria-hidden="true"></span>Vencedor de corrida</span>
+                        <span class="legend-item"><span class="legend-bar" aria-hidden="true"></span>Piloto</span>
+                        <span class="legend-hint">Clique no cabeçalho para ordenar</span>
+                    </div>
+
+                    <div class="table-container timing-scroll" role="region" aria-labelledby="leaderboardTitle" tabindex="0">
+                        <table class="timing-table pilotos-table" id="pilotosTable">
+                            <caption class="sr-only">Pilotos da Grip Racing e suas estatísticas de carreira. Use os botões do cabeçalho para ordenar.</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="col-pos"><abbr title="Posição">Pos</abbr></th>
+                                    <th scope="col" class="col-name sortable" data-sort="piloto"><button type="button" class="th-sort">Piloto<span class="sort-icon" aria-hidden="true"></span></button></th>
+                                    <th scope="col" class="num sortable" data-sort="corridas"><button type="button" class="th-sort">Corridas<span class="sort-icon" aria-hidden="true"></span></button></th>
+                                    <th scope="col" class="num sortable" data-sort="titulos"><button type="button" class="th-sort">Títulos<span class="sort-icon" aria-hidden="true"></span></button></th>
+                                    <th scope="col" class="num sortable" data-sort="vitorias"><button type="button" class="th-sort" title="Vitórias">Vit.<span class="sort-icon" aria-hidden="true"></span></button></th>
+                                    <th scope="col" class="num sortable" data-sort="podios"><button type="button" class="th-sort">Pódios<span class="sort-icon" aria-hidden="true"></span></button></th>
+                                    <th scope="col" class="num sortable" data-sort="poles"><button type="button" class="th-sort">Poles<span class="sort-icon" aria-hidden="true"></span></button></th>
+                                    <th scope="col" class="num sortable" data-sort="fastLaps"><button type="button" class="th-sort" title="Voltas mais rápidas">FL<span class="sort-icon" aria-hidden="true"></span></button></th>
+                                    <th scope="col" class="num sortable" data-sort="hatTricks"><button type="button" class="th-sort" title="Hat-tricks: pole + vitória + volta mais rápida">HT<span class="sort-icon" aria-hidden="true"></span></button></th>
+                                    <th scope="col" class="num sortable" data-sort="chelems"><button type="button" class="th-sort" title="Chelems: hat-trick liderando todas as voltas">CH<span class="sort-icon" aria-hidden="true"></span></button></th>
+                                    <th scope="col" class="season sortable" data-sort="estreia"><button type="button" class="th-sort">Estreia<span class="sort-icon" aria-hidden="true"></span></button></th>
+                                    <th scope="col" class="season sortable" data-sort="ultima"><button type="button" class="th-sort">Última<span class="sort-icon" aria-hidden="true"></span></button></th>
+                                </tr>
+                            </thead>
+                            <tbody id="pilotosTableBody">
+                                <tr class="loading-row">
+                                    <td colspan="12">
+                                        <div class="loading-spinner"></div>
+                                        <p>Carregando dados dos pilotos...</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
             </div>
         </section>
     </main>

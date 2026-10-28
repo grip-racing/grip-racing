@@ -32,6 +32,10 @@
         if (themeIcon) {
             themeIcon.textContent = theme === DARK_THEME ? '☀️' : '🌙';
         }
+        const toggle = document.getElementById('themeToggle');
+        if (toggle) {
+            toggle.setAttribute('aria-pressed', String(theme === DARK_THEME));
+        }
     }
     
     // Update logos based on theme
@@ -50,6 +54,7 @@
     // Expose function globally for components loader
     window.updateThemeLogos = function() {
         updateLogos(getSavedTheme());
+        updateThemeIcon(getSavedTheme());
     };
     
     // Toggle theme
@@ -65,32 +70,30 @@
     }
     
     // Initialize theme on page load
+    // Um único listener delegado: o botão chega depois (components-loader)
+    // e listeners duplicados anulariam o clique (alternaria duas vezes).
+    let toggleBound = false;
     function initTheme() {
-        const savedTheme = getSavedTheme();
-        applyTheme(savedTheme);
-        
-        // Add event listener to theme toggle button with delay to ensure DOM is loaded
-        setTimeout(() => {
-            const themeToggle = document.getElementById('themeToggle');
-            if (themeToggle) {
-                themeToggle.addEventListener('click', toggleTheme);
-                console.log('Theme toggle initialized');
-            } else {
-                console.warn('Theme toggle button not found');
+        applyTheme(getSavedTheme());
+        if (toggleBound) return;
+        toggleBound = true;
+        document.addEventListener('click', (e) => {
+            if (e.target.closest && e.target.closest('#themeToggle')) {
+                toggleTheme();
             }
-        }, 100);
+        });
     }
-    
+
     // Apply theme immediately to prevent flash
     applyTheme(getSavedTheme());
-    
+
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initTheme);
     } else {
         initTheme();
     }
-    
-    // Also try to initialize after components are loaded
-    window.addEventListener('load', initTheme);
+
+    // Reaplica ícone/logos depois que header/footer forem carregados
+    window.addEventListener('load', () => applyTheme(getSavedTheme()));
 })();

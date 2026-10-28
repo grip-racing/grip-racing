@@ -295,9 +295,26 @@ function displayPilotoInfo() {
     const estreia = pilotoData['Estreia'] || pilotoData['estreia'] || '-';
     const ultima = pilotoData['Ultima'] || pilotoData['Última'] || pilotoData['ultima'] || '-';
     
-    document.getElementById('pilotoNameV2').textContent = nome;
-    document.getElementById('pilotoSubtitleV2').textContent = `${estreia} - ${ultima}`;
+    const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const partes = nome.trim().split(/\s+/);
+    const primeiro = partes.length > 1 ? partes[0] : '';
+    const sobrenome = partes.length > 1 ? partes.slice(1).join(' ') : nome;
+
+    // Nome no estilo "driver card": primeiro nome pequeno, sobrenome gigante
+    document.getElementById('pilotoNameV2').innerHTML =
+        `${primeiro ? `<span class="name-first-v2">${esc(primeiro)}</span> ` : ''}<span class="name-last-v2">${esc(sobrenome)}</span>`;
+    document.getElementById('pilotoSubtitleV2').innerHTML = `
+        <span class="career-span"><span class="career-label">Estreia</span> <strong>${esc(estreia)}</strong></span>
+        <span class="career-arrow" aria-hidden="true"></span>
+        <span class="career-span"><span class="career-label">Última</span> <strong>${esc(ultima)}</strong></span>`;
     document.title = `${nome} - Grip Racing`;
+
+    // Código de 3 letras estilo timing (ex.: SOU) como marca d'água do hero
+    const codeEl = document.getElementById('driverCodeV2');
+    if (codeEl) {
+        const ultimo = (partes[partes.length - 1] || nome).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z]/g, '');
+        codeEl.textContent = ultimo.slice(0, 3).toUpperCase();
+    }
 
     // Foto do piloto — só tenta se estiver no manifest
     const imgEl = document.getElementById('pilotoPhotoV2');
@@ -632,21 +649,41 @@ function addDetailedStatCard(elementId, ranking, total, statType, value) {
     const existingRanking = parent.querySelector('.stat-ranking');
     if (existingRanking) existingRanking.remove();
     
+    const card = element.closest('.stat-bar-item');
+
     if (ranking > 0 && ranking <= total) {
         const rankingEl = document.createElement('div');
         rankingEl.className = 'stat-ranking';
         rankingEl.textContent = `#${ranking} de ${total}`;
         parent.appendChild(rankingEl);
+        // Barra de "telemetria": quanto mais perto do topo do ranking, mais cheia
+        if (card) {
+            const pct = total > 1 ? 1 - (ranking - 1) / total : 1;
+            card.style.setProperty('--rank-scale', Math.max(0.04, pct).toFixed(3));
+            card.classList.toggle('rank-top3', ranking <= 3);
+            card.classList.toggle('rank-p1', ranking === 1);
+        }
+    } else if (card) {
+        card.style.setProperty('--rank-scale', '0');
+        card.classList.remove('rank-top3', 'rank-p1');
     }
-    
-    // Tornar card clicável apenas se houver valor
-    const card = element.closest('.stat-bar-item');
+
+    // Tornar card clicável apenas se houver valor (com suporte a teclado)
     if (card && value > 0) {
         card.style.cursor = 'pointer';
         card.onclick = () => showStatDetailModal(statType);
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        const label = card.querySelector('.stat-bar-label')?.textContent || '';
+        card.setAttribute('aria-label', `${label}: ${element.textContent}${ranking > 0 && ranking <= total ? `, ${ranking}º de ${total}` : ''}. Ver detalhes`);
+        card.classList.add('is-clickable');
     } else if (card) {
         card.style.cursor = 'default';
         card.onclick = null;
+        card.removeAttribute('role');
+        card.removeAttribute('tabindex');
+        card.removeAttribute('aria-label');
+        card.classList.remove('is-clickable');
     }
 }
 
@@ -1359,6 +1396,13 @@ function createYearlyChart() {
     const textColor = isDark ? '#e0e0e0' : '#333';
     const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
     
+    // Paleta "telemetria": volume em cinza, resultados em laranja/ouro, top 10 como linha
+    const displayFont = "'Saira Condensed', 'Montserrat', sans-serif";
+    const neutral = isDark ? 'rgba(255, 255, 255, 0.16)' : 'rgba(17, 17, 17, 0.14)';
+    const neutralBorder = isDark ? 'rgba(255, 255, 255, 0.35)' : 'rgba(17, 17, 17, 0.35)';
+    const top10Color = isDark ? '#7FB8FF' : '#2563EB';
+    const titleColor = isDark ? '#3DDC84' : '#15803D';
+
     new Chart(ctx, {
         type: 'bar',
         data: {
@@ -1367,76 +1411,100 @@ function createYearlyChart() {
                 {
                     label: 'Corridas',
                     data: corridasData,
-                    backgroundColor: 'rgba(255, 107, 0, 0.3)',
-                    borderColor: '#ff6b00',
-                    borderWidth: 2,
-                    order: 1
+                    backgroundColor: neutral,
+                    borderColor: neutralBorder,
+                    borderWidth: { top: 2, right: 0, bottom: 0, left: 0 },
+                    borderSkipped: false,
+                    order: 4,
+                    barPercentage: 0.9,
+                    categoryPercentage: 0.8
                 },
                 {
                     label: 'Top 10',
+                    type: 'line',
                     data: top10Data,
-                    backgroundColor: 'rgba(100, 200, 255, 0.4)',
-                    borderColor: '#64c8ff',
+                    borderColor: top10Color,
+                    backgroundColor: top10Color,
                     borderWidth: 2,
-                    order: 2
+                    pointRadius: 3,
+                    pointHoverRadius: 5,
+                    tension: 0.25,
+                    order: 0
                 },
                 {
                     label: 'Pódios',
                     data: podiosData,
-                    backgroundColor: 'rgba(255, 153, 0, 0.5)',
-                    borderColor: '#ff9900',
-                    borderWidth: 2,
-                    order: 3
+                    backgroundColor: '#FF6B00',
+                    borderWidth: 0,
+                    order: 3,
+                    barPercentage: 0.9,
+                    categoryPercentage: 0.8
                 },
                 {
                     label: 'Vitórias',
                     data: vitoriasData,
-                    backgroundColor: 'rgba(255, 215, 0, 0.8)',
-                    borderColor: '#FFD700',
-                    borderWidth: 2,
-                    order: 4
+                    backgroundColor: '#F5C542',
+                    borderWidth: 0,
+                    order: 2,
+                    barPercentage: 0.9,
+                    categoryPercentage: 0.8
                 },
                 {
                     label: 'Títulos',
                     data: titulosData,
-                    backgroundColor: 'rgba(6, 255, 165, 0.8)',
-                    borderColor: '#06ffa5',
-                    borderWidth: 2,
-                    order: 5
+                    backgroundColor: titleColor,
+                    borderWidth: 0,
+                    order: 1,
+                    barPercentage: 0.9,
+                    categoryPercentage: 0.8
                 }
             ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
             plugins: {
                 legend: {
                     position: 'top',
+                    align: 'start',
                     labels: {
                         color: textColor,
-                        padding: 12,
+                        padding: 14,
+                        boxWidth: 14,
+                        boxHeight: 6,
                         font: {
-                            size: 12,
-                            family: "'Montserrat', sans-serif",
-                            weight: 600
+                            size: 14,
+                            family: displayFont,
+                            weight: 700
                         }
                     }
                 },
                 tooltip: {
-                    backgroundColor: isDark ? 'rgba(0, 0, 0, 0.9)' : 'rgba(255, 255, 255, 0.9)',
-                    titleColor: isDark ? '#fff' : '#000',
-                    bodyColor: isDark ? '#fff' : '#000',
-                    borderColor: '#ff6b00',
-                    borderWidth: 1
+                    backgroundColor: '#111214',
+                    titleColor: '#FFFFFF',
+                    bodyColor: '#F2F2F2',
+                    borderColor: '#FF6B00',
+                    borderWidth: 1,
+                    cornerRadius: 0,
+                    padding: 10,
+                    titleFont: { family: displayFont, size: 16, weight: 800 },
+                    bodyFont: { family: "'Montserrat', sans-serif", size: 12, weight: 600 }
                 }
             },
             scales: {
                 y: {
                     beginAtZero: true,
+                    border: { display: false },
                     ticks: {
                         color: textColor,
+                        precision: 0,
                         font: {
-                            family: "'Montserrat', sans-serif"
+                            family: displayFont,
+                            size: 13
                         }
                     },
                     grid: {
@@ -1444,20 +1512,24 @@ function createYearlyChart() {
                     }
                 },
                 x: {
+                    border: { color: '#FF6B00', width: 2 },
                     ticks: {
                         color: textColor,
                         font: {
-                            family: "'Montserrat', sans-serif"
+                            family: displayFont,
+                            size: 14,
+                            weight: 700
                         }
                     },
                     grid: {
-                        color: gridColor
+                        display: false
                     }
                 }
             }
         }
     });
 }
+
 
 // Display temporadas (expandable by year and season)
 function displayTemporadas() {
@@ -2585,13 +2657,15 @@ function initHistoryTabs() {
             // Remove active class from all buttons and panels
             document.querySelectorAll('.history-tab-btn').forEach(btn => {
                 btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
             });
             document.querySelectorAll('.history-tab-panel').forEach(panel => {
                 panel.classList.remove('active');
             });
-            
+
             // Add active class to clicked button and corresponding panel
             button.classList.add('active');
+            button.setAttribute('aria-selected', 'true');
             const panel = document.getElementById(`tab${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`);
             if (panel) {
                 panel.classList.add('active');
@@ -2612,6 +2686,87 @@ window.showTop5Modal = showTop5Modal;
 window.closeTop5Modal = closeTop5Modal;
 window.closeStatDetailModal = closeStatDetailModal;
 window.changeModalVideoV2 = changeModalVideoV2;
+
+// ============================================
+// ACESSIBILIDADE: itens clicáveis renderizados como <div onclick>
+// ganham foco por teclado (Enter/Espaço) e os modais fecham com Esc.
+// ============================================
+(function setupKeyboardAccess() {
+    const CLICKABLE_SELECTOR = [
+        '.ano-item-v2', '.temporada-item-v2', '.campeonato-item-v2', '.campeonato-temporada-v2',
+        '.circuito-item-v2', '.corrida-item-v2', '.corrida-campeonato-item-v2', '.circuito-corrida-item-v2',
+        '.marco-item-v2', '.stat-detail-clickable', '.corrida-sidebar-item.clickable-piloto',
+        '.top5-item[onclick]', '.recorde-clickable'
+    ].join(',');
+
+    let lastTrigger = null;
+
+    function enhance(root) {
+        if (!root || !root.querySelectorAll) return;
+        root.querySelectorAll(CLICKABLE_SELECTOR).forEach(el => {
+            if (el.hasAttribute('data-kbd')) return;
+            el.setAttribute('data-kbd', '');
+            if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+            if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+        });
+        // Fechar modais: foco vai para o botão de fechar
+        root.querySelectorAll('.corrida-modal-close, .stat-detail-modal-close, .top5-modal-close').forEach(btn => {
+            if (!btn.hasAttribute('aria-label')) btn.setAttribute('aria-label', 'Fechar');
+        });
+        const dialog = root.querySelector && root.querySelector('.corrida-modal, .stat-detail-modal, .top5-modal');
+        if (dialog && !dialog.hasAttribute('role')) {
+            dialog.setAttribute('role', 'dialog');
+            dialog.setAttribute('aria-modal', 'true');
+            const close = dialog.querySelector('.corrida-modal-close, .stat-detail-modal-close, .top5-modal-close');
+            if (close) setTimeout(() => close.focus({ preventScroll: true }), 0);
+        }
+    }
+
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(m => m.addedNodes.forEach(node => {
+            if (node.nodeType !== 1) return;
+            if (node.matches && node.matches(CLICKABLE_SELECTOR)) enhance(node.parentNode);
+            enhance(node);
+        }));
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const open = document.querySelector('.corrida-modal-overlay, .stat-detail-modal-overlay, .top5-modal-overlay');
+            if (open) {
+                closeCorridaModalV2();
+                closeStatDetailModal();
+                closeTop5Modal();
+                if (lastTrigger && document.contains(lastTrigger)) lastTrigger.focus();
+            }
+            return;
+        }
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        const el = e.target.closest && e.target.closest('[data-kbd], .stat-bar-item.is-clickable');
+        if (!el || el !== e.target) return;
+        e.preventDefault();
+        lastTrigger = el;
+        el.click();
+    });
+
+    document.addEventListener('click', (e) => {
+        const el = e.target.closest && e.target.closest('[data-kbd], .stat-bar-item.is-clickable');
+        if (el) lastTrigger = el;
+    }, true);
+
+    // Setas esquerda/direita entre as abas do histórico
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        const tab = e.target.closest && e.target.closest('.history-tab-btn');
+        if (!tab) return;
+        const tabs = [...document.querySelectorAll('.history-tab-btn')];
+        const i = tabs.indexOf(tab);
+        const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+        next.focus();
+        next.click();
+    });
+})();
 
 // Init
 loadPilotoData();

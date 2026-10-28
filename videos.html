@@ -34,21 +34,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/videos.css">
+    <link rel="stylesheet" href="css/racing.css">
 </head>
 <body>
     <!-- Navigation -->
     <div id="header-container"></div>
 
-    <main class="videos-main">
+    <main class="videos-main" id="conteudo">
         <section class="videos-hero">
-            <div class="container">
-                <h1 class="hero-title">Vídeos GRIP Racing</h1>
-                <p class="hero-subtitle">Destaques da equipe</p>
+            <div class="container videos-hero-inner">
+                <span class="videos-eyebrow"><span class="videos-rec-dot" aria-hidden="true"></span>Replay &middot; Highlights &middot; Onboard</span>
+                <h1 class="hero-title">V&iacute;deos Grip Racing</h1>
+                <p class="hero-subtitle videos-hero-sub">Ultrapassagens, corridas hist&oacute;ricas, forfuns e os memes que viraram lenda no grid. <span id="videosCount" class="videos-count"></span></p>
             </div>
         </section>
 
         <section class="videos-content">
             <div class="container">
+                <nav class="videos-nav" aria-label="Categorias de v&iacute;deos">
+                    <div id="videosChips" class="videos-chips" role="group" aria-label="Filtrar por categoria"></div>
+                </nav>
+
                 <div id="videos-grid" class="videos-grid">
                     <!-- Videos serão carregados aqui -->
                 </div>
@@ -57,6 +63,24 @@
     </main>
 
     <div id="footer-container"></div>
+
+    <!-- Player em modo "teatro" -->
+    <div id="videoTheater" class="videos-theater" hidden>
+        <div class="videos-theater-dialog" role="dialog" aria-modal="true" aria-labelledby="videoTheaterTitle">
+            <div class="videos-theater-bar">
+                <span class="videos-theater-tag">Replay</span>
+                <h2 id="videoTheaterTitle" class="videos-theater-title">-</h2>
+                <button type="button" class="videos-theater-close" id="videoTheaterClose" aria-label="Fechar v&iacute;deo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="videos-theater-frame" id="videoTheaterFrame"></div>
+            <p class="videos-theater-desc" id="videoTheaterDesc"></p>
+        </div>
+    </div>
 
     <script src="js/theme.js"></script>
     <script src="js/components-loader.js"></script>
