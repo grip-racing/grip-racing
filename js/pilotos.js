@@ -305,11 +305,11 @@ function displayPilotos() {
             ${numCell(p, 'vitorias', 'Vitórias')}
             ${numCell(p, 'podios', 'Pódios')}
             ${numCell(p, 'poles', 'Poles')}
-            ${numCell(p, 'fastLaps', 'Voltas rápidas')}
+            ${numCell(p, 'fastLaps', 'V. rápidas')}
             ${numCell(p, 'hatTricks', 'Hat-tricks')}
             ${numCell(p, 'chelems', 'Chelems')}
-            <td class="season${estreiaSorted}">${escapeHtml(p.estreia)}</td>
-            <td class="season${ultimaSorted}${isActive ? ' is-active' : ''}">${escapeHtml(p.ultima)}</td>
+            <td class="season${estreiaSorted}" data-label="Estreia">${escapeHtml(p.estreia)}</td>
+            <td class="season${ultimaSorted}${isActive ? ' is-active' : ''}" data-label="Última">${escapeHtml(p.ultima)}</td>
         </tr>`;
     }).join('');
 

@@ -4535,60 +4535,232 @@
         display: none;
     }
 
-    .pilotos-main .timing-table td.col-pos,
-    .pilotos-main .timing-table thead th.col-pos {
-        width: 48px;
-        min-width: 48px;
-        padding: 0 6px 0 6px;
+    /* ---------- LISTA EM CARTÕES (mobile) ----------
+       A tabela de 12 colunas não cabe em 375px: cada linha vira um cartão com
+       posição + nome, grade 4x2 de métricas rotuladas e estreia/última. */
+    .pilotos-main .table-container.timing-scroll {
+        overflow: visible;
+        background: none;
+        box-shadow: none;
     }
 
-    .pilotos-main .timing-table .col-name,
-    .pilotos-main .timing-table thead th.col-name {
-        left: 48px;
+    .pilotos-main .table-container.timing-scroll::before {
+        margin-bottom: 8px;
     }
 
-    .pilotos-main .timing-table td.col-name {
+    .pilotos-main .timing-table.pilotos-table,
+    .pilotos-main .timing-table tbody {
+        display: block;
+        width: 100%;
+    }
+
+    /* Cabeçalho só para leitores de tela: a ordenação mobile é o seletor "Ordenar" */
+    .pilotos-main .timing-table thead {
+        display: block;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    .pilotos-main .timing-table tbody tr {
+        display: grid;
+        grid-template-columns: 48px repeat(4, minmax(0, 1fr));
+        align-items: stretch;
+        margin-bottom: 8px;
+        background: var(--lb-board);
+        border-bottom: 2px solid var(--orange);
+    }
+
+    .pilotos-main .timing-table tbody tr:last-child {
+        margin-bottom: 0;
+    }
+
+    .pilotos-main .timing-table tbody td {
+        display: block;
+        height: auto;
         min-width: 0;
-        width: auto;
-        max-width: 168px;
-        padding: 0 10px;
+        padding: 5px 8px 6px 10px;
+        white-space: normal;
+        border-bottom: none;
+        text-align: left;
     }
 
-    .pilotos-main .timing-table .piloto-avatar-mini {
-        display: none;
+    /* Posição ocupa as 4 linhas do cartão, com a barra de tier na borda direita */
+    .pilotos-main .timing-table tbody td.col-pos {
+        grid-column: 1;
+        grid-row: 1 / span 4;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        width: auto;
+        min-width: 0;
+        padding: 12px 4px 0;
+    }
+
+    .pilotos-main .timing-table td.col-pos::after {
+        top: 10px;
+        bottom: 10px;
+    }
+
+    .pilotos-main .timing-table tbody td.col-name {
+        grid-column: 2 / -1;
+        grid-row: 1;
+        width: auto;
+        min-width: 0;
+        max-width: none;
+        padding: 10px 12px 6px 12px;
     }
 
     .pilotos-main .driver-link {
-        gap: 8px;
+        gap: 10px;
+        min-height: 40px;
+    }
+
+    .pilotos-main .timing-table .piloto-avatar-mini {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        max-width: 40px;
+        max-height: 40px;
     }
 
     .pilotos-main .piloto-name-text {
+        flex: 1 1 auto;
+        min-width: 0;
         display: block;
+        overflow: visible;
     }
 
     .pilotos-main .name-first {
         display: block;
-        font-size: 11px;
+        font-size: 12px;
         line-height: 1.2;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 
     .pilotos-main .name-last {
-        font-size: 17px;
         display: block;
+        font-size: 20px;
+        line-height: 1.05;
+        overflow-wrap: anywhere;
+    }
+
+    .pilotos-main .champ-flag {
+        margin-left: 4px;
+        font-size: 13px;
+        padding: 1px 8px;
+    }
+
+    /* Métricas: 2 linhas x 4 colunas, rótulo pequeno sobre o valor */
+    .pilotos-main .timing-table tbody td.num {
+        grid-column: auto;
+        text-align: left;
+        min-width: 0;
+        font-size: 21px;
+        line-height: 1.1;
+        border-top: 1px solid var(--lb-board-line);
+    }
+
+    .pilotos-main .timing-table tbody td.num:nth-child(3),
+    .pilotos-main .timing-table tbody td.num:nth-child(7) { grid-column-start: 2; }
+
+    .pilotos-main .timing-table tbody td.num:nth-child(n+3):nth-child(-n+6) { grid-row: 2; }
+    .pilotos-main .timing-table tbody td.num:nth-child(n+7):nth-child(-n+10) { grid-row: 3; }
+
+    .pilotos-main .timing-table tbody td.num::before,
+    .pilotos-main .timing-table tbody td.season::before {
+        content: attr(data-label);
+        display: block;
+        margin: 0 0 1px;
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 11px;
+        line-height: 1.2;
+        letter-spacing: 0;
+        text-transform: none;
+        color: var(--lb-board-muted);
+        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
-    .pilotos-main .champ-flag {
-        font-size: 12px;
-        padding: 0 6px;
+    .pilotos-main .timing-table tbody td.is-sorted::before {
+        color: var(--orange);
     }
 
-    .pilotos-main .timing-table td.num {
-        font-size: 18px;
-        min-width: 54px;
+    .pilotos-main .gap-bar {
+        display: none;
+    }
+
+    /* Estreia / última na última linha do cartão */
+    .pilotos-main .timing-table tbody td.season {
+        grid-row: 4;
+        font-size: 15px;
+        padding: 5px 10px 7px;
+        border-top: 1px solid var(--lb-board-line);
+    }
+
+    .pilotos-main .timing-table tbody td.season:nth-child(11) { grid-column: 2 / span 2; }
+    .pilotos-main .timing-table tbody td.season:nth-child(12) { grid-column: 4 / span 2; }
+
+    .pilotos-main .timing-table td.season.is-active::before {
+        content: attr(data-label);
+        color: var(--lb-board-muted);
+        display: block;
+        width: auto;
+        height: auto;
+        margin: 0 0 2px;
+        border-radius: 0;
+        background: none;
+        vertical-align: baseline;
+    }
+
+    .pilotos-main .timing-table tbody tr.loading-row {
+        display: block;
+    }
+
+    .pilotos-main .timing-table tbody td.empty-row {
+        grid-column: 1 / -1;
+        grid-row: auto;
+    }
+
+    .pilotos-main .timing-legend {
+        gap: 6px 14px;
+        font-size: 11px;
+        letter-spacing: 0.2px;
+    }
+
+    .pilotos-main .legend-item {
+        white-space: nowrap;
+    }
+}
+
+/* Telas muito estreitas (320-360px): cartões um pouco mais compactos */
+@media (max-width: 360px) {
+    .pilotos-main .timing-table tbody tr {
+        grid-template-columns: 40px repeat(4, minmax(0, 1fr));
+    }
+
+    .pilotos-main .timing-table tbody td.num,
+    .pilotos-main .timing-table tbody td.season {
+        padding-left: 6px;
+        padding-right: 4px;
+    }
+
+    .pilotos-main .timing-table tbody td.num::before,
+    .pilotos-main .timing-table tbody td.season::before {
+        font-size: 10px;
+    }
+
+    .pilotos-main .pos-num {
+        min-width: 28px;
+        font-size: 17px;
     }
 }
 
