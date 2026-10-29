@@ -142,6 +142,25 @@ function updateSummary() {
 
     const heroTotal = document.getElementById('totalPilotosHero');
     if (heroTotal) heroTotal.textContent = fmtNum(totalPilotos);
+
+    updateSeoTags(totalPilotos);
+}
+
+// Title e metas acompanham o total da planilha (o HTML estático é só o fallback sem JS)
+function updateSeoTags(total) {
+    if (!total) return;
+    const n = fmtNum(total);
+    document.title = `Pilotos - Grip Racing | ${n} Pilotos e suas Estatísticas`;
+
+    const description = document.querySelector('meta[name="description"]');
+    if (description) {
+        description.setAttribute('content', `Conheça os ${n} pilotos que fizeram história na Grip Racing. Estatísticas completas, títulos, pódios e participações em corridas virtuais.`);
+    }
+
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) {
+        ogDescription.setAttribute('content', `${n} pilotos que fizeram história na Grip Racing. Veja estatísticas completas de títulos, pódios e participações.`);
+    }
 }
 
 // ---------- pódio ----------

@@ -108,6 +108,23 @@ function applyFooterStats() {
     setText('footerCampeonatos', fmt(homeStats.campeonatos));
 }
 
+// Metas de descrição acompanham a planilha (o HTML estático é só o fallback sem JS)
+function updateHomeSeoTags(totalPilotos, totalEtapas) {
+    if (!totalPilotos) return;
+    const pilotos = fmt(totalPilotos);
+    const corridas = totalEtapas > 0 ? `Mais de ${fmt(Math.floor(totalEtapas / 1000) * 1000)} corridas disputadas` : '';
+
+    const description = document.querySelector('meta[name="description"]');
+    if (description) {
+        description.setAttribute('content', `Grip Racing - Equipe de automobilismo virtual desde 2008. ${corridas ? `${corridas}, ` : ''}${pilotos} pilotos e história de conquistas no automobilismo virtual brasileiro.`);
+    }
+
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) {
+        ogDescription.setAttribute('content', `Equipe de automobilismo virtual desde 2008. ${corridas ? `${corridas} e ` : ''}${pilotos} pilotos que fizeram história.`);
+    }
+}
+
 // Load dynamic stats
 async function loadDynamicStats() {
     try {
@@ -144,9 +161,10 @@ async function loadDynamicStats() {
         // Daqui para baixo só existe na home
         if (!document.querySelector('.page-home')) return;
 
-        const pilotosResponse = await fetch('/data/data-pilotos.csv');
-        const pilotosText = await pilotosResponse.text();
-        const totalPilotos = pilotosText.trim().split('\n').length - 1;
+        // Mesmo carregador da página /pilotos (junta duplicados), para os totais baterem
+        const pilotosData = await window.GripUtils.fetchData('/data/data-pilotos.csv');
+        const totalPilotos = pilotosData.length;
+        updateHomeSeoTags(totalPilotos, totalEtapas);
 
         // Painel de telemetria: valor final em data-value (o contador anima até ele)
         const counters = {

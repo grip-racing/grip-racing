@@ -76,7 +76,9 @@ async function updateStatistics() {
         // Update main paragraph with current stats
         const mainP = aboutText.querySelectorAll('p')[1];
         if (mainP) {
-            mainP.innerHTML = `Ao longo de 18 anos de história, construímos um legado impressionante com <strong>218 pilotos diferentes</strong> que representaram a equipe, acumulando <strong>${window.GripUtils.formatNumber(participacoes)} participações</strong> em <strong>${window.GripUtils.formatNumber(campeonatos)} campeonatos</strong> e <strong>${window.GripUtils.formatNumber(etapas)} etapas</strong>. Conquistamos <strong>${window.GripUtils.formatNumber(totalTitulos)} títulos</strong> (${titulos} de pilotos e ${construtores} de construtores), com <strong>${window.GripUtils.formatNumber(podios)} pódios</strong>, sendo ${vitorias} vitórias.`;
+            const pilotosData = await window.GripUtils.fetchData(DATA_SOURCES.pilotos);
+            const totalPilotos = pilotosData ? pilotosData.length : 0;
+            mainP.innerHTML = `Ao longo de 18 anos de história, construímos um legado impressionante com <strong>${window.GripUtils.formatNumber(totalPilotos)} pilotos diferentes</strong> que representaram a equipe, acumulando <strong>${window.GripUtils.formatNumber(participacoes)} participações</strong> em <strong>${window.GripUtils.formatNumber(campeonatos)} campeonatos</strong> e <strong>${window.GripUtils.formatNumber(etapas)} etapas</strong>. Conquistamos <strong>${window.GripUtils.formatNumber(totalTitulos)} títulos</strong> (${titulos} de pilotos e ${construtores} de construtores), com <strong>${window.GripUtils.formatNumber(podios)} pódios</strong>, sendo ${vitorias} vitórias.`;
         }
         
         // Update detailed paragraph
