@@ -79,3 +79,5 @@ Igual às outras skills: `update-data.ps1` baixa os 3 CSVs, incrementa `DATA_VER
 ## Registro
 
 29/10/2026: levantamento completo; `pendencias-campeonatos-classicos.csv` gerado (36 linhas novas, 1 ajuste de Chelem, 8 remoções, 13 ajustes históricos). Ainda não aplicado.
+
+29/10/2026 (decisao do dono): aplicados na planilha o Stock Car 2007, Chevette, BPR, MX5, GT3 2024, For Gretta, o Chelem do Curitiba, as 8 remocoes e 3 ajustes do Endurance. **Mantido como esta no CSV (nao reabrir):** os 10 ajustes historicos de Wohnrath FunCup 2021, Alpine Monza e DTM Hockenheim 2022, e a Taca Caio Wohnrath (Elizeu Filho, 3 linhas), que nao foi lancada. Dados na versao 1.0.35.
