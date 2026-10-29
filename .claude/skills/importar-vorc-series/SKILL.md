@@ -74,7 +74,7 @@ Corridas repetidas na pista: o CSV usa sufixo ` 2` na pista, **sem acento** (`In
 - **Pole**: o relatório traz `Qual Time`. A pole é o **menor `Qual Time` da corrida R1** (a R2 não tem classificação, grade invertida). Nas multiclasse a pole é por classe e a Grip não teve nenhuma.
 - **Best Lap (VR)**: menor `Best Lap` da corrida; marque `SIM` na linha do piloto. Em corrida multiclasse use a melhor volta da classe (só ocorreu com Felipe no Zandvoort/GT3: decisão do dono).
 - **Piloto Campeao**: topo da classificação do campeonato (JSON). Marque em **uma** linha do piloto, na última etapa. Único caso Grip: Victor Ribeiro no Stock Car Sudam 2026 T2 (196 x 194 do Regatieri).
-- **Construtores**: o JSON traz o campeão por equipe. A Grip Racing venceu a classe GT3 da M7 Help GT Series (223 pts); o dono precisa dizer se vale (e em quais linhas), então fica `-`.
+- **Construtores**: o JSON traz o campeão por equipe (`Team Standings`, `points_sum`). A Grip Racing venceu a classe GT3 da M7 Help GT Series (cid 138, 223 pts; equipe "Grip Racing" = R. Sousa + F. Faria). **O dono confirmou (29/10/2026) que vale**: marcar só a **última etapa** do campeonato (Algarve, `2026-2`) com `SIM` no piloto que mais pontuou pela equipe (Felipe Faria, 154 pts) e `TIME` no outro (Rodrigo de Sousa, 69 pts), igual às outras ligas. **Matheus Araujo corre pela "Grip Racing 2" (11ª, 97 pts), fora do título: fica `-`.** Antes de marcar um título, confira no `Team Standings` qual equipe/pilotos o compõem (`team_drivers`) e some `points_sum` individual. Pendência gerada em `pendencias-vorc-series.csv` (2 linhas AJUSTE).
 - **Hat-Trick / Chelem**: pole + VR + vitória na mesma corrida. Não ocorreu.
 
 ## 7. Nomes de pilotos
