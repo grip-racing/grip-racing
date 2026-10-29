@@ -9068,7 +9068,7 @@ DNF,GTE,Hockenheim,Sandro Goulart,-,-,-,-,-,-,-,Racing Bears,2023-3,2023,GTE/Rac
 DNF,TCR Cup,Summit Point,Flavio Felicio,,-,-,-,-,-,-,F1BC,2023-3,2023,TCR Cup/F1BC/2023-3,TCR Cup/F1BC/2023-3/Summit Point,#N/A
 19,TCR Cup,Summit Point 2,Flavio Felicio,,-,-,-,-,-,-,F1BC,2023-3,2023,TCR Cup/F1BC/2023-3,TCR Cup/F1BC/2023-3/Summit Point 2,#N/A
 23,TCR Cup,Summit Point 2,Felipe Faria,,-,-,-,-,-,-,F1BC,2023-3,2023,TCR Cup/F1BC/2023-3,TCR Cup/F1BC/2023-3/Summit Point 2,#N/A
-4,P1,Watkins Glen,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2023-3,2023,P1/Racing Bears/2023-3,P1/Racing Bears/2023-3/Watkins Glen,https://www.youtube.com/watch?v=piWSpKuPLGA
+3,P1,Watkins Glen,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2023-3,2023,P1/Racing Bears/2023-3,P1/Racing Bears/2023-3/Watkins Glen,https://www.youtube.com/watch?v=piWSpKuPLGA
 2,P2,Watkins Glen,Rodrigo de Sousa,,-,-,-,-,-,-,Racing Bears,2023-3,2023,P2/Racing Bears/2023-3,P2/Racing Bears/2023-3/Watkins Glen,https://www.youtube.com/watch?v=piWSpKuPLGA
 3,P2,Watkins Glen,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2023-3,2023,P2/Racing Bears/2023-3,P2/Racing Bears/2023-3/Watkins Glen,https://www.youtube.com/watch?v=piWSpKuPLGA
 4,P2,Watkins Glen,Rubens Algazi,,-,-,-,-,-,-,Racing Bears,2023-3,2023,P2/Racing Bears/2023-3,P2/Racing Bears/2023-3/Watkins Glen,https://www.youtube.com/watch?v=piWSpKuPLGA
@@ -9117,6 +9117,10 @@ DNF,P3,Brasilia,Isabel Costa,,-,-,-,-,-,-,Racing Bears,2023-3,2023,P3/Racing Bea
 8,DTM,Cascais,Robert Johen,,-,-,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Cascais,#N/A
 DNF,DTM,Jacarepagua,Sandro Goulart,,-,-,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Jacarepagua,#N/A
 16,DTM,Jacarepagua,Robert Johen,,-,-,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Jacarepagua,#N/A
+9,DTM,Jerez,Henrique Bettega,,-,-,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Jerez,#N/A
+18,DTM,Jerez,Sandro Goulart,,-,-,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Jerez,#N/A
+3,DTM,Adelaide,Henrique Bettega,,-,SIM,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Adelaide,#N/A
+5,DTM,Jacarepagua,Henrique Bettega,,-,-,-,-,-,-,Racing Bears,2023-3,2023,DTM/Racing Bears/2023-3,DTM/Racing Bears/2023-3/Jacarepagua,#N/A
 2024-1,,,,,,,,,,,,,,,,
 1,LMDH,Imola,Matheus Saliba,,-,-,-,-,SIM,-,Racing Bears,2024-1,2024,LMDH/Racing Bears/2024-1,LMDH/Racing Bears/2024-1/Imola,#N/A
 3,LMDH,Le Mans,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2024-1,2024,LMDH/Racing Bears/2024-1,LMDH/Racing Bears/2024-1/Le Mans,#N/A
@@ -9310,7 +9314,7 @@ DNF,G40,Spielberg,Bernardo Purri,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racin
 2,G40,Nurburgring,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Nurburgring,#N/A
 13,G40,Nurburgring,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Nurburgring,#N/A
 16,G40,Nurburgring,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Nurburgring,#N/A
-2,G40,Silverstone,Matheus Saliba,,-,-,-,-,SIM,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Silverstone,#N/A
+2,G40,Silverstone,Matheus Saliba,,-,SIM,-,-,SIM,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Silverstone,#N/A
 5,G40,Silverstone,Fernando Melo,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Silverstone,#N/A
 9,G40,Silverstone,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Silverstone,#N/A
 17,G40,Silverstone,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,G40/Racing Bears/2025-2,G40/Racing Bears/2025-2/Silverstone,#N/A
@@ -9367,6 +9371,12 @@ DNF,GT3,Imola,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,GT3/Racing Bear
 6,Sprint Race,Interlagos,Pablo Cenjor,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Interlagos,https://www.youtube.com/watch?v=GtwkpBxYiQY
 11,Sprint Race,Interlagos,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Interlagos,https://www.youtube.com/watch?v=GtwkpBxYiQY
 DNF,Sprint Race,Interlagos,Felipe Faria,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Interlagos,https://www.youtube.com/watch?v=GtwkpBxYiQY
+DNF,GT3,Interlagos,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Interlagos,#N/A
+1,GT3,Monza,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2025-2,2025,GT3/Racing Bears/2025-2,GT3/Racing Bears/2025-2/Monza,#N/A
+16,Sprint Race,Londrina,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Londrina,#N/A
+12,Sprint Race,Cascavel,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Cascavel,#N/A
+12,Sprint Race,Goiania,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Goiania,#N/A
+10,Sprint Race,Curitiba,Robert Johen,,-,-,-,-,-,-,Racing Bears,2025-2,2025,Sprint Race/Racing Bears/2025-2,Sprint Race/Racing Bears/2025-2/Curitiba,#N/A
 2025-3,,,,,,,,,,,,,,,,
 2,WES Le Mans 24h,Le Mans,Andrey Fajardo,Grip Racing,-,-,-,-,-,-,F1BC,2025-3,2025,WES Le Mans 24h/F1BC/2025-3,WES Le Mans 24h/F1BC/2025-3/Le Mans,#N/A
 2,WES Le Mans 24h,Le Mans,Carlos Junior,Grip Racing,-,-,-,-,-,-,F1BC,2025-3,2025,WES Le Mans 24h/F1BC/2025-3,WES Le Mans 24h/F1BC/2025-3/Le Mans,#N/A
@@ -9441,6 +9451,7 @@ DNF,GT3,Monza,Luiz Humberto,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bea
 17,GT3,Interlagos,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Interlagos,#N/A
 18,GT3,Interlagos,Luiz Humberto,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Interlagos,#N/A
 13,GT3,Imola,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Imola,#N/A
+DNF,GT3,Spa Francorchamps,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Spa Francorchamps,#N/A
 2026-2,,,,,,,,,,,,,,,,
 1,Stock Car,Campo Grande,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Campo Grande,https://www.youtube.com/watch?v=nzZff1pOU08
 2,Stock Car,Campo Grande,Fernando Passos,,SIM,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Campo Grande,https://www.youtube.com/watch?v=nzZff1pOU08
@@ -9462,3 +9473,14 @@ DNF,Stock Car,Brasilia,Rodrigo de Sousa,,-,-,-,-,-,-,Campeonatos Classicos,2026-
 13,Stock Car,La Chutana,Felipe Faria,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/La Chutana,#N/A
 1,Stock Car,La Chutana,Victor Ribeiro,,-,SIM,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/La Chutana,#N/A
 4,Stock Car,La Chutana,Felipe Faria,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/La Chutana,#N/A
+DNF,Stock Car,Interlagos,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,Stock Car/Racing Bears/2026-2,Stock Car/Racing Bears/2026-2/Interlagos,#N/A
+DNF,Stock Car,Goiania,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,Stock Car/Racing Bears/2026-2,Stock Car/Racing Bears/2026-2/Goiania,#N/A
+21,GT4,Barcelona,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Barcelona,#N/A
+DNF,GT4,Adelaide,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Adelaide,#N/A
+DNF,GT4,Imola,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Imola,#N/A
+DNS,GT4,Indianapolis,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Indianapolis,#N/A
+DNS,GT4,Spielberg,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Spielberg,#N/A
+2026-3,,,,,,,,,,,,,,,,
+8,DTM,Donington,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2026-3,2026,DTM/Racing Bears/2026-3,DTM/Racing Bears/2026-3/Donington,#N/A
+DNF,DTM,Bathurst,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2026-3,2026,DTM/Racing Bears/2026-3,DTM/Racing Bears/2026-3/Bathurst,#N/A
+DNF,DTM,Spa Francorchamps,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2026-3,2026,DTM/Racing Bears/2026-3,DTM/Racing Bears/2026-3/Spa Francorchamps,#N/A
