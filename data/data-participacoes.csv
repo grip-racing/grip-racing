@@ -9458,15 +9458,15 @@ DNF,WES Bathurst 12h PRO,Bathurst ,Matheus Beraldo,,-,-,-,-,-,-,F1BC,2026-1,2026
 DNF,WES Bathurst 12h PRO,Bathurst ,Andrey Fajardo,,-,-,-,-,-,-,F1BC,2026-1,2026,WES Bathurst 12h PRO/F1BC/2026-1,WES Bathurst 12h PRO/F1BC/2026-1/Bathurst ,#N/A
 2,WES Bathurst 12h AM,Bathurst ,Flavio Felicio ,,-,-,-,-,-,-,F1BC,2026-1,2026,WES Bathurst 12h AM/F1BC/2026-1,WES Bathurst 12h AM/F1BC/2026-1/Bathurst ,#N/A
 2,WES Bathurst 12h AM,Bathurst ,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-1,2026,WES Bathurst 12h AM/F1BC/2026-1,WES Bathurst 12h AM/F1BC/2026-1/Bathurst ,#N/A
-9,GT3,Monza,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Monza,#N/A
-DNF,GT3,Monza,Luiz Humberto,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Monza,#N/A
-16,GT3,Monza,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Monza,#N/A
-11,GT3,Virginia,Luiz Humberto,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Virginia,#N/A
-16,GT3,Virginia,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Virginia,#N/A
-17,GT3,Interlagos,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Interlagos,#N/A
-18,GT3,Interlagos,Luiz Humberto,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Interlagos,#N/A
-13,GT3,Imola,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Imola,#N/A
-DNF,GT3,Spa Francorchamps,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Spa Francorchamps,#N/A
+9,GT3,Monza,Matheus Saliba,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Monza,https://www.youtube.com/watch?v=aaW80xi9E5g
+DNF,GT3,Monza,Luiz Humberto,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Monza,https://www.youtube.com/watch?v=aaW80xi9E5g
+16,GT3,Monza,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Monza,https://www.youtube.com/watch?v=aaW80xi9E5g
+11,GT3,Virginia,Luiz Humberto,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Virginia,https://www.youtube.com/watch?v=VLrCHZ6HVuY
+16,GT3,Virginia,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Virginia,https://www.youtube.com/watch?v=VLrCHZ6HVuY
+17,GT3,Interlagos,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Interlagos,https://www.youtube.com/watch?v=2R3MVV_3qGs
+18,GT3,Interlagos,Luiz Humberto,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Interlagos,https://www.youtube.com/watch?v=2R3MVV_3qGs
+13,GT3,Imola,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Imola,https://www.youtube.com/watch?v=THt-SLByy64
+DNF,GT3,Spa Francorchamps,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-1,2026,GT3/Racing Bears/2026-1,GT3/Racing Bears/2026-1/Spa Francorchamps,https://www.youtube.com/watch?v=EOw6de9pupc
 2026-2,,,,,,,,,,,,,,,,
 1,Stock Car,Campo Grande,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Campo Grande,https://www.youtube.com/watch?v=nzZff1pOU08
 2,Stock Car,Campo Grande,Fernando Passos,,SIM,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Campo Grande,https://www.youtube.com/watch?v=nzZff1pOU08
@@ -9480,69 +9480,69 @@ DNF,Stock Car,Interlagos,Rodrigo de Sousa,,-,-,-,-,-,-,Campeonatos Classicos,202
 12,Stock Car,Curitiba,Rodrigo de Sousa,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Curitiba,https://www.youtube.com/watch?v=7V-W45LgODA
 5,Stock Car,Brasilia,Victor Ribeiro,,SIM,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Brasilia,https://www.youtube.com/watch?v=HwHC50JlQ9k
 DNF,Stock Car,Brasilia,Rodrigo de Sousa,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Brasilia,https://www.youtube.com/watch?v=HwHC50JlQ9k
-DNF,Stock Car,Interlagos,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,Stock Car/Racing Bears/2026-2,Stock Car/Racing Bears/2026-2/Interlagos,#N/A
-DNF,Stock Car,Goiania,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,Stock Car/Racing Bears/2026-2,Stock Car/Racing Bears/2026-2/Goiania,#N/A
-21,GT4,Barcelona,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Barcelona,#N/A
-DNF,GT4,Adelaide,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Adelaide,#N/A
-DNF,GT4,Imola,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Imola,#N/A
-DNS,GT4,Indianapolis,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Indianapolis,#N/A
-DNS,GT4,Spielberg,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Spielberg,#N/A
-3,Stock Car,Buenos Aires,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Buenos Aires,#N/A
-5,Stock Car,Buenos Aires,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Buenos Aires,#N/A
-7,Stock Car,Buenos Aires,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Buenos Aires,#N/A
-10,Stock Car,Buenos Aires,Gustavo Sugari,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Buenos Aires,#N/A
-2,Stock Car,La Chutana,Victor Ribeiro,,SIM,SIM,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/La Chutana,#N/A
-13,Stock Car,La Chutana,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/La Chutana,#N/A
-1,Stock Car,La Chutana 2,Victor Ribeiro,,-,SIM,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/La Chutana 2,#N/A
-4,Stock Car,La Chutana 2,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/La Chutana 2,#N/A
-5,Stock Car,Ibarra,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Ibarra,#N/A
-7,Stock Car,Ibarra,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Ibarra,#N/A
-DQ,Stock Car,Ibarra,Flavio Felicio,,SIM,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Ibarra,#N/A
-1,Stock Car,Tocancipa,Flavio Felicio,,-,SIM,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa,#N/A
-3,Stock Car,Tocancipa,Victor Ribeiro,,SIM,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa,#N/A
-8,Stock Car,Tocancipa,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa,#N/A
-1,Stock Car,Tocancipa 2,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa 2,#N/A
-2,Stock Car,Tocancipa 2,Flavio Felicio,,-,SIM,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa 2,#N/A
-4,Stock Car,Tocancipa 2,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa 2,#N/A
-9,Stock Car,Tocancipa 2,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa 2,#N/A
-1,Stock Car,Goiania,Victor Ribeiro,,SIM,-,-,-,SIM,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Goiania,#N/A
-2,Stock Car,Goiania,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Goiania,#N/A
-3,Stock Car,Goiania,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Goiania,#N/A
-4,GP Cascavel,Cascavel,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,GP Cascavel/VORC Series/2026-2,GP Cascavel/VORC Series/2026-2/Cascavel,#N/A
-2,Indy 500,Indianapolis,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,Indy 500/VORC Series/2026-2,Indy 500/VORC Series/2026-2/Indianapolis,#N/A
-3,Indy 500,Indianapolis,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-2,2026,Indy 500/VORC Series/2026-2,Indy 500/VORC Series/2026-2/Indianapolis,#N/A
-DNF,Indy 500,Indianapolis,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,Indy 500/VORC Series/2026-2,Indy 500/VORC Series/2026-2/Indianapolis,#N/A
-5,GTE,Red Bull Ring,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,GTE/VORC Series/2026-2,GTE/VORC Series/2026-2/Red Bull Ring,#N/A
-8,GTE,Baku,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,GTE/VORC Series/2026-2,GTE/VORC Series/2026-2/Baku,#N/A
-7,GTE,Mugello,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,GTE/VORC Series/2026-2,GTE/VORC Series/2026-2/Mugello,#N/A
-1,GTE,Zandvoort,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,GTE/VORC Series/2026-2,GTE/VORC Series/2026-2/Zandvoort,#N/A
-4,GTE,Algarve,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,GTE/VORC Series/2026-2,GTE/VORC Series/2026-2/Algarve,#N/A
-3,GT3,Red Bull Ring,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Red Bull Ring,#N/A
-5,GT3,Red Bull Ring,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Red Bull Ring,#N/A
-19,GT3,Red Bull Ring,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Red Bull Ring,#N/A
-1,GT3,Baku,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Baku,#N/A
-12,GT3,Baku,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Baku,#N/A
-DQ,GT3,Baku,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Baku,#N/A
-8,GT3,Mugello,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Mugello,#N/A
-9,GT3,Mugello,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Mugello,#N/A
-2,GT3,Zandvoort,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Zandvoort,#N/A
-13,GT3,Zandvoort,Felipe Faria,,-,SIM,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Zandvoort,#N/A
-21,GT3,Zandvoort,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Zandvoort,#N/A
-5,GT3,Algarve,Felipe Faria,,-,-,-,-,-,SIM,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Algarve,#N/A
-12,GT3,Algarve,Rodrigo de Sousa,,-,-,-,-,-,TIME,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Algarve,#N/A
-14,GT3,Algarve,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Algarve,#N/A
-2,2h de Le Mans,Le Mans,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,2h de Le Mans/VORC Series/2026-2,2h de Le Mans/VORC Series/2026-2/Le Mans,#N/A
-1,Stock Car,Londrina,Victor Ribeiro,,SIM,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Londrina,#N/A
-1,Stock Car,Buenos Aires,Victor Ribeiro,,SIM,SIM,SIM,SIM,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Buenos Aires,#N/A
-2,Stock Car,Buenos Aires,Fernando Passos,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Buenos Aires,#N/A
-4,Stock Car,Taruma,Victor Ribeiro,,SIM,SIM,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Taruma,#N/A
-5,Stock Car,Taruma,Rodrigo de Sousa,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Taruma,#N/A
-1,Stock Car,Jacarepagua,Flavio Felicio,,SIM,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Jacarepagua,#N/A
-6,Stock Car,Jacarepagua,Rodrigo de Sousa,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Jacarepagua,#N/A
-1,Stock Car,Interlagos 2,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Interlagos 2,#N/A
-3,Stock Car,Interlagos 2,Fernando Passos,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Interlagos 2,#N/A
-DNF,Stock Car,Interlagos 2,Rodrigo de Sousa,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Interlagos 2,#N/A
-DNF,Stock Car,Interlagos 2,Victor Ribeiro,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Interlagos 2,#N/A
+DNF,Stock Car,Interlagos,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,Stock Car/Racing Bears/2026-2,Stock Car/Racing Bears/2026-2/Interlagos,https://www.youtube.com/watch?v=EnaaDy6vkao
+DNF,Stock Car,Goiania,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,Stock Car/Racing Bears/2026-2,Stock Car/Racing Bears/2026-2/Goiania,https://www.youtube.com/watch?v=7LPxPh-eYdI
+21,GT4,Barcelona,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Barcelona,https://www.youtube.com/watch?v=QR-GEsj7_OA
+DNF,GT4,Adelaide,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Adelaide,https://www.youtube.com/watch?v=xaflvzgeNOk
+DNF,GT4,Imola,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Imola,https://www.youtube.com/watch?v=8GPBXgiLGjY
+DNS,GT4,Indianapolis,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Indianapolis,https://www.youtube.com/watch?v=hZSnWV1N-50
+DNS,GT4,Spielberg,Robert Johen,,-,-,-,-,-,-,Racing Bears,2026-2,2026,GT4/Racing Bears/2026-2,GT4/Racing Bears/2026-2/Spielberg,https://www.youtube.com/watch?v=ZFD0LwDdfKo
+3,Stock Car,Buenos Aires,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Buenos Aires,https://www.youtube.com/watch?v=98hHe8L4g7s
+5,Stock Car,Buenos Aires,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Buenos Aires,https://www.youtube.com/watch?v=98hHe8L4g7s
+7,Stock Car,Buenos Aires,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Buenos Aires,https://www.youtube.com/watch?v=98hHe8L4g7s
+10,Stock Car,Buenos Aires,Gustavo Sugari,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Buenos Aires,https://www.youtube.com/watch?v=98hHe8L4g7s
+2,Stock Car,La Chutana,Victor Ribeiro,,SIM,SIM,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/La Chutana,https://www.youtube.com/watch?v=LBoyL8eMB-o
+13,Stock Car,La Chutana,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/La Chutana,https://www.youtube.com/watch?v=LBoyL8eMB-o
+1,Stock Car,La Chutana 2,Victor Ribeiro,,-,SIM,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/La Chutana 2,https://www.youtube.com/watch?v=LBoyL8eMB-o
+4,Stock Car,La Chutana 2,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/La Chutana 2,https://www.youtube.com/watch?v=LBoyL8eMB-o
+5,Stock Car,Ibarra,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Ibarra,https://www.youtube.com/watch?v=gwzmX-r5Jpw
+7,Stock Car,Ibarra,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Ibarra,https://www.youtube.com/watch?v=gwzmX-r5Jpw
+DQ,Stock Car,Ibarra,Flavio Felicio,,SIM,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Ibarra,https://www.youtube.com/watch?v=gwzmX-r5Jpw
+1,Stock Car,Tocancipa,Flavio Felicio,,-,SIM,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa,https://www.youtube.com/watch?v=rP6PPQ0qQTs
+3,Stock Car,Tocancipa,Victor Ribeiro,,SIM,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa,https://www.youtube.com/watch?v=rP6PPQ0qQTs
+8,Stock Car,Tocancipa,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa,https://www.youtube.com/watch?v=rP6PPQ0qQTs
+1,Stock Car,Tocancipa 2,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa 2,https://www.youtube.com/watch?v=rP6PPQ0qQTs
+2,Stock Car,Tocancipa 2,Flavio Felicio,,-,SIM,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa 2,https://www.youtube.com/watch?v=rP6PPQ0qQTs
+4,Stock Car,Tocancipa 2,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa 2,https://www.youtube.com/watch?v=rP6PPQ0qQTs
+9,Stock Car,Tocancipa 2,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Tocancipa 2,https://www.youtube.com/watch?v=rP6PPQ0qQTs
+1,Stock Car,Goiania,Victor Ribeiro,,SIM,-,-,-,SIM,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Goiania,https://www.youtube.com/watch?v=D4XHg1-lpSA
+2,Stock Car,Goiania,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Goiania,https://www.youtube.com/watch?v=D4XHg1-lpSA
+3,Stock Car,Goiania,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-2,2026,Stock Car/VORC Series/2026-2,Stock Car/VORC Series/2026-2/Goiania,https://www.youtube.com/watch?v=D4XHg1-lpSA
+4,GP Cascavel,Cascavel,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,GP Cascavel/VORC Series/2026-2,GP Cascavel/VORC Series/2026-2/Cascavel,https://www.youtube.com/watch?v=k0YACua1tl8
+2,Indy 500,Indianapolis,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,Indy 500/VORC Series/2026-2,Indy 500/VORC Series/2026-2/Indianapolis,https://www.youtube.com/watch?v=5OiGt9CQNk4
+3,Indy 500,Indianapolis,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-2,2026,Indy 500/VORC Series/2026-2,Indy 500/VORC Series/2026-2/Indianapolis,https://www.youtube.com/watch?v=5OiGt9CQNk4
+DNF,Indy 500,Indianapolis,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,Indy 500/VORC Series/2026-2,Indy 500/VORC Series/2026-2/Indianapolis,https://www.youtube.com/watch?v=5OiGt9CQNk4
+5,GTE,Red Bull Ring,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,GTE/VORC Series/2026-2,GTE/VORC Series/2026-2/Red Bull Ring,https://www.youtube.com/watch?v=5D-jT-AGpQU
+8,GTE,Baku,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,GTE/VORC Series/2026-2,GTE/VORC Series/2026-2/Baku,https://www.youtube.com/watch?v=V4gRrx94oIY
+7,GTE,Mugello,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,GTE/VORC Series/2026-2,GTE/VORC Series/2026-2/Mugello,https://www.youtube.com/watch?v=iUlO8pNfsic
+1,GTE,Zandvoort,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,GTE/VORC Series/2026-2,GTE/VORC Series/2026-2/Zandvoort,https://www.youtube.com/watch?v=pINIr5VZ2-M
+4,GTE,Algarve,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,GTE/VORC Series/2026-2,GTE/VORC Series/2026-2/Algarve,https://www.youtube.com/watch?v=Jv46OCQXPa8
+3,GT3,Red Bull Ring,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Red Bull Ring,https://www.youtube.com/watch?v=5D-jT-AGpQU
+5,GT3,Red Bull Ring,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Red Bull Ring,https://www.youtube.com/watch?v=5D-jT-AGpQU
+19,GT3,Red Bull Ring,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Red Bull Ring,https://www.youtube.com/watch?v=5D-jT-AGpQU
+1,GT3,Baku,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Baku,https://www.youtube.com/watch?v=V4gRrx94oIY
+12,GT3,Baku,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Baku,https://www.youtube.com/watch?v=V4gRrx94oIY
+DQ,GT3,Baku,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Baku,https://www.youtube.com/watch?v=V4gRrx94oIY
+8,GT3,Mugello,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Mugello,https://www.youtube.com/watch?v=iUlO8pNfsic
+9,GT3,Mugello,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Mugello,https://www.youtube.com/watch?v=iUlO8pNfsic
+2,GT3,Zandvoort,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Zandvoort,https://www.youtube.com/watch?v=pINIr5VZ2-M
+13,GT3,Zandvoort,Felipe Faria,,-,SIM,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Zandvoort,https://www.youtube.com/watch?v=pINIr5VZ2-M
+21,GT3,Zandvoort,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Zandvoort,https://www.youtube.com/watch?v=pINIr5VZ2-M
+5,GT3,Algarve,Felipe Faria,,-,-,-,-,-,SIM,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Algarve,https://www.youtube.com/watch?v=Jv46OCQXPa8
+12,GT3,Algarve,Rodrigo de Sousa,,-,-,-,-,-,TIME,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Algarve,https://www.youtube.com/watch?v=Jv46OCQXPa8
+14,GT3,Algarve,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-2,2026,GT3/VORC Series/2026-2,GT3/VORC Series/2026-2/Algarve,https://www.youtube.com/watch?v=Jv46OCQXPa8
+2,2h de Le Mans,Le Mans,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-2,2026,2h de Le Mans/VORC Series/2026-2,2h de Le Mans/VORC Series/2026-2/Le Mans,https://www.youtube.com/watch?v=lZjBxSEdCf8
+1,Stock Car,Londrina,Victor Ribeiro,,SIM,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Londrina,https://www.youtube.com/watch?v=ybHHge7sDuU
+1,Stock Car,Buenos Aires,Victor Ribeiro,,SIM,SIM,SIM,SIM,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Buenos Aires,https://www.youtube.com/watch?v=J1fK2bWfXGU
+2,Stock Car,Buenos Aires,Fernando Passos,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Buenos Aires,https://www.youtube.com/watch?v=J1fK2bWfXGU
+4,Stock Car,Taruma,Victor Ribeiro,,SIM,SIM,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Taruma,https://www.youtube.com/watch?v=GZWFHj9G4Uc
+5,Stock Car,Taruma,Rodrigo de Sousa,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Taruma,https://www.youtube.com/watch?v=GZWFHj9G4Uc
+1,Stock Car,Jacarepagua,Flavio Felicio,,SIM,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Jacarepagua,https://www.youtube.com/watch?v=eTkMfYb-iD0
+6,Stock Car,Jacarepagua,Rodrigo de Sousa,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Jacarepagua,https://www.youtube.com/watch?v=eTkMfYb-iD0
+1,Stock Car,Interlagos 2,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Interlagos 2,https://www.youtube.com/watch?v=C6Q0ylxGLeA
+3,Stock Car,Interlagos 2,Fernando Passos,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Interlagos 2,https://www.youtube.com/watch?v=C6Q0ylxGLeA
+DNF,Stock Car,Interlagos 2,Rodrigo de Sousa,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Interlagos 2,https://www.youtube.com/watch?v=C6Q0ylxGLeA
+DNF,Stock Car,Interlagos 2,Victor Ribeiro,,-,-,-,-,-,-,Campeonatos Classicos,2026-2,2026,Stock Car/Campeonatos Classicos/2026-2,Stock Car/Campeonatos Classicos/2026-2/Interlagos 2,https://www.youtube.com/watch?v=C6Q0ylxGLeA
 6,GT Challenge,Spa,Marcelo Eduardo,Grip Racing,-,-,-,-,-,-,RacersAv,2026-2,2026,GT Challenge/RacersAv/2026-2,GT Challenge/RacersAv/2026-2/Spa,#N/A
 6,GT Challenge,Portimao,Marcelo Eduardo,Grip Racing,-,-,-,-,-,-,RacersAv,2026-2,2026,GT Challenge/RacersAv/2026-2,GT Challenge/RacersAv/2026-2/Portimao,#N/A
 5,GT Challenge,Monza,Marcelo Eduardo,Grip Racing,-,-,-,-,-,-,RacersAv,2026-2,2026,GT Challenge/RacersAv/2026-2,GT Challenge/RacersAv/2026-2/Monza,#N/A
@@ -9566,95 +9566,95 @@ DNF,Stock Car,Interlagos 2,Victor Ribeiro,,-,-,-,-,-,-,Campeonatos Classicos,202
 6,Stock Car,Interlagos,Robert Johen,Grip Racing,-,-,-,-,-,-,RacersAv,2026-2,2026,Stock Car/RacersAv/2026-2,Stock Car/RacersAv/2026-2/Interlagos,#N/A
 11,Stock Car,Salvador,Robert Johen,Grip Racing,-,-,-,-,-,-,RacersAv,2026-2,2026,Stock Car/RacersAv/2026-2,Stock Car/RacersAv/2026-2/Salvador,#N/A
 4,Stock Car,Curitiba,Robert Johen,Grip Racing,-,-,-,-,-,-,RacersAv,2026-2,2026,Stock Car/RacersAv/2026-2,Stock Car/RacersAv/2026-2/Curitiba,#N/A
-2026-3,,,,,,,,,,,,,,,,
-8,DTM,Donington,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2026-3,2026,DTM/Racing Bears/2026-3,DTM/Racing Bears/2026-3/Donington,#N/A
-DNF,DTM,Bathurst,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2026-3,2026,DTM/Racing Bears/2026-3,DTM/Racing Bears/2026-3/Bathurst,#N/A
-DNF,DTM,Spa Francorchamps,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2026-3,2026,DTM/Racing Bears/2026-3,DTM/Racing Bears/2026-3/Spa Francorchamps,#N/A
-5,Michigan US500,Michigan,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-3,2026,Michigan US500/VORC Series/2026-3,Michigan US500/VORC Series/2026-3/Michigan,#N/A
-11,Michigan US500,Michigan,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-3,2026,Michigan US500/VORC Series/2026-3,Michigan US500/VORC Series/2026-3/Michigan,#N/A
-15,Michigan US500,Michigan,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Michigan US500/VORC Series/2026-3,Michigan US500/VORC Series/2026-3/Michigan,#N/A
-18,Michigan US500,Michigan,Fernando Passos,,-,-,-,-,-,-,VORC Series,2026-3,2026,Michigan US500/VORC Series/2026-3,Michigan US500/VORC Series/2026-3/Michigan,#N/A
-DNF,Michigan US500,Michigan,Marcelo Eduardo,,-,-,-,-,-,-,VORC Series,2026-3,2026,Michigan US500/VORC Series/2026-3,Michigan US500/VORC Series/2026-3/Michigan,#N/A
-12,3h de Monza,Monza,Robert Johen,,-,-,-,-,-,-,VORC Series,2026-3,2026,3h de Monza/VORC Series/2026-3,3h de Monza/VORC Series/2026-3/Monza,#N/A
-10,Auto Club 500,Auto Club,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Auto Club 500/VORC Series/2026-3,Auto Club 500/VORC Series/2026-3/Auto Club,#N/A
-DNF,Auto Club 500,Auto Club,Fernando Passos,,-,-,-,-,-,-,VORC Series,2026-3,2026,Auto Club 500/VORC Series/2026-3,Auto Club 500/VORC Series/2026-3/Auto Club,#N/A
-5,Endurance Series,Motegi,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Endurance Series/VORC Series/2026-3,Endurance Series/VORC Series/2026-3/Motegi,#N/A
-2,Endurance Series,Korea,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Endurance Series/VORC Series/2026-3,Endurance Series/VORC Series/2026-3/Korea,#N/A
-3,Endurance Series,Zhejiang,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Endurance Series/VORC Series/2026-3,Endurance Series/VORC Series/2026-3/Zhejiang,#N/A
-3,Endurance Series,Zhejiang 2,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Endurance Series/VORC Series/2026-3,Endurance Series/VORC Series/2026-3/Zhejiang 2,#N/A
-3,Indy Series,Motegi,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Motegi,#N/A
-5,Indy Series,Motegi,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Motegi,#N/A
-8,Indy Series,Motegi,Fernando Passos,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Motegi,#N/A
-9,Indy Series,Motegi,Marcelo Eduardo,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Motegi,#N/A
-14,Indy Series,Motegi,Matheus Araujo,,-,SIM,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Motegi,#N/A
-16,Indy Series,Motegi,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Motegi,#N/A
-18,Indy Series,Motegi,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Motegi,#N/A
-4,Indy Series,Adelaide,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Adelaide,#N/A
-5,Indy Series,Adelaide,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Adelaide,#N/A
-6,Indy Series,Adelaide,Fernando Passos,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Adelaide,#N/A
-13,Indy Series,Adelaide,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Adelaide,#N/A
-17,Indy Series,Adelaide,Marcelo Eduardo,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Adelaide,#N/A
-DQ,Indy Series,Adelaide,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Adelaide,#N/A
-5,Indy Series,Lausitzring,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Lausitzring,#N/A
-7,Indy Series,Lausitzring,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Lausitzring,#N/A
-9,Indy Series,Lausitzring,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Lausitzring,#N/A
-10,Indy Series,Lausitzring,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Lausitzring,#N/A
-11,Indy Series,Lausitzring,Marcelo Eduardo,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Lausitzring,#N/A
-21,Indy Series,Lausitzring,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Lausitzring,#N/A
-23,Indy Series,Lausitzring,Fernando Passos,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Lausitzring,#N/A
-5,Indy Series,Spa Francorchamps,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Spa Francorchamps,#N/A
-7,Indy Series,Spa Francorchamps,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Spa Francorchamps,#N/A
-8,Indy Series,Spa Francorchamps,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Spa Francorchamps,#N/A
-15,Indy Series,Spa Francorchamps,Fernando Passos,,-,SIM,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Spa Francorchamps,#N/A
-18,Indy Series,Spa Francorchamps,Marcelo Eduardo,,-,-,-,-,-,-,VORC Series,2026-3,2026,M7 Help Volantes/VORC Series/2026-3,M7 Help Volantes/VORC Series/2026-3/Spa Francorchamps,#N/A
-2,Chevette Turbo,Goiania,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Goiania,#N/A
-1,Chevette Turbo,Brasilia,Flavio Felicio,,SIM,SIM,SIM,SIM,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Brasilia,#N/A
-2,Chevette Turbo,Jacarepagua,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Jacarepagua,#N/A
-5,Chevette Turbo,Taruma,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Taruma,#N/A
-1,Chevette Turbo,Guapore,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Guapore,#N/A
-3,Chevette Turbo,Londrina,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Londrina,#N/A
-1,GT2,Curitiba,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,GT2/Campeonatos Classicos/2026-3,GT2/Campeonatos Classicos/2026-3/Curitiba,#N/A
-5,Chevette Turbo,Interlagos,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Interlagos,#N/A
-5,GT2,Curitiba 2,Charles Zimmermann,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,GT2/Campeonatos Classicos/2026-3,GT2/Campeonatos Classicos/2026-3/Curitiba 2,#N/A
-13,MX5 Sport,Oulton Park,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Oulton Park,
-3,MX5 Sport,Oulton Park,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Oulton Park,
-10,MX5 Sport,Summit Point,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Summit Point,
-20,MX5 Sport,Summit Point,Jota Junior5,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Summit Point,
-26,MX5 Sport,Summit Point,Rodrigo de Sousa,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Summit Point,
-9,MX5 Sport,Summit Point,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Summit Point,
-22,MX5 Sport,Summit Point,Jota Junior5,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Summit Point,
-24,MX5 Sport,Summit Point,Rodrigo de Sousa,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Summit Point,
-6,MX5 Sport,Winton,Felipe Faria,,-,SIM,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Winton,
-1,MX5 Sport,Winton,Felipe Faria,,-,SIM,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Winton,
-6,MX5 Sport,Charlotte,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Charlotte,
-21,MX5 Sport,Charlotte,Jota Junior5,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Charlotte,
-22,MX5 Sport,Charlotte,Rodrigo de Sousa,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Charlotte,
-8,MX5 Sport,Charlotte,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Charlotte,
-14,MX5 Sport,Charlotte,Jota Junior5,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Charlotte,
-23,MX5 Sport,Charlotte,Rodrigo de Sousa,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Charlotte,
-6,MX5 Sport,Oschersleben,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Oschersleben,
-20,MX5 Sport,Oschersleben,Jota Junior5,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Oschersleben,
-2,MX5 Sport,Oschersleben,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Oschersleben,
-13,MX5 Sport,Oschersleben,Jota Junior5,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Oschersleben,
-2026-4,,,,,,,,,,,,,,,,
-5,MX5 Sport,Okayama,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Okayama,
-DNF,MX5 Sport,Okayama,Jota Junior,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Okayama,
-4,MX5 Sport,Okayama,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Okayama,
-DNF,MX5 Sport,Okayama,Jota Junior,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Okayama,
-9,MX5 Sport,Tsukuba,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Tsukuba,
-20,MX5 Sport,Tsukuba,Jota Junior,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Tsukuba,
-1,MX5 Sport,Tsukuba,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Tsukuba,
-19,MX5 Sport,Tsukuba,Jota Junior,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Tsukuba,
-20,MX5 Sport,Navarra,Jota Junior,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Navarra,
-18,MX5 Sport,Navarra,Jota Junior,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Navarra,
-35,992 Cup,Okayama,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,992 Cup/F1BC/2026-4,992 Cup/F1BC/2026-4/Okayama,
-19,992 Cup,Okayama,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,992 Cup/F1BC/2026-4,992 Cup/F1BC/2026-4/Okayama,
-38,992 Cup,Mount Panorama,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,992 Cup/F1BC/2026-4,992 Cup/F1BC/2026-4/Mount Panorama,
-30,992 Cup,Mount Panorama,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,992 Cup/F1BC/2026-4,992 Cup/F1BC/2026-4/Mount Panorama,
-22,992 Cup,Austin,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,992 Cup/F1BC/2026-4,992 Cup/F1BC/2026-4/Austin,
-10,992 Cup,Austin,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,992 Cup/F1BC/2026-4,992 Cup/F1BC/2026-4/Austin,
-2,Super Formula,Suzuka,Fernando Passos,,-,-,-,-,-,-,VORC Series,2026-4,2026,Super Formula/VORC Series/2026-4,Super Formula/VORC Series/2026-4/Suzuka,#N/A
-4,Super Formula,Suzuka,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-4,2026,Super Formula/VORC Series/2026-4,Super Formula/VORC Series/2026-4/Suzuka,#N/A
-2,Super Formula,Okayama,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-4,2026,Super Formula/VORC Series/2026-4,Super Formula/VORC Series/2026-4/Okayama,#N/A
-DNF,GT3,Imola,Matheus Saliba,Grip Racing,-,-,-,-,-,-,Racing Bears,2026-4,2026,GT3/Racing Bears/2026-4,GT3/Racing Bears/2026-4/Imola,#N/A
-DNF,GT3,Imola,Ader Fernando,Grip Racing,-,-,-,-,-,-,Racing Bears,2026-4,2026,GT3/Racing Bears/2026-4,GT3/Racing Bears/2026-4/Imola,#N/A
+2026-3,,,,,,,,,,,,,,,,#N/A
+8,DTM,Donington,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2026-3,2026,DTM/Racing Bears/2026-3,DTM/Racing Bears/2026-3/Donington,https://www.youtube.com/watch?v=k3lTo3kLq3s
+DNF,DTM,Bathurst,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2026-3,2026,DTM/Racing Bears/2026-3,DTM/Racing Bears/2026-3/Bathurst,https://www.youtube.com/watch?v=W5y7XolZVu8
+DNF,DTM,Spa Francorchamps,Ader Fernando,,-,-,-,-,-,-,Racing Bears,2026-3,2026,DTM/Racing Bears/2026-3,DTM/Racing Bears/2026-3/Spa Francorchamps,https://www.youtube.com/watch?v=lPU9VWXfXtI
+5,Michigan US500,Michigan,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-3,2026,Michigan US500/VORC Series/2026-3,Michigan US500/VORC Series/2026-3/Michigan,https://www.youtube.com/watch?v=4G3V7z_96nY
+11,Michigan US500,Michigan,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-3,2026,Michigan US500/VORC Series/2026-3,Michigan US500/VORC Series/2026-3/Michigan,https://www.youtube.com/watch?v=4G3V7z_96nY
+15,Michigan US500,Michigan,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Michigan US500/VORC Series/2026-3,Michigan US500/VORC Series/2026-3/Michigan,https://www.youtube.com/watch?v=4G3V7z_96nY
+18,Michigan US500,Michigan,Fernando Passos,,-,-,-,-,-,-,VORC Series,2026-3,2026,Michigan US500/VORC Series/2026-3,Michigan US500/VORC Series/2026-3/Michigan,https://www.youtube.com/watch?v=4G3V7z_96nY
+DNF,Michigan US500,Michigan,Marcelo Eduardo,,-,-,-,-,-,-,VORC Series,2026-3,2026,Michigan US500/VORC Series/2026-3,Michigan US500/VORC Series/2026-3/Michigan,https://www.youtube.com/watch?v=4G3V7z_96nY
+12,3h de Monza,Monza,Robert Johen,,-,-,-,-,-,-,VORC Series,2026-3,2026,3h de Monza/VORC Series/2026-3,3h de Monza/VORC Series/2026-3/Monza,https://www.youtube.com/watch?v=X_aIubKL0jA
+10,Auto Club 500,Auto Club,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Auto Club 500/VORC Series/2026-3,Auto Club 500/VORC Series/2026-3/Auto Club,https://www.youtube.com/watch?v=zjHZKOD_DBg
+DNF,Auto Club 500,Auto Club,Fernando Passos,,-,-,-,-,-,-,VORC Series,2026-3,2026,Auto Club 500/VORC Series/2026-3,Auto Club 500/VORC Series/2026-3/Auto Club,https://www.youtube.com/watch?v=zjHZKOD_DBg
+5,Endurance Series,Motegi,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Endurance Series/VORC Series/2026-3,Endurance Series/VORC Series/2026-3/Motegi,https://www.youtube.com/watch?v=AnHsy5BmKLU
+2,Endurance Series,Korea,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Endurance Series/VORC Series/2026-3,Endurance Series/VORC Series/2026-3/Korea,https://www.youtube.com/watch?v=wk6gNX1bXdE
+3,Endurance Series,Zhejiang,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Endurance Series/VORC Series/2026-3,Endurance Series/VORC Series/2026-3/Zhejiang,https://www.youtube.com/watch?v=zVkuR4kJOkE
+3,Endurance Series,Zhejiang 2,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Endurance Series/VORC Series/2026-3,Endurance Series/VORC Series/2026-3/Zhejiang 2,https://www.youtube.com/watch?v=zVkuR4kJOkE
+3,Indy Series,Motegi,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Motegi,https://www.youtube.com/watch?v=aYbtaBYgCKs
+5,Indy Series,Motegi,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Motegi,https://www.youtube.com/watch?v=aYbtaBYgCKs
+8,Indy Series,Motegi,Fernando Passos,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Motegi,https://www.youtube.com/watch?v=aYbtaBYgCKs
+9,Indy Series,Motegi,Marcelo Eduardo,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Motegi,https://www.youtube.com/watch?v=aYbtaBYgCKs
+14,Indy Series,Motegi,Matheus Araujo,,-,SIM,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Motegi,https://www.youtube.com/watch?v=aYbtaBYgCKs
+16,Indy Series,Motegi,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Motegi,https://www.youtube.com/watch?v=aYbtaBYgCKs
+18,Indy Series,Motegi,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Motegi,https://www.youtube.com/watch?v=aYbtaBYgCKs
+4,Indy Series,Adelaide,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Adelaide,https://www.youtube.com/watch?v=Ug15rG2LaqE
+5,Indy Series,Adelaide,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Adelaide,https://www.youtube.com/watch?v=Ug15rG2LaqE
+6,Indy Series,Adelaide,Fernando Passos,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Adelaide,https://www.youtube.com/watch?v=Ug15rG2LaqE
+13,Indy Series,Adelaide,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Adelaide,https://www.youtube.com/watch?v=Ug15rG2LaqE
+17,Indy Series,Adelaide,Marcelo Eduardo,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Adelaide,https://www.youtube.com/watch?v=Ug15rG2LaqE
+DQ,Indy Series,Adelaide,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Adelaide,https://www.youtube.com/watch?v=Ug15rG2LaqE
+5,Indy Series,Lausitzring,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Lausitzring,https://www.youtube.com/watch?v=Yv8lvxas1gE
+7,Indy Series,Lausitzring,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Lausitzring,https://www.youtube.com/watch?v=Yv8lvxas1gE
+9,Indy Series,Lausitzring,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Lausitzring,https://www.youtube.com/watch?v=Yv8lvxas1gE
+10,Indy Series,Lausitzring,Rodrigo de Sousa,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Lausitzring,https://www.youtube.com/watch?v=Yv8lvxas1gE
+11,Indy Series,Lausitzring,Marcelo Eduardo,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Lausitzring,https://www.youtube.com/watch?v=Yv8lvxas1gE
+21,Indy Series,Lausitzring,Flavio Felicio,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Lausitzring,https://www.youtube.com/watch?v=Yv8lvxas1gE
+23,Indy Series,Lausitzring,Fernando Passos,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Lausitzring,https://www.youtube.com/watch?v=Yv8lvxas1gE
+5,Indy Series,Spa Francorchamps,Felipe Faria,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Spa Francorchamps,https://www.youtube.com/watch?v=7l3SDsp33VQ
+7,Indy Series,Spa Francorchamps,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Spa Francorchamps,https://www.youtube.com/watch?v=7l3SDsp33VQ
+8,Indy Series,Spa Francorchamps,Victor Ribeiro,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Spa Francorchamps,https://www.youtube.com/watch?v=7l3SDsp33VQ
+15,Indy Series,Spa Francorchamps,Fernando Passos,,-,SIM,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Spa Francorchamps,https://www.youtube.com/watch?v=7l3SDsp33VQ
+18,Indy Series,Spa Francorchamps,Marcelo Eduardo,,-,-,-,-,-,-,VORC Series,2026-3,2026,Indy Series/VORC Series/2026-3,Indy Series/VORC Series/2026-3/Spa Francorchamps,https://www.youtube.com/watch?v=7l3SDsp33VQ
+2,Chevette Turbo,Goiania,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Goiania,https://www.youtube.com/watch?v=jPvLXS4uhC8
+1,Chevette Turbo,Brasilia,Flavio Felicio,,SIM,SIM,SIM,SIM,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Brasilia,https://www.youtube.com/watch?v=bgr2ufrpGjk
+2,Chevette Turbo,Jacarepagua,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Jacarepagua,https://www.youtube.com/watch?v=anJhKxBr408
+5,Chevette Turbo,Taruma,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Taruma,https://www.youtube.com/watch?v=5AEBMdJLSxA
+1,Chevette Turbo,Guapore,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Guapore,https://www.youtube.com/watch?v=9tsF_12LQHo
+3,Chevette Turbo,Londrina,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Londrina,https://www.youtube.com/watch?v=SIrL6RvNdLQ
+1,GT2,Curitiba,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,GT2/Campeonatos Classicos/2026-3,GT2/Campeonatos Classicos/2026-3/Curitiba,https://www.youtube.com/watch?v=nA0p6ko70Js
+5,Chevette Turbo,Interlagos,Flavio Felicio,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,Chevette Turbo/Campeonatos Classicos/2026-3,Chevette Turbo/Campeonatos Classicos/2026-3/Interlagos,https://www.youtube.com/watch?v=g9IQDhy1Hkw
+5,GT2,Curitiba 2,Charles Zimmermann,,-,-,-,-,-,-,Campeonatos Classicos,2026-3,2026,GT2/Campeonatos Classicos/2026-3,GT2/Campeonatos Classicos/2026-3/Curitiba 2,https://www.youtube.com/watch?v=3eZvw8-3Es0
+13,MX5 Sport,Oulton Park,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Oulton Park,#N/A
+3,MX5 Sport,Oulton Park,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Oulton Park,#N/A
+10,MX5 Sport,Summit Point,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Summit Point,#N/A
+20,MX5 Sport,Summit Point,Jota Junior5,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Summit Point,#N/A
+26,MX5 Sport,Summit Point,Rodrigo de Sousa,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Summit Point,#N/A
+9,MX5 Sport,Summit Point,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Summit Point,#N/A
+22,MX5 Sport,Summit Point,Jota Junior5,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Summit Point,#N/A
+24,MX5 Sport,Summit Point,Rodrigo de Sousa,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Summit Point,#N/A
+6,MX5 Sport,Winton,Felipe Faria,,-,SIM,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Winton,#N/A
+1,MX5 Sport,Winton,Felipe Faria,,-,SIM,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Winton,#N/A
+6,MX5 Sport,Charlotte,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Charlotte,#N/A
+21,MX5 Sport,Charlotte,Jota Junior5,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Charlotte,#N/A
+22,MX5 Sport,Charlotte,Rodrigo de Sousa,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Charlotte,#N/A
+8,MX5 Sport,Charlotte,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Charlotte,#N/A
+14,MX5 Sport,Charlotte,Jota Junior5,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Charlotte,#N/A
+23,MX5 Sport,Charlotte,Rodrigo de Sousa,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Charlotte,#N/A
+6,MX5 Sport,Oschersleben,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Oschersleben,#N/A
+20,MX5 Sport,Oschersleben,Jota Junior5,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Oschersleben,#N/A
+2,MX5 Sport,Oschersleben,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Oschersleben,#N/A
+13,MX5 Sport,Oschersleben,Jota Junior5,,-,-,-,-,-,-,F1BC,2026-3,2026,MX5 Sport/F1BC/2026-3,MX5 Sport/F1BC/2026-3/Oschersleben,#N/A
+2026-4,,,,,,,,,,,,,,,,#N/A
+5,MX5 Sport,Okayama,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Okayama,#N/A
+DNF,MX5 Sport,Okayama,Jota Junior,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Okayama,#N/A
+4,MX5 Sport,Okayama,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Okayama,#N/A
+DNF,MX5 Sport,Okayama,Jota Junior,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Okayama,#N/A
+9,MX5 Sport,Tsukuba,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Tsukuba,#N/A
+20,MX5 Sport,Tsukuba,Jota Junior,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Tsukuba,#N/A
+1,MX5 Sport,Tsukuba,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Tsukuba,#N/A
+19,MX5 Sport,Tsukuba,Jota Junior,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Tsukuba,#N/A
+20,MX5 Sport,Navarra,Jota Junior,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Navarra,#N/A
+18,MX5 Sport,Navarra,Jota Junior,,-,-,-,-,-,-,F1BC,2026-4,2026,MX5 Sport/F1BC/2026-4,MX5 Sport/F1BC/2026-4/Navarra,#N/A
+35,992 Cup,Okayama,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,992 Cup/F1BC/2026-4,992 Cup/F1BC/2026-4/Okayama,#N/A
+19,992 Cup,Okayama,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,992 Cup/F1BC/2026-4,992 Cup/F1BC/2026-4/Okayama,#N/A
+38,992 Cup,Mount Panorama,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,992 Cup/F1BC/2026-4,992 Cup/F1BC/2026-4/Mount Panorama,#N/A
+30,992 Cup,Mount Panorama,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,992 Cup/F1BC/2026-4,992 Cup/F1BC/2026-4/Mount Panorama,#N/A
+22,992 Cup,Austin,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,992 Cup/F1BC/2026-4,992 Cup/F1BC/2026-4/Austin,#N/A
+10,992 Cup,Austin,Felipe Faria,,-,-,-,-,-,-,F1BC,2026-4,2026,992 Cup/F1BC/2026-4,992 Cup/F1BC/2026-4/Austin,#N/A
+2,Super Formula,Suzuka,Fernando Passos,,-,-,-,-,-,-,VORC Series,2026-4,2026,Super Formula/VORC Series/2026-4,Super Formula/VORC Series/2026-4/Suzuka,https://www.youtube.com/watch?v=-VLaFAJpvgA
+4,Super Formula,Suzuka,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-4,2026,Super Formula/VORC Series/2026-4,Super Formula/VORC Series/2026-4/Suzuka,https://www.youtube.com/watch?v=-VLaFAJpvgA
+2,Super Formula,Okayama,Matheus Araujo,,-,-,-,-,-,-,VORC Series,2026-4,2026,Super Formula/VORC Series/2026-4,Super Formula/VORC Series/2026-4/Okayama,https://www.youtube.com/watch?v=gjfBACEMMzg
+DNF,GT3,Imola,Matheus Saliba,Grip Racing,-,-,-,-,-,-,Racing Bears,2026-4,2026,GT3/Racing Bears/2026-4,GT3/Racing Bears/2026-4/Imola,https://www.youtube.com/watch?v=g3eDk64bxJM
+DNF,GT3,Imola,Ader Fernando,Grip Racing,-,-,-,-,-,-,Racing Bears,2026-4,2026,GT3/Racing Bears/2026-4,GT3/Racing Bears/2026-4/Imola,https://www.youtube.com/watch?v=g3eDk64bxJM
