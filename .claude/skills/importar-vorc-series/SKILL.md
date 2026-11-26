@@ -12,10 +12,10 @@ Diferente do Racing Bears, **não existe página da equipe**: é preciso varrer 
 
 ## Data de corte (não rebusque o que já foi importado)
 
-**Importado e conferido em 29/10/2026**: todos os campeonatos com `cid` até **151** (144 campeonatos, 626 corridas). Última corrida com dado: **23/10/2026** (Spa Francorchamps, M7 Help Volantes). As pendências já foram aplicadas na planilha e baixadas.
+**Conferido em 26/11/2026**: todos os campeonatos listados com `cid` até **158**. A Grip apareceu apenas no cid 157 (2026 T5 M7 Help Volantes Super Formula), em Suzuka e Okayama. Última corrida com resultado da Grip: **25/11/2026** (Okayama). O dono confirmou que já aplicou os ajustes.
 
-- Pule qualquer campeonato com `cid <= 151` cuja última etapa seja até 23/10/2026, a menos que o dono diga que o site foi corrigido.
-- O que olhar numa próxima rodada: etapas que faltavam ao fim do corte (Texas do M7 Help Volantes; Sepang do Endurance Series Asia; Auto Club 500 e 3h de Monza já feitos) e campeonatos **novos, com `cid` maior que 151**. O topo de `/championships` mostra os em andamento; os novos aparecem lá.
+- Não reabra corridas já conferidas em campeonatos com `cid <= 158`, a menos que o dono diga que o site foi corrigido.
+- Próxima rodada: etapas 3 e 4 do cid 157 (Sugo e Fuji Speedway), quando tiverem resultado; cid 153 (500km de Tarumã) ainda estava sem resultado em 26/11; cids 156 e 158 seguem no topo de `/championships` e merecem nova leitura de equipe/resultados ao avançarem; além de novos campeonatos com `cid > 158`.
 - Ao concluir uma nova rodada, atualize esta seção com a nova data/`cid` de corte.
 
 ## 1. Como o site é montado
@@ -43,16 +43,11 @@ Diferente do Racing Bears, **não existe página da equipe**: é preciso varrer 
 
 ## 4. Mapa de temporadas (AAAA-N do CSV, não o "Tn" do site)
 
-Mesmo corte do Racing Bears: `AAAA-1` jan até meados de mar; `AAAA-2` meados de mar até meados de ago; `AAAA-3` meados de ago até dez. Validado com o histórico:
+Use a data de início do campeonato para definir `Temporada` no formato `AAAA-N`: janeiro a março = `AAAA-1`, abril a junho = `AAAA-2`, julho a setembro = `AAAA-3` e outubro a dezembro = `AAAA-4`. Mantenha o mesmo código em todas as etapas, mesmo quando o campeonato atravessa outro trimestre.
 
-| Site | Datas | CSV |
-|---|---|---|
-| 2023 T2 Marcas Brasil | 25/mai e 8/jun/2023 | `2023-2` |
-| 2026 T1 Stock Car | 16/jan–27/fev/2026 | `2026-1` |
-| 2026 T2 Stock Car Sudam, GP Cascavel, Indy 500, GT Series, Le Mans 2h | 27/mar–11/ago/2026 | `2026-2` |
-| 2026 T3 Michigan (22/ago) e todos os "T4" (set–out) | | `2026-3` |
+Por exemplo, Michigan começou em 22/08/2026 e fica em `2026-3`. A Super Formula começou em 18/11/2026 e fica em `2026-4`. Ao comparar registros históricos, confira como o campeonato foi cadastrado para evitar duplicatas.
 
-Pontos de borda: Algarve (GT Series) foi em 11/ago e Michigan em 22/ago. Se o cabeçalho `2026-3,,,,,,,,,,,,,,,,` ainda não existir no CSV, é preciso criá-lo.
+Se já houver outro campeonato com o mesmo nome na mesma liga e temporada, use `Nome do Campeonato 2` no campo `Categoria` para o segundo campeonato e mantenha esse nome em todas as suas etapas. Use o nome com sufixo também nas chaves derivadas da categoria.
 
 Corridas repetidas na pista: o CSV usa sufixo ` 2` na pista, **sem acento** (`Interlagos`/`Interlagos 2`, `Velo Citta`/`Velo Citta 2`, `Taruma 2`). Corrida R1/R2 do site = pista e pista 2.
 
@@ -99,3 +94,5 @@ Igual ao Racing Bears: `update-data.ps1` baixa os 3 CSVs, incrementa `DATA_VERSI
 ## Registro
 
 29/10/2026: levantamento feito, `pendencias-vorc-series.csv` (1 ajuste + 82 linhas novas) aplicado na planilha e baixado com `update-data.ps1` (v1.0.33). O M7 Help Volantes ficou como `Indy Series` (sem nome de patrocinador). VORC Series: 113 linhas (2023-2: 8, 2026-1: 23, 2026-2: 45, 2026-3: 37).
+
+26/11/2026: cids 152–158 conferidos. Só o cid 157 teve pilotos correndo pela Grip: Fernando Passos (2º) e Matheus Araujo (4º) em Suzuka; Matheus (2º) em Okayama. Sem pole ou melhor volta para a Grip. O dono confirmou a aplicação das três linhas de `Super Formula`, da temporada `2026-4`.

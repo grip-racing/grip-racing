@@ -10,11 +10,11 @@ Destino: `data/data-participacoes.csv` (linhas com a coluna Liga = `Campeonatos 
 
 ## Data de corte (não rebusque o que já foi conferido)
 
-**Conferido por inteiro em 29/10/2026**: os 51 campeonatos listados (T1 2019 até T4 2026), 386 corridas, mais o especial BPR Brasil 1996 etapa 1. Última corrida com dado: **28/10/2026** (Chevette Turbo, etapa 6, Londrina).
+**Levantamento-base concluído em 29/10/2026; nova rodada conferida em 26/11/2026**: Chevette Turbo T4 2026 etapas 7 e 8, BPR Sprint (Curitiba) e IROCCC. Última corrida com resultado que inclui piloto da Grip: **25/11/2026** (BPR Sprint, Charles Zimmermann, GT2). O dono confirmou que já aplicou os ajustes.
 
-- Qualquer campeonato cuja última etapa seja **até 28/10/2026** já está feito: pule, a menos que o dono diga que corrigiu algo no site.
-- O que olhar numa próxima rodada: etapas do **Chevette Turbo T4 2026** a partir da 7 (próxima em 04/11/2026), **BPR Brasil 1996 etapa 2 (Brasília)** (inscrições abertas em 29/10, sem resultado), e **campeonatos novos** no fim da lista (a lista é da data mais nova para a mais velha).
-- O corte só vale depois que o dono aplicar `pendencias-campeonatos-classicos.csv` na planilha. Antes disso, as linhas dele ainda aparecem como pendência.
+- Campeonatos e corridas já conferidos até 28/10/2026 permanecem fechados; não reabra sem aviso de correção do site.
+- Nesta rodada: Chevette etapas 7 e 8, BPR Sprint e IROCCC foram conferidos. O Flavio não correu a etapa 7 do Chevette; Charles Zimmermann terminou em 5º na GT2 do BPR Sprint; nenhum piloto da Grip apareceu no IROCCC.
+- Próxima rodada: **BPR Brasil 1996 etapa 2 (Brasília)** quando houver resultado (a página ainda indicava “A ser anunciado” em 26/11/2026) e campeonatos/especiais novos no topo da lista.
 - Ao concluir uma nova rodada, atualize esta seção com a nova data de corte e o registro no fim.
 
 ## 1. Como o site é montado (tudo HTML estático, sem login)
@@ -35,7 +35,11 @@ Mesmo carro: posição geral da tabela. Classes com carros diferentes: posição
 
 ## 3. Mapa de temporadas (AAAA-N do CSV, não o "Tn" do site)
 
-Mesmo corte do Racing Bears/VORC: `AAAA-1` jan–meados de mar; `AAAA-2` meados de mar–meados de ago; `AAAA-3` meados de ago–dez. Exemplos já no CSV: Stock Car 2007 "T1 2026" (18/03–20/05/2026) = `2026-2`; Chevette Turbo "T4 2026" (23/09–28/10) = `2026-3`; C.S. MX5 "T3 2023" (27/06–07/08/2023) = `2023-2`. Para os antigos sem data: Velozes e Charmosas e Endurance 1960 (2020) = `2020-3`; Girusbag, Funcup USA e Taça Caio (2021) = `2021-3`; Kings DTM e Alpine (2022) = `2022-1`. Um campeonato nunca é dividido em duas temporadas.
+Use a data de início do campeonato para definir `Temporada` no formato `AAAA-N`: janeiro a março = `AAAA-1`, abril a junho = `AAAA-2`, julho a setembro = `AAAA-3` e outubro a dezembro = `AAAA-4`. Mantenha o mesmo código em todas as etapas, mesmo quando o campeonato atravessa outro trimestre. Por exemplo, o Chevette Turbo começou em 23/09/2026 e todas as suas etapas ficam em `2026-3`.
+
+Ao comparar registros históricos, confira como o campeonato foi cadastrado para evitar duplicatas. Para os antigos sem data, consulte os códigos registrados na base, como Velozes e Charmosas e Endurance 1960 em `2020-3`, Girusbag, Funcup USA e Taça Caio em `2021-3`, e Kings DTM e Alpine em `2022-1`.
+
+Se já houver outro campeonato com o mesmo nome na mesma liga e temporada, use `Nome do Campeonato 2` no campo `Categoria` para o segundo campeonato e mantenha esse nome em todas as suas etapas. Use o nome com sufixo também nas chaves derivadas da categoria.
 
 Pistas repetidas na mesma temporada/categoria: sufixo ` 2` (`Interlagos 2`). Nomes sem acento (`Taruma`, `Jacarepagua`, `Goiania`, `Brasilia`).
 
@@ -81,3 +85,5 @@ Igual às outras skills: `update-data.ps1` baixa os 3 CSVs, incrementa `DATA_VER
 29/10/2026: levantamento completo; `pendencias-campeonatos-classicos.csv` gerado (36 linhas novas, 1 ajuste de Chelem, 8 remoções, 13 ajustes históricos). Ainda não aplicado.
 
 29/10/2026 (decisao do dono): aplicados na planilha o Stock Car 2007, Chevette, BPR, MX5, GT3 2024, For Gretta, o Chelem do Curitiba, as 8 remocoes e 3 ajustes do Endurance. **Mantido como esta no CSV (nao reabrir):** os 10 ajustes historicos de Wohnrath FunCup 2021, Alpine Monza e DTM Hockenheim 2022, e a Taca Caio Wohnrath (Elizeu Filho, 3 linhas), que nao foi lancada. Dados na versao 1.0.35.
+
+26/11/2026: nova rodada com duas linhas (Flavio Felicio, Chevette Turbo, Interlagos, e Charles Zimmermann, GT2, Curitiba 2). BPR Sprint não tinha transmissão. IROCCC não teve piloto da Grip. BPR etapa 2 segue sem resultado. O dono confirmou a aplicação dos ajustes.
